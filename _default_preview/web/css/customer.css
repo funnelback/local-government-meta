@@ -77,7 +77,7 @@
 body {
 	font-family: 'Open Sans', sans-serif !important;
 	background: var(--color-background);
-	font-size: var(--size-body-1);
+	font-size: var(--size-body-2);
 }
 
 .funnelback h1 {
@@ -168,8 +168,9 @@ body {
 
 /* Used in card view */
 .funnelback .fb-card--fixed {
-	height: 31em;
+	height: 20em;
 	width: 344px;
+	border: none;
 }
 
 .funnelback .fb-card--fluid .card-text,

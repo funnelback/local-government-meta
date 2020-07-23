@@ -6,7 +6,7 @@
       <div class="col-md-4">
         <h1>Contact</h1>
         <p>
-          Funnelback Association<br>
+          Funnelback City Council<br>
           1, Funnelback Road<br>
           Funnelback, FB 12345
         </p>

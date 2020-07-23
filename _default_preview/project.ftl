@@ -342,7 +342,7 @@
 
 <#macro SideNavigation>
 
-  <#local tabFacets = question.getCurrentProfileConfig().get("stencils.tabs.facets.${response.customData.stencilsTabsSelectedTab}")!>
+  <#local tabFacets = question.getCurrentProfileConfig().get("stencils.tabs.facets.${(response.customData.stencilsTabsSelectedTab)!}")!>
 
   <#-- We always want to show the side bar for a consistent layout -->
   <nav class="fb-sidebar d-none d-sm-block">

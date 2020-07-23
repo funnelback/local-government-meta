@@ -8,12 +8,10 @@
       <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
             <div class="navbar-nav mr-auto">
                 <a class="nav-item nav-link" href="#">About</a>
-                <a class="nav-item nav-link" href="#">Jobs</a>
-                <a class="nav-item nav-link" href="#">Journals</a>
+                <a class="nav-item nav-link" href="#">Services</a>
             </div>
             <div class="navbar-nav">                
                 <a class="nav-item nav-link" href="#"><span class="fas fa-users"></span>My Network</a>
-                <@project.UserTypeSwitcher />
             </div>
         </div>
   </div>
