@@ -1,0 +1,202 @@
+[ {
+  "created" : "2017-06-13T10:29:37.53-07:00",
+  "lastModified" : "2017-06-13T10:47:59.593-07:00",
+  "id" : "0129fbef-5729-4c02-84d9-82e5400b2b5d",
+  "name" : "Campus Life",
+  "label" : "DEFAULT",
+  "enabled" : true,
+  "trigger" : {
+    "type" : "And",
+    "triggers" : [ {
+      "type" : "Or",
+      "triggers" : [ {
+        "type" : "AllQueryWords",
+        "triggerWords" : [ "campus" ]
+      } ]
+    } ]
+  },
+  "actions" : [ {
+    "type" : "DisplayUrlAdvert",
+    "titleHtml" : "Discover life a the FBU campus",
+    "displayUrl" : "-",
+    "linkUrl" : "-",
+    "descriptionHtml" : "<img class=\"card-img img-fluid\" src=\"/s/resources/higher-education-meta/img/campus-life.png\">\n<div class=\"card-img-overlay\">\n  <a class=\"float-right\" href=\"http://funnelback.edu/campus-life\">Discover life at the FBU campus <span class=\"fas fa-arrow-right\"></span></a>\n</div>",
+    "additionalProperties" : {
+      "position" : "center",
+      "class" : "campus-life"
+    },
+    "category" : "",
+    "removeCollectionUrl" : false
+  } ]
+}, {
+  "created" : "2018-11-21T09:35:16.971+11:00",
+  "lastModified" : "2018-11-21T09:35:16.971+11:00",
+  "id" : "3f3c203c-75a2-40f8-88f5-9e582896a514",
+  "name" : "",
+  "label" : "BEST_BETS",
+  "enabled" : true,
+  "trigger" : {
+    "type" : "AllQueryWords",
+    "triggerWords" : [ "admissions" ]
+  },
+  "actions" : [ {
+    "type" : "DisplayUrlAdvert",
+    "titleHtml" : "Admissions open Dec 30th",
+    "displayUrl" : "funnelback.edu/apply",
+    "linkUrl" : "https://funnelback.edu/apply",
+    "descriptionHtml" : "Apply to Funnelback University now to join thousands of students and access numerous academic opportunities!",
+    "additionalProperties" : null,
+    "category" : "BEST_BETS",
+    "removeCollectionUrl" : false
+  } ]
+}, {
+  "created" : "2017-06-13T09:49:12.186-07:00",
+  "lastModified" : "2019-01-11T06:33:41.639+11:00",
+  "id" : "53ca94ee-cd8a-4c11-9d18-fbad04f324d6",
+  "name" : "Open House",
+  "label" : "DEFAULT",
+  "enabled" : true,
+  "trigger" : {
+    "type" : "And",
+    "triggers" : [ {
+      "type" : "Or",
+      "triggers" : [ {
+        "type" : "FacetSelection",
+        "facetName" : "Tabs",
+        "categoryValue" : "Programs",
+        "matchType" : "EXACT"
+      } ]
+    } ]
+  },
+  "actions" : [ {
+    "type" : "DisplayUrlAdvert",
+    "titleHtml" : "CAMPUS TOUR",
+    "displayUrl" : "-",
+    "linkUrl" : "-",
+    "descriptionHtml" : "<div>\nLive a different perspective\n<small>March 17th</small>\n</div>\n\n\n\n<a href=\"http://funnelback.edu/open-day\" target=\"_blank\" class=\"btn btn-primary float-right\">Find out more</a>",
+    "additionalProperties" : {
+      "position" : "left",
+      "class" : "open-day"
+    },
+    "category" : "",
+    "removeCollectionUrl" : false
+  } ]
+}, {
+  "created" : "2017-07-07T17:26:06.115-07:00",
+  "lastModified" : "2020-03-11T16:01:32.007547Z",
+  "id" : "5c2b2b38-581f-4eae-8d55-4cbd1d8f4de9",
+  "name" : "IT Lab Closure",
+  "label" : "DEFAULT",
+  "enabled" : true,
+  "trigger" : {
+    "type" : "And",
+    "triggers" : [ {
+      "type" : "Or",
+      "triggers" : [ {
+        "type" : "AllQueryWords",
+        "triggerWords" : [ "internet" ]
+      } ]
+    }, {
+      "type" : "Or",
+      "triggers" : [ {
+        "type" : "DateRange",
+        "startDate" : 1563260400000,
+        "endDate" : 1594882800000
+      } ]
+    } ]
+  },
+  "actions" : [ {
+    "type" : "DisplayMessage",
+    "messageHtml" : "<strong>Notice:</strong> The IT lab will be unavailable on February 7th between 5pm - 7pm",
+    "additionalProperties" : {
+      "position" : "center"
+    },
+    "category" : ""
+  } ]
+}, {
+  "created" : "2020-03-11T14:34:28.23796Z",
+  "lastModified" : "2020-03-11T18:12:05.02024Z",
+  "id" : "9e45ee31-7d21-44ee-a5ac-f91ea73035d2",
+  "name" : "[Custom Groovy Trigger] FAQ Banner to display when there are no results",
+  "label" : "DEFAULT",
+  "enabled" : true,
+  "trigger" : {
+    "type" : "Groovy",
+    "classFile" : "/opt/funnelback/conf/membership-association-meta/@groovy/curator/triggers/NoResultTrigger.groovy",
+    "properties" : {
+      "key" : "value"
+    }
+  },
+  "actions" : [ {
+    "type" : "DisplayMessage",
+    "messageHtml" : "<div class=\"row no-gutters border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative\">\n  <div class=\"col p-4 d-flex flex-column position-static\">\n    <strong class=\"d-inline-block mb-2 text-primary\">Promotion</strong>\n    <h3 class=\"mb-0\">Frequently Asked Questions</h3>\n    <ul>\n      <li><a href=\"https://myama.force.com/s/article/How-do-I-renew-my-AMA-membership\"><span>How do I renew my AMA membership?</span></a></li>\n      <li><a href=\"https://myama.force.com/s/article/How-to-access-PCM-certification-exams\"><span>How to access PCM certification exams.</span></a></li>\n      <li><a href=\"https://myama.force.com/s/article/How-Do-I-Use-a-Group-Code\"><span>How Do I Use a Group Code?</span></a></li>\n    </ul>\n    <a href=\"#\" class=\"stretched-link\">See more</a>\n  </div>\n  <div class=\"col-auto d-none d-lg-block\">\n    <img src=\"https://www.ama.org/wp-content/uploads/2020/02/bruce-mars-DBGwy7s3QY0-unsplash.jpg?resize=486%2C365\" alt=\"...\" width=\"350\">\n  </div>\n</div>",
+    "additionalProperties" : { },
+    "category" : ""
+  } ]
+}, {
+  "created" : "2020-03-12T14:33:01.536859Z",
+  "lastModified" : "2020-04-22T12:12:07.759544Z",
+  "id" : "f667e7b1-7136-405b-af29-16e0fee57036",
+  "name" : "[Example] health and corona - center position",
+  "label" : "DEFAULT",
+  "enabled" : true,
+  "trigger" : {
+    "type" : "And",
+    "triggers" : [ {
+      "type" : "Or",
+      "triggers" : [ {
+        "type" : "AllQueryWords",
+        "triggerWords" : [ "health" ]
+      }, {
+        "type" : "AllQueryWords",
+        "triggerWords" : [ "corona" ]
+      } ]
+    } ]
+  },
+  "actions" : [ {
+    "type" : "DisplayMessage",
+    "messageHtml" : "<!-- Corona Virus -->\n<div class=\"card fb-card--fluid\">\n\n  <div class=\"card-body fb-card__body\">        \n\n    <!-- Header section usually containing a title and small thumbnail -->\n    <div class=\"fb-card__header mb-3 border-bottom\">\n      <div class=\"fb-card__header__image\">\n          <img class=\"rounded-circle fb-image-thumbnail\" alt=\"Thumbnail for ${result.title!}\" src=\"https://www.who.int/images/default-source/health-topics/coronavirus/coronavirus-getty.tmb-479v.jpg?Culture=en&sfvrsn=db0aa632_6\"> \n        </#if>\n      </div>\n\n      <div class=\"fb-card__header__title\">\n        <div class=\"card-title\">          \n          <h6>\n            <a href=\"#\" data-toggle=\"modal\" data-target=\"#signupModal\">\n              COVID-19 Crisis\n            </a>\n          </h6>            \n        </div>\n      </div>\n    </div>\n    \n    <!-- Summary section containing the description and key details of the document -->\n    <div class=\"fb-card__summary\">\n      <div class=\"card-text\">\n        <p>\n<i class=\"fas fa-ad\"></i>\n          We are communicators. We are helpers. We have the skills to spark inspiration, support, determination and hope – many of the things necessary to overcome adversity and the crisis our world is facing. These curated resources will be updated regularly to support you while you lead through these fast-changing times.\n        </p>\n      </div>\n\n    </div>   \n\n  </div>\n</div>",
+    "additionalProperties" : { },
+    "category" : ""
+  }, {
+    "type" : "DisplayMessage",
+    "messageHtml" : "<!-- Corona Virus -->\n<div class=\"card fb-card--fluid\">\n\n  <div class=\"card-body fb-card__body\">        \n\n    <!-- Header section usually containing a title and small thumbnail -->\n    <div class=\"fb-card__header mb-3 border-bottom\">\n      <div class=\"fb-card__header__image\">\n          <img class=\"rounded-circle fb-image-thumbnail\" alt=\"Thumbnail for ${result.title!}\" src=\"https://source.unsplash.com/random/40x40?virus\"> \n        </#if>\n      </div>\n\n      <div class=\"fb-card__header__title\">\n        <div class=\"card-title\">          \n          <h6>\n            <a href=\"#\" data-toggle=\"modal\" data-target=\"#signupModal\">\n              Prevent the spread - what you need to do\n            </a>\n          </h6>            \n        </div>\n      </div>\n    </div>\n    \n    <!-- Summary section containing the description and key details of the document -->\n    <div class=\"fb-card__summary\">\n      <div class=\"card-text\">\n        <p>\n          <i class=\"fas fa-ad\"></i>         \n          Everyone must stay at home to help stop coronavirus (COVID-19) spreading. Wash your hands with soap and water often to reduce the risk of infection.\n        </p>\n      </div>\n\n    </div>   \n\n  </div>\n</div>",
+    "additionalProperties" : { },
+    "category" : ""
+  } ]
+}, {
+  "created" : "2020-04-08T21:56:46.500816Z",
+  "lastModified" : "2020-04-22T12:12:18.011618Z",
+  "id" : "0f46ff92-62e3-46d2-9a29-f2f9bc2599d9",
+  "name" : "[Example] health and corona - bottom position",
+  "label" : "DEFAULT",
+  "enabled" : true,
+  "trigger" : {
+    "type" : "And",
+    "triggers" : [ {
+      "type" : "Or",
+      "triggers" : [ {
+        "type" : "AllQueryWords",
+        "triggerWords" : [ "health" ]
+      }, {
+        "type" : "AllQueryWords",
+        "triggerWords" : [ "corona" ]
+      } ]
+    } ]
+  },
+  "actions" : [ {
+    "type" : "DisplayMessage",
+    "messageHtml" : "<!-- Corona Virus -->\n<div class=\"card fb-card--fluid\">\n\n  <div class=\"card-body fb-card__body\">        \n\n    <!-- Header section usually containing a title and small thumbnail -->\n    <div class=\"fb-card__header mb-3 border-bottom\">\n      <div class=\"fb-card__header__image\">\n          <img class=\"rounded-circle fb-image-thumbnail\" alt=\"Thumbnail for ${result.title!}\" src=\"https://source.unsplash.com/random/40x40?health\"> \n        </#if>\n      </div>\n\n      <div class=\"fb-card__header__title\">\n        <div class=\"card-title\">          \n          <h6>\n            <a href=\"#\" data-toggle=\"modal\" data-target=\"#signupModal\">\n              RESEARCH INSIGHT | Access to Health Care\n            </a>\n          </h6>            \n        </div>\n      </div>\n    </div>\n    \n    <!-- Summary section containing the description and key details of the document -->\n    <div class=\"fb-card__summary\">\n      <div class=\"card-text\">\n        <p>\n          <i class=\"fas fa-ad\"></i>         \n          Access to health services affects the well-being of millions of consumers, and objective or situational access factors, such as distance from facility, often dominate the conversation. However, the reality is that subjective perceptions play just as great a role in consumers’ overall health and well-being. \n        </p>\n      </div>\n\n    </div>   \n\n  </div>\n</div>",
+    "additionalProperties" : {
+      "position" : "bottom"
+    },
+    "category" : ""
+  }, {
+    "type" : "DisplayMessage",
+    "messageHtml" : "<!-- Corona Virus -->\n<div class=\"card fb-card--fluid\">\n\n  <div class=\"card-body fb-card__body\">        \n\n    <!-- Header section usually containing a title and small thumbnail -->\n    <div class=\"fb-card__header mb-3 border-bottom\">\n      <div class=\"fb-card__header__image\">\n          <img class=\"rounded-circle fb-image-thumbnail\" alt=\"Thumbnail for ${result.title!}\" src=\"https://source.unsplash.com/random/40x40?female\"> \n        </#if>\n      </div>\n\n      <div class=\"fb-card__header__title\">\n        <div class=\"card-title\">          \n          <h6>\n            <a href=\"#\" data-toggle=\"modal\" data-target=\"#signupModal\">\n              Health Habits of Female Millennials\n            </a>\n          </h6>            \n        </div>\n      </div>\n    </div>\n    \n    <!-- Summary section containing the description and key details of the document -->\n    <div class=\"fb-card__summary\">\n      <div class=\"card-text\">\n        <p>\n          <i class=\"fas fa-ad\"></i>         \n          America’s shifting demographics are highly visible in the millennial generation. Consisting of about a third of Americans, this generation is far more racially diverse than any generation before it. Millennial women’s attitudes toward health and the healthcare system are different than previous generations, too, and millennials are consuming healthcare in different ways than older generations did.          </p>\n      </div>\n\n    </div>   \n\n  </div>\n</div>",
+    "additionalProperties" : {
+      "position" : "bottom"
+    },
+    "category" : ""
+  } ]
+} ]
