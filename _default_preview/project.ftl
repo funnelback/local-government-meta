@@ -240,7 +240,9 @@
         <div class="fb-card__header mb-3">
           <div class="fb-card__header__image">
             <#if (result.listMetadata["image"][0])!?has_content>
-              <img class="deferred rounded-circle fb-image-thumbnail" alt="Thumbnail for ${result.title!}" src="/stencils/resources/base/v15.8/img/pixel.gif" data-deferred-src="${result.listMetadata["image"][0]}"> 
+              <#--  <img class="deferred rounded-circle fb-image-thumbnail" alt="Thumbnail for ${result.title!}" src="/stencils/resources/base/v15.8/img/pixel.gif" data-deferred-src="${result.listMetadata["image"][0]}">   -->
+              <img class="rounded-circle fb-image-thumbnail" alt="Thumbnail for ${result.title!}" src="https://source.unsplash.com/random/40x40?${(result.title)!''?url}"> 
+
             <#else>
               <img class="rounded-circle fb-image-thumbnail" alt="Thumbnail for ${result.title!}" src="https://source.unsplash.com/random/40x40?${(result.title)!''?url}"> 
             </#if>
@@ -322,18 +324,14 @@
             <span class="badge badge-pill badge-light">
               something else
             </span>    
-
-            <span class="badge badge-pill badge-light">
-              another thing
-            </span>    
           </div>
         </div>  -->
 
         <#-- Key call to actions (CTA) -->
-        <#--  <div class="fb-card__actions"> 
-          <a href="#" class="card-link fb-color-secondary mt-4" data-toggle="modal" data-target="#signupModal" >REGISTER NOW</a>
+        <div class="fb-card__actions"> 
+          <a href="#" class="card-link fb-color-secondary mt-4" data-toggle="modal" data-target="#signupModal" >ACTION 1</a>
           <a href="#" class="card-link fb-color-secondary">ACTION 2</a>  
-        </div>  -->
+        </div>
 
       </div>
     </div>

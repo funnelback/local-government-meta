@@ -164,6 +164,7 @@ body {
 .funnelback .fb-card--fluid {
 	height: auto;
 	width: 344px;
+	border: none;
 }
 
 /* Used in card view */
@@ -226,6 +227,7 @@ body {
 /* Styles specific to the list view */
 .funnelback .fb-card--list {
 	width: 100%;
+	border: none;
 }
 
 .funnelback .fb-card--list .fb-card__header{
