@@ -20,12 +20,13 @@
   These imports are required for the automatic template selection to work
   The various namespaces (e.g. 'video', 'facebook') need to be on the main scope 
 -->
-<#import "people.ftl" as people />
-<#import "facebook.ftl" as facebook />
 <#import "events.ftl" as events />
 <#import "jobs.ftl" as jobs />
 <#import "services.ftl" as services />
 <#import "journals.ftl" as journals />
+<#import "cemetery.ftl" as cemetery />
+<#import "roadworks.ftl" as roadworks />
+<#import "planning_applications.ftl" as planning_applications />
 
 <!DOCTYPE html>
 <html lang="en">
@@ -85,10 +86,10 @@
   <script src="/s/resources/${question.collection.id}/${question.profile}/js/typeahead.fb-2.6.js"></script>
   <script src="/s/resources/${question.collection.id}/${question.profile}/js/base.js"></script> 
 
-  <@events.AutoCompleteTemplate />
+  <#--  <@events.AutoCompleteTemplate />
   <@people.AutoCompleteTemplate />
 
-  <@events.CartTemplate />
+  <@events.CartTemplate />  -->
 
   <script>
     jQuery(document).ready( function() {

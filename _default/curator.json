@@ -114,26 +114,6 @@
     "category" : ""
   } ]
 }, {
-  "created" : "2020-03-11T14:34:28.23796Z",
-  "lastModified" : "2020-03-11T18:12:05.02024Z",
-  "id" : "9e45ee31-7d21-44ee-a5ac-f91ea73035d2",
-  "name" : "[Custom Groovy Trigger] FAQ Banner to display when there are no results",
-  "label" : "DEFAULT",
-  "enabled" : true,
-  "trigger" : {
-    "type" : "Groovy",
-    "classFile" : "/opt/funnelback/conf/membership-association-meta/@groovy/curator/triggers/NoResultTrigger.groovy",
-    "properties" : {
-      "key" : "value"
-    }
-  },
-  "actions" : [ {
-    "type" : "DisplayMessage",
-    "messageHtml" : "<div class=\"row no-gutters border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative\">\n  <div class=\"col p-4 d-flex flex-column position-static\">\n    <strong class=\"d-inline-block mb-2 text-primary\">Promotion</strong>\n    <h3 class=\"mb-0\">Frequently Asked Questions</h3>\n    <ul>\n      <li><a href=\"https://myama.force.com/s/article/How-do-I-renew-my-AMA-membership\"><span>How do I renew my AMA membership?</span></a></li>\n      <li><a href=\"https://myama.force.com/s/article/How-to-access-PCM-certification-exams\"><span>How to access PCM certification exams.</span></a></li>\n      <li><a href=\"https://myama.force.com/s/article/How-Do-I-Use-a-Group-Code\"><span>How Do I Use a Group Code?</span></a></li>\n    </ul>\n    <a href=\"#\" class=\"stretched-link\">See more</a>\n  </div>\n  <div class=\"col-auto d-none d-lg-block\">\n    <img src=\"https://www.ama.org/wp-content/uploads/2020/02/bruce-mars-DBGwy7s3QY0-unsplash.jpg?resize=486%2C365\" alt=\"...\" width=\"350\">\n  </div>\n</div>",
-    "additionalProperties" : { },
-    "category" : ""
-  } ]
-}, {
   "created" : "2020-03-12T14:33:01.536859Z",
   "lastModified" : "2020-04-22T12:12:07.759544Z",
   "id" : "f667e7b1-7136-405b-af29-16e0fee57036",
@@ -197,6 +177,26 @@
     "additionalProperties" : {
       "position" : "bottom"
     },
+    "category" : ""
+  } ]
+}, {
+  "created" : "2020-03-11T14:34:28.23796Z",
+  "lastModified" : "2020-03-11T18:12:05.02024Z",
+  "id" : "9e45ee31-7d21-44ee-a5ac-f91ea73035d2",
+  "name" : "[Custom Groovy Trigger] FAQ Banner to display when there are no results",
+  "label" : "DEFAULT",
+  "enabled" : true,
+  "trigger" : {
+    "type" : "Groovy",
+    "classFile" : "/opt/funnelback/conf/local-government-meta/@groovy/curator/triggers/NoResultTrigger.groovy",
+    "properties" : {
+      "key" : "value"
+    }
+  },
+  "actions" : [ {
+    "type" : "DisplayMessage",
+    "messageHtml" : "<div class=\"row no-gutters border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative\">\n  <div class=\"col p-4 d-flex flex-column position-static\">\n    <strong class=\"d-inline-block mb-2 text-primary\">Promotion</strong>\n    <h3 class=\"mb-0\">Frequently Asked Questions</h3>\n    <ul>\n      <li><a href=\"https://myama.force.com/s/article/How-do-I-renew-my-AMA-membership\"><span>How do I renew my AMA membership?</span></a></li>\n      <li><a href=\"https://myama.force.com/s/article/How-to-access-PCM-certification-exams\"><span>How to access PCM certification exams.</span></a></li>\n      <li><a href=\"https://myama.force.com/s/article/How-Do-I-Use-a-Group-Code\"><span>How Do I Use a Group Code?</span></a></li>\n    </ul>\n    <a href=\"#\" class=\"stretched-link\">See more</a>\n  </div>\n  <div class=\"col-auto d-none d-lg-block\">\n    <img src=\"https://www.ama.org/wp-content/uploads/2020/02/bruce-mars-DBGwy7s3QY0-unsplash.jpg?resize=486%2C365\" alt=\"...\" width=\"350\">\n  </div>\n</div>",
+    "additionalProperties" : { },
     "category" : ""
   } ]
 } ]
