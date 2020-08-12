@@ -56,18 +56,19 @@
             <#if (result.listMetadata["image"][0])!?has_content>
               <img class="deferred rounded-circle fb-image-thumbnail" alt="Thumbnail for ${result.title!}" src="/stencils/resources/base/v15.8/img/pixel.gif" data-deferred-src="https://jobs.ama.org${result.listMetadata["image"][0]}"> 
             <#else>
-              <img class="rounded-circle fb-image-thumbnail" alt="Thumbnail for ${result.title!}" src="https://source.unsplash.com/random/40x40?${(result.listMetadata["jobCompanyName"][0])!}"> 
+              <span class="fas fa-traffic-light fb-text-icon-round"></span>
+              <#--  <img class="rounded-circle fb-image-thumbnail" alt="Thumbnail for ${result.title!}" src="https://source.unsplash.com/random/40x40?${(result.listMetadata["roadworksResponsibleCompany"][0])!}">   -->
             </#if>
           </div>
 
           <div class="fb-card__header__title">
             <div class="card-title">          
-              <#if (result.listMetadata["jobPositionTitle"][0])!?has_content>
+              <#if (result.listMetadata["roadworksStreet"][0])!?has_content>
                 <h5>
                   <a href="${result.clickTrackingUrl!}" title="${result.liveUrl!}">
                     <@s.boldicize>
                       <@s.Truncate length=90>
-                        ${(result.listMetadata["jobPositionTitle"][0])!}
+                        ${(result.listMetadata["roadworksStreet"][0])!}
                       </@s.Truncate>
                     </@s.boldicize>
                   </a>
@@ -81,12 +82,12 @@
 
         <#-- Summary section containing the description and key details of the document -->
         <div class="fb-card__summary">
-          <#if (result.listMetadata["jobCompanyName"][0])!?has_content> 
+          <#if (result.listMetadata["roadworksResponsibleCompany"][0])!?has_content> 
             <div class="card-text">
-              <div class="mb-1"> ${(result.listMetadata["jobCompanyName"][0])!} </div>
+              <div class="mb-1"> ${(result.listMetadata["roadworksResponsibleCompany"][0])!} </div>
               <p class="text-muted small truncate-text">
                 <span class="fas fa-fw fa-map-marker-alt"></span>
-                ${(result.listMetadata["jobLocation"][0])!}
+                ${(result.listMetadata["roadworksLocality"][0])!}
               </p>
             </div>
           </#if>
@@ -101,14 +102,14 @@
             </p>
           </div>
 
-          <#if (result.metaData["jobPosted"])!?has_content>
+          <#if (result.metaData["roadworksStartDate"])!?has_content>
             <div class="card-text mb-3">
               <div class="small">
                 <span>
-                  Posted: 
+                  Start date: 
                 </span>
                 <span class="text-muted">
-                  ${result.metaData["jobPosted"]!}
+                  ${result.metaData["roadworksStartDate"]!}
                 </span>
               </div>
             </div>
@@ -128,38 +129,30 @@
               Additional information
             </p>
 
-            <span class="badge badge-pill badge-light">
-              $${rand(50,99)},000
-            </span>
-
-
-            <#if (result.listMetadata["jobType"][0])!?has_content>
+            <#if (result.listMetadata["roadworksWorkStatus"][0])!?has_content>
               <span class="badge badge-pill badge-light">
-                ${result.listMetadata["jobType"][0]!}
+                ${result.listMetadata["roadworksWorkStatus"][0]!}
               </span>
             </#if> 
 
-            <#--  <span class="badge badge-pill badge-light">
-              something else
-            </span>    
+            <#if (result.listMetadata["roadworksCategoryOfWorks"][0])!?has_content>
+              <span class="badge badge-pill badge-light">
+                ${result.listMetadata["roadworksCategoryOfWorks"][0]!}
+              </span>
+            </#if> 
 
-            <span class="badge badge-pill badge-light">
-              another thing
-            </span>      -->
+            <#if (result.listMetadata["roadworksContactTelephoneNumber"][0])!?has_content>
+              <span class="badge badge-pill badge-light">
+                ${result.listMetadata["roadworksContactTelephoneNumber"][0]!}
+              </span>
+            </#if>             
+ 
           </div>
         </div>
 
-          <#--  <#if (result.metaData["jobSalary"])!?has_content>
-            <div>
-              <span class="text-muted">
-                ${result.metaData["jobSalary"]!}
-              </span>
-            </div>
-          </#if>   -->
-
         <#-- Key call to actions (CTA) -->
         <div class="fb-card__actions"> 
-          <a href="#" class="card-link fb-color-secondary mt-4" data-toggle="modal" data-target="#signupModal" >APPLY</a>
+          <a href="#" class="card-link fb-color-secondary mt-4" data-toggle="modal" data-target="#signupModal" >SHOW ON MAP</a>
         </div>
 
       </div>

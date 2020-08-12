@@ -56,18 +56,19 @@
             <#if (result.listMetadata["image"][0])!?has_content>
               <img class="deferred rounded-circle fb-image-thumbnail" alt="Thumbnail for ${result.title!}" src="/stencils/resources/base/v15.8/img/pixel.gif" data-deferred-src="https://jobs.ama.org${result.listMetadata["image"][0]}"> 
             <#else>
-              <img class="rounded-circle fb-image-thumbnail" alt="Thumbnail for ${result.title!}" src="https://source.unsplash.com/random/40x40?${(result.listMetadata["jobCompanyName"][0])!}"> 
+              <span class="fas fa-id-badge fb-text-icon-round"></span>
+              <#--  <img class="rounded-circle fb-image-thumbnail" alt="Thumbnail for ${result.title!}" src="https://source.unsplash.com/random/40x40?${(result.listMetadata["cemeterySurname"][0])!},${(result.listMetadata["cemeteryFirstName"][0])!}">   -->
             </#if>
           </div>
 
           <div class="fb-card__header__title">
             <div class="card-title">          
-              <#if (result.listMetadata["jobPositionTitle"][0])!?has_content>
+              <#if (result.listMetadata["cemeterySurname"][0])!?has_content || (result.listMetadata["cemeteryFirstName"][0])!?has_content>
                 <h5>
                   <a href="${result.clickTrackingUrl!}" title="${result.liveUrl!}">
                     <@s.boldicize>
                       <@s.Truncate length=90>
-                        ${(result.listMetadata["jobPositionTitle"][0])!}
+                        ${(result.listMetadata["cemeterySurname"][0])!}, ${(result.listMetadata["cemeteryFirstName"][0])!}
                       </@s.Truncate>
                     </@s.boldicize>
                   </a>
@@ -81,12 +82,12 @@
 
         <#-- Summary section containing the description and key details of the document -->
         <div class="fb-card__summary">
-          <#if (result.listMetadata["jobCompanyName"][0])!?has_content> 
+          <#if (result.listMetadata["cemeteryCemetery"][0])!?has_content> 
             <div class="card-text">
-              <div class="mb-1"> ${(result.listMetadata["jobCompanyName"][0])!} </div>
+              <#--  <div class="mb-1"> ${(result.listMetadata["cemeteryCemetery"][0])!} </div>  -->
               <p class="text-muted small truncate-text">
                 <span class="fas fa-fw fa-map-marker-alt"></span>
-                ${(result.listMetadata["jobLocation"][0])!}
+                ${(result.listMetadata["cemeteryCemetery"][0])!}
               </p>
             </div>
           </#if>
@@ -94,25 +95,30 @@
           <div class="card-text">
             <p class="text-muted">
               <@s.boldicize>
-                <@s.Truncate length=170>
-                  ${result.summary!?no_esc}
+                <@s.Truncate length=250>
+                 
+                  Passed away
+                    <#if (result.listMetadata["cemeteryDateDied"][0])!?has_content>
+                      on ${(result.listMetadata["cemeteryDateDied"][0])!}
+                    </#if> 
+                  
+                  <#if (result.listMetadata["cemeteryAge"][0])!?has_content &&
+                  (result.listMetadata["cemeteryAge"][0])!?upper_case != "0">
+                    at the age of on ${(result.listMetadata["cemeteryAge"][0])!} 
+                    ${(result.listMetadata["cemeteryAgeUnit"][0])!} 
+                  </#if> 
+
+
+                  <#if (result.listMetadata["cemeteryCemetery"][0])!?has_content> 
+                    Burried at ${(result.listMetadata["cemeteryCemetery"][0])!} 
+                    <#if (result.listMetadata["cemeteryDateBuried"][0])!?has_content> 
+                      on  ${(result.listMetadata["cemeteryDateBuried"][0])!} 
+                    </#if>
+                  </#if>
                 </@s.Truncate>
               </@s.boldicize>
             </p>
           </div>
-
-          <#if (result.metaData["jobPosted"])!?has_content>
-            <div class="card-text mb-3">
-              <div class="small">
-                <span>
-                  Posted: 
-                </span>
-                <span class="text-muted">
-                  ${result.metaData["jobPosted"]!}
-                </span>
-              </div>
-            </div>
-          </#if>
 
           <div class="card-text">
             <@history_cart.LastVisitedLink result=result/>
@@ -120,7 +126,7 @@
         </div>   
         
         <#-- Additional information such as metadata -->
-        <div class="fb-card__additional-info">
+        <#--  <div class="fb-card__additional-info">
           <hr class="mt-3 mb-3" />
 
           <div class="card-text">
@@ -139,27 +145,19 @@
               </span>
             </#if> 
 
-            <#--  <span class="badge badge-pill badge-light">
+            <span class="badge badge-pill badge-light">
               something else
             </span>    
 
             <span class="badge badge-pill badge-light">
               another thing
-            </span>      -->
+            </span>
           </div>
-        </div>
-
-          <#--  <#if (result.metaData["jobSalary"])!?has_content>
-            <div>
-              <span class="text-muted">
-                ${result.metaData["jobSalary"]!}
-              </span>
-            </div>
-          </#if>   -->
+        </div>  -->
 
         <#-- Key call to actions (CTA) -->
         <div class="fb-card__actions"> 
-          <a href="#" class="card-link fb-color-secondary mt-4" data-toggle="modal" data-target="#signupModal" >APPLY</a>
+          <a href="#" class="card-link fb-color-secondary mt-4" data-toggle="modal" data-target="#signupModal" >SHOW ON MAP</a>
         </div>
 
       </div>

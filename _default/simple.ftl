@@ -25,7 +25,7 @@
 <#import "services.ftl" as services />
 <#import "journals.ftl" as journals />
 <#import "cemetery.ftl" as cemetery />
-<#import "road_works.ftl" as road_works />
+<#import "roadworks.ftl" as roadworks />
 <#import "planning_applications.ftl" as planning_applications />
 
 <!DOCTYPE html>
@@ -86,10 +86,10 @@
   <script src="/s/resources/${question.collection.id}/${question.profile}/js/typeahead.fb-2.6.js"></script>
   <script src="/s/resources/${question.collection.id}/${question.profile}/js/base.js"></script> 
 
-  <@events.AutoCompleteTemplate />
+  <#--  <@events.AutoCompleteTemplate />
   <@people.AutoCompleteTemplate />
 
-  <@events.CartTemplate />
+  <@events.CartTemplate />  -->
 
   <script>
     jQuery(document).ready( function() {

@@ -43,7 +43,7 @@
   @param result An individual result fron the data model
 -->
 <#macro GenericView result cardClass="fb-card--fixed">
-  <li class="search-result search-result-people" data-fb-result="${result.indexUrl}">
+  <li class="search-result search-result-people">
     <div class="card ${cardClass!''}">
  
       <div class="card-body fb-card__body ">        

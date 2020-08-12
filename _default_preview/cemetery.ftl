@@ -56,7 +56,8 @@
             <#if (result.listMetadata["image"][0])!?has_content>
               <img class="deferred rounded-circle fb-image-thumbnail" alt="Thumbnail for ${result.title!}" src="/stencils/resources/base/v15.8/img/pixel.gif" data-deferred-src="https://jobs.ama.org${result.listMetadata["image"][0]}"> 
             <#else>
-              <img class="rounded-circle fb-image-thumbnail" alt="Thumbnail for ${result.title!}" src="https://source.unsplash.com/random/40x40?${(result.listMetadata["cemeterySurname"][0])!},${(result.listMetadata["cemeteryFirstName"][0])!}"> 
+              <span class="fas fa-id-badge fb-text-icon-round"></span>
+              <#--  <img class="rounded-circle fb-image-thumbnail" alt="Thumbnail for ${result.title!}" src="https://source.unsplash.com/random/40x40?${(result.listMetadata["cemeterySurname"][0])!},${(result.listMetadata["cemeteryFirstName"][0])!}">   -->
             </#if>
           </div>
 

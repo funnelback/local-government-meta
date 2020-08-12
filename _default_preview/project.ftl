@@ -328,10 +328,10 @@
         </div>  -->
 
         <#-- Key call to actions (CTA) -->
-        <div class="fb-card__actions"> 
+        <#--  <div class="fb-card__actions"> 
           <a href="#" class="card-link fb-color-secondary mt-4" data-toggle="modal" data-target="#signupModal" >ACTION 1</a>
           <a href="#" class="card-link fb-color-secondary">ACTION 2</a>  
-        </div>
+        </div>  -->
 
       </div>
     </div>

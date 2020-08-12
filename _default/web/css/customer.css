@@ -11,6 +11,12 @@
 	--color-text-white: #FFFFFF;
 	--color-text-black: #212529;
 	--color-text-grey: #979797;
+	--color-blue: #949ef8;
+	--color-red: #f8a0a0;
+	--color-yellow: #f5fab2;
+	--color-green: #ceffcc;
+	--color-orange: #f7e0b5;
+	--color-purple: #c6a7f8;
 	--size-headline-1: 96px;
 	--size-headline-2: 60px;
 	--size-headline-3: 48px;
@@ -49,6 +55,29 @@
 	color: var(--color-secondary);
 }
 
+.funnelback .fb-bg-blue {
+	background-color: var(--color-blue);
+}
+
+.funnelback .fb-bg-red {
+	background-color: var(--color-red);	
+}
+
+.funnelback .fb-bg-yellow {
+	background-color: var(--color-yellow);	
+}
+.funnelback .fb-bg-orange {
+	background-color: var(--color-orange);	
+}
+
+.funnelback .fb-bg-green {
+	background-color: var(--color-green);	
+}
+
+.funnelback .fb-bg-purple {
+	background-color: var(--color-purple);	
+}
+
 .funnelback .truncate-text {
 	white-space: nowrap;
 	overflow: hidden;
@@ -67,6 +96,18 @@
 	object-fit: cover;
 }
 
+.funnelback .fb-text-icon-round {
+	height: 40px;
+    width: 40px;
+    text-align: center;
+    border-radius: 2em;
+    vertical-align: middle;
+    font-size: var(--size-headline-6);
+	line-height: 40px;
+	color: white;
+	background-color: var(--color-primary-dark);	
+}
+
 
 /** 
 	Bootstrap overrides
@@ -77,7 +118,7 @@
 body {
 	font-family: 'Open Sans', sans-serif !important;
 	background: var(--color-background);
-	font-size: var(--size-body-1);
+	font-size: var(--size-body-2);
 }
 
 .funnelback h1 {
@@ -164,12 +205,15 @@ body {
 .funnelback .fb-card--fluid {
 	height: auto;
 	width: 344px;
+	border: none;
 }
 
 /* Used in card view */
 .funnelback .fb-card--fixed {
-	height: 31em;
+	/* height: 20em; */
 	width: 344px;
+	border: none;
+	height: 100%;
 }
 
 .funnelback .fb-card--fluid .card-text,
@@ -225,10 +269,10 @@ body {
 /* Styles specific to the list view */
 .funnelback .fb-card--list {
 	width: 100%;
+	border: none;
 }
 
 .funnelback .fb-card--list .fb-card__header{
-	height: 100%;
 }
 
 .funnelback .fb-card--list .fb-card__body {

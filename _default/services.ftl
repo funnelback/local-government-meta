@@ -43,7 +43,7 @@
   @param result An individual result fron the data model
 -->
 <#macro GenericView result cardClass="fb-card--fixed">
-  <li class="search-result search-result-services" data-fb-result="${result.indexUrl}">
+  <li class="search-result search-result-services">
     <div class="card ${cardClass!''}">
  
       <div class="card-body fb-card__body ">        
@@ -61,7 +61,7 @@
           <div class="fb-card__header__title">
             <div class="card-title">          
               <#if (result.title)!?has_content>
-                <h6>
+                <h5>
                   <a href="${result.clickTrackingUrl!}" title="${result.liveUrl!}">
                     <@s.boldicize>
                       <@s.Truncate length=90>
@@ -69,7 +69,7 @@
                       </@s.Truncate>
                     </@s.boldicize>
                   </a>
-                </h6>            
+                </h5>            
               </#if>
             </div>
           </div>

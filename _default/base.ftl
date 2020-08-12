@@ -7,7 +7,9 @@
   the showcase collection. To fix it, copy the file from
   $SEARCH_HOME/share/stencils/libraries/... -->
 <#if question.collection.id == 'higher-education-meta' || 
-  question.collection.id == 'membership-association-meta' >
+  question.collection.id == 'membership-association-meta' ||
+  question.collection.id == 'local-government-meta'
+  >
   <#include "/share/stencils/libraries/base/base.ftl">
 <#else>
   <#-- Create a dummy version of a base.ftl macro, as a way to display
