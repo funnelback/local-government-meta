@@ -12,6 +12,21 @@ new GroupingResultsHookLifecycle().postProcess(transaction)
 new SecurityHookLifecycle().postProcess(transaction)
 
 /**
+ * The following functions are used for demo purposes.
+ */
+
+// Remove council specific names
+
+transaction?.response?.resultPacket?.results.each() {
+	result ->
+
+	result.title = result.title.replaceAll(/\s+-\s+Camden Council/, "")
+	result.title = result.title.replaceAll(/\s*\|\s*SF311/, "")
+}
+
+
+
+/**
  * <p>Hook functions for provide a preview of a tab using extra searches.</p>
  *
  * e.g.

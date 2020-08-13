@@ -86,11 +86,10 @@
   <script src="/s/resources/${question.collection.id}/${question.profile}/js/typeahead.fb-2.6.js"></script>
   <script src="/s/resources/${question.collection.id}/${question.profile}/js/base.js"></script> 
 
-  <#--  <@events.AutoCompleteTemplate />
-  <@people.AutoCompleteTemplate />
 
-  <@events.CartTemplate />  -->
-
+  <@cemetery.AutoCompleteTemplate />
+  <@planning_applications.AutoCompleteTemplate />
+  
   <script>
     jQuery(document).ready( function() {
       setupDeferredImages();

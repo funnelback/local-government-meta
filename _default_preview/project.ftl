@@ -401,7 +401,7 @@
       <div class="modal-content">
         <div class="modal-header">
           <h5 class="modal-title" id="exampleModalLabel">
-            Why join us?
+            Funnelback Map
           </h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
@@ -409,47 +409,17 @@
         </div>
         <div class="modal-body">
           <div>
-            We’re building the essential community for marketers, and we need you.
-            Joining the AMA not only connects you to other forward-thinking marketers but 
-            also equips you with the knowledge to understand what’s coming next in the industry.
+            TODO: A map of displayed showing the following:
           </div>
           <br />
           <ul>
-            <li>Access to all AMA content</li>
-            <li>Unlimited AMA journal digital access</li>
-            <li>Exclusive downloadable toolkits</li>
-            <li>Best pricing for AMA events</li>
-            <li>Discounts on Professional Certified Marketer® exams</li>
-            <li>Members-only webcasts</li>
-            <li>In-person networking opportunities through AMA local professional chapters</li>
+            <li>Cemetery</li>
+            <li>Planning applications</li>
+            <li>Roadworks</li>
+            <li>Services</li>
+            <li>etc.</li>
           </ul>
 
-          <hr />
-
-          <form class="p-3">
-            <h5>
-              <i class="fas fa-user mr-3"></i>
-              Ready? Create an account now
-              </h5>
-            <br /> 
-            <div class="form-group row">
-              <label for="inputEmail3" class="col-sm-1 col-form-label">
-                <i class="fas fa-envelope text-muted"></i>
-              </label>
-              <div class="col-sm-11">
-                <input type="email" class="form-control" id="inputEmail3" placeholder="Email">
-              </div>
-            </div>
-            <div class="form-group row">
-              <label for="inputPassword3" class="col-sm-1 col-form-label">
-                <i class="fas fa-key text-muted"></i>
-              </label>
-              <div class="col-sm-11">
-                <input type="password" class="form-control" id="inputPassword3" placeholder="password">
-              </div>
-            </div>
-            <button type="button" class="btn btn-dark btn-block" data-dismiss="modal">CREATE ACCOUNT</button>
-          </form>          
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
