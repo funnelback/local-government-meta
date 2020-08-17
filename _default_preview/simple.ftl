@@ -109,6 +109,8 @@
   <script type="text/javascript">
     window.addEventListener('DOMContentLoaded', function() {
 
+      <#-- Deactive cart so that history can work 
+      
       new Funnelback.SessionCart({
         collection: '${question.collection.id}',
         iconPrefix: '',
@@ -150,7 +152,7 @@
           isLabel: true,
           labelDelete: "REMOVE FROM SHORTLIST"
         }        
-      });
+      });  -->
       
       new Funnelback.SessionHistory({
         collection: '${question.collection.id}',
