@@ -94,9 +94,7 @@
 
           <div class="card-text">
             <p class="text-muted">
-              <@s.boldicize>
-                <@s.Truncate length=250>
-                 
+              <@s.boldicize>              
                   Passed away
                     <#if (result.listMetadata["cemeteryDateDied"][0])!?has_content>
                       on ${(result.listMetadata["cemeteryDateDied"][0])!}
@@ -104,18 +102,17 @@
                   
                   <#if (result.listMetadata["cemeteryAge"][0])!?has_content &&
                   (result.listMetadata["cemeteryAge"][0])!?upper_case != "0">
-                    at the age of on ${(result.listMetadata["cemeteryAge"][0])!} 
+                    at the age of ${(result.listMetadata["cemeteryAge"][0])!} 
                     ${(result.listMetadata["cemeteryAgeUnit"][0])!} 
                   </#if> 
 
-
                   <#if (result.listMetadata["cemeteryCemetery"][0])!?has_content> 
+                    <br />
                     Burried at ${(result.listMetadata["cemeteryCemetery"][0])!} 
                     <#if (result.listMetadata["cemeteryDateBuried"][0])!?has_content> 
                       on  ${(result.listMetadata["cemeteryDateBuried"][0])!} 
                     </#if>
                   </#if>
-                </@s.Truncate>
               </@s.boldicize>
             </p>
           </div>
@@ -166,101 +163,43 @@
 </#macro>
 
 
-<#macro CartTemplate>
-  <script id="cart-template-membership-association-jobs-web" type="text/x-handlebar-template">
-    <div class="card mb-3">
-      <div class="card-body">
-        <#-- Title -->
-        <div class="card-title">    
-          <h4>
-            <span class="fas fa-briefcase text-muted pull-right small mr-2" title="Job"></span>
-            <a href="{{indexUrl}}">
-              {{#if metaData.jobPositionTitle}} 
-                {{metaData.jobPositionTitle}}  
-              {{/if}}
-            </a>
+<#-- 
+  Handlebars template used to display the current object
+  in concierge.
+--> 
+<#macro AutoCompleteTemplate>
+  <script id="auto-completion-cemetery" type="text/x-handlebar-template">
+    <div class="fb-auto-complete--non-organic">
+      {{#if extra.disp.metaData.eventImage}}
+        <img class="rounded-circle fb-auto-complete__primary_visual" src="{{extra.disp.metaData.eventImage}}" alt="{{extra.disp.title}}" />
+      {{else}}
+        <span class="fas fa-id-badge fb-text-icon-round mr-3"></span> 
+      {{/if}}
+      <div class="fb-auto-complete--non-organic__body">
+        <h6 class="fb-auto-complete__body__primary-text">
+          {{extra.disp.metaData.cemeterySurname}}, {{extra.disp.metaData.cemeteryFirstName}}
+        </h6>
 
-            {{#if metaData.jobType}}                 
-              <span class="text-muted small">
-                ({{metaData.jobType}})
-              </span>
-            {{/if}}
-          </h4>
-        </div>
+        <div class="fb-auto-complete__body__metadata text-muted">
+          
+          Passed away on
+          {{#if extra.disp.metaData.cemeteryDateDied}}
+            {{extra.disp.metaData.cemeteryDateDied}}
+          {{/if}}        
 
-        <#-- Card subtitle -->
-        {{#if metaData.jobCompanyName}}
-          <div class="card-subtitle">
-            {{metaData.jobCompanyName}}  
-          </div>        
-        {{/if}}
+          {{#if extra.disp.metaData.cemeteryAge}}
+            at the age of
+            {{extra.disp.metaData.cemeteryAge}}
+            {{extra.disp.metaData.cemeteryAgeUnit}}
+          {{/if}}  
 
-        <#-- Location -->
-        {{#if metaData.jobLocation}}
-          <div class="card-text text-muted small">
-            {{metaData.jobLocation}}  
-          </div>        
-        {{/if}}
-
-
-        <div class="card-text clearfix mt-3">          
-          <#-- TODO - metadata coud have multiple values. Need to add logic to split and take the first one
-            {{#if metaData.image}}            
-              <img class="img-fluid float-right ml-3 mb-3" alt="Thumbnail for {{title}}" src="https://jobs.ama.org{{metaData.image}} />"> 
-            {{/if}}  
-          -->
-
-          {{#if summary}}
-            <p>
-              {{#truncate 255}}
-                {{summary}}
-              {{/truncate}}
-            </p>
-          {{/if}}
-
-          {{#if metaData.jobSalary}}
-            <div class="card-text text-muted small">
-              <span class="text-muted">
-                {{metaData.jobSalary}}  
-              </span>
-            </div>        
-          {{/if}}
-        </div>        
-
-        {{#if metaData.jobPosted}}
-          <div class="card-text">
-            <div class="text-right small">
-              <span>
-                Posted: 
-              </span>
-              <span class="text-muted">
-                {{metaData.jobPosted}}  
-              </span>
+          {{#if extra.disp.metaData.cemeteryCemetery}}
+            <div>
+              Burried at {{extra.disp.metaData.cemeteryCemetery}}
             </div>
-          </div>
-        {{/if}}
-      </div>
-    </div>
+          {{/if}}              
+        </di v>
+    </div>    
   </script>
 </#macro>
 
-<#--
-* Generates a "random" integer between min and max (inclusive)
-*
-* Note the values this function returns are based on the current
-* second the function is called and thus are highly deterministic
-* and SHOULD NOT be used for anything other than inconsequential
-* purposes, such as picking a random image to display.
--->
-<#function rand min max>
-  <#local now = .now?long?c />
-  <#local randomNum = _rand +
-    ("0." + now?substring(now?length-1) + now?substring(now?length-2))?number />
-  <#if (randomNum > 1)>
-    <#assign _rand = randomNum % 1 />
-  <#else>
-    <#assign _rand = randomNum />
-  </#if>
-  <#return (min + ((max - min) * _rand))?round />
-</#function>
-<#assign _rand = 0.36 />

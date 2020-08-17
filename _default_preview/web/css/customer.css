@@ -203,7 +203,6 @@ body {
 
 /* Used in curator */
 .funnelback .fb-card--fluid {
-	height: auto;
 	width: 344px;
 	border: none;
 }

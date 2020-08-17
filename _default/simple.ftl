@@ -86,11 +86,10 @@
   <script src="/s/resources/${question.collection.id}/${question.profile}/js/typeahead.fb-2.6.js"></script>
   <script src="/s/resources/${question.collection.id}/${question.profile}/js/base.js"></script> 
 
-  <#--  <@events.AutoCompleteTemplate />
-  <@people.AutoCompleteTemplate />
 
-  <@events.CartTemplate />  -->
-
+  <@cemetery.AutoCompleteTemplate />
+  <@planning_applications.AutoCompleteTemplate />
+  
   <script>
     jQuery(document).ready( function() {
       setupDeferredImages();
@@ -110,6 +109,8 @@
   <script type="text/javascript">
     window.addEventListener('DOMContentLoaded', function() {
 
+      <#-- Deactive cart so that history can work 
+      
       new Funnelback.SessionCart({
         collection: '${question.collection.id}',
         iconPrefix: '',
@@ -151,7 +152,7 @@
           isLabel: true,
           labelDelete: "REMOVE FROM SHORTLIST"
         }        
-      });
+      });  -->
       
       new Funnelback.SessionHistory({
         collection: '${question.collection.id}',

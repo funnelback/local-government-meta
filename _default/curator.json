@@ -1,34 +1,4 @@
 [ {
-  "created" : "2017-06-13T10:29:37.53-07:00",
-  "lastModified" : "2017-06-13T10:47:59.593-07:00",
-  "id" : "0129fbef-5729-4c02-84d9-82e5400b2b5d",
-  "name" : "Campus Life",
-  "label" : "DEFAULT",
-  "enabled" : true,
-  "trigger" : {
-    "type" : "And",
-    "triggers" : [ {
-      "type" : "Or",
-      "triggers" : [ {
-        "type" : "AllQueryWords",
-        "triggerWords" : [ "campus" ]
-      } ]
-    } ]
-  },
-  "actions" : [ {
-    "type" : "DisplayUrlAdvert",
-    "titleHtml" : "Discover life a the FBU campus",
-    "displayUrl" : "-",
-    "linkUrl" : "-",
-    "descriptionHtml" : "<img class=\"card-img img-fluid\" src=\"/s/resources/higher-education-meta/img/campus-life.png\">\n<div class=\"card-img-overlay\">\n  <a class=\"float-right\" href=\"http://funnelback.edu/campus-life\">Discover life at the FBU campus <span class=\"fas fa-arrow-right\"></span></a>\n</div>",
-    "additionalProperties" : {
-      "position" : "center",
-      "class" : "campus-life"
-    },
-    "category" : "",
-    "removeCollectionUrl" : false
-  } ]
-}, {
   "created" : "2018-11-21T09:35:16.971+11:00",
   "lastModified" : "2018-11-21T09:35:16.971+11:00",
   "id" : "3f3c203c-75a2-40f8-88f5-9e582896a514",
@@ -48,70 +18,6 @@
     "additionalProperties" : null,
     "category" : "BEST_BETS",
     "removeCollectionUrl" : false
-  } ]
-}, {
-  "created" : "2017-06-13T09:49:12.186-07:00",
-  "lastModified" : "2019-01-11T06:33:41.639+11:00",
-  "id" : "53ca94ee-cd8a-4c11-9d18-fbad04f324d6",
-  "name" : "Open House",
-  "label" : "DEFAULT",
-  "enabled" : true,
-  "trigger" : {
-    "type" : "And",
-    "triggers" : [ {
-      "type" : "Or",
-      "triggers" : [ {
-        "type" : "FacetSelection",
-        "facetName" : "Tabs",
-        "categoryValue" : "Programs",
-        "matchType" : "EXACT"
-      } ]
-    } ]
-  },
-  "actions" : [ {
-    "type" : "DisplayUrlAdvert",
-    "titleHtml" : "CAMPUS TOUR",
-    "displayUrl" : "-",
-    "linkUrl" : "-",
-    "descriptionHtml" : "<div>\nLive a different perspective\n<small>March 17th</small>\n</div>\n\n\n\n<a href=\"http://funnelback.edu/open-day\" target=\"_blank\" class=\"btn btn-primary float-right\">Find out more</a>",
-    "additionalProperties" : {
-      "position" : "left",
-      "class" : "open-day"
-    },
-    "category" : "",
-    "removeCollectionUrl" : false
-  } ]
-}, {
-  "created" : "2017-07-07T17:26:06.115-07:00",
-  "lastModified" : "2020-03-11T16:01:32.007547Z",
-  "id" : "5c2b2b38-581f-4eae-8d55-4cbd1d8f4de9",
-  "name" : "IT Lab Closure",
-  "label" : "DEFAULT",
-  "enabled" : true,
-  "trigger" : {
-    "type" : "And",
-    "triggers" : [ {
-      "type" : "Or",
-      "triggers" : [ {
-        "type" : "AllQueryWords",
-        "triggerWords" : [ "internet" ]
-      } ]
-    }, {
-      "type" : "Or",
-      "triggers" : [ {
-        "type" : "DateRange",
-        "startDate" : 1563260400000,
-        "endDate" : 1594882800000
-      } ]
-    } ]
-  },
-  "actions" : [ {
-    "type" : "DisplayMessage",
-    "messageHtml" : "<strong>Notice:</strong> The IT lab will be unavailable on February 7th between 5pm - 7pm",
-    "additionalProperties" : {
-      "position" : "center"
-    },
-    "category" : ""
   } ]
 }, {
   "created" : "2020-03-11T14:34:28.23796Z",
@@ -196,6 +102,69 @@
     "messageHtml" : "<!-- Corona Virus -->\n<div class=\"card fb-card--fluid\">\n\n  <div class=\"card-body fb-card__body\">        \n\n    <!-- Header section usually containing a title and small thumbnail -->\n    <div class=\"fb-card__header mb-3 border-bottom\">\n      <div class=\"fb-card__header__image\">\n          <img class=\"rounded-circle fb-image-thumbnail\" alt=\"Thumbnail for ${result.title!}\" src=\"https://source.unsplash.com/random/40x40?female\"> \n        </#if>\n      </div>\n\n      <div class=\"fb-card__header__title\">\n        <div class=\"card-title\">          \n          <h6>\n            <a href=\"#\" data-toggle=\"modal\" data-target=\"#signupModal\">\n              Health Habits of Female Millennials\n            </a>\n          </h6>            \n        </div>\n      </div>\n    </div>\n    \n    <!-- Summary section containing the description and key details of the document -->\n    <div class=\"fb-card__summary\">\n      <div class=\"card-text\">\n        <p>\n          <i class=\"fas fa-ad\"></i>         \n          America’s shifting demographics are highly visible in the millennial generation. Consisting of about a third of Americans, this generation is far more racially diverse than any generation before it. Millennial women’s attitudes toward health and the healthcare system are different than previous generations, too, and millennials are consuming healthcare in different ways than older generations did.          </p>\n      </div>\n\n    </div>   \n\n  </div>\n</div>",
     "additionalProperties" : {
       "position" : "bottom"
+    },
+    "category" : ""
+  } ]
+}, {
+  "created" : "2020-08-17T16:12:56.407535Z",
+  "lastModified" : "2020-08-17T16:41:15.198904Z",
+  "id" : "fe3b1d3b-fa55-4fbe-a154-a3d4ed3c2e32",
+  "name" : "[Example] Bins",
+  "label" : "DEFAULT",
+  "enabled" : true,
+  "trigger" : {
+    "type" : "And",
+    "triggers" : [ {
+      "type" : "Or",
+      "triggers" : [ {
+        "type" : "AllQueryWords",
+        "triggerWords" : [ "bins" ]
+      } ]
+    } ]
+  },
+  "actions" : [ {
+    "type" : "DisplayMessage",
+    "messageHtml" : "<!-- Bins -->\n<div class=\"card fb-card--fluid\">\n    <div class=\"card-body fb-card__body\">        \n        <!-- Header section usually containing a title and small thumbnail -->\n        <div class=\"fb-card__header mb-3 border-bottom\">\n            <div class=\"fb-card__header__image\">\n                <img class=\"rounded-circle fb-image-thumbnail\" alt=\"Thumbnail for ${result.title!}\" src=\"https://environmentservices.camden.gov.uk/cl/img/services/communal-green.jpg\"> \n            </div>\n    \n            <div class=\"fb-card__header__title\">\n                <div class=\"card-title\">          \n                    <h5>\n                        <a href=\"https://environmentservices.camden.gov.uk/property?\">\n                            Recycling and rubbish collection days\n                        </a>\n                    </h5>            \n                </div>\n            </div>\n        </div>\n        \n        <!-- Summary section containing the description and key details of the document -->\n        <div class=\"fb-card__summary\">\n            <div class=\"card-text\">\n                <p>\n                    <i class=\"fas fa-ad\"></i>\n                    Find out when your rubbish and recycling is collected.\n                </p>\n            </div>\n        </div>   \n\n        <div class=\"fb-card__actions\"> \n            <a href=\"https://environmentservices.camden.gov.uk/property?\" class=\"card-link fb-color-secondary mt-4 small\">\n                CHECK YOUR COLLECTION DAY\n            </a>\n        </div>\n    </div>\n</div>",
+    "additionalProperties" : {
+      "position" : "center"
+    },
+    "category" : ""
+  }, {
+    "type" : "DisplayMessage",
+    "messageHtml" : "<!-- Street damage -->\n<div class=\"card fb-card--fluid\">\n    <div class=\"card-body fb-card__body\">        \n        <!-- Header section usually containing a title and small thumbnail -->\n        <div class=\"fb-card__header mb-3 border-bottom\">\n            <div class=\"fb-card__header__image\">\n                <img class=\"rounded-circle fb-image-thumbnail\" alt=\"Thumbnail for reporting damage\" src=\"https://forms.camden.gov.uk/cus/images/icons/edit.png\"> \n            </div>\n    \n            <div class=\"fb-card__header__title\">\n                <div class=\"card-title\">          \n                    <h5>\n                        <a href=\"https://www.camden.gov.uk/report-street-issue\">\n                            Report street damage or a cleaning issue\n                        </a>\n                    </h5>            \n                </div>\n            </div>\n        </div>\n        \n        <!-- Summary section containing the description and key details of the document -->\n        <div class=\"fb-card__summary\">\n            <div class=\"card-text\">\n                <p>\n                    <i class=\"fas fa-ad\"></i>\n                    Tell us about a problem on our streets so that we can have a look.\n                </p>\n            </div>\n        </div>   \n\n        <div class=\"fb-card__actions\"> \n            <a href=\"https://www.camden.gov.uk/report-street-issue\" class=\"card-link fb-color-secondary mt-4 small\">\n                REPORT DAMAGE\n            </a>\n        </div>\n    </div>\n</div>",
+    "additionalProperties" : {
+      "position" : "center"
+    },
+    "category" : ""
+  } ]
+}, {
+  "created" : "2020-08-17T16:48:38.568916Z",
+  "lastModified" : "2020-08-17T16:53:30.24414Z",
+  "id" : "2c27d476-f132-4772-95ad-06fb61b3323f",
+  "name" : "[Example] Term dates",
+  "label" : "DEFAULT",
+  "enabled" : true,
+  "trigger" : {
+    "type" : "And",
+    "triggers" : [ {
+      "type" : "Or",
+      "triggers" : [ {
+        "type" : "AllQueryWords",
+        "triggerWords" : [ "school" ]
+      }, {
+        "type" : "AllQueryWords",
+        "triggerWords" : [ "term", "dates" ]
+      }, {
+        "type" : "AllQueryWords",
+        "triggerWords" : [ "holidays" ]
+      } ]
+    } ]
+  },
+  "actions" : [ {
+    "type" : "DisplayMessage",
+    "messageHtml" : "<!-- Term dates -->\n<div class=\"card fb-card--fluid\">\n    <div class=\"card-body fb-card__body\">        \n        <!-- Header section usually containing a title and small thumbnail -->\n        <div class=\"fb-card__header mb-3 border-bottom\">\n            <div class=\"fb-card__header__image\">\n                <img class=\"rounded-circle fb-image-thumbnail\" alt=\"Thumbnail for reporting damage\" src=\"https://upload.wikimedia.org/wikipedia/commons/c/cd/Circle-icons-calendar.svg\"> \n            </div>\n    \n            <div class=\"fb-card__header__title\">\n                <div class=\"card-title\">          \n                    <h5>\n                        <a href=\"https://www.camden.gov.uk/term-dates\">\n                            Term dates\n                        </a>\n                    </h5>            \n                </div>\n            </div>\n        </div>\n        \n        <!-- Summary section containing the description and key details of the document -->\n        <div class=\"fb-card__summary\">\n            <div class=\"card-text\">\n                <p>\n                    <i class=\"fas fa-ad\"></i>\n                    Find out when your child's school term starts. State school term and holiday dates through to summer 2022.\n                </p>\n            </div>\n        </div>   \n\n        <div class=\"fb-card__actions\"> \n            <a href=\"https://www.camden.gov.uk/term-dates\" class=\"card-link fb-color-secondary mt-4 small\">\n                VIEW DATES\n            </a>\n        </div>\n    </div>\n</div>",
+    "additionalProperties" : {
+      "position" : "center"
     },
     "category" : ""
   } ]

@@ -203,7 +203,6 @@ body {
 
 /* Used in curator */
 .funnelback .fb-card--fluid {
-	height: auto;
 	width: 344px;
 	border: none;
 }
@@ -211,6 +210,7 @@ body {
 /* Used in card view */
 .funnelback .fb-card--fixed {
 	/* height: 20em; */
+	min-height: 16em;
 	width: 344px;
 	border: none;
 	height: 100%;
@@ -225,7 +225,6 @@ body {
 .funnelback .fb-card__header {
 	display: flex;
 	overflow: hidden;
-	height:	70px;
 	grid-area: header;
 }
 
