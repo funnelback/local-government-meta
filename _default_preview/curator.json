@@ -107,7 +107,7 @@
   } ]
 }, {
   "created" : "2020-08-17T16:12:56.407535Z",
-  "lastModified" : "2020-08-17T16:41:15.198904Z",
+  "lastModified" : "2020-08-18T07:55:55.357582Z",
   "id" : "fe3b1d3b-fa55-4fbe-a154-a3d4ed3c2e32",
   "name" : "[Example] Bins",
   "label" : "DEFAULT",
@@ -119,6 +119,12 @@
       "triggers" : [ {
         "type" : "AllQueryWords",
         "triggerWords" : [ "bins" ]
+      }, {
+        "type" : "AllQueryWords",
+        "triggerWords" : [ "bin" ]
+      }, {
+        "type" : "AllQueryWords",
+        "triggerWords" : [ "rubbish" ]
       } ]
     } ]
   },
