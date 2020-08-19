@@ -2,148 +2,43 @@
 <!DOCTYPE testfile SYSTEM
 "http://es.csiro.au/C-TEST/testfile_v1.0.dtd">
 <testfile>
-  <query id="02b728bd-3237-443b-8d06-76126abc7bd0" text="design">
-    <interpretation id="53914fb6-a9ad-49ae-b505-40130e3469f5" label="" weight="1.0">
+  <query id="32457443-6822-4a45-a22f-071ef20fbe12" text="bins" weight="1.0" depth="20">
+    <interpretation id="7b3334b9-1a00-454b-bb87-3d5ee3f1f273" label="" weight="1.0">
       <eset util="1.0">
-        <docid>http://sydney.edu.au/about-us/our-world-rankings.html</docid>
-      </eset>
-      <eset util="1.0">
-        <docid>http://sydney.edu.au/careers/home.html</docid>
+        <docid>https://environmentservices.camden.gov.uk/property</docid>
       </eset>
     </interpretation>
-    <created>2019-02-07T07:39:06.412+11:00</created>
-    <lastModified>2019-02-07T07:39:06.412+11:00</lastModified>
+    <created>2020-08-19T15:52:18.649725Z</created>
+    <lastModified>2020-08-19T15:52:18.654177Z</lastModified>
   </query>
-  <query id="8bcce5ce-290a-4a79-9aad-d563ae5b8dac" text="apply">
-    <interpretation id="e6cea2c1-ff22-40d3-8aaa-4b100e0ea7da" label="" weight="1.0">
+  <query id="3d0a737c-5a7d-4f81-a84e-5b42bf1aaa59" text="schools" weight="1.0" depth="20">
+    <interpretation id="6b6d5bb3-9e1f-4992-8fcf-5fb33018c398" label="" weight="1.0">
       <eset util="1.0">
-        <docid>https://www.westernsydney.edu.au/informationabout/scholarships_home</docid>
-      </eset>
-      <eset util="1.0">
-        <docid>https://www.taylorssydney.edu.au/how-to-apply</docid>
-      </eset>
-      <eset util="1.0">
-        <docid>https://sydney.edu.au/students/os-help/how-to-apply.html</docid>
+        <docid>https://www.camden.gov.uk/term-dates</docid>
       </eset>
     </interpretation>
-    <created>2018-11-21T09:39:07.665+11:00</created>
-    <lastModified>2018-11-21T09:39:07.665+11:00</lastModified>
+    <created>2020-08-19T15:52:53.138475Z</created>
+    <lastModified>2020-08-19T15:52:53.147556Z</lastModified>
   </query>
-  <query id="53c19907-9048-4317-b77f-88c8b9e044af" text="art">
-    <interpretation id="0bc7357c-52ae-4280-945b-3b5e36c33468" label="" weight="1.0">
+  <query id="2c4b8161-8867-451a-af52-c6d7026b5976" text="libraries" weight="1.0" depth="20">
+    <interpretation id="53c315a3-5954-4f25-9bce-fde0f8b163a1" label="" weight="1.0">
       <eset util="1.0">
-        <docid>https://www.westernsydney.edu.au/humanities_communication_arts/hca</docid>
-      </eset>
-      <eset util="1.0">
-        <docid>http://sydney.edu.au/news-opinion/sydney-ideas/art-culture.html</docid>
-      </eset>
-      <eset util="1.0">
-        <docid>https://www.westernsydney.edu.au/policy/policy_dds</docid>
+        <docid>https://www.camden.gov.uk/libraries-and-leisure</docid>
       </eset>
     </interpretation>
-    <created>2019-01-10T06:49:00.685+11:00</created>
-    <lastModified>2019-01-10T06:49:00.685+11:00</lastModified>
+    <created>2020-08-19T15:54:19.071933Z</created>
+    <lastModified>2020-08-19T15:54:19.079903Z</lastModified>
   </query>
-  <query id="1c16a414-029d-47e4-ae9d-1b5c7dea7c67" text="art">
-    <interpretation id="484046f4-f8e4-45b5-aefe-698702cfc227" label="" weight="1.0">
+  <query id="f0be22e7-f370-40b8-9a21-00a931d2d2fc" text="council tax" weight="1.0" depth="20">
+    <interpretation id="edb454e4-d594-4b3c-a590-39a7aeeebf5f" label="" weight="1.0">
       <eset util="1.0">
-        <docid>https://sydney.edu.au/sca/future-students/exchange/index.shtml</docid>
+        <docid>https://www.camden.gov.uk/council-tax</docid>
       </eset>
       <eset util="1.0">
-        <docid>https://www.westernsydney.edu.au/humanities_communication_arts/hca</docid>
-      </eset>
-      <eset util="1.0">
-        <docid>http://sydney.edu.au/about-us/our-world-rankings.html</docid>
+        <docid>https://www.camden.gov.uk/paying-your-council-tax</docid>
       </eset>
     </interpretation>
-    <created>2018-12-13T08:00:27.784+11:00</created>
-    <lastModified>2018-12-13T08:00:27.784+11:00</lastModified>
-  </query>
-  <query id="b399d9c2-b2a5-4a17-a3e7-10d432f111ec" text="exam timetable">
-    <interpretation id="3c099c39-93cc-425b-8344-6d117a394665" label="" weight="1.0">
-      <eset util="1.0">
-        <docid>https://exams.westernsydney.edu.au/timetable/personal.php?db=17</docid>
-      </eset>
-      <eset util="1.0">
-        <docid>https://www.westernsydney.edu.au/policy/policy_dds</docid>
-      </eset>
-      <eset util="1.0">
-        <docid>https://www.westernsydney.edu.au/currentstudents/current_students/forms</docid>
-      </eset>
-    </interpretation>
-    <created>2018-10-17T01:41:43.884+11:00</created>
-    <lastModified>2018-10-17T01:41:43.884+11:00</lastModified>
-  </query>
-  <query id="f128a2c9-a5eb-4282-8524-59e77813202d" text="apply">
-    <interpretation id="8d505690-d1c4-440e-a480-e6a6e4eee8c1" label="" weight="1.0">
-      <eset util="1.0">
-        <docid>https://online.westernsydney.edu.au/apply-now/</docid>
-      </eset>
-      <eset util="1.0">
-        <docid>https://library.sydney.edu.au/libraries/membership.html</docid>
-      </eset>
-    </interpretation>
-    <created>2019-02-09T03:39:30.995+11:00</created>
-    <lastModified>2019-02-09T03:39:30.995+11:00</lastModified>
-  </query>
-  <query id="4ab2cf85-6080-4c0b-b0f9-77f24ed556bc" text="campus">
-    <interpretation id="a3d3fbcc-4d84-4c91-a59b-1c2a5b96c2c2" label="" weight="1.0">
-      <eset util="1.0">
-        <docid>http://sydney.edu.au/about-us/campuses/campus-locations.html</docid>
-      </eset>
-      <eset util="1.0">
-        <docid>http://sydney.edu.au/campus-life.html</docid>
-      </eset>
-      <eset util="1.0">
-        <docid>https://www.westernsydney.edu.au/campus_safety_and_security/security</docid>
-      </eset>
-    </interpretation>
-    <created>2018-11-29T06:37:54.054+11:00</created>
-    <lastModified>2018-11-29T06:37:54.054+11:00</lastModified>
-  </query>
-  <query id="85fc957b-687e-4f2c-8df5-b455aac574e5" text="apply">
-    <interpretation id="707e2bdd-ae99-48c1-a21f-18908e5fdb83" label="" weight="1.0">
-      <eset util="1.0">
-        <docid>http://sydney.edu.au/study/admissions/apply/how-to-apply.html</docid>
-      </eset>
-      <eset util="1.0">
-        <docid>https://online.westernsydney.edu.au/apply-now/</docid>
-      </eset>
-      <eset util="1.0">
-        <docid>https://library.sydney.edu.au/libraries/membership.html</docid>
-      </eset>
-    </interpretation>
-    <created>2018-11-03T05:15:10.476+11:00</created>
-    <lastModified>2018-11-03T05:15:10.476+11:00</lastModified>
-  </query>
-  <query id="1d8a86e2-b08b-46b8-96a8-df2d617e2e0e" text="art">
-    <interpretation id="1ecc361c-7e69-489c-9c54-0ca85f4e45ba" label="" weight="1.0">
-      <eset util="1.0">
-        <docid>https://sydney.edu.au/sca/future-students/exchange/index.shtml</docid>
-      </eset>
-      <eset util="1.0">
-        <docid>http://sydney.edu.au/contact-us.html</docid>
-      </eset>
-      <eset util="1.0">
-        <docid>http://sydney.edu.au/about-us/our-world-rankings.html</docid>
-      </eset>
-    </interpretation>
-    <created>2018-12-06T06:35:13.523+11:00</created>
-    <lastModified>2018-12-06T06:35:13.523+11:00</lastModified>
-  </query>
-  <query id="3d8c3783-2dc1-4e30-9b5a-b62dfa5cc58b" text="interior design">
-    <interpretation id="73547a4b-58df-4eb6-b48a-01fbf4a059ed" label="" weight="1.0">
-      <eset util="1.0">
-        <docid>file:///opt/funnelback/conf/higher-education-courses/@data/he-courses.xml/doc001.924</docid>
-      </eset>
-      <eset util="1.0">
-        <docid>https://www.taylorssydney.edu.au/programs/the-university-of-sydney-foundation-program/subjects</docid>
-      </eset>
-      <eset util="1.0">
-        <docid>file:///opt/funnelback/conf/higher-education-courses/@data/he-courses.xml/doc003.298</docid>
-      </eset>
-    </interpretation>
-    <created>2018-12-07T03:42:27.321+11:00</created>
-    <lastModified>2018-12-07T03:42:27.321+11:00</lastModified>
+    <created>2020-08-19T15:53:45.555254Z</created>
+    <lastModified>2020-08-19T15:53:45.561499Z</lastModified>
   </query>
 </testfile>

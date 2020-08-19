@@ -174,4 +174,32 @@
     },
     "category" : ""
   } ]
+}, {
+  "created" : "2020-08-19T16:00:08.117078Z",
+  "lastModified" : "2020-08-19T16:00:08.131633Z",
+  "id" : "878f2174-ef98-48a1-9fdc-9ab1954a587b",
+  "name" : "[Example] Fines",
+  "label" : "DEFAULT",
+  "enabled" : true,
+  "trigger" : {
+    "type" : "And",
+    "triggers" : [ {
+      "type" : "Or",
+      "triggers" : [ {
+        "type" : "AllQueryWords",
+        "triggerWords" : [ "fine" ]
+      }, {
+        "type" : "AllQueryWords",
+        "triggerWords" : [ "fines" ]
+      } ]
+    } ]
+  },
+  "actions" : [ {
+    "type" : "DisplayMessage",
+    "messageHtml" : "<!-- Parking fines -->\n<div class=\"card fb-card--fluid\">\n    <div class=\"card-body fb-card__body\">        \n        <!-- Header section usually containing a title and small thumbnail -->\n        <div class=\"fb-card__header mb-3 border-bottom\">\n            <div class=\"fb-card__header__image\">\n                <img class=\"rounded-circle fb-image-thumbnail\" alt=\"Thumbnail for parking fines\" src=\"https://www.islington.gov.uk/-/media/images/page-icons/parking/pcnintro.svg?la=en&hash=9F3D2F17EFBD6D65BFA557C00697440C4C51B06E\"> \n            </div>\n    \n            <div class=\"fb-card__header__title\">\n                <div class=\"card-title\">          \n                    <h5>\n                        <a href=\"https://www3.camden.gov.uk/pay/\">\n                            Pay a Penalty Charge Notice\n                        </a>\n                    </h5>            \n                </div>\n            </div>\n        </div>\n        \n        <!-- Summary section containing the description and key details of the document -->\n        <div class=\"fb-card__summary\">\n            <div class=\"card-text\">\n                <p>\n                    <i class=\"fas fa-ad\"></i>\n                    Pay a Penalty Charge Notice (PCN) online\n                </p>\n            </div>\n        </div>   \n\n        <div class=\"fb-card__actions\"> \n            <a href=\"https://www3.camden.gov.uk/pay/\"\" class=\"card-link fb-color-secondary mt-4 small\">\n                PAY NOW\n            </a>\n        </div>\n    </div>\n</div>",
+    "additionalProperties" : {
+      "position" : "center"
+    },
+    "category" : ""
+  } ]
 } ]
