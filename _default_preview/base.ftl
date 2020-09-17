@@ -639,35 +639,29 @@
 </#macro>
 
 <#--
-  Display the contextual navigation panel
+  Display the contextual navigation panel only if there are valid values
 -->
 <#macro ContextualNavigation>
-  <#if ((response.resultPacket.contextualNavigation.categories)![])?size gt 0>
-    <div class="card search-contextual-navigation">
-      <div class="card-body">
-        <div class="card-title">
-          <h3>Related searches for <strong><@s.QueryClean /></strong></h3>
-        </div>
-
-        <div class="card-text">
-          <div class="row">
-            <#list (response.resultPacket.contextualNavigation.categories)![] as category>
-              <div class="col">
-                <h4 class="text-muted">By ${category.name}</h4>
-                <ul class="list-unstyled ml-3">
-                  <#list category.clusters as cluster>
-                    <li class="list-item-unstyled"><a href="${cluster.href}">${cluster.label?replace("...", " <strong>${response.resultPacket.contextualNavigation.searchTerm} </strong> ")?no_esc}</a></li>
-                  </#list>
-                </ul>
-              </div>
-            </#list>
-          </div>
-        </div>
-      </div>
-    </div>
-  </#if>
+    <#if (response.resultPacket.contextualNavigation.categories)!?has_content &&
+        response.resultPacket.contextualNavigation.categories?filter(category -> category.clusters?size gt 0)?size gt 0>
+        <section class="related-links">
+            <h2 class="related-links__title">
+                Related searches for <strong><@s.QueryClean /></strong>
+            </h2>
+            <ul class="related-links__list">
+                <#list (response.resultPacket.contextualNavigation.categories)![] as category>
+                        <#list category.clusters as cluster>
+                            <li class="related-links__item">
+                                <a href="${cluster.href}" class="related-links__link">
+                                    ${cluster.label?replace("...", " <strong>${response.resultPacket.contextualNavigation.searchTerm} </strong> ")?no_esc}
+                                </a>
+                            </li>
+                        </#list>
+                </#list>
+            </ul>
+        </section>
+    </#if>
 </#macro>
-
 
 <#--
     Display result counts

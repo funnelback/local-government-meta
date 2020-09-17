@@ -236,62 +236,7 @@
 
                 <@base.Paging />
 
-                <section class="related-links">
-                    <h2 class="related-links__title">Search related to
-                        <strong>science</strong>
-                    </h2>
-                    <ul class="related-links__list">
-                        <li class="related-links__item">
-                            <a href="#" class="related-links__link">
-                                Science
-                                <strong>definition</strong>
-                            </a>
-                        </li>
-                        <li class="related-links__item">
-                            <a href="#" class="related-links__link">
-                                Science
-                                <strong>news</strong>
-                            </a>
-                        </li>
-                        <li class="related-links__item">
-                            <a href="#" class="related-links__link">
-                                Science
-                                <strong>direct</strong>
-                            </a>
-                        </li>
-                        <li class="related-links__item">
-                            <a href="#" class="related-links__link">
-                                Science
-                                <strong>games</strong>
-                            </a>
-                        </li>
-                        <li class="related-links__item">
-                            <a href="#" class="related-links__link">
-                                Science
-                                <strong>definition</strong>
-                            </a>
-                        </li>
-                        <li class="related-links__item">
-                            <a href="#" class="related-links__link">
-                                Science
-                                <strong>news</strong>
-                            </a>
-                        </li>
-                        <li class="related-links__item">
-                            <a href="#" class="related-links__link">
-                                Science
-                                <strong>direct</strong>
-                            </a>
-                        </li>
-                        <li class="related-links__item">
-                            <a href="#" class="related-links__link">
-                                Science
-                                <strong>games</strong>
-                            </a>
-                        </li>
-                    </ul>
-                </section>
-
+                <@base.ContextualNavigation />
             </div>
 
         </section>
