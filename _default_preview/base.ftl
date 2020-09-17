@@ -627,15 +627,17 @@
   Message to display when there are no results
 -->
 <#macro NoResults>
-  <#if (response.resultPacket.resultsSummary.totalMatching)! == 0>
-    <h3><span class="glyphicon glyphicon-warning-sign"></span> No results</h3>
-    <p>Your search for <strong><@s.QueryClean /></strong> did not return any results. Please ensure that you:</p>
-    <ul>
-      <li>are not using any advanced search operators like + - | " etc.</li>
-      <li>expect this document to exist within the <em><@s.cfg>service_name</@s.cfg></em> collection <@s.IfDefCGI name="scope"> and within <em><@s.Truncate length=80>${question.inputParameterMap["scope"]!}</@s.Truncate></em></@s.IfDefCGI></li>
-      <li>have permission to see any documents that may match your query</li>
-    </ul>
-  </#if>
+    <#if (response.resultPacket.resultsSummary.totalMatching)! == 0>
+        <section class="module-info content-wrapper">
+            <figure class="module-info__bg">
+                <img src="/s/resources/${question.collection.id}/${question.profile}/css/mysource_files/no-results-icon.svg" alt="">
+            </figure>
+            <h2 class="module-info__title">No matching results</h2>
+            <p class="module-info__desc">
+                Your search for <strong><@s.QueryClean /></strong> did not return any results.
+            </p>
+        </section>
+    </#if>
 </#macro>
 
 <#--
@@ -705,7 +707,7 @@
             <#-- Previous page -->
             <#if response.customData.stencilsPaging.previousUrl??>
                 <div class="pagination__item pagination__item-navigation pagination__item-previous">
-                    <a class="pagination__link" rel="prev" href="href="${response.customData.stencilsPaging.previousUrl}"">
+                    <a class="pagination__link" rel="prev" href="${response.customData.stencilsPaging.previousUrl}">
                         <span class="pagination__label">Prev</span>
                     </a>
                 </div>
@@ -736,7 +738,7 @@
             <#-- Next page -->
             <#if response.customData.stencilsPaging.nextUrl??>            
                 <div class="pagination__item pagination__item-navigation pagination__item-next">
-                    <a class="pagination__link" href="${response.customData.stencilsPaging.nextUrl}" rel="next">
+                    <a class="pagination__link" rel="next" href="${response.customData.stencilsPaging.nextUrl}" >
                         <span class="pagination__label">Next</span>
                     </a>
                 </div>

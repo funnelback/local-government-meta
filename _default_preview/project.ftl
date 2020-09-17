@@ -214,7 +214,7 @@
                 <@curator.BestBets />                
                 <@curator.Curator position="center" />      
 
-                <#--  <@base.NoResults />  -->
+                <@base.NoResults />
 
                 <@base.ResultList nestedRank=3>            
                     <@fb.ExtraResults name="twitter">
