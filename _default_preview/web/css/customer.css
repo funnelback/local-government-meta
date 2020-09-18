@@ -4,7 +4,7 @@
 
 /* Design overrides made by the products team - Avoid changing these if possible */
 .fb-container {
-    padding-bottom: 0;
+    /* padding-bottom: 0; */
 }
 
 @media only screen and (min-width: 1025px) {
@@ -12,6 +12,10 @@
         padding-bottom: 15rem;
         padding-top: 15em;
     }
+}
+
+.fb-container .search-tier {
+    width: 100%;
 }
 
 .module-curator__title + cite {

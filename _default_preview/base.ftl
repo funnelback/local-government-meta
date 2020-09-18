@@ -187,11 +187,7 @@
     <article class="search-results__list <#if getDisplayMode(question)! == 'LIST'>search-results__list--list-view</#if>">
         <#list (response.resultPacket.resultsWithTierBars)![] as result>
             <#if result.class.simpleName == "TierBar">
-                <div class="row tier-bar">      
-                    <div class="col-md-12">
-                        <@TierBar result=result />
-                    </div>
-                </div>
+                <@TierBar result=result />
             <#else>
                 <#if nestedRank gte 0 && result.rank == nestedRank>
                     <#nested>
@@ -203,6 +199,22 @@
         </#list>
     </article>
 
+</#macro>
+
+<#--
+  Display a tier bar
+-->
+<#macro TierBar result>
+  <#-- A tier bar -->
+  <#if result.matched != result.outOf>
+    <h3 class="search-tier text-muted">Results that match ${result.matched} of ${result.outOf} words</h3>
+  <#else>
+    <h3 class="sr-only search-tier">Fully-matching results</h3>
+  </#if>
+  <#-- Print event tier bars if they exist -->
+  <#if result.eventDate??>
+      <h3 class="text-muted search-tier">Events on ${result.eventDate?date}</h3>
+  </#if>
 </#macro>
 
 <#--
