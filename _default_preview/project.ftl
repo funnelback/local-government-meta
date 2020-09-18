@@ -46,105 +46,18 @@
 </#macro>
 
 
-<#macro SearchForm>
 
+
+
+<#macro SearchForm>
     <section class="module-search js-module-search content-wrapper module-search--bg" style="background-image: url('/s/resources/${question.collection.id}/${question.profile}/css/mysource_files/bg-search.png');">
         <h2 class="sr-only">Search module</h2>
         <@base.SearchForm>
             <div class="module-search__group">
                 <input type="hidden" name="collection" value="program-finder-meta">
                 <label for="query" class="sr-only">Search</label>
-                <span class="twitter-typeahead" style="position: relative; display: inline-block;">
-                    <input name="query" id="query" type="search" class="module-search__query tt-input" autocomplete="off" placeholder="Start your search here…" value="science" spellcheck="false" dir="auto" style="position: relative; vertical-align: top;">
-                    <pre aria-hidden="true" style="position: absolute; visibility: hidden;
-                    white-space: pre; font-family: Gilroy, Arial, sans-serif; font-size: 25.0468px;
-                    font-style: normal; font-variant: normal; font-weight: 300; word-spacing: 0px;
-                    letter-spacing: 0px; text-indent: 0px; text-rendering: auto; text-transform: none;">science</pre>
-                    <div class="tt-menu" style="position: absolute; top: 100%; left: 0px; z-index: 100; display: none;">
-                        <div class="tt-dataset tt-dataset-organic">
-                            <div class="tt-suggestion tt-selectable">
-                                <strong class="tt-highlight">science</strong>
-                            </div>
-                            <div class="tt-suggestion tt-selectable">
-                                <strong class="tt-highlight">science</strong>s</div>
-                            <div class="tt-suggestion tt-selectable">
-                                military <strong class="tt-highlight">science</strong> army rotc</div>
-                            <div class="tt-suggestion tt-selectable">health
-                                <strong class="tt-highlight">science</strong>
-                            </div>
-                            <div class="tt-suggestion tt-selectable">political
-                                <strong class="tt-highlight">science</strong>
-                            </div>
-                            <div class="tt-suggestion tt-selectable">computer
-                                <strong class="tt-highlight">science</strong>
-                            </div>
-                        </div>
-                        <div class="tt-dataset tt-dataset-courses">
-                            <h5 class="tt-category">Courses</h5>
-                            <div class="tt-suggestion tt-selectable">
-                                <h6>Success in Veterinary <strong>Science</strong>
-                                    <small>VBMS-101</small>
-                                </h6>
-                                <div>
-                                    Fall
-                                </div>
-                            </div>
-                            <div class="tt-suggestion tt-selectable">
-                                <h6>Success in Veterinary <strong>Science</strong>
-                                    <small>VBMS-101</small>
-                                </h6>
-                                <div>
-                                    Fall
-                                </div>
-                            </div>
-                            <div class="tt-suggestion tt-selectable">
-                                <h6>Success in Veterinary <strong>Science</strong>
-                                    <small>VBMS-101</small>
-                                </h6>
-                                <div>
-                                    Fall
-                                </div>
-                            </div>
-                            <a href="#" class="module-search__more">Show more courses</a>
-                        </div>
-                        <div class="tt-dataset tt-dataset-people">
-                            <h5 class="tt-category">People</h5>
-                            <div class="module-search__list-item tt-suggestion tt-selectable">
-                                <h6>Dan Giles</h6>
-                                <span>Research Assistant,Professor</span>
-                                <div class="details">
-                                    <span class="details__item details__item--icon details__item--icon-university">
-                                        Department Of Accounting,Department Of Political
-                                        <strong class="tt-highlight">Science</strong>
-                                    </span>
-                                    <!--<span class="details__item details__item&#45;&#45;icon details__item&#45;&#45;icon-phone">-->
-                                        <!--5836-->
-                                    <!--</span>-->
-                                    <!--<span class="details__item details__item&#45;&#45;icon details__item&#45;&#45;icon-envelope">-->
-                                        <!--dan.giles@funnelback.edu-->
-                                    <!--</span>-->
-                                </div>
-                            </div>
-                            <div class="module-search__list-item tt-suggestion tt-selectable">
-                                <h6>Dan Giles</h6>
-                                <span>Research Assistant,Professor</span>
-                                <div class="details">
-                                    <span class="details__item details__item--icon details__item--icon-university">
-                                        Department Of Accounting,Department Of Political
-                                        <strong class="tt-highlight">Science</strong>
-                                    </span>
-                                    <!--<span class="details__item details__item&#45;&#45;icon details__item&#45;&#45;icon-phone">-->
-                                        <!--5836-->
-                                    <!--</span>-->
-                                    <!--<span class="details__item details__item&#45;&#45;icon details__item&#45;&#45;icon-envelope">-->
-                                        <!--dan.giles@funnelback.edu-->
-                                    <!--</span>-->
-                                </div>
-                            </div>
-                            <a href="#" class="module-search__more">Show more people</a>
-                        </div>
-                    </div>
-                </span>
+                <input required name="query" id="query" type="Search query" autofocus class="module-search__query tt-input" autocomplete="off" placeholder="Start your search here…" value="${question.query!}" spellcheck="false" dir="auto"">
+
                 <button type="submit" class="module-search__btn"><span class="sr-only">Search</span></button>
             </div>
         </@base.SearchForm>
@@ -187,59 +100,42 @@
     <div>
         <section class="search-results js-search-results">
 
-            <div class="">
-                <div class="search-results__tools">
-                    <h2 class="search-results__tools-title sr-only">Search Funnelback University</h2>
-                    <@base.Counts />
-                    <div class="search-results__tools-right">
-                        <a href="#" class="search-results__icon search-results__icon--box">
-                            <span class="sr-only">Grid view</span>
-                        </a>
-                        <a href="#" class="search-results__icon search-results__icon--list active">
-                            <span class="sr-only">List view</span>
-                        </a>
 
-                        <#--  
-                        TODO: Add drop down for limit and sort
-                        <#if (response.resultPacket.resultsSummary.totalMatching)! != 0>
-                            <@base.LimitDropdown />
-                            <@base.SortDropdown />
-                            <@base.DisplayMode />
-                        </#if>  
-                        -->
-                    </div>
-                </div>
+            <#if ((response.resultPacket.resultsSummary.totalMatching)!0) != 0>
+                <@base.LimitDropdown />
+                <@base.SortDropdown />
+                <@base.DisplayMode />            
+            </#if> 
 
+            <@curator.BestBets />                
+            <@curator.Curator position="center" />      
 
-                <@curator.BestBets />                
-                <@curator.Curator position="center" />      
+            <@base.NoResults />
 
-                <@base.NoResults />
+            <@base.ResultList nestedRank=3>            
+                <@fb.ExtraResults name="twitter">
+                    <li><h4 class="sr-only">Tweet results</h4></li>
+                    <li class="search-results-twitter">
+                        <div class="row mb-3">
+                            <#list (response.resultPacket.results)![] as result>
+                                <#-- Limit to only 3 Twitter cards -->
+                                <#if result?index lt 3>
+                                    <div class="col-md-4">
+                                        <@twitter.TwitterCard result=result />
+                                    </div>
+                                </#if>
+                            </#list>
+                        </div>
+                    </li>
+                </@fb.ExtraResults>
+            </@base.ResultList>
 
-                <@base.ResultList nestedRank=3>            
-                    <@fb.ExtraResults name="twitter">
-                        <li><h4 class="sr-only">Tweet results</h4></li>
-                        <li class="search-results-twitter">
-                            <div class="row mb-3">
-                                <#list (response.resultPacket.results)![] as result>
-                                    <#-- Limit to only 3 Twitter cards -->
-                                    <#if result?index lt 3>
-                                        <div class="col-md-4">
-                                            <@twitter.TwitterCard result=result />
-                                        </div>
-                                    </#if>
-                                </#list>
-                            </div>
-                        </li>
-                    </@fb.ExtraResults>
-                </@base.ResultList>
+            <@curator.Curator position="bottom" />
 
-                <@curator.Curator position="bottom" />
+            <@base.Paging />
 
-                <@base.Paging />
+            <@base.ContextualNavigation />
 
-                <@base.ContextualNavigation />
-            </div>
 
         </section>
 

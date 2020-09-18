@@ -46,21 +46,20 @@
 	<@client_includes.ContentHeader />
 
 	<div class="fb-container">
-			<main class="main" role="main">
+			<main class="main <@s.InitialFormOnly>initial-search-form</@s.InitialFormOnly>" role="main">
+				
 				<@project.SearchForm />
 
-				<@project.Tabs />
+				<@s.AfterSearchOnly>
+					
 
+					<@project.Tabs />
 
-				<section class="content-wrapper content-wrapper--col">
-					<@project.Facets />
-                    <@project.Results />
-				</section>
-
-
-
-
-
+					<section class="content-wrapper content-wrapper--col">
+						<@project.Facets />
+						<@project.Results />
+					</section>
+				</@s.AfterSearchOnly>
 
 
 

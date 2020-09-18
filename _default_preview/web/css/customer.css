@@ -3,6 +3,17 @@
 
 
 /* Design overrides made by the products team - Avoid changing these if possible */
+.fb-container {
+    padding-bottom: 0;
+}
+
+@media only screen and (min-width: 1025px) {
+    .fb-container .initial-search-form .module-search--bg {
+        padding-bottom: 15rem;
+        padding-top: 15em;
+    }
+}
+
 .module-curator__title + cite {
     margin: 0 1.8125rem .3125em 1.8125rem;
 }

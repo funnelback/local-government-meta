@@ -34,6 +34,7 @@
     defining <macro SomeMacro>. 
 --> 
 
+
 <#---
     Generates a search form for the current collection, passing through the
     relevant parameters like collection, profile, form, scope, ...
@@ -86,24 +87,23 @@
 </#function>
 
 <#macro DisplayMode>
-    <label for="fb-display-control" class="sr-only">Display: </label>
-    <div id="fb-display-control" class="btn-group float-right mr-1 fb-search-controls" aria-label="Display controls">
-        <button type="button" class="btn btn-light <#if getDisplayMode(question)! == 'LIST'>active</#if>">
-            <a href='${question.getCurrentProfileConfig().get("ui.modern.search_link")}?${removeParam(QueryString, "displayMode")}&displayMode=list'
-                title="Display results as a list"
-            >
-                <i class="fas fa-list"></i>
-            </a>
-        </button>
-        <button type="button" class="btn btn-light <#if getDisplayMode(question)! == 'CARD'>active</#if>">
-            <a href='${question.getCurrentProfileConfig().get("ui.modern.search_link")}?${removeParam(QueryString, "displayMode")}&displayMode=card'
-                title="Display results as cards"
-            >
-                <i class="fas fa-th"></i>
-            </a>
-        </button>    
-    </div>
 
+    <div class="search-results__tools">
+        <h2 class="search-results__tools-title sr-only">Search Funnelback University</h2>
+        <@base.Counts />
+        <div class="search-results__tools-right">
+            <a href='${question.getCurrentProfileConfig().get("ui.modern.search_link")}?${removeParam(QueryString, "displayMode")}&displayMode=card' 
+                class="search-results__icon search-results__icon--box <#if getDisplayMode(question)! == 'CARD'>active</#if>"
+                title="Display results as cards">
+                <span class="sr-only">Card view</span>
+            </a>
+            <a href='${question.getCurrentProfileConfig().get("ui.modern.search_link")}?${removeParam(QueryString, "displayMode")}&displayMode=list' 
+                class="search-results__icon search-results__icon--list <#if getDisplayMode(question)! == 'LIST'>active</#if>"
+                title="Display results as a list">
+                <span class="sr-only">List view</span>
+            </a>
+        </div>
+    </div>
 </#macro>
 
 <#--
@@ -121,16 +121,20 @@
   "url": "URL (A-Z)",
   "durl": "URL (Z-A)",
   "shuffle": "Shuffle"} >
-  <div class="dropdown float-right">
-    <button class="btn btn-light btn-sm dropdown-toggle" id="search-sort" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-      <span class="text-muted">Sort:</span> ${options[question.inputParameterMap["sort"]!]}
-    </button>
-    <div class="dropdown-menu" aria-labelledby="search-sort">
-      <#list options as key, value>
-        <a class="dropdown-item" title="Sort by ${value}" href="${question.collection.configuration.value("ui.modern.search_link")}?${removeParam(QueryString, "sort")}&sort=${key}">${value}</a>
-      </#list>
-    </div>
-  </div>
+
+
+    <section class="dropdown-list">
+        <button class="dropdown-list__link js-dropdown-list__link" aria-haspopup="true" aria-expanded="false">
+            <span>${(options[question.inputParameterMap["sort"]])!"Sort by"}</span>
+        </button>
+        <ul class="dropdown-list__list" role="listbox" tabindex="-1"">
+            <#list options as key, value>
+                <li role="option">
+                    <a class="dropdown-list__list-link" title="Sort by ${value}" href="${question.collection.configuration.value("ui.modern.search_link")}?${removeParam(QueryString, "sort")}&sort=${key}">${value}</a>
+                </li>
+            </#list>
+        </ul>
+    </section>
 </#macro>
 
 <#--
@@ -139,16 +143,19 @@
   @param limits Array of number of results to provide (defaults to 10, 20, 50)
 -->
 <#macro LimitDropdown limits=[10, 20, 50]>
-  <div class="dropdown float-right ml-1">
-    <button class="btn btn-light btn-sm dropdown-toggle" id="search-limit" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-      <span class="text-muted">Limit:</span> ${question.inputParameterMap["num_ranks"]!"10"}
-    </button>
-    <div class="dropdown-menu" aria-labelledby="search-limit">
-      <#list limits as limit>
-        <a class="dropdown-item" title="Limit to ${limit} results" href="${question.collection.configuration.value("ui.modern.search_link")}?${removeParam(QueryString, "num_ranks")}&num_ranks=${limit}">${limit} results</a>
-      </#list>
-    </div>
-  </div>
+
+    <section class="dropdown-list">
+        <button class="dropdown-list__link js-dropdown-list__link" aria-haspopup="true" aria-expanded="false">
+            <span>${question.inputParameterMap["num_ranks"]!"10"}</span>
+        </button>
+        <ul class="dropdown-list__list" role="listbox" tabindex="-1"">
+            <#list limits as limit>
+                <li role="option">
+                    <a class="dropdown-list__list-link" title="Limit to ${limit} results" href="${question.collection.configuration.value("ui.modern.search_link")}?${removeParam(QueryString, "num_ranks")}&num_ranks=${limit}">${limit} results</a>
+                </li>
+            </#list>
+        </ul>
+    </section>
 </#macro>
 
 <#-- 
@@ -177,7 +184,7 @@
         This is used to insert content (usually an extra search) between results.
 -->
 <#macro StandardResults view="LIST" nestedRank=-1>
-    <article class="search-results__list search-results__list--list-view">
+    <article class="search-results__list <#if getDisplayMode(question)! == 'LIST'>search-results__list--list-view</#if>">
         <#list (response.resultPacket.resultsWithTierBars)![] as result>
             <#if result.class.simpleName == "TierBar">
                 <div class="row tier-bar">      
@@ -191,234 +198,7 @@
                 </#if>
                 
                 <#-- Display the result based on the configured template -->
-                <@Result result=result view=view/>
-                <#--  <article class="search-results__item search-results__item--video">
-                    <a href="#">
-                        <figure class="search-results__bg">
-                            <img src="/s/resources/${question.collection.id}/${question.profile}/css/mysource_files/img2.jpg" alt="">
-                        </figure>
-                    </a>
-                    <div class="search-results__content">
-                        <h3 class="search-results__title">
-                            <a href="#" class="search-results__link">
-                                Lorem ipsum dolor (Ph.D.), consetetur sadipscing elitr
-                            </a>
-                        </h3>
-                        <p class="search-results__desc">
-                            Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod Lorem ipsum dolor sit
-                                        amet, consetetur sadipscing elitr, sed diam nonumy eirmod Lorem ipsum dolor sit amet, consetetur
-                                        sadipscing elitr, sed diam nonumy eirmod
-                        </p>
-                    </div>
-                </article>
-
-                <article class="search-results__item search-results__item--default">
-                    <figure class="search-results__bg">
-                        <img src="/s/resources/${question.collection.id}/${question.profile}/css/mysource_files/img-1.jpg" alt="">
-                    </figure>
-                    <div class="search-results__content">
-                        <h3 class="search-results__title">
-                            Lorem ipsum dolor (Ph.D.)
-                        </h3>
-                        <p class="search-results__desc">
-                            Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod
-                                        Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod
-                        </p>
-                        <div class="search-results__bottom">
-                            <a href="#" class="btn--link">Read more</a>
-                        </div>
-                    </div>
-                </article>
-
-                <article class="search-results__item search-results__item--event">
-                    <figure class="search-results__bg">
-                        <img src="/s/resources/${question.collection.id}/${question.profile}/css/mysource_files/img-1.jpg" alt="">
-                    </figure>
-                    <time class="search-results__time" datetime="08-27">
-                        <span class="search-results__month">Sep</span>
-                        <span class="search-results__day">27</span>
-                    </time>
-                    <div class="search-results__content">
-                        <h3 class="search-results__title">
-                            <a href="#" class="search-results__link">
-                                Lorem ipsum dolor (Ph.D.)
-                            </a>
-                        </h3>
-                        <span class="search-results__sub-title">Office of the Dean, School of Medicine</span>
-                        <p class="search-results__desc">
-                            Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod
-                                        Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod
-                        </p>
-                        <section class="tags">
-                            <ul class="tags__list">
-                                <li class="tags__item">
-                                    Lorem
-                                </li>
-                                <li class="tags__item">
-                                    Lorem ipsum
-                                </li>
-                                <li class="tags__item">
-                                    Lorem
-                                </li>
-                                <li class="tags__item">
-                                    Lorem ipsum
-                                </li>
-                                <li class="tags__item">
-                                    Lorem
-                                </li>
-                            </ul>
-                        </section>
-
-                        <div class="search-results__bottom">
-                            <section class="contact js-contact">
-                                <div class="contact__item contact__item--event-time contact__item--icon contact__item--icon-clock">
-                                    <time datetime="2020-08-27T16:30:00">4:30 PM</time>
-                                    -
-                                    <time datetime="2020-08-27T18:30:00">6:30 PM</time>
-                                </div>
-
-                                <ul class="contact__list">
-                                    <li class="contact__item contact__item--icon contact__item--icon-envelope">
-                                        <a href="mailto:cbmuller@stanford.edu" class="contact__link">cbmuller@stanford.edu</a>
-                                    </li>
-                                    <li class="contact__item contact__item--icon contact__item--icon-phone">
-                                        <a href="tel:4593" class="contact__link">4593</a>
-                                    </li>
-                                    <li class="contact__item contact__item--icon contact__item--icon-location">
-                                        <span>Canberra Tuggeranong</span>
-                                    </li>
-                                </ul>
-                            </section>
-
-                        </div>
-                    </div>
-                </article>
-
-                <article class="search-results__item search-results__item--people">
-                    <figure class="search-results__bg">
-                        <img src="/s/resources/${question.collection.id}/${question.profile}/css/mysource_files/people1.png" alt="">
-                    </figure>
-                    <div class="search-results__content">
-                        <h3 class="search-results__title">
-                            <a href="#" class="search-results__link">
-                                Lorem ipsum dolor (Ph.D.)
-                            </a>
-                        </h3>
-                        <span class="search-results__sub-title">Office of the Dean, School of Medicine</span>
-                        <p class="search-results__desc">
-                            Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod
-                                        Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod
-                        </p>
-                        <div class="search-results__bottom">
-                            <section class="contact js-contact">
-                                <ul class="contact__list">
-                                    <li class="contact__item contact__item--icon contact__item--icon-envelope">
-                                        <a href="mailto:cbmuller@stanford.edu" class="contact__link">cbmuller@stanford.edu</a>
-                                    </li>
-                                    <li class="contact__item contact__item--icon contact__item--icon-phone">
-                                        <a href="tel:4593" class="contact__link">4593</a>
-                                    </li>
-                                    <li class="contact__item contact__item--icon contact__item--icon-location">
-                                        <span>Canberra Tuggeranong</span>
-                                    </li>
-                                </ul>
-                            </section>
-
-                        </div>
-                    </div>
-                </article>
-
-                <article class="search-results__item search-results__item--default">
-                    <figure class="search-results__bg"></figure>
-                    <div class="search-results__content">
-                        <h3 class="search-results__title">
-                            <a href="#" class="search-results__link">
-                                Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy
-                            </a>
-                        </h3>
-                        <p class="search-results__desc">
-                            Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod.
-                                        Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod
-                        </p>
-                        <section class="tags">
-                            <ul class="tags__list">
-                                <li class="tags__item">
-                                    Lorem
-                                </li>
-                                <li class="tags__item">
-                                    Lorem ipsum
-                                </li>
-                                <li class="tags__item">
-                                    Lorem
-                                </li>
-                                <li class="tags__item">
-                                    Lorem ipsum
-                                </li>
-                                <li class="tags__item">
-                                    Lorem
-                                </li>
-                            </ul>
-                        </section>
-
-                    </div>
-                </article>
-
-                <article class="search-results__item search-results__item--col search-results__item--twitter">
-                    <article>
-                        <figure class="search-results__bg">
-                            <img src="/s/resources/${question.collection.id}/${question.profile}/css/mysource_files/people1.png" alt="">
-                        </figure>
-                        <div class="search-results__header">
-                            <h3 class="search-results__title">
-                                <a href="#" class="search-results__link">
-                                    @Sydney_Uni
-                                </a>
-                            </h3>
-                            <time class="icon-after icon-after--twitter" datetime="">March 14, 2018 via</time>
-                        </div>
-                        <div class="search-results__content">
-                            <p class="search-results__desc">
-                                RT @Sydney_Science: Happy #PiDay2018! This year we’re celebrating with…
-                            </p>
-                        </div>
-                    </article>
-                    <article>
-                        <figure class="search-results__bg">
-                            <img src="/s/resources/${question.collection.id}/${question.profile}/css/mysource_files/people1.png" alt="14-03-2018">
-                        </figure>
-                        <div class="search-results__header">
-                            <h3 class="search-results__title">
-                                <a href="#" class="search-results__link">
-                                    @Sydney_Uni
-                                </a>
-                            </h3>
-                            <time class="icon-after icon-after--twitter" datetime="14-03-2018">March 14, 2018 via</time>
-                        </div>
-                        <div class="search-results__content">
-                            <p class="search-results__desc">
-                                RT @Sydney_Science: Happy #PiDay2018! This year we’re celebrating with…
-                            </p>
-                        </div>
-                    </article>
-                    <article>
-                        <figure class="search-results__bg">
-                            <img src="/s/resources/${question.collection.id}/${question.profile}/css/mysource_files/people1.png" alt="">
-                        </figure>
-                        <div class="search-results__header">
-                            <h3 class="search-results__title">
-                                <a href="#" class="search-results__link">
-                                    @Sydney_Uni
-                                </a>
-                            </h3>
-                            <time class="icon-after icon-after--twitter" datetime="14-03-2018">March 14, 2018 via</time>
-                        </div>
-                        <div class="search-results__content">
-                            <p class="search-results__desc">
-                                RT @Sydney_Science: Happy #PiDay2018! This year we’re celebrating with…
-                            </p>
-                        </div>
-                    </article>
-                </article>  -->
+                <@Result result=result view=view/>                
             </#if>
         </#list>
     </article>
@@ -510,95 +290,6 @@
 </#macro>
 
 <#--
-    Message to display when there are no results
--->
-<#macro NoResults>
-    <#if (response.resultPacket.resultsSummary.totalMatching)! == 0>
-        <div class="mb-5">
-            <h3><i class="fas fa-exclamation-circle"></i> No results</h3>
-            <p>Your search for <strong><@s.QueryClean /></strong> did not return any results. Please ensure that you:</p>
-            <ul >
-                <li>are not using any advanced search operators like + - | " etc.</li>
-                <li>expect this document to exist within the <em><@s.cfg>service_name</@s.cfg></em> collection <@s.IfDefCGI name="scope"> and within <em><@s.Truncate length=80>${question.inputParameterMap["scope"]!}</@s.Truncate></em></@s.IfDefCGI></li>
-                <li>have permission to see any documents that may match your query</li>
-            </ul>
-        </div>
-
-        <div class="mb-5">
-            <h3>Trending searches</h3>
-            <div class="row no-gutters border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
-                <div class="col-auto d-none d-lg-block">
-                    <img src="https://www.ama.org/wp-content/themes/ama/assets/images/placeholder-image-small.png" alt="..." width="350">
-                </div>
-                <div class="col p-4 d-flex flex-column position-static">
-                    <h4 class="">What other members are looking for</h3>
-                    <ul>
-                        <li>
-                            <a href="${question.collection.configuration.value('ui.modern.search_link')}?${removeParam(QueryString,['query','start_rank'])}&query=membership+benefits">
-                                <span>Membership benefits</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="${question.collection.configuration.value('ui.modern.search_link')}?${removeParam(QueryString,['query','start_rank'])}&query=coronavirus+and+the+impacts+on+marketing">
-                                <span>Coronavirus and the impacts on marketing</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="${question.collection.configuration.value('ui.modern.search_link')}?${removeParam(QueryString,['query','start_rank'])}&query=upcoming+events">
-                                <span>Upcoming events</span>
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-            </div>      
-        </div>
-
-        <div>
-            <h3 class="mt-3 mb-3">You could also try</h3>
-            <div class="card-deck">
-                <div class="card">
-                    <img src="https://www.ama.org/wp-content/uploads/2020/02/undraw_social-girl.jpg?resize=486%2C365" class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <h5 class="card-title">Contact Us</h5>
-                        <div class="card-text">
-                            Give us a call at 1-800-AMA-1150. Our customer support team is available Monday through Friday, 8:30 a.m. - 5 p.m. CDT.
-                        </div>
-                    </div>
-                </div>
-                <div class="card">
-                    <img src="https://www.ama.org/wp-content/uploads/2020/02/TS20-Demand-Generation-Website-Card-New.png?resize=486%2C365" class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <h5 class="card-title">Professional Chapter Leaders</h5>
-                        <div class="card-text">
-                            <ul>
-                                <li><a href="https://myama.force.com/s/article/Codes-of-Conduct"><span>Codes of Conduct</span></a></li>
-                                <li><a href="https://myama.force.com/s/article/Group-Discount-Program-for-AMA-Membership"><span>Group Discount Program for AMA Membership</span></a></li>
-                                <li><a href="https://myama.force.com/s/article/AMA-Community-Help"><span>AMA Community Help</span></a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                <div class="card">
-                    <img src="https://www.ama.org/wp-content/uploads/2020/02/WEB_virtue.jpg?resize=486%2C365" class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <h5 class="card-title">Certification and Training</h5>
-                        <div class="card-text">
-                            <ul>
-                                <li><a href="https://myama.force.com/s/article/How-to-Maintain-Your-Professional-Certified-Marketer-PCM-Certification" >How to Maintain Your Professional Certified Marketer (PCM) Certification and Record CEUs</span></a></li>
-                                <li><a href="https://myama.force.com/s/article/How-to-access-PCM-certification-exams" >How to access PCM certification exams.</span></a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-    </#if>
-
-</#macro>
-
-
-<#--
   Display query blending notice
 -->
 <#macro Blending>
@@ -618,7 +309,7 @@
     <#if (response.resultPacket.spell)??>
       <div class="search-spelling">
         <span class="fas fa-question-circle"></span>
-        Did you mean <em><a href="${question.collection.configuration.value("ui.modern.search_link")}?${response.resultPacket.spell.url}" title="Spelling suggestion">${response.resultPacket.spell.text}</a></em>?
+        Did you mean <em><a href="${question.collection.configuration.value("ui.modern.search_link")}?${response.resultPacket.spell.url}" title="Spelling suggestion">${(response.resultPacket.spell.text)!}</a></em>?
       </div>
     </#if>
 </#macro>
@@ -627,7 +318,8 @@
   Message to display when there are no results
 -->
 <#macro NoResults>
-    <#if (response.resultPacket.resultsSummary.totalMatching)! == 0>
+    <#if (response.resultPacket.resultsSummary.totalMatching)!?has_content &&
+        response.resultPacket.resultsSummary.totalMatching == 0>
         <section class="module-info content-wrapper">
             <figure class="module-info__bg">
                 <img src="/s/resources/${question.collection.id}/${question.profile}/css/mysource_files/no-results-icon.svg" alt="">
@@ -670,29 +362,29 @@
 -->
 <#macro Counts>
     <span class="search-results__total">                                                                    
-        <#if response.resultPacket.resultsSummary.totalMatching == 0>
+        <#if ((response.resultPacket.resultsSummary.totalMatching)!0) == 0>
             <span class="search-counts-total-matching">0</span> search results for <strong class="highlight"><@s.QueryClean /></strong>
         </#if>
-        <#if response.resultPacket.resultsSummary.totalMatching != 0>
-            <span class="search-counts-page-start">${response.resultPacket.resultsSummary.currStart}</span> -
-            <span class="search-counts-page-end">${response.resultPacket.resultsSummary.currEnd}</span> of
-            <span class="search-counts-total-matching">${response.resultPacket.resultsSummary.totalMatching?string.number}</span>
-            <#if question.inputParameterMap["s"]?? && question.inputParameterMap["s"]?contains("?:")>
+        <#if ((response.resultPacket.resultsSummary.totalMatching)!0) != 0>
+            <span class="search-counts-page-start">${(response.resultPacket.resultsSummary.currStart)!}</span> -
+            <span class="search-counts-page-end">${(response.resultPacket.resultsSummary.currEnd)!}</span> of
+            <span class="search-counts-total-matching">${(response.resultPacket.resultsSummary.totalMatching)!?string.number}</span>
+            <#if (question.inputParameterMap["s"])!?has_content && question.inputParameterMap["s"]?contains("?:")>
                 <em>collapsed</em> 
             </#if>search results for <strong class="highlight"><@s.QueryClean></@s.QueryClean></strong> 
             <#list response.resultPacket.QSups as qsup>
-                or <strong class="highlight">${qsup.query}</strong>
+                or <strong class="highlight">${(qsup.query)!}</strong>
                 <#if qsup_has_next>, </#if>
             </#list>
         </#if>
 
-        <#if (response.resultPacket.resultsSummary.partiallyMatching!0) != 0>
-            where <span class="search-counts-fully-matching">${response.resultPacket.resultsSummary.fullyMatching?string.number}</span>
-            match all words and <span class="search-counts-partially-matching">${response.resultPacket.resultsSummary.partiallyMatching?string.number}</span>
+        <#if ((response.resultPacket.resultsSummary.partiallyMatching)!0) != 0>
+            where <span class="search-counts-fully-matching">${(response.resultPacket.resultsSummary.fullyMatching)!?string.number}</span>
+            match all words and <span class="search-counts-partially-matching">${(response.resultPacket.resultsSummary.partiallyMatching)!?string.number}</span>
             match some words.
         </#if>
-        <#if (response.resultPacket.resultsSummary.collapsed!0) != 0>
-            <span class="search-counts-collapsed">${response.resultPacket.resultsSummary.collapsed}</span>
+        <#if ((response.resultPacket.resultsSummary.collapsed)!0) != 0>
+            <span class="search-counts-collapsed">${(response.resultPacket.resultsSummary.collapsed)!}</span>
             very similar results included.
         </#if>
     </span>
@@ -705,7 +397,7 @@
     <section class="pagination">
         <nav class="pagination__nav" aria-label="Pagination Navigation">
             <#-- Previous page -->
-            <#if response.customData.stencilsPaging.previousUrl??>
+            <#if (response.customData.stencilsPaging.previousUrl)??>
                 <div class="pagination__item pagination__item-navigation pagination__item-previous">
                     <a class="pagination__link" rel="prev" href="${response.customData.stencilsPaging.previousUrl}">
                         <span class="pagination__label">Prev</span>
@@ -714,7 +406,8 @@
             </#if>
 
             <#-- Sibling pages -->
-            <#if response.customData.stencilsPaging.pages?size gt 1>
+            <#if (response.customData.stencilsPaging.pages)!?has_content &&
+                response.customData.stencilsPaging.pages?size gt 1>
                 <ul class="pagination__pages-list">
                     <#list response.customData.stencilsPaging.pages as page>
                         <#if page.selected>
@@ -736,7 +429,7 @@
             </#if>
 
             <#-- Next page -->
-            <#if response.customData.stencilsPaging.nextUrl??>            
+            <#if (response.customData.stencilsPaging.nextUrl)??>            
                 <div class="pagination__item pagination__item-navigation pagination__item-next">
                     <a class="pagination__link" rel="next" href="${response.customData.stencilsPaging.nextUrl}" >
                         <span class="pagination__label">Next</span>
