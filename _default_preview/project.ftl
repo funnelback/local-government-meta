@@ -234,6 +234,8 @@
                     </@fb.ExtraResults>
                 </@base.ResultList>
 
+                <@curator.Curator position="bottom" />
+
                 <@base.Paging />
 
                 <@base.ContextualNavigation />

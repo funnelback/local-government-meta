@@ -23,10 +23,10 @@
                                 <div class="module-curator__top">
                                     
                                     <#-- Display the image if there is one -->
-                                    <#if !(exhibit.additionalProperties.image)!?has_content>
+                                    <#if (exhibit.additionalProperties.image)!?has_content>
                                         <figure class="module-curator__bg">
                                             <#-- TODO - CHange the URL to reference one from the curator rule -->
-                                            <img src="/s/resources/${question.collection.id}/${question.profile}/css/mysource_files/img-1.jpg" alt="">
+                                            <img src="${(exhibit.additionalProperties.image)!}" alt="">
                                         </figure>                                    
                                     </#if>
                                     <div>

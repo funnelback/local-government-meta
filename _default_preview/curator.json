@@ -47,7 +47,7 @@
   } ]
 }, {
   "created" : "2020-03-12T14:33:01.536859Z",
-  "lastModified" : "2020-04-22T12:12:07.759544Z",
+  "lastModified" : "2020-09-18T00:20:48.609356Z",
   "id" : "f667e7b1-7136-405b-af29-16e0fee57036",
   "name" : "[Example] health and corona - center position",
   "label" : "DEFAULT",
@@ -66,19 +66,31 @@
     } ]
   },
   "actions" : [ {
-    "type" : "DisplayMessage",
-    "messageHtml" : "<!-- Corona Virus -->\n<div class=\"card fb-card--fluid\">\n\n  <div class=\"card-body fb-card__body\">        \n\n    <!-- Header section usually containing a title and small thumbnail -->\n    <div class=\"fb-card__header mb-3 border-bottom\">\n      <div class=\"fb-card__header__image\">\n          <img class=\"rounded-circle fb-image-thumbnail\" alt=\"Thumbnail for ${result.title!}\" src=\"https://www.who.int/images/default-source/health-topics/coronavirus/coronavirus-getty.tmb-479v.jpg?Culture=en&sfvrsn=db0aa632_6\"> \n        </#if>\n      </div>\n\n      <div class=\"fb-card__header__title\">\n        <div class=\"card-title\">          \n          <h6>\n            <a href=\"#\" data-toggle=\"modal\" data-target=\"#signupModal\">\n              COVID-19 Crisis\n            </a>\n          </h6>            \n        </div>\n      </div>\n    </div>\n    \n    <!-- Summary section containing the description and key details of the document -->\n    <div class=\"fb-card__summary\">\n      <div class=\"card-text\">\n        <p>\n<i class=\"fas fa-ad\"></i>\n          We are communicators. We are helpers. We have the skills to spark inspiration, support, determination and hope – many of the things necessary to overcome adversity and the crisis our world is facing. These curated resources will be updated regularly to support you while you lead through these fast-changing times.\n        </p>\n      </div>\n\n    </div>   \n\n  </div>\n</div>",
-    "additionalProperties" : { },
-    "category" : ""
+    "type" : "DisplayUrlAdvert",
+    "titleHtml" : "COVID-19:  Coronavirus Updates",
+    "displayUrl" : "https://www.who.int/emergencies/diseases/novel-coronavirus-2019/events-as-they-happen",
+    "linkUrl" : "https://www.who.int/emergencies/diseases/novel-coronavirus-2019/events-as-they-happen",
+    "descriptionHtml" : "We are communicators. We are helpers. We have the skills to spark inspiration, support, determination and hope – many of the things necessary to overcome adversity and the crisis our world is facing. These curated resources will be updated regularly to support you while you lead through these fast-changing times.",
+    "additionalProperties" : {
+      "position" : "center"
+    },
+    "category" : "",
+    "removeCollectionUrl" : false
   }, {
-    "type" : "DisplayMessage",
-    "messageHtml" : "<!-- Corona Virus -->\n<div class=\"card fb-card--fluid\">\n\n  <div class=\"card-body fb-card__body\">        \n\n    <!-- Header section usually containing a title and small thumbnail -->\n    <div class=\"fb-card__header mb-3 border-bottom\">\n      <div class=\"fb-card__header__image\">\n          <img class=\"rounded-circle fb-image-thumbnail\" alt=\"Thumbnail for ${result.title!}\" src=\"https://source.unsplash.com/random/40x40?virus\"> \n        </#if>\n      </div>\n\n      <div class=\"fb-card__header__title\">\n        <div class=\"card-title\">          \n          <h6>\n            <a href=\"#\" data-toggle=\"modal\" data-target=\"#signupModal\">\n              Prevent the spread - what you need to do\n            </a>\n          </h6>            \n        </div>\n      </div>\n    </div>\n    \n    <!-- Summary section containing the description and key details of the document -->\n    <div class=\"fb-card__summary\">\n      <div class=\"card-text\">\n        <p>\n          <i class=\"fas fa-ad\"></i>         \n          Everyone must stay at home to help stop coronavirus (COVID-19) spreading. Wash your hands with soap and water often to reduce the risk of infection.\n        </p>\n      </div>\n\n    </div>   \n\n  </div>\n</div>",
-    "additionalProperties" : { },
-    "category" : ""
+    "type" : "DisplayUrlAdvert",
+    "titleHtml" : "Prevent the spread - what you need to do",
+    "displayUrl" : "https://www.nhs.uk/conditions/coronavirus-covid-19/social-distancing/what-you-need-to-do/",
+    "linkUrl" : "https://www.nhs.uk/conditions/coronavirus-covid-19/social-distancing/what-you-need-to-do/",
+    "descriptionHtml" : "Everyone must stay at home to help stop coronavirus (COVID-19) spreading. Wash your hands with soap and water often to reduce the risk of infection.",
+    "additionalProperties" : {
+      "image" : "https://source.unsplash.com/random/160x160?nhs"
+    },
+    "category" : "",
+    "removeCollectionUrl" : false
   } ]
 }, {
   "created" : "2020-04-08T21:56:46.500816Z",
-  "lastModified" : "2020-04-22T12:12:18.011618Z",
+  "lastModified" : "2020-09-18T00:22:51.056861Z",
   "id" : "0f46ff92-62e3-46d2-9a29-f2f9bc2599d9",
   "name" : "[Example] health and corona - bottom position",
   "label" : "DEFAULT",
@@ -97,23 +109,20 @@
     } ]
   },
   "actions" : [ {
-    "type" : "DisplayMessage",
-    "messageHtml" : "<!-- Corona Virus -->\n<div class=\"card fb-card--fluid\">\n\n  <div class=\"card-body fb-card__body\">        \n\n    <!-- Header section usually containing a title and small thumbnail -->\n    <div class=\"fb-card__header mb-3 border-bottom\">\n      <div class=\"fb-card__header__image\">\n          <img class=\"rounded-circle fb-image-thumbnail\" alt=\"Thumbnail for ${result.title!}\" src=\"https://source.unsplash.com/random/40x40?health\"> \n        </#if>\n      </div>\n\n      <div class=\"fb-card__header__title\">\n        <div class=\"card-title\">          \n          <h6>\n            <a href=\"#\" data-toggle=\"modal\" data-target=\"#signupModal\">\n              RESEARCH INSIGHT | Access to Health Care\n            </a>\n          </h6>            \n        </div>\n      </div>\n    </div>\n    \n    <!-- Summary section containing the description and key details of the document -->\n    <div class=\"fb-card__summary\">\n      <div class=\"card-text\">\n        <p>\n          <i class=\"fas fa-ad\"></i>         \n          Access to health services affects the well-being of millions of consumers, and objective or situational access factors, such as distance from facility, often dominate the conversation. However, the reality is that subjective perceptions play just as great a role in consumers’ overall health and well-being. \n        </p>\n      </div>\n\n    </div>   \n\n  </div>\n</div>",
+    "type" : "DisplayUrlAdvert",
+    "titleHtml" : "RESEARCH INSIGHT | Access to Health Care",
+    "displayUrl" : "https://www.health.org.uk/funding-and-partnerships/programmes/insight-2019",
+    "linkUrl" : "https://www.health.org.uk/funding-and-partnerships/programmes/insight-2019",
+    "descriptionHtml" : "Access to health services affects the well-being of millions of consumers, and objective or situational access factors, such as distance from facility, often dominate the conversation. However, the reality is that subjective perceptions play just as great a role in consumers’ overall health and well-being.",
     "additionalProperties" : {
       "position" : "bottom"
     },
-    "category" : ""
-  }, {
-    "type" : "DisplayMessage",
-    "messageHtml" : "<!-- Corona Virus -->\n<div class=\"card fb-card--fluid\">\n\n  <div class=\"card-body fb-card__body\">        \n\n    <!-- Header section usually containing a title and small thumbnail -->\n    <div class=\"fb-card__header mb-3 border-bottom\">\n      <div class=\"fb-card__header__image\">\n          <img class=\"rounded-circle fb-image-thumbnail\" alt=\"Thumbnail for ${result.title!}\" src=\"https://source.unsplash.com/random/40x40?female\"> \n        </#if>\n      </div>\n\n      <div class=\"fb-card__header__title\">\n        <div class=\"card-title\">          \n          <h6>\n            <a href=\"#\" data-toggle=\"modal\" data-target=\"#signupModal\">\n              Health Habits of Female Millennials\n            </a>\n          </h6>            \n        </div>\n      </div>\n    </div>\n    \n    <!-- Summary section containing the description and key details of the document -->\n    <div class=\"fb-card__summary\">\n      <div class=\"card-text\">\n        <p>\n          <i class=\"fas fa-ad\"></i>         \n          America’s shifting demographics are highly visible in the millennial generation. Consisting of about a third of Americans, this generation is far more racially diverse than any generation before it. Millennial women’s attitudes toward health and the healthcare system are different than previous generations, too, and millennials are consuming healthcare in different ways than older generations did.          </p>\n      </div>\n\n    </div>   \n\n  </div>\n</div>",
-    "additionalProperties" : {
-      "position" : "bottom"
-    },
-    "category" : ""
+    "category" : "",
+    "removeCollectionUrl" : false
   } ]
 }, {
   "created" : "2020-08-17T16:12:56.407535Z",
-  "lastModified" : "2020-08-18T07:55:55.357582Z",
+  "lastModified" : "2020-09-18T00:14:59.254508Z",
   "id" : "fe3b1d3b-fa55-4fbe-a154-a3d4ed3c2e32",
   "name" : "[Example] Bins",
   "label" : "DEFAULT",
@@ -135,23 +144,37 @@
     } ]
   },
   "actions" : [ {
-    "type" : "DisplayMessage",
-    "messageHtml" : "<!-- Bins -->\n<div class=\"card fb-card--fluid\">\n    <div class=\"card-body fb-card__body\">        \n        <!-- Header section usually containing a title and small thumbnail -->\n        <div class=\"fb-card__header mb-3 border-bottom\">\n            <div class=\"fb-card__header__image\">\n                <img class=\"rounded-circle fb-image-thumbnail\" alt=\"Thumbnail for ${result.title!}\" src=\"https://environmentservices.camden.gov.uk/cl/img/services/communal-green.jpg\"> \n            </div>\n    \n            <div class=\"fb-card__header__title\">\n                <div class=\"card-title\">          \n                    <h5>\n                        <a href=\"https://environmentservices.camden.gov.uk/property?\">\n                            Recycling and rubbish collection days\n                        </a>\n                    </h5>            \n                </div>\n            </div>\n        </div>\n        \n        <!-- Summary section containing the description and key details of the document -->\n        <div class=\"fb-card__summary\">\n            <div class=\"card-text\">\n                <p>\n                    <i class=\"fas fa-ad\"></i>\n                    Find out when your rubbish and recycling is collected.\n                </p>\n            </div>\n        </div>   \n\n        <div class=\"fb-card__actions\"> \n            <a href=\"https://environmentservices.camden.gov.uk/property?\" class=\"card-link fb-color-secondary mt-4 small\">\n                CHECK YOUR COLLECTION DAY\n            </a>\n        </div>\n    </div>\n</div>",
+    "type" : "DisplayUrlAdvert",
+    "titleHtml" : "Report street damage or a cleaning issue",
+    "displayUrl" : "https://www.camden.gov.uk/report-street-issue",
+    "linkUrl" : "https://www.camden.gov.uk/report-street-issue",
+    "descriptionHtml" : "Tell us about a problem on our streets so that we can have a look.",
     "additionalProperties" : {
-      "position" : "center"
+      "position" : "center",
+      "call_to_action_label" : "REPORT DAMAGE",
+      "call_to_action_url" : "https://www.camden.gov.uk/report-street-issue",
+      "image" : "https://source.unsplash.com/random/160x160?damage"
     },
-    "category" : ""
+    "category" : "",
+    "removeCollectionUrl" : false
   }, {
-    "type" : "DisplayMessage",
-    "messageHtml" : "<!-- Street damage -->\n<div class=\"card fb-card--fluid\">\n    <div class=\"card-body fb-card__body\">        \n        <!-- Header section usually containing a title and small thumbnail -->\n        <div class=\"fb-card__header mb-3 border-bottom\">\n            <div class=\"fb-card__header__image\">\n                <img class=\"rounded-circle fb-image-thumbnail\" alt=\"Thumbnail for reporting damage\" src=\"https://forms.camden.gov.uk/cus/images/icons/edit.png\"> \n            </div>\n    \n            <div class=\"fb-card__header__title\">\n                <div class=\"card-title\">          \n                    <h5>\n                        <a href=\"https://www.camden.gov.uk/report-street-issue\">\n                            Report street damage or a cleaning issue\n                        </a>\n                    </h5>            \n                </div>\n            </div>\n        </div>\n        \n        <!-- Summary section containing the description and key details of the document -->\n        <div class=\"fb-card__summary\">\n            <div class=\"card-text\">\n                <p>\n                    <i class=\"fas fa-ad\"></i>\n                    Tell us about a problem on our streets so that we can have a look.\n                </p>\n            </div>\n        </div>   \n\n        <div class=\"fb-card__actions\"> \n            <a href=\"https://www.camden.gov.uk/report-street-issue\" class=\"card-link fb-color-secondary mt-4 small\">\n                REPORT DAMAGE\n            </a>\n        </div>\n    </div>\n</div>",
+    "type" : "DisplayUrlAdvert",
+    "titleHtml" : "Recycling and rubbish collection days",
+    "displayUrl" : "https://environmentservices.camden.gov.uk/property?",
+    "linkUrl" : "https://environmentservices.camden.gov.uk/property?",
+    "descriptionHtml" : "Find out when your rubbish and recycling is collected.",
     "additionalProperties" : {
-      "position" : "center"
+      "position" : "center",
+      "call_to_action_label" : "CHECK YOUR COLLECTION DAY",
+      "call_to_action_url" : "https://environmentservices.camden.gov.uk/property?",
+      "image" : "https://source.unsplash.com/random/160x160?bins"
     },
-    "category" : ""
+    "category" : "",
+    "removeCollectionUrl" : false
   } ]
 }, {
   "created" : "2020-08-17T16:48:38.568916Z",
-  "lastModified" : "2020-08-17T16:53:30.24414Z",
+  "lastModified" : "2020-09-18T00:17:45.108074Z",
   "id" : "2c27d476-f132-4772-95ad-06fb61b3323f",
   "name" : "[Example] Term dates",
   "label" : "DEFAULT",
@@ -173,16 +196,23 @@
     } ]
   },
   "actions" : [ {
-    "type" : "DisplayMessage",
-    "messageHtml" : "<!-- Term dates -->\n<div class=\"card fb-card--fluid\">\n    <div class=\"card-body fb-card__body\">        \n        <!-- Header section usually containing a title and small thumbnail -->\n        <div class=\"fb-card__header mb-3 border-bottom\">\n            <div class=\"fb-card__header__image\">\n                <img class=\"rounded-circle fb-image-thumbnail\" alt=\"Thumbnail for reporting damage\" src=\"https://upload.wikimedia.org/wikipedia/commons/c/cd/Circle-icons-calendar.svg\"> \n            </div>\n    \n            <div class=\"fb-card__header__title\">\n                <div class=\"card-title\">          \n                    <h5>\n                        <a href=\"https://www.camden.gov.uk/term-dates\">\n                            Term dates\n                        </a>\n                    </h5>            \n                </div>\n            </div>\n        </div>\n        \n        <!-- Summary section containing the description and key details of the document -->\n        <div class=\"fb-card__summary\">\n            <div class=\"card-text\">\n                <p>\n                    <i class=\"fas fa-ad\"></i>\n                    Find out when your child's school term starts. State school term and holiday dates through to summer 2022.\n                </p>\n            </div>\n        </div>   \n\n        <div class=\"fb-card__actions\"> \n            <a href=\"https://www.camden.gov.uk/term-dates\" class=\"card-link fb-color-secondary mt-4 small\">\n                VIEW DATES\n            </a>\n        </div>\n    </div>\n</div>",
+    "type" : "DisplayUrlAdvert",
+    "titleHtml" : "Term dates",
+    "displayUrl" : "https://www.camden.gov.uk/term-dates",
+    "linkUrl" : "https://www.camden.gov.uk/term-dates",
+    "descriptionHtml" : "Find out when your child's school term starts. State school term and holiday dates through to summer 2022.",
     "additionalProperties" : {
-      "position" : "center"
+      "call_to_action_label" : "VIEW DATES",
+      "call_to_action_url" : "https://www.camden.gov.uk/term-dates",
+      "class" : "center",
+      "image" : "https://source.unsplash.com/random/160x160?calendar"
     },
-    "category" : ""
+    "category" : "",
+    "removeCollectionUrl" : false
   } ]
 }, {
   "created" : "2020-08-19T16:00:08.117078Z",
-  "lastModified" : "2020-09-17T16:16:53.373808Z",
+  "lastModified" : "2020-09-18T00:15:46.028089Z",
   "id" : "878f2174-ef98-48a1-9fdc-9ab1954a587b",
   "name" : "[Example] Fines",
   "label" : "DEFAULT",
@@ -209,7 +239,8 @@
     "additionalProperties" : {
       "call_to_action_url" : "https://www3.camden.gov.uk/pay",
       "position" : "center",
-      "call_to_action_text" : "Pay now"
+      "call_to_action_label" : "Pay now",
+      "image" : "https://source.unsplash.com/random/160x160?fines"
     },
     "category" : "",
     "removeCollectionUrl" : false
