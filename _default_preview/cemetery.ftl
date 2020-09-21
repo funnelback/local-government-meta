@@ -123,35 +123,27 @@
 <#macro AutoCompleteTemplate>
 	<script id="auto-completion-cemetery" type="text/x-handlebar-template">
 		<div class="fb-auto-complete--non-organic">
-			{{#if extra.disp.metaData.eventImage}}
-				<img class="rounded-circle fb-auto-complete__primary_visual" src="{{extra.disp.metaData.eventImage}}" alt="{{extra.disp.title}}" />
-			{{else}}
-				<span class="fas fa-id-badge fb-text-icon-round mr-3"></span> 
-			{{/if}}
-			<div class="fb-auto-complete--non-organic__body">
-				<h6 class="fb-auto-complete__body__primary-text">
-					{{extra.disp.metaData.cemeterySurname}}, {{extra.disp.metaData.cemeteryFirstName}}
-				</h6>
+            <h6>
+                {{extra.disp.metaData.cemeterySurname}}, {{extra.disp.metaData.cemeteryFirstName}}
+            </h6>
+			<div class="details">	
+                Passed away on
+                {{#if extra.disp.metaData.cemeteryDateDied}}
+                    {{extra.disp.metaData.cemeteryDateDied}}
+                {{/if}}        
 
-				<div class="fb-auto-complete__body__metadata text-muted">
-					
-					Passed away on
-					{{#if extra.disp.metaData.cemeteryDateDied}}
-						{{extra.disp.metaData.cemeteryDateDied}}
-					{{/if}}        
+                {{#if extra.disp.metaData.cemeteryAge}}
+                    at the age of
+                    {{extra.disp.metaData.cemeteryAge}}
+                    {{extra.disp.metaData.cemeteryAgeUnit}}
+                {{/if}}  
 
-					{{#if extra.disp.metaData.cemeteryAge}}
-						at the age of
-						{{extra.disp.metaData.cemeteryAge}}
-						{{extra.disp.metaData.cemeteryAgeUnit}}
-					{{/if}}  
-
-					{{#if extra.disp.metaData.cemeteryCemetery}}
-						<div>
-							Burried at {{extra.disp.metaData.cemeteryCemetery}}
-						</div>
-					{{/if}}              
-				</di v>
+                {{#if extra.disp.metaData.cemeteryCemetery}}
+                    <div>
+                        Burried at {{extra.disp.metaData.cemeteryCemetery}}
+                    </div>
+                {{/if}}
+            </div>              
 		</div>    
 	</script>
 </#macro>

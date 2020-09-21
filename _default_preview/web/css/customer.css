@@ -2,7 +2,7 @@
 /* Implementation specific overrides should be added below */
 
 
-/* Design overrides made by the products team - Avoid changing these if possible */
+/* Design overrides made by the vertical products team - Avoid changing these if possible */
 .fb-container {
     /* padding-bottom: 0; */
 }
@@ -28,4 +28,23 @@
     font-size: 0.8rem;
     color: #e42b12;
 }
-    
+
+/* Concierge */
+
+@media only screen and (min-width: 1025px) {
+    .fb-container .module-search--bg .tt-dataset-planning_applications,
+    .fb-container .module-search--bg .tt-dataset-cemetery {
+        display: -webkit-box;
+        display: flex;
+        -webkit-box-flex: 0;
+        flex: 0 0 50%;
+        flex-wrap: wrap;
+        max-width: 50%;
+        width: 50%;
+    }
+
+    .fb-container .module-search--bg .tt-category {
+        -webkit-box-flex: 0;
+        flex: 0 0 100%;
+    }
+}

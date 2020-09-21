@@ -2,47 +2,47 @@
 <#import "base.ftl" as base />
 
 <#-- 
-	Macro decides how each result should be presented. 
+    Macro decides how each result should be presented. 
 
-	@param result An individual result fron the data model
-	@param view An uppercase string which represents how
-		the result should be displayed. Defaults to DETAILED.
+    @param result An individual result fron the data model
+    @param view An uppercase string which represents how
+        the result should be displayed. Defaults to DETAILED.
 -->
 <#macro Result result=result view="LIST">
-	<#switch view?upper_case>
-		<#case "CARD">
-			<@CardView result=result />
-			<#break>
-		<#case "LIST">
-			<#-- Determine if results should be hidden or not -->
-			<@ListView result=result />
-			<#break>
-		<#default>
-			<@ListView result=result />
-	</#switch>
+    <#switch view?upper_case>
+        <#case "CARD">
+            <@CardView result=result />
+            <#break>
+        <#case "LIST">
+            <#-- Determine if results should be hidden or not -->
+            <@ListView result=result />
+            <#break>
+        <#default>
+            <@ListView result=result />
+    </#switch>
 </#macro>
 
 <#--
-	Stardard view of a result which is to be displayed in the 
-	main section of the search engine result page (SERP)
-	@param result An individual result fron the data model
+    Stardard view of a result which is to be displayed in the 
+    main section of the search engine result page (SERP)
+    @param result An individual result fron the data model
 -->
 <#macro ListView result>
-	<@GenericView result=result cardClass="fb-card--list" />
+    <@GenericView result=result cardClass="fb-card--list" />
 </#macro>
 
 <#--
-	Card view of a result which is to be displayed in the 
-	main section of the search engine result page (SERP)
-	@param result An individual result fron the data model
+    Card view of a result which is to be displayed in the 
+    main section of the search engine result page (SERP)
+    @param result An individual result fron the data model
 -->
 <#macro CardView result>
-	<@GenericView result=result cardClass="fb-card--fixed" />
+    <@GenericView result=result cardClass="fb-card--fixed" />
 </#macro>
 
 <#--
-	A generic view used to drive both the the list and card view
-	@param result An individual result fron the data model
+    A generic view used to drive both the the list and card view
+    @param result An individual result fron the data model
 -->
 <#macro GenericView result cardClass="fb-card--fixed">
     <article class="search-results__item search-results__item--people" data-fb-result="${result.indexUrl}">
@@ -125,44 +125,34 @@
 
 
 <#-- 
-	Handlebars template used to display the current object
-	in concierge.
+    Handlebars template used to display the current object
+    in concierge.
 --> 
 <#macro AutoCompleteTemplate>
-	<script id="auto-completion-planning_applications" type="text/x-handlebar-template">
-		<div class="fb-auto-complete--non-organic">
-			{{#if extra.disp.metaData.image}}
-				<img class="rounded-circle fb-auto-complete__primary_visual" src="{{extra.disp.metaData.image}}" alt="{{extra.disp.title}}" />
-			{{else}}
-				<span class="fas fa-pencil-ruler fb-text-icon-round mr-3"></span> 
-			{{/if}}
-			<div class="fb-auto-complete--non-organic__body">
-				<h6 class="fb-auto-complete__body__primary-text">{{extra.disp.metaData.planningApplicationName}}</h6>
-				<div class="fb-auto-complete__body__metadata text-muted">
-					<#--  <span class="text-capitalize">{{extra.disp.metaData.peopleRole}}</span>  -->
-					{{#if extra.disp.metaData.planningWardName}}
-						<span class="text-capitalize">{{extra.disp.metaData.planningWardName}}</span>
-					{{/if}}
+    <script id="auto-completion-planning_applications" type="text/x-handlebar-template">
+        <div class="fb-auto-complete--non-organic">
+            <h6>
+                {{extra.disp.metaData.planningApplicationName}}
+            </h6>
+            <div class="details">
+                {{#if extra.disp.metaData.planningWardName}}
+                    <div class="text-capitalize">{{extra.disp.metaData.planningWardName}}</div>
+                {{/if}}
 
-					{{#if extra.disp.metaData.planningDevelopeAddress}}
-						<div class="fb-auto-complete__body__metadata text-muted">
-							<small>
-								<span class="fas fa-map-marker-alt text-muted" aria-hidden="true"></span> 
-								{{extra.disp.metaData.planningDevelopeAddress}}
-							</small>
-						</div>
-					{{/if}}
+                {{#if extra.disp.metaData.planningDevelopeAddress}}
+                    <div class="fb-auto-complete__body__metadata text-muted">
+                        <span class="fas fa-map-marker-alt text-muted" aria-hidden="true"></span> 
+                        {{extra.disp.metaData.planningDevelopeAddress}}
+                    </div>
+                {{/if}}
 
-					{{#if extra.disp.metaData.planningRegisteredDate}}
-						<div class="fb-auto-complete__body__metadata text-muted">
-							<small>
-								<span class="fas fa-calendar-alt text-muted" aria-hidden="true"></span> 
-								Registered on {{extra.disp.metaData.planningRegisteredDate}}
-							</small>
-						</div>
-					{{/if}}
-				</div>
-			</div>
-		</div>
-	</script>
+                {{#if extra.disp.metaData.planningRegisteredDate}}
+                    <div class="fb-auto-complete__body__metadata text-muted">
+                        <span class="fas fa-calendar-alt text-muted" aria-hidden="true"></span> 
+                        Registered on {{extra.disp.metaData.planningRegisteredDate}}
+                    </div>
+                {{/if}}
+            </div>
+        </div>
+    </script>
 </#macro>
