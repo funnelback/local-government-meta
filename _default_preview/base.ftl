@@ -130,7 +130,6 @@
   "durl": "URL (Z-A)",
   "shuffle": "Shuffle"} >
 
-
     <section class="dropdown-list">
         <button class="dropdown-list__link js-dropdown-list__link" aria-haspopup="true" aria-expanded="false">
             <span>${(options[question.inputParameterMap["sort"]])!"Sort by"}</span>
@@ -139,7 +138,7 @@
             <#list options as key, value>
                 <li role="option">                
                     <a class="dropdown-list__list-link" title="Sort by ${value}" href="${question.collection.configuration.value("ui.modern.search_link")}?${removeParam(QueryString, "sort")}&sort=${key}">
-                        <#if options[question.inputParameterMap["sort"]] == value>
+                        <#if ((options[question.inputParameterMap["sort"]])!"") == value>
                             <i class="fas fa-check"></i>
                         </#if>
                         ${value}
@@ -165,7 +164,7 @@
             <#list limits as limit>
                 <li role="option">
                     <a class="dropdown-list__list-link" title="Limit to ${limit} results" href="${question.collection.configuration.value("ui.modern.search_link")}?${removeParam(QueryString, "num_ranks")}&num_ranks=${limit}">
-                        <#if question.inputParameterMap["num_ranks"]?number == limit>
+                        <#if ((question.inputParameterMap["num_ranks"]?number)!0) == limit>
                             <i class="fas fa-check"></i>
                         </#if>
                         ${limit} results
