@@ -1,53 +1,5 @@
 <#ftl encoding="utf-8" output_format="HTML" />
 
-<#-- 
-    Allows the user to switch between prospective member and
-    full fledge.
--->
-<#macro UserTypeSwitcher>
-    <div class="dropdown" >
-        <a class="btn btn-light dropdown-toggle btn-sm" 
-            href="#" 
-            role="button" 
-            id="dropdownMenuLinkUserTypeSwitcher" 
-            data-toggle="dropdown" 
-            aria-haspopup="true"
-            aria-expanded="false"
-            title="Change between member types">
-            <i class="fas fa-user"></i>
-        </a>
-        <div class="dropdown-menu" aria-labelledby="dropdownMenuLinkUserTypeSwitcher">
-            
-            <#-- Find out which user is active -->
-            <#assign userTypes = (question.inputParameterMap['userTypes'])!"PROSPECTIVE">
-            
-            <#switch userTypes?upper_case>
-                <#case "MEMBER">
-                    <a class="dropdown-item" href="?${removeParam(QueryString, ['userTypes']) + '&userTypes=prospective'}">
-                        Prospective Member
-                    </a>
-                    <a class="dropdown-item active" href="#">
-                        <i class="fas fa-check"></i> Full Member
-                    </a>
-                    <#break>
-                <#case "PROSPECTIVE">
-                    <#-- No need to break. Prospective users are the default -->
-                <#default>
-                    <a class="dropdown-item active" href="#">
-                        <i class="fas fa-check"></i> Prospective Member
-                    </a>
-                    <a class="dropdown-item" href="?${removeParam(QueryString, ['userTypes']) + '&userTypes=member'}">
-                        Full member
-                    </a>
-                    <#break>
-            </#switch>      
-        </div>
-    </div>
-</#macro>
-
-
-
-
 
 <#macro SearchForm>
     <section class="module-search js-module-search content-wrapper module-search--bg" style="background-image: url('/s/resources/${question.collection.id}/${question.profile}/css/mysource_files/bg-search.png');">
@@ -103,9 +55,8 @@
             <@facets.FacetBreadBox />
 
             <#if ((response.resultPacket.resultsSummary.totalMatching)!0) != 0>
-                    <#--  <@base.LimitDropdown />  -->
-                    <#--  <@base.SortDropdown />  -->
-                    <@base.DisplayMode />            
+
+                    <@base.SearchTools />            
             </#if> 
             
 

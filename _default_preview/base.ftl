@@ -65,6 +65,21 @@
     </form>
 </#macro>
 
+<#-- 
+    Generate the HTML for advanced features which control the search results such as 
+    sorting and number of results to display
+-->
+<#macro SearchTools>
+    <div class="search-results__tools clearfix">
+        <h2 class="search-results__tools-title sr-only">Search Funnelback University</h2>
+        <@base.Counts /> 
+        <div class="search-results__tools-right">
+            <@base.LimitDropdown />
+            <@base.SortDropdown />
+            <@base.DisplayMode />        
+        </div>
+    </div>
+</#macro>
 
 <#-- Obtain the result mode from the CGI paramters; Valid values are LIST and CARD -->
 <#function getDisplayMode question>
@@ -87,23 +102,16 @@
 </#function>
 
 <#macro DisplayMode>
-
-    <div class="search-results__tools">
-        <h2 class="search-results__tools-title sr-only">Search Funnelback University</h2>
-        <@base.Counts />
-        <div class="search-results__tools-right">
-            <a href='${question.getCurrentProfileConfig().get("ui.modern.search_link")}?${removeParam(QueryString, "displayMode")}&displayMode=card' 
-                class="search-results__icon search-results__icon--box <#if getDisplayMode(question)! == 'CARD'>active</#if>"
-                title="Display results as cards">
-                <span class="sr-only">Card view</span>
-            </a>
-            <a href='${question.getCurrentProfileConfig().get("ui.modern.search_link")}?${removeParam(QueryString, "displayMode")}&displayMode=list' 
-                class="search-results__icon search-results__icon--list <#if getDisplayMode(question)! == 'LIST'>active</#if>"
-                title="Display results as a list">
-                <span class="sr-only">List view</span>
-            </a>
-        </div>
-    </div>
+    <a href='${question.getCurrentProfileConfig().get("ui.modern.search_link")}?${removeParam(QueryString, "displayMode")}&displayMode=card' 
+        class="search-results__icon search-results__icon--box <#if getDisplayMode(question)! == 'CARD'>active</#if>"
+        title="Display results as cards">
+        <span class="sr-only">Card view</span>
+    </a>
+    <a href='${question.getCurrentProfileConfig().get("ui.modern.search_link")}?${removeParam(QueryString, "displayMode")}&displayMode=list' 
+        class="search-results__icon search-results__icon--list <#if getDisplayMode(question)! == 'LIST'>active</#if>"
+        title="Display results as a list">
+        <span class="sr-only">List view</span>
+    </a>
 </#macro>
 
 <#--
@@ -129,8 +137,13 @@
         </button>
         <ul class="dropdown-list__list" role="listbox" tabindex="-1"">
             <#list options as key, value>
-                <li role="option">
-                    <a class="dropdown-list__list-link" title="Sort by ${value}" href="${question.collection.configuration.value("ui.modern.search_link")}?${removeParam(QueryString, "sort")}&sort=${key}">${value}</a>
+                <li role="option">                
+                    <a class="dropdown-list__list-link" title="Sort by ${value}" href="${question.collection.configuration.value("ui.modern.search_link")}?${removeParam(QueryString, "sort")}&sort=${key}">
+                        <#if options[question.inputParameterMap["sort"]] == value>
+                            <i class="fas fa-check"></i>
+                        </#if>
+                        ${value}
+                    </a>
                 </li>
             </#list>
         </ul>
@@ -151,7 +164,12 @@
         <ul class="dropdown-list__list" role="listbox" tabindex="-1"">
             <#list limits as limit>
                 <li role="option">
-                    <a class="dropdown-list__list-link" title="Limit to ${limit} results" href="${question.collection.configuration.value("ui.modern.search_link")}?${removeParam(QueryString, "num_ranks")}&num_ranks=${limit}">${limit} results</a>
+                    <a class="dropdown-list__list-link" title="Limit to ${limit} results" href="${question.collection.configuration.value("ui.modern.search_link")}?${removeParam(QueryString, "num_ranks")}&num_ranks=${limit}">
+                        <#if question.inputParameterMap["num_ranks"]?number == limit>
+                            <i class="fas fa-check"></i>
+                        </#if>
+                        ${limit} results
+                    </a>
                 </li>
             </#list>
         </ul>

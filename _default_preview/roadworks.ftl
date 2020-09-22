@@ -50,7 +50,7 @@
             <#if (result.listMetadata["image"][0])!?has_content>
                 <img class="deferred rounded-circle fb-image-thumbnail" alt="Thumbnail for ${result.title!}" src="/stencils/resources/base/v15.8/img/pixel.gif" data-deferred-src="https://jobs.ama.org${result.listMetadata["image"][0]}"> 
             <#else>
-                <img alt="Thumbnail for ${result.title!}" src="https://source.unsplash.com/random/160x160?${(result.title)!''?url}"> 
+                <img alt="Thumbnail for ${result.title!}" src="https://source.unsplash.com/random/160x160?${(result.listMetadata['roadworksStreet'][0])!''?url}"> 
             </#if>
         </figure>
         <div class="search-results__content">

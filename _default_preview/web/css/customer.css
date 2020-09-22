@@ -3,20 +3,61 @@
 
 
 /* Design overrides made by the vertical products team - Avoid changing these if possible */
+
 .fb-container {
     /* padding-bottom: 0; */
 }
 
-    /* Facet breadcrumb */
-    .fb-container .search-results__total {
-        float: none;
-    }
+/** 
+ * Facets 
+ **/
 
-    .fb-container .filter-list__title {
-        font-size: 1.25rem;
-        margin-bottom: 1em;
-    }
+/* Add support for radio boxes and check boxes */
+.fb-container .module-filter--dark .module-filter__facets-link.round::after {
+    border-radius: 50%;
+}
 
+.fb-container .module-filter--dark .module-filter__facets-link.square::after {
+    border-radius: 0;
+}
+
+/* Clear all link which will remove all selected categories for the current facet */
+.fb-container .module-filter__facets-clear_all_link {
+    color: #e42b12;
+    font-size: 1rem;
+}
+
+.fb-container .module-filter__facets-clear_all_link::after {
+    display: none;
+}
+
+/* Facet breadcrumb */
+.fb-container .search-results__total {
+    float: none;
+}
+
+.fb-container .filter-list__title {
+    font-size: 1.25rem;
+    margin-bottom: 1em;
+}
+
+.fb-container .filter-list__list {
+    margin: 1.5rem 0 0 0;
+}
+
+/** 
+  * Search tools 
+  **/
+
+.fb-container .search-results__tools {
+    overflow: visible;
+}
+
+/* Tabs */
+
+.fb-container .tabs__item .fas {
+    margin-right: 0.5rem;
+}
 
 @media only screen and (min-width: 1025px) {
     .fb-container .initial-search-form .module-search--bg {
@@ -40,7 +81,9 @@
     color: #e42b12;
 }
 
-/* Concierge */
+/** 
+  * Concierge
+  **/
 
 @media only screen and (min-width: 1025px) {
     .fb-container .module-search--bg .tt-dataset-planning_applications,

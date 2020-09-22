@@ -48,40 +48,59 @@
                             <span class="module-filter__item-title" aria-haspopup="true" aria-expanded="true"
                                 tabindex="0">
                                 ${facet.name}
-
-                                <#-- Display a "Clear all" link except for radio button type facets
-                                    as they already have an "all" value -->
-                                <#if facet.selected && facet.guessedDisplayType != "RADIO_BUTTON">
-                                    <a class="text-muted" href="${facet.unselectAllUrl}">
-                                        <small>
-                                            <span class="fas fa-times"></span>
-                                            clear all
-                                        </small>
-                                    </a>
-                                </#if>
                             </span>
 
-                            <div class="module-filter__facets" style="display: block;">
+                            <div class="module-filter__facets">
                                 <div class="content-wrapper">
                                     <ul class="module-filter__facets-list" role="menu">
                                         <#list facet.allValues as value>
                                             <li class="module-filter__facets-item" role="menuitem">
                                                 <#if facet.guessedDisplayType == "RADIO_BUTTON">
-                                                    <i class="fb-sidebar__facet-icon align-middle text-muted ${value.selected?then("fas fa-circle", "far fa-circle")}"></i>
+                                                    <!-- Radio facets -->
+                                                    <a href="${value.toggleUrl!}" class="module-filter__facets-link round ${value.selected?then("active","")}">
+                                                        ${value.label} 
+                                                        <span>
+                                                            ${(value.count)!"0"?string}
+                                                        </span>                                                    
+                                                    </a>                                                      
                                                 <#elseif facet.guessedDisplayType == "CHECKBOX">
-                                                    <i class="fb-sidebar__facet-icon align-middle text-muted ${value.selected?then("fas fa-check-square", "far fa-square")}"></i>
+                                                    <!-- Checkbox facets -->
+                                                    <a href="${value.toggleUrl!}" class="module-filter__facets-link square ${value.selected?then("active","")}">
+                                                        ${value.label} 
+                                                        <span>
+                                                            ${(value.count)!"0"?string}
+                                                        </span>
+                                                    </a>
                                                 <#elseif value.selected>
-                                                    <#if facet.guessedDisplayType == "SINGLE_DRILL_DOWN" && value?counter gt 1>
-                                                        <span class="text-muted ml-${value?counter}">&#8627;</span>
-                                                    </#if>
-                                                    <i class="fb-sidebar__facet-icon align-middle text-muted fas fa-times"></i>
+                                                    <!-- Drilldown facets -->
+                                                    <a href="${value.toggleUrl!}" class="module-filter__facets-link ${value.selected?then("active","")}">
+                                                        <#if facet.guessedDisplayType == "SINGLE_DRILL_DOWN" && value?counter gt 1>
+                                                            <span class="text-muted ml-${value?counter}">&#8627;</span>                                                                                                                        
+                                                        </#if>
+                                                        ${value.label} 
+                                                        (${(value.count)!"0"?string})
+                                                    </a>                                                        
+                                                <#else>
+                                                    <a href="${value.toggleUrl!}" class="module-filter__facets-link square ${value.selected?then("active","")}">
+                                                        ${value.label}
+                                                        <span>
+                                                            ${(value.count)!"0"?string}
+                                                        </span>                                                        
+                                                    </a>                                                      
                                                 </#if>
-
-                                                <a href="${value.toggleUrl!}" class="module-filter__facets-link">
-                                                    ${value.label} (${(value.count)!"0"?string})
-                                                </a>
                                             </li>
                                         </#list>
+                                        <#-- 
+                                            Display a "Clear all" link except for radio button type facets
+                                            as they already have an "all" value 
+                                        -->
+                                        <#if facet.selected && facet.guessedDisplayType != "RADIO_BUTTON">
+                                            <li class="module-filter__facets-item" role="menuitem">
+                                                <a class="module-filter__facets-link module-filter__facets-clear_all_link" href="${facet.unselectAllUrl}">
+                                                    clear all
+                                                </a>
+                                            </li>                                        
+                                        </#if>                                        
                                     </ul>
                                     <button class="btn-toggle" data-show="3" data-more="+ More" data-less="- Less">
                                         <span class="btn-toggle__text">+ More</span>
@@ -110,7 +129,7 @@
 --> 
 <#macro FacetBreadBox>
     <#if response.facetExtras.hasSelectedNonTabFacets>
-        <section class="filter-list search-results__total">
+        <section class="filter-list search-results__total clearfix">
             <span class="filter-list__title">Selected filters:</span>
             <ul class="filter-list__list">
                 <#list response.facets as facet>
