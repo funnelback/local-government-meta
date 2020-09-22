@@ -1,5 +1,3 @@
-<#-- asjdsadjasojd a- -->
-
 <#ftl encoding="utf-8" output_format="HTML" />
 
 <#-- Core Funnelback imports -->
@@ -44,7 +42,6 @@
 
 </head>
 <body>
-        <h1> Testing GIT </h1>
 	<@client_includes.ContentHeader />
 
 	<div class="fb-container">
