@@ -100,12 +100,14 @@
     <div>
         <section class="search-results js-search-results">
 
+            <@facets.FacetBreadBox />
 
             <#if ((response.resultPacket.resultsSummary.totalMatching)!0) != 0>
-                <@base.LimitDropdown />
-                <@base.SortDropdown />
-                <@base.DisplayMode />            
+                    <#--  <@base.LimitDropdown />  -->
+                    <#--  <@base.SortDropdown />  -->
+                    <@base.DisplayMode />            
             </#if> 
+            
 
             <@curator.BestBets />                
             <@curator.Curator position="center" />      

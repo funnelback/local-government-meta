@@ -7,6 +7,17 @@
     /* padding-bottom: 0; */
 }
 
+    /* Facet breadcrumb */
+    .fb-container .search-results__total {
+        float: none;
+    }
+
+    .fb-container .filter-list__title {
+        font-size: 1.25rem;
+        margin-bottom: 1em;
+    }
+
+
 @media only screen and (min-width: 1025px) {
     .fb-container .initial-search-form .module-search--bg {
         padding-bottom: 15rem;
