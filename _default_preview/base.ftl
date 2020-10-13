@@ -215,23 +215,22 @@
             </#if>
         </#list>
     </article>
-
 </#macro>
 
 <#--
   Display a tier bar
 -->
 <#macro TierBar result>
-  <#-- A tier bar -->
-  <#if result.matched != result.outOf>
-    <h3 class="search-tier text-muted">Results that match ${result.matched} of ${result.outOf} words</h3>
-  <#else>
-    <h3 class="sr-only search-tier">Fully-matching results</h3>
-  </#if>
-  <#-- Print event tier bars if they exist -->
-  <#if result.eventDate??>
-      <h3 class="text-muted search-tier">Events on ${result.eventDate?date}</h3>
-  </#if>
+    <#-- A tier bar -->
+    <#if result.matched != result.outOf>
+        <h3 class="search-tier text-muted">Results that match ${result.matched} of ${result.outOf} words</h3>
+    <#else>
+        <h3 class="sr-only search-tier">Fully-matching results</h3>
+    </#if>
+    <#-- Print event tier bars if they exist -->
+    <#if result.eventDate??>
+        <h3 class="text-muted search-tier">Events on ${result.eventDate?date}</h3>
+    </#if>
 </#macro>
 
 <#--
