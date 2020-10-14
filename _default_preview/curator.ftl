@@ -1,12 +1,13 @@
 <#ftl encoding="utf-8" output_format="HTML" />
 
 <#--
-    Display Curator messages
+    Display Curator messages.
 
     @param position Position attribute to consider from the Curator message.
         Only messages with a position attribute matching this will be displayed. Can be empty to display all messages regardless of position.
 -->
 <#macro Curator position>
+    <!-- curator.Curator -->
     <section class="module-curator module-curator--no-bg">
         <h2 class="sr-only">Curator</h2>
         <article class="module-curator__list">
@@ -67,10 +68,24 @@
     </section>
 </#macro>
 
+<#-- 
+    Runs the nested code if there is at least 1 curator rule which 
+    matches the position.
+-->
+<#macro HasCurator position>
+    <#if ((response.curator.exhibits)![])?filter(exhibit -> exhibit.category != "BEST_BETS" && (!position?? || ((exhibit.additionalProperties.position)!"center") == position))?size gt 0>
+        <#nested>
+    </#if>
+</#macro>
+
+
+facets?split(",")?filter( x -> response.facets?filter(y -> x == y.name && y.allValues?size gt 0)?size gt 0)?size gt 0>
+
 <#--
-  Display best bets
+  Display best bets.
 -->
 <#macro BestBets>
+    <!-- curator.BestBets -->
     <#list (response.curator.exhibits)![] as exhibit>
         <#if exhibit.category == "BEST_BETS">   
             <section class="module-curator module-curator--no-bg">
@@ -104,4 +119,13 @@
             </section>
         </#if>
     </#list>
+</#macro>
+
+<#-- 
+    Runs the nested code if there is at least 1 best bet rule.
+-->
+<#macro HasBestBets>
+    <#if ((response.curator.exhibits)![])?filter(exhibit -> exhibit.category == "BEST_BETS")?size gt 0>
+        <#nested>
+    </#if>
 </#macro>

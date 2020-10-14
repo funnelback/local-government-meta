@@ -65,20 +65,82 @@
     </form>
 </#macro>
 
-<#-- 
-    Generate the HTML for advanced features which control the search results such as 
-    sorting and number of results to display
+<#--
+  Display query blending notice
 -->
-<#macro SearchTools>
-    <div class="search-results__tools clearfix">
-        <h2 class="search-results__tools-title sr-only">Search Funnelback University</h2>
-        <@base.Counts /> 
-        <div class="search-results__tools-right">
-            <@base.LimitDropdown />
-            <@base.SortDropdown />
-            <@base.DisplayMode />        
-        </div>
-    </div>
+<#macro Blending>
+    <#if (response.resultPacket.QSups)!?size &gt; 0>
+        <!-- Blending -->
+        <blockquote class="search-blending">
+        <span class="fas fa-info-circle"></span>
+        Your query has been expanded to <strong><#list response.resultPacket.QSups as qsup> ${qsup.query}<#if qsup_has_next>, </#if></#list></strong>.
+        &nbsp;Search for <a class="highlight" href="?${QueryString}&amp;qsup=off" title="Turn off query expansion"><em>${question.originalQuery}</em></a> instead.
+        </blockquote>
+    </#if>
+</#macro>
+
+<#--
+  Display spelling suggestion notice
+-->
+<#macro Spelling>
+    <#if (response.resultPacket.spell)??>
+        <!-- base.Spelling -->
+        <blockquote class="search-spelling">
+            Did you mean <em><a class="highlight" href="${question.collection.configuration.value("ui.modern.search_link")}?${response.resultPacket.spell.url}" title="Spelling suggestion">${(response.resultPacket.spell.text)!}</a></em>?
+        </blockquote>
+    </#if>
+</#macro>
+
+<#--
+    Display result counts
+-->
+<#macro Counts>
+    <span class="search-results__total">                                                                    
+        <#if ((response.resultPacket.resultsSummary.totalMatching)!0) == 0>
+            <span class="search-counts-total-matching">0</span> search results for <strong class="highlight"><@s.QueryClean /></strong>
+        </#if>
+        <#if ((response.resultPacket.resultsSummary.totalMatching)!0) != 0>
+            <span class="search-counts-page-start">${(response.resultPacket.resultsSummary.currStart)!}</span> -
+            <span class="search-counts-page-end">${(response.resultPacket.resultsSummary.currEnd)!}</span> of
+            <span class="search-counts-total-matching">${(response.resultPacket.resultsSummary.totalMatching)!?string.number}</span>
+            <#if (question.inputParameterMap["s"])!?has_content && question.inputParameterMap["s"]?contains("?:")>
+                <em>collapsed</em> 
+            </#if>search results for <strong class="highlight"><@s.QueryClean></@s.QueryClean></strong> 
+            <#list response.resultPacket.QSups as qsup>
+                or <strong class="highlight">${(qsup.query)!}</strong>
+                <#if qsup_has_next>, </#if>
+            </#list>
+        </#if>
+
+        <#if ((response.resultPacket.resultsSummary.partiallyMatching)!0) != 0>
+            where <span class="search-counts-fully-matching">${(response.resultPacket.resultsSummary.fullyMatching)!?string.number}</span>
+            match all words and <span class="search-counts-partially-matching">${(response.resultPacket.resultsSummary.partiallyMatching)!?string.number}</span>
+            match some words.
+        </#if>
+        <#if ((response.resultPacket.resultsSummary.collapsed)!0) != 0>
+            <span class="search-counts-collapsed">${(response.resultPacket.resultsSummary.collapsed)!}</span>
+            very similar results included.
+        </#if>
+    </span>
+</#macro>
+
+<#--
+  Message to display when there are no results
+-->
+<#macro NoResults>
+    <#if (response.resultPacket.resultsSummary.totalMatching)!?has_content &&
+        response.resultPacket.resultsSummary.totalMatching == 0>
+        <!-- base.NoResults -->
+        <section class="module-info content-wrapper">
+            <figure class="module-info__bg">
+                <img src="/s/resources/${question.collection.id}/${question.profile}/css/mysource_files/no-results-icon.svg" alt="">
+            </figure>
+            <h2 class="module-info__title">No matching results</h2>
+            <p class="module-info__desc">
+                Your search for <strong><@s.QueryClean /></strong> did not return any results.
+            </p>
+        </section>
+    </#if>
 </#macro>
 
 <#-- Obtain the result mode from the CGI paramters; Valid values are LIST and CARD -->
@@ -112,6 +174,22 @@
         title="Display results as a list">
         <span class="sr-only">List view</span>
     </a>
+</#macro>
+
+<#-- 
+    Generate the HTML for advanced features which control the search results such as 
+    sorting and number of results to display
+-->
+<#macro SearchTools>
+    <div class="search-results__tools clearfix">
+        <h2 class="search-results__tools-title sr-only">Search Funnelback University</h2>
+        <@base.Counts /> 
+        <div class="search-results__tools-right">
+            <@base.LimitDropdown />
+            <@base.SortDropdown />
+            <@base.DisplayMode />        
+        </div>
+    </div>
 </#macro>
 
 <#--
@@ -174,6 +252,58 @@
         </ul>
     </section>
 </#macro>
+
+<#--
+  Display paging controls
+-->
+<#macro Paging>
+    <!-- base.Paging -->
+    <section class="pagination">
+        <nav class="pagination__nav" aria-label="Pagination Navigation">
+            <#-- Previous page -->
+            <#if (response.customData.stencilsPaging.previousUrl)??>
+                <div class="pagination__item pagination__item-navigation pagination__item-previous">
+                    <a class="pagination__link" rel="prev" href="${response.customData.stencilsPaging.previousUrl}">
+                        <span class="pagination__label">Prev</span>
+                    </a>
+                </div>
+            </#if>
+
+            <#-- Sibling pages -->
+            <#if (response.customData.stencilsPaging.pages)!?has_content &&
+                response.customData.stencilsPaging.pages?size gt 1>
+                <ul class="pagination__pages-list">
+                    <#list response.customData.stencilsPaging.pages as page>
+                        <#if page.selected>
+                            <li class="pagination__item pagination__item--active">
+
+                                <span class="pagination__current" aria-label="Current Page, Page ${page.number}">
+                                    <span class="pagination__label">${page.number}</span>
+                                </span>                            
+                            </li>
+                        <#else>                    
+                            <li class="pagination__item">
+                                <a class="pagination__link" href="${page.url}" aria-label="Goto Page 1">
+                                    <span class="pagination__label">${page.number}</span>
+                                </a>
+                            </li>
+                        </#if>
+                    </#list>
+                </ul>
+            </#if>
+
+            <#-- Next page -->
+            <#if (response.customData.stencilsPaging.nextUrl)??>            
+                <div class="pagination__item pagination__item-navigation pagination__item-next">
+                    <a class="pagination__link" rel="next" href="${response.customData.stencilsPaging.nextUrl}" >
+                        <span class="pagination__label">Next</span>
+                    </a>
+                </div>
+            </#if> 
+        </nav>
+    </section>
+</#macro>
+
 
 <#-- 
     Determines if the results are to be displayed normally
@@ -318,45 +448,69 @@
 </#macro>
 
 <#--
-  Display query blending notice
+    Iterate over results and choose the right quick view template depending
+    on the results type and what is configured in collection.cfg
+
+    Defaults to <code>&lt;@project.Result /&gt;
+
+    @param nestedRank Before which result to insert the nested content of the macro.
+        This is used to insert content (usually an extra search) between results.
 -->
-<#macro Blending>
-  <#if (response.resultPacket.QSups)!?size &gt; 0>
-    <blockquote class="blockquote">
-      <span class="fas fa-info-circle"></span>
-      Your query has been expanded to <strong><#list response.resultPacket.QSups as qsup> ${qsup.query}<#if qsup_has_next>, </#if></#list></strong>.
-      &nbsp;Search for <a href="?${QueryString}&amp;qsup=off" title="Turn off query expansion"><em>${question.originalQuery}</em></a> instead.
-    </blockquote>
-  </#if>
+<#macro QuickViewTemplates>
+    <!-- base.StandardResults -->
+    <#list (response.resultPacket.resultsWithTierBars)![] as result>
+        <#if result.class.simpleName == "TierBar">
+            <#-- Ignore tier bars -->
+        <#else>            
+            <#-- Display the result based on the configured template -->
+            <@QuickViewTemplate result=result />                
+        </#if>
+    </#list>
 </#macro>
 
 <#--
-  Display spelling suggestion notice
+    Displays a search result using the the right quick view template depending
+    on the results type and what is configured in collection.cfg
+
+    Defaults to <code>&lt;@project.Result /&gt;
+
+    @param result The search result to output
 -->
-<#macro Spelling>
-    <#if (response.resultPacket.spell)??>
-      <div class="search-spelling">
-        <span class="fas fa-question-circle"></span>
-        Did you mean <em><a href="${question.collection.configuration.value("ui.modern.search_link")}?${response.resultPacket.spell.url}" title="Spelling suggestion">${(response.resultPacket.spell.text)!}</a></em>?
-      </div>
+<#macro QuickViewTemplate result question=question>
+    <#-- Get result template depending on collection name -->
+    <#assign resultDisplayLibrary = question.getCurrentProfileConfig().get("stencils.template.result.${result.collection}")!"" />
+
+    <#-- If not defined, attempt to get it depending on the gscopes the result belong to -->
+    <#if !resultDisplayLibrary?has_content>
+        <#list (result.gscopesSet)![] as gscope>
+            <#assign resultDisplayLibrary = question.getCurrentProfileConfig().get("stencils.template.result.${gscope}")!"" />
+            <#if resultDisplayLibrary?has_content>
+                <#break>
+            </#if>
+        </#list>
+    </#if>
+
+    <#if .main[resultDisplayLibrary]??>
+        <@.main[resultDisplayLibrary].QuickView result=result />
+    <#--  
+    TODO: Add a default template in case one has not been defined
+    <#elseif .main["project"]??>
+        <#-- Default Result macro in current namespace 
+        <@.main["project"].QuickView result=result/>
+    -->
+    <#else>
+        <div class="alert alert-danger" role="alert">
+            <strong>Result template not found</strong>: Template <code>&lt;@<#if resultDisplayLibrary?has_content>${resultDisplayLibrary}<#else>(default namespace)</#if>.Result /&gt;</code>
+            not found for result from collection <em>${result.collection}</em>.
+        </div>
     </#if>
 </#macro>
 
-<#--
-  Message to display when there are no results
--->
-<#macro NoResults>
-    <#if (response.resultPacket.resultsSummary.totalMatching)!?has_content &&
-        response.resultPacket.resultsSummary.totalMatching == 0>
-        <section class="module-info content-wrapper">
-            <figure class="module-info__bg">
-                <img src="/s/resources/${question.collection.id}/${question.profile}/css/mysource_files/no-results-icon.svg" alt="">
-            </figure>
-            <h2 class="module-info__title">No matching results</h2>
-            <p class="module-info__desc">
-                Your search for <strong><@s.QueryClean /></strong> did not return any results.
-            </p>
-        </section>
+
+<#macro HasContextualNavigation>
+    <#if (response.resultPacket.contextualNavigation.categories)!?has_content &&
+        response.resultPacket.contextualNavigation.categories?filter(category -> category.clusters?size gt 0)?size gt 0>
+        <#nested>
     </#if>
 </#macro>
 
@@ -364,8 +518,8 @@
   Display the contextual navigation panel only if there are valid values
 -->
 <#macro ContextualNavigation>
-    <#if (response.resultPacket.contextualNavigation.categories)!?has_content &&
-        response.resultPacket.contextualNavigation.categories?filter(category -> category.clusters?size gt 0)?size gt 0>
+    <@HasContextualNavigation>
+        <!-- base.ContextualNavigation -->
         <section class="related-links">
             <h2 class="related-links__title">
                 Related searches for <strong><@s.QueryClean /></strong>
@@ -382,88 +536,15 @@
                 </#list>
             </ul>
         </section>
-    </#if>
+    </@HasContextualNavigation>
 </#macro>
 
-<#--
-    Display result counts
+<#-- 
+    Creates a valid CSS ID by replacing all special characters (except for hypens)
+    with underscores (_). Note mulitple underscores will be replace by 1 underscore.
+
+    @param input A string which is to be converted to a valid CSS ID.
 -->
-<#macro Counts>
-    <span class="search-results__total">                                                                    
-        <#if ((response.resultPacket.resultsSummary.totalMatching)!0) == 0>
-            <span class="search-counts-total-matching">0</span> search results for <strong class="highlight"><@s.QueryClean /></strong>
-        </#if>
-        <#if ((response.resultPacket.resultsSummary.totalMatching)!0) != 0>
-            <span class="search-counts-page-start">${(response.resultPacket.resultsSummary.currStart)!}</span> -
-            <span class="search-counts-page-end">${(response.resultPacket.resultsSummary.currEnd)!}</span> of
-            <span class="search-counts-total-matching">${(response.resultPacket.resultsSummary.totalMatching)!?string.number}</span>
-            <#if (question.inputParameterMap["s"])!?has_content && question.inputParameterMap["s"]?contains("?:")>
-                <em>collapsed</em> 
-            </#if>search results for <strong class="highlight"><@s.QueryClean></@s.QueryClean></strong> 
-            <#list response.resultPacket.QSups as qsup>
-                or <strong class="highlight">${(qsup.query)!}</strong>
-                <#if qsup_has_next>, </#if>
-            </#list>
-        </#if>
-
-        <#if ((response.resultPacket.resultsSummary.partiallyMatching)!0) != 0>
-            where <span class="search-counts-fully-matching">${(response.resultPacket.resultsSummary.fullyMatching)!?string.number}</span>
-            match all words and <span class="search-counts-partially-matching">${(response.resultPacket.resultsSummary.partiallyMatching)!?string.number}</span>
-            match some words.
-        </#if>
-        <#if ((response.resultPacket.resultsSummary.collapsed)!0) != 0>
-            <span class="search-counts-collapsed">${(response.resultPacket.resultsSummary.collapsed)!}</span>
-            very similar results included.
-        </#if>
-    </span>
-</#macro>
-
-<#--
-  Display paging controls
--->
-<#macro Paging>
-    <section class="pagination">
-        <nav class="pagination__nav" aria-label="Pagination Navigation">
-            <#-- Previous page -->
-            <#if (response.customData.stencilsPaging.previousUrl)??>
-                <div class="pagination__item pagination__item-navigation pagination__item-previous">
-                    <a class="pagination__link" rel="prev" href="${response.customData.stencilsPaging.previousUrl}">
-                        <span class="pagination__label">Prev</span>
-                    </a>
-                </div>
-            </#if>
-
-            <#-- Sibling pages -->
-            <#if (response.customData.stencilsPaging.pages)!?has_content &&
-                response.customData.stencilsPaging.pages?size gt 1>
-                <ul class="pagination__pages-list">
-                    <#list response.customData.stencilsPaging.pages as page>
-                        <#if page.selected>
-                            <li class="pagination__item pagination__item--active">
-
-                                <span class="pagination__current" aria-label="Current Page, Page ${page.number}">
-                                    <span class="pagination__label">${page.number}</span>
-                                </span>                            
-                            </li>
-                        <#else>                    
-                            <li class="pagination__item">
-                                <a class="pagination__link" href="${page.url}" aria-label="Goto Page 1">
-                                    <span class="pagination__label">${page.number}</span>
-                                </a>
-                            </li>
-                        </#if>
-                    </#list>
-                </ul>
-            </#if>
-
-            <#-- Next page -->
-            <#if (response.customData.stencilsPaging.nextUrl)??>            
-                <div class="pagination__item pagination__item-navigation pagination__item-next">
-                    <a class="pagination__link" rel="next" href="${response.customData.stencilsPaging.nextUrl}" >
-                        <span class="pagination__label">Next</span>
-                    </a>
-                </div>
-            </#if> 
-        </nav>
-    </section>
-</#macro>
+<#function getCssID input="">
+    <#return (input)!?replace('[^A-Za-z0-9-]+', '_', 'r')>
+</#function>

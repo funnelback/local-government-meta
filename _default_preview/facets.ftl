@@ -30,6 +30,7 @@
     @param facets Comma delimited list of facet names to display. If not set all facets are displayed
 --->
 <#macro Facets facets="">
+    <!-- facets.Facets -->
     <#local facetNames = [] />
     <#if facets != "">
         <#local facetNames = facets?split(",") />
@@ -117,12 +118,6 @@
     </ul>                             
 </#macro>
 
-<#macro HasFacets facets="">
-    <#if facets?split(",")?filter( x -> response.facets?filter(y -> x == y.name && y.allValues?size gt 0)?size gt 0)?size gt 0>
-        <#nested>
-    </#if>
-</#macro>
-
 <#--
     Display the facet bread crumb which describes the 
     facets/filter options that have been selected by the user
@@ -143,5 +138,40 @@
                 </#list>
             </ul>
         </section>
+    </#if>
+</#macro>
+
+<#macro HasFacets facets="">
+    <#if facets?split(",")?filter( x -> response.facets?filter(y -> x == y.name && y.allValues?size gt 0)?size gt 0)?size gt 0>
+        <#nested>
+    </#if>
+</#macro>
+
+<#-- Runs the nested code only when a certain facet is selected -->
+<#macro IsSelected facetName="" categoryLabel="">
+    <#if !facetName?has_content || !categoryLabel?has_content>   
+        <#-- 
+            By default, we want to run the nested code if no valid
+            configurations are supplied.
+        -->
+        <#nested>
+    <#elseif (response.facets![])?filter(facet -> facet.name?upper_case == facetName?upper_case && facet.selectedValues?filter(category -> category.label?upper_case == categoryLabel?upper_case)?size gt 0)?size gt 0>
+        <#-- 
+            Given that valid configurations are supplied, we ony 
+            want to show the nested content of the facet has been selected.
+        -->
+        <#nested>
+    </#if>
+</#macro>
+
+
+<#-- Runs the nested code only when a certain facet is selected -->
+<#macro IsNotSelected facetName="" categoryLabel="">
+    <#-- 
+        Show the nested content only whent he supplied facet category
+        has not been selected
+    -->
+    <#if (response.facets![])?filter(facet -> facet.name?upper_case == facetName?upper_case && facet.selectedValues?filter(category -> category.label?upper_case == categoryLabel?upper_case)?size gt 0)?size == 0>
+        <#nested>
     </#if>
 </#macro>

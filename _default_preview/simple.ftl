@@ -14,6 +14,9 @@
 <#import "tabs.ftl" as tabs />
 <#import "facets.ftl" as facets />
 <#import "history_cart.ftl" as history_cart />
+<#import "auto-complete.ftl" as auto_complete />
+<#import "curator.ftl" as curator />
+<#import "extra_search.ftl" as extra_search />
 
 <#import "/share/stencils/libraries/base/client_includes.ftl" as client_includes />
 
@@ -62,31 +65,33 @@
 
 
 
-					<#--  <section class="module-search js-module-search content-wrapper module-search--bg"
-				 style="background-image: url('/s/resources/${question.collection.id}/${question.profile}/css/mysource_files/bg-search.png');">
-							<h2>Discover your future</h2>
+				<#--  
+					<section class="module-search js-module-search content-wrapper module-search--bg"
+				 		style="background-image: url('/s/resources/${question.collection.id}/${question.profile}/css/mysource_files/bg-search.png');">
+						<h2>Discover your future</h2>
 
-							<@project.SearchForm />
+						<@project.SearchForm />
 
+						
+						<@s.AfterSearchOnly>
+							<@project.Tabs />
 							
-							<@s.AfterSearchOnly>
-								<@project.Tabs />
-								
-								<div class="d-flex">
-									<@project.SideNavigation />
-									<@project.Results />
+							<div class="d-flex">
+								<@project.SideNavigation />
+								<@project.Results />
 
-									<section>
-										<div class="container-fluid">
-											<@history_cart.Cart />
-										</div>
-									</section>
+								<section>
+									<div class="container-fluid">
+										<@history_cart.Cart />
+									</div>
+								</section>
 
-									<@history_cart.SearchHistory />
-								</div>
-								
-							</@s.AfterSearchOnly>
-					</section>  -->
+								<@history_cart.SearchHistory />
+							</div>
+							
+						</@s.AfterSearchOnly>
+					</section>  
+				-->
 			</main>
 			<!-- /.main -->
 	</div>    

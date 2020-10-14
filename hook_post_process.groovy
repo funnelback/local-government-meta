@@ -1,15 +1,14 @@
-
 import groovy.util.logging.Log4j2
 
 import com.funnelback.publicui.search.model.transaction.SearchTransaction
 import com.funnelback.publicui.search.model.transaction.SearchQuestion.SearchQuestionType
 import com.funnelback.stencils.hook.support.HookLifecycle
+import java.net.URLEncoder
 
 new com.funnelback.stencils.hook.StencilHooks().apply(transaction, binding.hasVariable("hook") ? hook : null)
 
-new TabsPreviewHookLifecycle().postProcess(transaction)
+new SearchPreviewHookLifecycle().postProcess(transaction)
 new GroupingResultsHookLifecycle().postProcess(transaction)
-new SecurityHookLifecycle().postProcess(transaction)
 
 /**
  * The following functions are used for demo purposes.
@@ -24,10 +23,8 @@ transaction?.response?.resultPacket?.results.each() {
 	result.title = result.title.replaceAll(/\s*\|\s*SF311/, "")
 }
 
-
-
 /**
- * <p>Hook functions for provide a preview of a tab using extra searches.</p>
+ * <p>Hook functions for provide a preview of a tab powered using extra searches.</p>
  *
  * e.g.
  * Given
@@ -45,24 +42,39 @@ transaction?.response?.resultPacket?.results.each() {
  *	- Create a preview of the "Events" tab using the events extra search 
  *	- Create a preview of the "Facebook and Twitter" tab using the social_media extra search
  * 
- * stencils.tabs.preview.events=Events
- * stencils.tabs.preview.social_media=Facebook and Twitter
+ * stencils.search_preview.events.facet_name=Tabs
+ * stencils.search_preview.events.facet_label=Events
+ * stencils.search_preview.social_media.facet_name=Tabs
+ * stencils.search_preview.social_media.facet_label=Facebook and Twitter
+ * 
+ * It is also possible to preserve the facet selection when navigating between tabs using the search 
+ * preview functionality by using the following option:
+ * stencils.search_preview.append_selected_facets=true|false
  *
  */
 @Log4j2
-class TabsPreviewHookLifecycle implements HookLifecycle {
+class SearchPreviewHookLifecycle implements HookLifecycle {
 
 	/** Key where the preview links will be stored in the custom data map */
-	static final String CUSTOM_DATA_NAMESPACE = "stencilsTabsPreviewLink"
-
-	/** Name of the facet containing the tabs */
-	static final String TABS_FACET_NAME = "Tabs"
+	static final String CUSTOM_DATA_NAMESPACE = "stencilsSearchPreviewLink"
 
 	/** Key holding the config */
-	static final String CONFIG_KEY_PREFIX = "stencils.tabs.preview"
+	static final String CONFIG_KEY_PREFIX = "stencils.search_preview"
+
+	/** Name of the facet or tabs */
+	static final String APPEND_SELECTED_FACET_CONFIG = "append_selected_facets"
+
+	/** Name of the facet or tabs */
+	static final String FACET_NAME_CONFIG = "facet_name"
+
+    /** The label of the target facet */
+	static final String CATEGORY_LABEL_CONFIG = "category_label"
 
 	/** Separator for config keys */
 	static final String CONFIG_KEY_SEPARATOR = "."
+
+	/*  Guess type of tabs */
+	static final String TAB_GUESSED_DISPLAY_TYPE = "TAB"	
 
 	/**
 	 * Updates the data model with "more link" for each extra search.
@@ -70,76 +82,82 @@ class TabsPreviewHookLifecycle implements HookLifecycle {
 	 * @param transaction
 	 */
 	void postProcess(SearchTransaction transaction) {
-		if (isTabPreviewEnabled(transaction)) {
-			addTabPreview(transaction)
+		if (isSearchPreviewEnabled(transaction)) {
+			addSearchPreview(transaction)
 		}
 	}
 
 	/**
 	 * Injects the "more link" into each extra search. The "more link"
-	 * will provide the user a different way to navigate to a particular tab
+	 * will provide the user a different way to navigate to a 
+     * particular facet or tab
 	 *  
 	 * @param transaction
 	 */
-	public void addTabPreview(def transaction) {
-		def profileConfig = transaction.question.getCurrentProfileConfig()
+	public void addSearchPreview(def transaction) {
 
-		// Get all the configs which apply to this hook life cycle
-		Map<String, String> config = profileConfig.getRawKeys()
-			.findAll() {				
-				it.startsWith(CONFIG_KEY_PREFIX)
-			}
-			// Massage the key into the right format: [<extra_search_id>:<tab_name>]
-			.inject([:]) { 
-				result, key ->
-				
-        int separator = key.lastIndexOf(".")
-        
-				// Config is expected in the following format:
-				// stencils.tabs.preview.<extra search name>=<tab name>
-				if (separator >= 0 ) {
-					String extraSearchID = key.substring(separator + 1)
-					String tabName = profileConfig.get(key)
+        def profileConfig = transaction.question.getCurrentProfileConfig()
+
+		boolean appendSelectedFacets = profileConfig.get(CONFIG_KEY_PREFIX + CONFIG_KEY_SEPARATOR + APPEND_SELECTED_FACET_CONFIG)?.toUpperCase() == "TRUE" ? true : false 
+
+        // Look through each extra search and find the associated 
+        // configurations keys to generate the more links
+        transaction?.extraSearches?.each() { extraSearchName, extraSearchTransaction ->            
+            String facetNameKey = CONFIG_KEY_PREFIX + CONFIG_KEY_SEPARATOR +  extraSearchName + CONFIG_KEY_SEPARATOR + FACET_NAME_CONFIG
+            String categoryLabelKey = CONFIG_KEY_PREFIX + CONFIG_KEY_SEPARATOR +  extraSearchName + CONFIG_KEY_SEPARATOR + CATEGORY_LABEL_CONFIG
+
+            // Get the facet name and facet label using the configuration            
+            String facetName = profileConfig.get(facetNameKey)
+            String categoryLabel = profileConfig.get(categoryLabelKey)
+            
+            if(facetName?.trim() && categoryLabel?.trim()) {
+                // Add the more link to the extra search
+                if( transaction?.response && transaction?.response?.facets) {
+                    String moreLink = ""
 					
-					result.put(extraSearchID, tabName)		
-				}
-				else {
-					// Warn the user if the key is invalid
-					log.warn("'${key}' is invalid");
-					log.warn("Expected format the key is '${CONFIG_KEY_PREFIX}.<extra search name>=<tab name>")
-					log.warn("e.g '${CONFIG_KEY_PREFIX}.events=All Events")
-				}
+					// Decide if we want to append the selected facets onto the navigation link
+					// This is useful if we want to preseve the facet selection when navigation
+					// between tabs which by default, it is not preserved
+					if(appendSelectedFacets) {		
+						moreLink = getMoreLinkWithSelectedFacets(facetName, categoryLabel, transaction.response.facets)
+					} 
+					else {
+						moreLink = getMoreLink(facetName, categoryLabel, transaction.response.facets)						
+					}
 
-				result
-			}
+					if(moreLink?.trim()) {                        
+						extraSearchTransaction.response.customData.put(CUSTOM_DATA_NAMESPACE, moreLink)
+						log.debug("Added ${CUSTOM_DATA_NAMESPACE}:${moreLink} to the '${extraSearchName}' extra search");
+					}
+                }   
+            }   
+            else {
+                // Warn the user if the configuration is invalid or incomplete
+                log.warn("The following configuration is invalid or incomplete")
+                log.warn("${facetNameKey}=${facetName}")
+                log.warn("${categoryLabelKey}=${categoryLabel}")
 
-		// Create more links for each extra search based on the config		
-		config
-			// Only add more links to extra search which exists and have the
-			// neccessary config
-			.findAll{
-				extraSearchID, tabName ->
-				transaction.extraSearches.keySet().contains(extraSearchID)
-			}
-			.each() {
-				extraSearchID, tabName ->
-				def extraSearch = transaction.extraSearches[extraSearchID]
-
-				// Add more links to the extra search	only if facets have been defined			
-				if( transaction?.response && transaction?.response?.facets) {
-					String moreLink = getMoreLink(tabName, profileConfig, transaction.response.facets)
-					extraSearch.response.customData.put(CUSTOM_DATA_NAMESPACE, moreLink)
-				}
-			}
+                log.warn("Expected format")
+                log.warn("${CONFIG_KEY_PREFIX}.<extra search name>.${FACET_NAME_CONFIG}=<facet name>")
+                log.warn("${CONFIG_KEY_PREFIX}.<extra search name>.${CATEGORY_LABEL_CONFIG}=<category label>")                
+                
+                log.warn("e.g")
+                log.warn("stencils.search_preview.programs.facet_name=Display")
+                log.warn("stencils.search_preview.programs.category_label=Programs")
+                log.warn("stencils.search_preview.courses.facet_name=Display")
+                log.warn("stencils.search_preview.courses.category_label=Courses")
+            }         
+        }
 	}
 
-		/**
-	 * Determines if tab preview should be enabled for this transaction
+	/**
+	 * Determines if tab preview should be enabled for this transaction.
+	 *
 	 * @param transaction The funnelback transaction which represents the search
 	 **/
-	public boolean isTabPreviewEnabled(def transaction) {
+	public boolean isSearchPreviewEnabled(def transaction) {
 		return isMainSearch(transaction) &&
-						isConfigured(transaction)
+				isConfigured(transaction)
 	}
 
 	/** 
@@ -160,35 +178,81 @@ class TabsPreviewHookLifecycle implements HookLifecycle {
 	 **/
 	public boolean isConfigured(def transaction) {		
 		return transaction?.question?.getCurrentProfileConfig().getRawKeys()
-			.find() {	it.startsWith(CONFIG_KEY_PREFIX) } ? true : false		
+			.find() { it.startsWith(CONFIG_KEY_PREFIX) } ? true : false		
 	}	
 
 	/** 
 	 *	Generate the more link 
 	 *
-	 * @param tabName - The name of the tab in which the user will be redirected to
-	 * @param profileConfig - The config at the profile level
-	 * @param facet - The facets which contains the tabs
+	 * @param facetName - The name of the facet in which contains the facet category 
+     *  that the user will be redirected to.
+	 * @param categoryLabel - The label of the category config which the user will be 
+     *  redirected to.   
+	 * @param facet - The list of facets in the response of the search transactions.
 	 *
 	 **/
-	public String getMoreLink(String tabName, def profileConfig, def facets) {
-		// Get the facet which powers tabs
-		def tabFacet = facets.find {
-			it.name.toUpperCase() == TABS_FACET_NAME.toUpperCase()
+	public String getMoreLink(String facetName, String categoryLabel, def facets) {
+		def targetFacetCategory = facets
+        // Get the facet which is specified
+        .find() {
+			it.name.toUpperCase() == facetName.toUpperCase() && it?.allValues?.size() > 0
 		}
+        // Convert from a collection of facet to a collection of facet categories
+        .collect() {            
+            it.allValues
+        }
+        .flatten()
+        // Get individual facet category which is the target of the more link
+        .find() {
+            it.label.toUpperCase() == categoryLabel.toUpperCase()
+        }
 
-		// Get individual facet category which is the target of the more link
-		def tabFacetCategory = tabFacet.categories
-			.findAll {
-				it.values.find { it.label.toUpperCase() == tabName.toUpperCase() }
-			}
-			.collect {
-				it.values
-			}
-			.flatten()
-			.find()
+        return targetFacetCategory?.toggleUrl?.trim() ?: "" 
+	}
 
-		return tabFacetCategory.toggleUrl
+	/** 
+	 * Generate the more link and appending all selected facets which are tabs. 
+	 * Useful if you want to remember facet selections when transitioning
+	 * between tabs.
+	 *
+	 * @param facetName - The name of the facet in which contains the facet category 
+     *  that the user will be redirected to.
+	 * @param categoryLabel - The label of the category config which the user will be 
+     *  redirected to.   
+	 * @param facet - The list of facets in the response of the search transactions.
+	 *
+	 **/
+	public String getMoreLinkWithSelectedFacets(String facetName, String categoryLabel, def facets) {
+		return [ getMoreLink(facetName, categoryLabel, facets), getSelectedFacets(facets) ].join("&")
+	}
+
+	/** 
+	 * Generate the parameters of all selected facets which are not
+	 * of the type tabs.
+	 *
+	 * @param facet - The list of facets in the response of the search transactions.
+	 *
+	 **/
+	public String getSelectedFacets(def facets) {
+		String selectedFacets = facets
+        // Get the facet which is specified
+        .findAll() {
+			it?.guessedDisplayType != com.funnelback.publicui.search.model.transaction.facet.FacetDisplayType.TAB && it?.selectedValues?.size() > 0
+		}
+        // Convert from a collection of facet to a collection of selected categories
+        .collect() {            
+            it.selectedValues
+        }
+        // Get individual selected categories rather than an array of selected categories
+        .flatten()
+		// Convert from a collection of selected categories to collection of strings which can be
+		// used as url parameters
+        .collect() {
+            URLEncoder.encode(it.queryStringParamName, "UTF-8") + "=" + URLEncoder.encode(it.queryStringParamValue, "UTF-8")
+        }
+		.join("&")
+
+        return selectedFacets ?: "" 
 	}
 }
 
@@ -585,114 +649,3 @@ class GroupingResultsHookLifecycle {
 	}
 }
 
-
-@Log4j2
-class SecurityHookLifecycle implements HookLifecycle {
-
-	static final String CONFIG_KEY_PREFIX = "stencils.security"
-
-	static final String WHITELIST_OF_SECURITY_FIELDS_CONFIG = CONFIG_KEY_PREFIX + ".SF"
-	static final String WHITELIST_OF_SECURITY_FIELDS_DELIMETER = ","
-
-	static final String MEMBER_ROLE = "MEMBER"
-	static final String PUBLIC_ROLE = "PUBLIC"
-
-	static final String SECURITY_FIELD_ON_RESULT = "stencilsSecurity"
-
-	static final String USER_TYPES_CGI_PARAMETER = "userTypes"
-	static final String USER_TYPES_DELIMETER = ","
-
-
-	/**
-	 * Updates the data model with "more link" for each extra search.
-	 *  
-	 * @param transaction
-	 */
-	void postProcess(SearchTransaction transaction) {
-		if(isMainSearch(transaction)){
-			secureResults(transaction)
-		}
-	}
-
-	void secureResults(def transaction) {
-			// Determine the user type from the cgi parameters. Every user will have the public role.
-		List<String> userTypes = [PUBLIC_ROLE]
-
-		if(transaction?.question?.inputParameterMap[USER_TYPES_CGI_PARAMETER]) {
-			userTypes.addAll(transaction?.question?.inputParameterMap[USER_TYPES_CGI_PARAMETER].split(USER_TYPES_DELIMETER))
-		} 
-
-		transaction?.response?.resultPacket?.results
-		.each { 
-			result ->
-
-			// Get the lock string from the document. 
-			// Documents with no lock string will default to public
-			List<String> locks = result?.listMetadata.get(SECURITY_FIELD_ON_RESULT) ?: [PUBLIC_ROLE]
-			
-			// Hide sensitive fields for users who do not have the right access
-			if(isAllowed(userTypes, locks)) {
-				result.documentVisibleToUser = true
-			}
-			else {
-				hideSensitiveFields(result, transaction)
-			}	
-		}	
-	}
-
-	/** 
-	 * Returns true if the current transaction is the main search. 
-	 * i.e. not content auditor, accessibility auditor orfaceted navigation
-	 *
-	 * @param transaction The funnelback transaction which represents the search
-	 **/
-	public boolean isMainSearch(def transaction) {
-		return SearchQuestionType.SEARCH.equals(transaction.question.questionType)
-	}
-
-	/** 
-	 * Determines if a user has access to a document. 
-	 * A user has access if one of their keys opens one or more locks
-	 * 
-	 * @param keys - List of user keys
-	 * @param locks - List of locks for a document
-	 *
-	 **/
-	public boolean isAllowed (List<String> keys, List<String> locks) {
-		return keys.find() { key -> locks.contains(key)} ? true : false
-	}
-	
-	public void hideSensitiveFields(def result, def transaction) {
-		// Hide the key results fields from the user
-		result.documentVisibleToUser = false
-		result.liveUrl=""
-		result.cacheUrl=""
-		result.clickTrackingUrl=""
-		result.displayUrl=""
-		result.indexUrl=""
-		result.summary=""		
-
-		// We always want to show the security field as it controls how
-		// the result is templated
-		def securityField = [SECURITY_FIELD_ON_RESULT]
-
-		// Get the list of metadata classes we can show 
-		if (transaction?.question?.collection?.configuration.value(WHITELIST_OF_SECURITY_FIELDS_CONFIG) != null) {
-			securityField.addAll(transaction?.question?.collection?.configuration.value(WHITELIST_OF_SECURITY_FIELDS_CONFIG).split(WHITELIST_OF_SECURITY_FIELDS_DELIMETER))
-		}
-
-		// Only show the metadata class which are on the translucent security whitelist.
-		// Hide the remaining metadata class.
-		result.metaData
-		// Find metadata classes which are not on the whitelist
-		.findAll() {
-			key, value ->
-			securityField.contains(key) == false
-		}
-		.each { 
-			k,v ->
-			result.metaData[k] = ""
-		}
-	}
-
-}
