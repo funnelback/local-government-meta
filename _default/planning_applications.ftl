@@ -131,7 +131,9 @@
 <#macro AutoCompleteTemplate>
     <script id="auto-completion-planning_applications" type="text/x-handlebar-template">
         <div class="fb-auto-complete--non-organic">
-            <h6>{{extra.disp.metaData.planningApplicationName}}</h6>
+            <h6>
+                {{extra.disp.metaData.planningApplicationName}}
+            </h6>
             <div class="details">
                 {{#if extra.disp.metaData.planningWardName}}
                     <div class="text-capitalize">{{extra.disp.metaData.planningWardName}}</div>

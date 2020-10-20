@@ -1,4 +1,18 @@
 <#ftl encoding="utf-8" output_format="HTML" />
+<#--
+    This file is responsible for determining the overall structure
+    of the search implementations without the header. Unlike the simple.ftl
+    it only provides the search specific elements and does not include things
+    like the css or headers and footers. 
+    
+    - The HTML for the overall structure of the main content.
+    - Third party libraries
+    - References to javascript templates for sessions and concierge
+
+    The intended purpose of this template is to allow for partial integration
+    into an Content Management System (CMS). 
+-->
+
 <#import "/web/templates/modernui/funnelback_classic.ftl" as s/>
 <#import "/web/templates/modernui/funnelback.ftl" as fb />
 
