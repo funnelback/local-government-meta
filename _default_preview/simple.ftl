@@ -1,4 +1,14 @@
 <#ftl encoding="utf-8" output_format="HTML" />
+<#--
+    This file is responsible for determining the overall structure
+    of the search implementations. It contains things such as:
+
+    - The HTML for the overall structure such as the header, footer 
+        and main content.
+    - The references to the client's header and footer
+    - Third party libraries
+    - References to javascript templates for sessions and concierge
+-->
 
 <#-- Core Funnelback imports -->
 <#import "/web/templates/modernui/funnelback_classic.ftl" as s/>
@@ -13,10 +23,12 @@
 <#import "curator.ftl" as curator />
 <#import "tabs.ftl" as tabs />
 <#import "facets.ftl" as facets />
+<#import "contextual_navigation.ftl" as contextual_navigation />
 <#import "history_cart.ftl" as history_cart />
-<#import "auto-complete.ftl" as auto_complete />
+<#import "auto_complete.ftl" as auto_complete />
 <#import "curator.ftl" as curator />
 <#import "extra_search.ftl" as extra_search />
+<#import "results.ftl" as results />
 
 <#import "/share/stencils/libraries/base/client_includes.ftl" as client_includes />
 
@@ -125,7 +137,7 @@
 		jQuery(document).ready( function() {
 			setupDeferredImages();
 			setupFacetLessMoreButtons(${question.collection.configuration.value("stencils.faceted_navigation.max_displayed_categories", "8")}, '.fb-sidebar__nav');
-			<@project.AutoComplete />
+			<@auto_complete.AutoComplete />
 		});
 	</script>
 
@@ -208,21 +220,6 @@
 	</script>
 
 	</#if>
-
-	<script>
-		const inputSelector = document.querySelector('.js-module-search .module-search__query'),
-				suggestionList = document.querySelector('.js-module-search .tt-menu');
-
-		inputSelector.addEventListener('focus', function () {
-				suggestionList.style.display = 'block';
-				suggestionList.classList.add('tt-open');
-		});
-
-		inputSelector.addEventListener('blur', function () {
-				suggestionList.style.display = 'none';
-				suggestionList.classList.remove('tt-open');
-		});
-</script>
 
 </body>
 </html>

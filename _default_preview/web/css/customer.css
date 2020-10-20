@@ -5,7 +5,8 @@
 /* Design overrides made by the vertical products team - Avoid changing these if possible */
 
 .fb-container {
-    /* padding-bottom: 0; */
+    padding-bottom: 0;
+    overflow: initial;
 }
 
 /** 
@@ -45,6 +46,10 @@
     margin: 1.5rem 0 0 0;
 }
 
+.fb-container .module-filter__list, .fb-container .module-filter__wrapper-mobile {
+    width: 100%;
+}
+
 /** 
   * Search tools 
   **/
@@ -53,12 +58,31 @@
     overflow: visible;
 }
 
+
+@media only screen and (max-width: 768px) {
+    .fb-container .search-results__tools-right {
+        float: none;
+        width: 100%;
+        padding-top: 1em;
+    }
+
+    .fb-container .dropdown-list {
+        margin-bottom: 1.5em;
+        width: 100%;
+    }
+    
+    .fb-container .dropdown-list__link {
+        width: 100%;
+    }    
+}
+
 /* Tabs */
 
 .fb-container .tabs__item .fas {
     margin-right: 0.5rem;
 }
 
+/* Adjust the presentation of sort and results per page on mobile */
 @media only screen and (min-width: 1025px) {
     .fb-container .initial-search-form .module-search--bg {
         padding-bottom: 15rem;
@@ -84,7 +108,6 @@
 /** 
   * Concierge
   **/
-
 @media only screen and (min-width: 1025px) {
     .fb-container .module-search--bg .tt-dataset-planning_applications,
     .fb-container .module-search--bg .tt-dataset-cemetery {
@@ -102,3 +125,35 @@
         flex: 0 0 100%;
     }
 }
+
+/* Pagination */
+
+/* Add a padding at the bottom so that footer is not so close */
+@media only screen and (min-width: 1025px) {
+    .fb-container .pagination {
+        margin: 2.8125rem 0 2.8125rem 0;
+    }
+}
+
+/* Contexual Navigation */ 
+
+/* Add a padding at the bottom so that footer is not so close */
+@media only screen and (min-width: 1025px) {
+    .fb-container .related-links {
+        margin: 2.8125rem 0 2.8125rem 0;
+    }
+}
+
+/* Blending */
+
+.fb-container .search-blending {
+    margin-left: 0rem;
+}
+
+@media only screen and (min-width: 1025px) {
+    .fb-container .search-blending {
+        margin-left: 1.25rem;
+    }
+}
+
+

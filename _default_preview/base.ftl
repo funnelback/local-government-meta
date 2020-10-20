@@ -1,41 +1,13 @@
 <#ftl encoding="utf-8" output_format="HTML" />
-
-<#-- Not to be used in production -->
-
-<#-- This file should be replaced by a copy of the Stencils file when
-    deploying, to allow customization. Explicitly fail if the collection is not
-    the showcase collection. To fix it, copy the file from
-    $SEARCH_HOME/share/stencils/libraries/... -->
-<#if question.collection.id == 'higher-education-meta' || 
-    question.collection.id == 'membership-association-meta' ||
-    question.collection.id == 'local-government-meta'
-    >
-    <#include "/share/stencils/libraries/base/base.ftl">
-<#else>
-    <#-- Create a dummy version of a base.ftl macro, as a way to display
-        the error message -->
-    <#macro SearchForm>
-        <div class="alert alert-danger">
-            <p><code>base.ftl</code> is currently directly including the Stencils
-            file. This is discouraged as Stencils changes will break the collection
-            templates. Please make a copy of <code>base.ftl</code> instead, from the
-            Stencils sources (<code>$SEARCH_HOME/share/stencils/libraries/</code>).</p>
-
-            <p>Subsequent template processing will fail until this is fixed.</p>
-        </div>
-    </#macro>
-</#if>
-
 <#-- 
-    Macros specific to Vertical Product instance 
-    These can override those found in Stencils. 
-    i.e. Given /share/stencils/libraries/foo.ftl defines @SomeMacro,
-    and is included is this template, it can be overriden by 
-    defining <macro SomeMacro>. 
---> 
+    A collections of common elements used in search implementations.
 
+    If a particular feature requires multiple presentations or is made
+    up more than one macro, consider refactoring the feature to 
+    its own freemarker template.
+-->
 
-<#---
+<#--
     Generates a search form for the current collection, passing through the
     relevant parameters like collection, profile, form, scope, ...
 
@@ -43,6 +15,7 @@
     @param class Optional <code>class</code> attribute to use on the &lt;form&gt; tag
 -->
 <#macro SearchForm preserveTab=true class="">
+    <!-- base.SearchForm -->
     <form action="${question.getCurrentProfileConfig().get("ui.modern.search_link")}" method="GET"<#if class?has_content> class="${class}"</#if>>
         <input type="hidden" name="collection" value="${question.collection.id}">
 
@@ -69,8 +42,8 @@
   Display query blending notice
 -->
 <#macro Blending>
-    <#if (response.resultPacket.QSups)!?size &gt; 0>
-        <!-- Blending -->
+    <!-- base.Blending -->
+    <#if (response.resultPacket.QSups)!?size &gt; 0>        
         <blockquote class="search-blending">
         <span class="fas fa-info-circle"></span>
         Your query has been expanded to <strong><#list response.resultPacket.QSups as qsup> ${qsup.query}<#if qsup_has_next>, </#if></#list></strong>.
@@ -83,8 +56,8 @@
   Display spelling suggestion notice
 -->
 <#macro Spelling>
+    <!-- base.Spelling -->
     <#if (response.resultPacket.spell)??>
-        <!-- base.Spelling -->
         <blockquote class="search-spelling">
             Did you mean <em><a class="highlight" href="${question.collection.configuration.value("ui.modern.search_link")}?${response.resultPacket.spell.url}" title="Spelling suggestion">${(response.resultPacket.spell.text)!}</a></em>?
         </blockquote>
@@ -95,6 +68,7 @@
     Display result counts
 -->
 <#macro Counts>
+    <!-- base.Counts -->
     <span class="search-results__total">                                                                    
         <#if ((response.resultPacket.resultsSummary.totalMatching)!0) == 0>
             <span class="search-counts-total-matching">0</span> search results for <strong class="highlight"><@s.QueryClean /></strong>
@@ -128,6 +102,7 @@
   Message to display when there are no results
 -->
 <#macro NoResults>
+    <!-- base.NoResults -->
     <#if (response.resultPacket.resultsSummary.totalMatching)!?has_content &&
         response.resultPacket.resultsSummary.totalMatching == 0>
         <!-- base.NoResults -->
@@ -164,6 +139,7 @@
 </#function>
 
 <#macro DisplayMode>
+    <!-- base.displayMode -->
     <a href='${question.getCurrentProfileConfig().get("ui.modern.search_link")}?${removeParam(QueryString, "displayMode")}&displayMode=card' 
         class="search-results__icon search-results__icon--box <#if getDisplayMode(question)! == 'CARD'>active</#if>"
         title="Display results as cards">
@@ -182,9 +158,10 @@
 -->
 <#macro SearchTools>
     <div class="search-results__tools clearfix">
-        <h2 class="search-results__tools-title sr-only">Search Funnelback University</h2>
+        <h2 class="search-results__tools-title sr-only">Search Funnelback for Local Government</h2>
         <@base.Counts /> 
         <div class="search-results__tools-right">
+            <@facets.ClearAllFacets />            
             <@base.LimitDropdown />
             <@base.SortDropdown />
             <@base.DisplayMode />        
@@ -207,7 +184,7 @@
   "url": "URL (A-Z)",
   "durl": "URL (Z-A)",
   "shuffle": "Shuffle"} >
-
+    <!-- base.SortDropdown -->
     <section class="dropdown-list">
         <button class="dropdown-list__link js-dropdown-list__link" aria-haspopup="true" aria-expanded="false">
             <span>${(options[question.inputParameterMap["sort"]])!"Sort by"}</span>
@@ -233,7 +210,7 @@
   @param limits Array of number of results to provide (defaults to 10, 20, 50)
 -->
 <#macro LimitDropdown limits=[10, 20, 50]>
-
+    <!-- base.LimitDropdown -->
     <section class="dropdown-list">
         <button class="dropdown-list__link js-dropdown-list__link" aria-haspopup="true" aria-expanded="false">
             <span>${question.inputParameterMap["num_ranks"]!"10"}</span>
@@ -331,6 +308,7 @@
         This is used to insert content (usually an extra search) between results.
 -->
 <#macro StandardResults view="LIST" nestedRank=-1>
+    <!-- base.StandardResults -->
     <article class="search-results__list <#if getDisplayMode(question)! == 'LIST'>search-results__list--list-view</#if>">
         <#list (response.resultPacket.resultsWithTierBars)![] as result>
             <#if result.class.simpleName == "TierBar">
@@ -351,6 +329,7 @@
   Display a tier bar
 -->
 <#macro TierBar result>
+    <!-- base.TierBar -->
     <#-- A tier bar -->
     <#if result.matched != result.outOf>
         <h3 class="search-tier text-muted">Results that match ${result.matched} of ${result.outOf} words</h3>
@@ -386,9 +365,13 @@
     </#if>
 
     <#if .main[resultDisplayLibrary]??>
+        <#-- Output the result using the presentation specified in the configurations -->
         <@.main[resultDisplayLibrary].Result result=result view=view />
+    <#elseif .main["results"]??>
+        <#-- Default presentation -->
+        <@.main["results"].Result result=result view=view />
     <#elseif .main["project"]??>
-        <#-- Default Result macro in current namespace -->
+        <#-- Default presentation for legacy (pre 15.24.x) implementations -->
         <@.main["project"].Result result=result view=view />
     <#else>
         <div class="alert alert-danger" role="alert">
@@ -504,39 +487,6 @@
             not found for result from collection <em>${result.collection}</em>.
         </div>
     </#if>
-</#macro>
-
-
-<#macro HasContextualNavigation>
-    <#if (response.resultPacket.contextualNavigation.categories)!?has_content &&
-        response.resultPacket.contextualNavigation.categories?filter(category -> category.clusters?size gt 0)?size gt 0>
-        <#nested>
-    </#if>
-</#macro>
-
-<#--
-  Display the contextual navigation panel only if there are valid values
--->
-<#macro ContextualNavigation>
-    <@HasContextualNavigation>
-        <!-- base.ContextualNavigation -->
-        <section class="related-links">
-            <h2 class="related-links__title">
-                Related searches for <strong><@s.QueryClean /></strong>
-            </h2>
-            <ul class="related-links__list">
-                <#list (response.resultPacket.contextualNavigation.categories)![] as category>
-                        <#list category.clusters as cluster>
-                            <li class="related-links__item">
-                                <a href="${cluster.href}" class="related-links__link">
-                                    ${cluster.label?replace("...", " <strong>${response.resultPacket.contextualNavigation.searchTerm} </strong> ")?no_esc}
-                                </a>
-                            </li>
-                        </#list>
-                </#list>
-            </ul>
-        </section>
-    </@HasContextualNavigation>
 </#macro>
 
 <#-- 

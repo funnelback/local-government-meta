@@ -1,4 +1,8 @@
 <#ftl encoding="utf-8" output_format="HTML" />
+<#-- 
+  This template contains markup and logic related to the 
+  auto complete feature.
+-->
 
 <#--
     Javascript required to configure concierge
