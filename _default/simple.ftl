@@ -124,8 +124,8 @@
 	
 	<script src="/stencils/resources/autocompletion/js/typeahead.bundle-0.11.1.min.js"></script>
 	<script type="text/javascript" src="${GlobalResourcesPrefix}thirdparty/handlebars-4.0.12/handlebars.min.js"></script>
-	<script src="/s/resources/${question.collection.id}/${question.profile}/js/typeahead.fb-2.6.js"></script>
 	<script src="/s/resources/${question.collection.id}/${question.profile}/js/base.js"></script> 
+	<script src="${GlobalResourcesPrefix}js/funnelback.autocompletion-2.6.0.js"></script>
 
 
 	<#-- Output the auto complete templates for concierge -->
