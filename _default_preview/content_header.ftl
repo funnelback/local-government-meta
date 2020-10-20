@@ -6,29 +6,26 @@
             <div class="header-top-links">
                 <ul class="header-top-links__list">
                     <li class="header-top-links__item">
-                        <a href="#" class="header-top-links__link">About us</a>
+                        <a href="#" class="header-top-links__link">Contact us</a>
                     </li>
                     <li class="header-top-links__item">
-                        <a href="#" class="header-top-links__link">Jobs</a>
-                    </li>
-                    <li class="header-top-links__item">
-                        <a href="#" class="header-top-links__link">Newsroom</a>
-                    </li>
-                    <li class="header-top-links__item">
-                        <a href="#" class="header-top-links__link">Giving tu FBU</a>
+                        <a href="#" class="header-top-links__link">Emergencies</a>
                     </li>
                 </ul>
                 <ul class="header-top-links__list  header-top-links__list--icon">
                     <li class="header-top-links__item">
-                        <a href="#" class="header-top-links__link header-top-links__link--icon header-top-links__link--icon-user">Join or
-                                            Login</a>
+                        <a href="#" class="header-top-links__link header-top-links__link--icon header-top-links__link--icon-user">
+                            Register or Login</a>
                     </li>
                     <li class="header-top-links__item">
-                        <a href="#" class="header-top-links__link header-top-links__link--icon header-top-links__link--icon-star">Membership</a>
+                        <a href="#" class="header-top-links__link header-top-links__link--icon header-top-links__link--icon-star">
+                            Pay online
+                        </a>
                     </li>
                     <li class="header-top-links__item">
-                        <a href="#" class="header-top-links__link header-top-links__link--icon header-top-links__link--icon-case">Partner
-                                            program</a>
+                        <a href="#" class="header-top-links__link header-top-links__link--icon header-top-links__link--icon-case">
+                            Services A-Z
+                        </a>
                     </li>
                 </ul>
             </div>
@@ -39,8 +36,8 @@
     <div class="fb-header-bottom content-wrapper">
         <div class="fb-header-left">
             <div class="header-logo">
-                <a class="header-logo__link" href="home.html">
-                    <img class="header-logo__img" src="/s/resources/${question.collection.id}/${question.profile}/css/mysource_files/logo-higher-education.svg" width="auto" height="auto" alt="Home"></a>
+                <a class="header-logo__link" href="/s/search.html?collection=${(question.collection.id)!}&profile=${(question.profile)!}">
+                    <img class="header-logo__img" src="/s/resources/${question.collection.id}/${question.profile}/img/funnelback-horizontal-dark.svg" width="auto" height="auto" alt="Home"></a>
                 </div>
 
             </div>
@@ -48,14 +45,18 @@
                 <div class="header-links">
                     <ul class="header-links__list">
                         <li class="header-links__item">
-                            <a href="#" class="header-links__link">Home</a>
+                            <a href="/s/search.html?collection=${(question.collection.id)!}&profile=${(question.profile)!}" class="header-links__link">Home</a>
                         </li>
                         <li class="header-links__item">
-                            <a href="#" class="header-links__link">About</a>
+                            <a href="#" class="header-links__link">Community</a>
                         </li>
                         <li class="header-links__item">
-                            <a href="#" class="header-links__link">Products</a>
+                            <a href="#" class="header-links__link">Council</a>
                         </li>
+                        <li class="header-links__item">
+                            <a href="#" class="header-links__link">Services</a>
+                        </li>
+
                     </ul>
                 </div>
 

@@ -156,4 +156,13 @@
     }
 }
 
+/* Results */
 
+.fb-container .search-results__content {
+    flex-direction: column;
+    flex-wrap: nowrap;
+}
+
+.fb-container .search-results__bottom {
+    box-sizing: border-box;
+}

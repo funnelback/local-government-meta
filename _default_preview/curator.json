@@ -21,9 +21,9 @@
   } ]
 }, {
   "created" : "2020-03-11T14:34:28.23796Z",
-  "lastModified" : "2020-09-17T16:21:47.278826Z",
+  "lastModified" : "2020-10-20T17:15:44.230751Z",
   "id" : "9e45ee31-7d21-44ee-a5ac-f91ea73035d2",
-  "name" : "[Custom Groovy Trigger] FAQ Banner to display when there are no results",
+  "name" : "[Example] Curators to display for \"No Results\"",
   "label" : "DEFAULT",
   "enabled" : true,
   "trigger" : {
@@ -35,19 +35,60 @@
   },
   "actions" : [ {
     "type" : "DisplayUrlAdvert",
-    "titleHtml" : "Frequently Asked Questions",
-    "displayUrl" : "www.funnelback.com",
-    "linkUrl" : "www.funnelback.com",
-    "descriptionHtml" : "Frequently Asked Questions\n    <ul>\n      <li><a href=\"https://myama.force.com/s/article/How-do-I-renew-my-AMA-membership\"><span>How do I renew my AMA membership?</span></a></li>\n      <li><a href=\"https://myama.force.com/s/article/How-to-access-PCM-certification-exams\"><span>How to access PCM certification exams.</span></a></li>\n      <li><a href=\"https://myama.force.com/s/article/How-Do-I-Use-a-Group-Code\"><span>How Do I Use a Group Code?</span></a></li>\n    </ul>",
+    "titleHtml" : "Contact Us",
+    "displayUrl" : "www.local-council.com",
+    "linkUrl" : "www.local-council.com",
+    "descriptionHtml" : "Want to make an enquiry, get something fixed, or just give us some feedback? You can contact us in many ways.\n\nOne of the easiest ways to contact our Customer Services team is to use our below Contact form. The Customer Services email is only monitored during Rangiora office hours. If you have an urgent request outside of office hours, phone 0800 965 468 (0800WMKGOV).",
+    "additionalProperties" : {
+      "position" : "bottom",
+      "call_to_action_label" : "Contact Us",
+      "call_to_action_url" : "office@wmk.govt.nz",
+      "image" : "https://source.unsplash.com/random/40x40?email"
+    },
+    "category" : "",
+    "removeCollectionUrl" : false
+  }, {
+    "type" : "DisplayUrlAdvert",
+    "titleHtml" : "Rates and property search",
+    "displayUrl" : "https://rates.gov",
+    "linkUrl" : "https://rates.gov",
+    "descriptionHtml" : "Find out the valuation or rates payable on a property.",
+    "additionalProperties" : {
+      "position" : "center",
+      "call_to_action_label" : "Search rates",
+      "call_to_action_url" : "https://eservices.waimakariri.govt.nz/ePropertyPROD/P1/eRates/RatingInformationSearch.aspx?r=P1.WMKWEBGUEST&f=%24P1.ERA.RATINFO.ENQ",
+      "image" : "https://source.unsplash.com/random/40x40?rates"
+    },
+    "category" : "",
+    "removeCollectionUrl" : false
+  }, {
+    "type" : "DisplayUrlAdvert",
+    "titleHtml" : "Building Consent Search",
+    "displayUrl" : "www.build.consent.search/",
+    "linkUrl" : "www.build.consent.search/",
+    "descriptionHtml" : "Find the current status of your building consent.",
     "additionalProperties" : {
       "position" : "center"
+    },
+    "category" : "",
+    "removeCollectionUrl" : false
+  }, {
+    "type" : "DisplayUrlAdvert",
+    "titleHtml" : "Recycling, Rubbish & Organics",
+    "displayUrl" : "https://www.rubbish.com",
+    "linkUrl" : "https://www.rubbish.com",
+    "descriptionHtml" : "The Council provides a number of waste services for the District's residents, businesses, schools and visitors",
+    "additionalProperties" : {
+      "call_to_action_label" : "Sign up",
+      "call_to_action_url" : "https://rethinkrubbish.waimakariri.govt.nz/s/#reminder",
+      "image" : "https://source.unsplash.com/random/40x40?recycling"
     },
     "category" : "",
     "removeCollectionUrl" : false
   } ]
 }, {
   "created" : "2020-03-12T14:33:01.536859Z",
-  "lastModified" : "2020-09-18T00:20:48.609356Z",
+  "lastModified" : "2020-10-20T17:08:16.29323Z",
   "id" : "f667e7b1-7136-405b-af29-16e0fee57036",
   "name" : "[Example] health and corona - center position",
   "label" : "DEFAULT",
@@ -62,24 +103,16 @@
       }, {
         "type" : "AllQueryWords",
         "triggerWords" : [ "corona" ]
+      }, {
+        "type" : "AllQueryWords",
+        "triggerWords" : [ "covid" ]
       } ]
     } ]
   },
   "actions" : [ {
     "type" : "DisplayUrlAdvert",
-    "titleHtml" : "COVID-19:  Coronavirus Updates",
-    "displayUrl" : "https://www.who.int/emergencies/diseases/novel-coronavirus-2019/events-as-they-happen",
-    "linkUrl" : "https://www.who.int/emergencies/diseases/novel-coronavirus-2019/events-as-they-happen",
-    "descriptionHtml" : "We are communicators. We are helpers. We have the skills to spark inspiration, support, determination and hope – many of the things necessary to overcome adversity and the crisis our world is facing. These curated resources will be updated regularly to support you while you lead through these fast-changing times.",
-    "additionalProperties" : {
-      "position" : "center"
-    },
-    "category" : "",
-    "removeCollectionUrl" : false
-  }, {
-    "type" : "DisplayUrlAdvert",
     "titleHtml" : "Prevent the spread - what you need to do",
-    "displayUrl" : "https://www.nhs.uk/conditions/coronavirus-covid-19/social-distancing/what-you-need-to-do/",
+    "displayUrl" : "https://www.nhs.uk/conditions/coronavirus-covid-19/",
     "linkUrl" : "https://www.nhs.uk/conditions/coronavirus-covid-19/social-distancing/what-you-need-to-do/",
     "descriptionHtml" : "Everyone must stay at home to help stop coronavirus (COVID-19) spreading. Wash your hands with soap and water often to reduce the risk of infection.",
     "additionalProperties" : {
@@ -87,10 +120,24 @@
     },
     "category" : "",
     "removeCollectionUrl" : false
+  }, {
+    "type" : "DisplayUrlAdvert",
+    "titleHtml" : "Current Alert Level",
+    "displayUrl" : "https://covid19.waimakariri.govt.nz/app",
+    "linkUrl" : "https://covid19.waimakariri.govt.nz/app",
+    "descriptionHtml" : "New Zealand is at Alert Level 1.\n\nAuckland joined the rest of New Zealand at Alert Level 1 at 11:59pm on Wednesday 7 October.",
+    "additionalProperties" : {
+      "position" : "center",
+      "call_to_action_label" : "See more",
+      "call_to_action_url" : "https://covid19.govt.nz/alert-system/alert-level-1/",
+      "image" : "https://source.unsplash.com/random/40x40?covid"
+    },
+    "category" : "",
+    "removeCollectionUrl" : false
   } ]
 }, {
   "created" : "2020-04-08T21:56:46.500816Z",
-  "lastModified" : "2020-09-18T00:22:51.056861Z",
+  "lastModified" : "2020-10-20T17:03:22.392566Z",
   "id" : "0f46ff92-62e3-46d2-9a29-f2f9bc2599d9",
   "name" : "[Example] health and corona - bottom position",
   "label" : "DEFAULT",
@@ -105,6 +152,9 @@
       }, {
         "type" : "AllQueryWords",
         "triggerWords" : [ "corona" ]
+      }, {
+        "type" : "AllQueryWords",
+        "triggerWords" : [ "covid" ]
       } ]
     } ]
   },
