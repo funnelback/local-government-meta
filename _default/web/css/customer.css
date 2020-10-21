@@ -90,8 +90,9 @@
     }
 }
 
+/* Prevent the search tier from appearing next to a card in card view */
 .fb-container .search-tier {
-    width: 100%;
+    flex-basis: 100%;
 }
 
 .module-curator__title + cite {
