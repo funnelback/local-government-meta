@@ -4,16 +4,16 @@
 <footer class="fb-footer">
     <div class="content-wrapper">
         <div class="footer-links">
-            <h3 class="footer-links__title">Contacts</h3>
+            <h3 class="footer-links__title">About us</h3>
             <ul class="footer-links__list">
                 <li class="footer-links__item">
-                    <a href="#" class="footer-links__link">Lorem ipsum dolor sit amet</a>
+                    <a href="#" class="footer-links__link">Contact information</a>
                 </li>
                 <li class="footer-links__item">
-                    <a href="#" class="footer-links__link">Lorem ipsum dolor sit</a>
+                    <a href="#" class="footer-links__link">Our site</a>
                 </li>
                 <li class="footer-links__item">
-                    <a href="#" class="footer-links__link">Lorem ipsum dolor sit amet, consetetur</a>
+                    <a href="#" class="footer-links__link">Meet the team</a>
                 </li>
             </ul>
         </div>
@@ -22,13 +22,13 @@
             <h3 class="footer-links__title">Quick Links</h3>
             <ul class="footer-links__list">
                 <li class="footer-links__item">
-                    <a href="#" class="footer-links__link">Lorem ipsum dolor sit amet</a>
+                    <a href="#" class="footer-links__link">Terms and conditions</a>
                 </li>
                 <li class="footer-links__item">
-                    <a href="#" class="footer-links__link">Lorem ipsum dolor sit</a>
+                    <a href="#" class="footer-links__link">Privacy</a>
                 </li>
                 <li class="footer-links__item">
-                    <a href="#" class="footer-links__link">Lorem ipsum dolor sit amet, consetetur</a>
+                    <a href="#" class="footer-links__link">Sitemap</a>
                 </li>
             </ul>
         </div>

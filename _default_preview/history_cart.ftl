@@ -41,91 +41,203 @@
 </#macro>
 
 <#--
+  Display the shopping cart / shortlist
+
+  Different shortlist templates can be used depending the source collection
+  the result is coming from (based on the <code>C</code> metadata).
+-->
+<#macro Cart>
+	<#if question.collection.configuration.valueAsBoolean("ui.modern.session")>
+		<section class="search-cart">
+			<#-- 
+				ToDo: Add support for card view. The problem at the moment is that the session 
+				code is a bit too opinionated in injecting it own html markup which is messing with the 
+				cutups.
+			-->
+			<article id="search-cart" class="search-results__list search-results__list--list-view">
+			
+			</article>
+		</section>
+	</#if>
+</#macro>
+
+<#--
 	Display the click and search history
 -->
 <#macro SearchHistory>
 	<#if question.collection.configuration.valueAsBoolean("ui.modern.session")>
-		<section id="search-history" class="search-history mb-3">
-			<div class="container">
-				<div class="row">
-					<div class="col-md-12">
-						<button tabindex="0" class="btn btn-link session-history-hide"><span class="fa fa-arrow-left"></span> Back to results</button>
-						<h2 class="sr-only">Search history</h2>
+		<section id="search-history" class="search-history module-curator">
+			<h2 class="box__title">History</h2>
+			<p>
+				<a href="#" class="highlight session-history-hide"><span class="fa fa-arrow-left"></span> Back to results</a>
+			</p>
 
-						<div class="row">
-
-							<#-- Click history -->
-							<div class="col-md-6">
-							<!-- ${session.clickHistory?size} -->
-								<div class="card session-history-click-results">
-									<div class="card-header">
-										<h3>
-											<span class="fa fa-heart"></span> Recently clicked results
-											<button class="btn btn-danger btn-sm float-right session-history-clear-click" title="Clear click history"><span class="fa fa-times"></span> Clear</button>
-										</h3>
-									</div>
-									<div class="card-body">
-										<ul class="list-unstyled">
-											<#list session.clickHistory as h>
-												<li>
-													<a href="${h.indexUrl}">${h.title}</a> &middot; <span class="text-info">${prettyTime(h.clickDate)}</span>
-													<#if h.query??>
-														<span class="text-muted"> for &quot;${(h.query!"")?split("|")[0]?trim}&quot;</span>
-													</#if>
-												</li>
-											</#list>
-										</ul>
-									</div>
-								</div>
-							
-								<div class="card session-history-click-empty">
-									<div class="card-header">
-										<h3><span class="fa fa-heart"></span> Recently clicked results</h3>
-									</div>
-									<div class="card-body">
-										<p class="text-muted">Your click history is empty.</p>
-									</div>
-								</div>
-							
-							</div>
-
-							<#-- Search history -->
-							<div class="col-md-6">
-							
-								<div class="card session-history-search-results">
-									<div class="card-header">
-										<h3>
-											<span class="fa fa-search"></span> Recent searches
-											<button class="btn btn-danger btn-sm float-right session-history-clear-search" title="Clear search history"><span class="fa fa-times"></span> Clear</button>
-										</h3>
-									</div>
-									<div class="card-body">
-										<ul class="list-unstyled">
-											<#list session.searchHistory as h>
-												<li>
-													<a href="?${h.searchParams}">${h.originalQuery!} <small>(${h.totalMatching})</small></a> &middot; 
-													<span class="text-info">${prettyTime(h.searchDate)}</span>
-												</li>
-											</#list>
-										</ul>
-									</div>
-								</div>
-							
-								<div class="card session-history-search-empty">
-									<div class="card-header">
-										<h3><span class="fa fa-search"></span> Recent searches</h3>
-									</div>
-									<div class="card-body">
-										<p class="text-muted">Your search history is empty.</p>
-									</div>
-								</div>
-							
-							</div>
-
-						</div>
+			<#-- Click history -->
+			<article class="module-curator__list ">
+				<article class="module-curator__item module-curator__item">
+					<div class="module-curator__top">
+						<h3 class="module-curator__title">
+							<span class="fa fa-heart"></span> Recently clicked results
+						</h3>
 					</div>
-				</div>
-			</div>
+					<div class="module-curator__content">
+						<#-- Result for click history -->
+						<#list session.clickHistory>
+							<div class="module-curator__desc session-history-click-results">
+								<#items as h>
+									<div>
+										<a href="${h.indexUrl}">${h.title}</a> &middot; <span class="text-info">${prettyTime(h.clickDate)}</span>
+										<#if h.query??>
+											<span class="text-muted"> for &quot;${(h.query!"")?split("|")[0]?trim}&quot;</span>
+										</#if>
+									</div>
+								</#items>
+							</div>
+						</#list>
+
+						<#-- No results for click history -->
+						<p class="module-curator__desc session-history-click-empty">
+							Your click history is empty.
+						</p>
+					</div>
+					<#if (session.clickHistory)!?has_content>
+						<span class="btn--link session-history-clear-click" title="Clear click history">										
+							<span class="fa fa-times"></span> Clear
+						</span>
+					</#if>
+				</article>
+				<article class="module-curator__item module-curator__item ">
+					<div class="module-curator__top">
+						<h3 class="module-curator__title">
+							<span class="fa fa-search"></span> Recent searches
+						</h3>
+					</div>
+					<div class="module-curator__content">
+						<#-- Result for search history -->
+						<#list session.searchHistory>
+							<div class="module-curator__desc session-history-search-results">
+								<#items as h>
+									<p>
+										<a href="?${h.searchParams}">
+											${h.originalQuery!} 
+											<small>(${h.totalMatching})</small>
+										</a> 
+										&middot; 
+										<span class="text-info">${prettyTime(h.searchDate)}</span>
+									</p>
+								</#items>
+							</div>
+						</#list>
+						<#-- No results for search history -->
+						<p class="module-curator__desc session-history-search-empty">
+							Your search history is empty.
+						</p>
+					</div>
+					<#if (session.searchHistory)!?has_content>
+						<a class="btn--link session-history-clear-search float-right" href="#" title="Clear click history">										
+							<span class="fa fa-times"></span> Clear					
+						</a>
+					</#if>
+				</article>
+			</article>
+
+			<#-- Search history -->
+			<article class="module-curator__list">
+
+			</article>
 		</section>
 	</#if>
 </#macro>
+
+
+<#macro Configuration>
+	<#if question.collection.configuration.valueAsBoolean("ui.modern.session")>
+	  	<#local host=httpRequest.getHeader('host')>
+
+		<script type="text/javascript">
+			window.addEventListener('DOMContentLoaded', function() {
+				new Funnelback.SessionCart({
+					collection: '${question.collection.id}',
+					iconPrefix: '',
+					cartCount: {
+						template: '{{>icon-block}} {{>label-block}} ({{count}})',
+						icon: 'fas fa-star',
+						label: 'Shortlist',
+						isLabel: true
+					},
+					cart: {
+						icon: 'fas fa-star',
+						label: 'Saved results',
+						backIcon: 'fas fa-arrow-left',
+						backLabel: 'Back to results',
+						clearIcon: 'fas fa-times',
+						clearClasses: "btn btn-xs btn-light",                    
+						emptyMessage: '<span id="flb-cart-empty-message">No items in your shortlist</span>',
+						pageSelector: ['#search-results', '#search-history']
+					},
+					item: {
+						icon: 'fas fa-star',          
+						template: document.getElementById('cart-template-local-government-web').text
+					},
+					resultItemTrigger: {
+						selector: '.enable-cart-on-result',
+						labelAdd: '',
+						iconAdd: 'far fa-star',
+						labelDelete: '',
+						iconDelete: 'fas fa-star',
+						isLabel: false,
+						template: '<span class="text-info float-right">{{>icon-block}} {{>label-block}}</span>',
+						position: 'afterbegin'
+					},
+					cartItemTrigger: {
+						selector: ".fb-cart__remove",
+						iconDelete: "fas",
+						template: '{{>icon-block}} {{>label-block}}',
+						position: 'afterbegin',
+						isLabel: true,
+						labelDelete: "REMOVE FROM SHORTLIST"
+					}        
+				});
+				
+				new Funnelback.SessionHistory({
+					collection: '${question.collection.id}',
+					pageSelector: ['#search-results', '#search-cart']
+				});
+			});
+
+			<#-- ToDo - Figure out how to attach handlebar helpers 
+				window.Funnelback.SessionCart.prototype.Handlebars.registerHelper('equal', function(lvalue, rvalue, options) {
+					if (arguments.length < 3)
+						throw new Error("Handlebars Helper equal needs 2 parameters");
+					if( lvalue!=rvalue ) {
+						return options.inverse(this);
+					} else {
+						return options.fn(this);
+					}
+				});
+			-->    
+		</script>
+	</#if>
+</#macro>
+
+<#macro Controls>
+	<#if question.collection.configuration.valueAsBoolean("ui.modern.session")>
+		<ul>
+			<li class="list-inline-item">
+				<button type="button" tabindex="0" class="btn btn-link">
+				<small>
+					<span class="flb-cart-count"></span>
+				</small>
+				</button>
+			</li>
+			<li class="list-inline-item">
+				<button type="button" tabindex="0" class="btn btn-link session-history-toggle">
+				<small>
+					<span class="fas fa-history"></span> History
+				</small>
+				</button>
+			</li>
+		</ul>
+	</#if>
+</#macro>
+

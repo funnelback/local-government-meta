@@ -9,6 +9,14 @@
     overflow: initial;
 }
 
+.fb-container .float-right {
+    float: right;
+}
+
+.fb-container .list-unstyled {
+    list-style: none;
+}
+
 /** 
  * Facets 
  **/
@@ -167,3 +175,27 @@
 .fb-container .search-results__bottom {
     box-sizing: border-box;
 }
+
+/* Sessions */
+
+.fb-container .flb-cart-box-back {
+    color: #e42b12;
+    cursor: pointer;
+    text-decoration: underline;    
+}
+
+.fb-container .flb-cart-box-list {
+    display: flex;
+    flex-wrap: wrap;
+    padding-left: 0;
+}
+
+.fb-container .flb-cart-box-header {
+    font-size: 1.5625rem;
+    color: #000;
+}
+.fb-container #search-history .module-curator__desc::before {
+    display: none;
+}
+
+

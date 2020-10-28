@@ -56,8 +56,7 @@
 <#-- Outputs the search result section -->
 <#macro Results>
     <div>
-        <section class="search-results">
-
+        <section id="search-results" class="search-results">
             <@facets.FacetBreadBox />
 
             <@base.Blending />
@@ -99,6 +98,11 @@
             <@contextual_navigation.ContextualNavigation />
 
         </section>
+
+        
+        <@history_cart.Cart />
+        <@history_cart.SearchHistory />
+
     </div>
 </#macro>
 

@@ -166,6 +166,7 @@
             <@base.SortDropdown />
             <@base.DisplayMode />        
         </div>
+        <@history_cart.Controls />
     </div>
 </#macro>
 
@@ -280,7 +281,6 @@
         </nav>
     </section>
 </#macro>
-
 
 <#-- 
     Determines if the results are to be displayed normally

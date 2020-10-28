@@ -49,7 +49,7 @@
     @param result An individual result fron the data model
 -->
 <#macro GenericView result cardClass="fb-card--fixed">
-    <article class="search-results__item search-results__item--default">
+    <article class="search-results__item search-results__item--default" data-fb-result="${(result.indexUrl)!}">
         <figure class="search-results__bg">
             <#if (result.listMetadata["image"][0])!?has_content>
                 <#--  <img class="deferred rounded-circle fb-image-thumbnail" alt="Thumbnail for ${result.title!}" src="/stencils/resources/base/v15.8/img/pixel.gif" data-deferred-src="${result.listMetadata["image"][0]}">   -->
@@ -60,7 +60,7 @@
         </figure>
         <div class="search-results__content">
             <#if (result.title)!?has_content>
-                <h3 class="search-results__title">
+                <h4 class="search-results__title">
                     <#-- Show an icon to represented the file type of the current document -->
                     <#switch result.fileType>
                         <#case "pdf">
@@ -89,7 +89,9 @@
                             </@s.Truncate>
                         </@s.boldicize>
                     </a>
-                </h3>
+
+                    <span class="enable-cart-on-result"></span>
+                </h4>
             </#if>
             
             <#-- Pretty version of the url of the document -->
@@ -132,7 +134,7 @@
             -->
 
             <#-- Display the time which this result has last been visited by the user -->
-            <@history_cart.LastVisitedLink result=result/>
+            <@history_cart.LastVisitedLink result=result/>            
         </div>
     </article>
 </#macro>
@@ -233,3 +235,74 @@
         </div>
     </section>    
 </#macro>
+
+<#macro CartTemplate>
+    <script id="cart-template-local-government-web" type="text/x-handlebar-template">
+        <article class="search-results__item search-results__item--default">
+            <figure class="search-results__bg">
+                {{#if metaData.image}}  
+                    <img class="card-img-top" alt="Thumbnail for {{title}}" src="{{metaData.image}}" /> 
+                {{else}}
+                    <img class="card-img-top" alt="Thumbnail for {{title}}" src="https://source.unsplash.com/random/335x192?{{title}}"> 
+                {{/if}}
+            </figure>
+            <div class="search-results__content">
+                {{#if title}} 
+                    <h4 class="search-results__title">
+                        <a href="{{indexUrl}}" title="{{title}}" class="search-results__link">
+                            {{#truncate 255}}
+                                {{title}}  
+                            {{/truncate}}
+                        </a>
+
+                        <span class="enable-cart-on-result"></span>
+                    </h4>
+                {{/if}}
+                
+                <#-- Pretty version of the url of the document -->
+                <cite>
+                    {{#truncate 90}}
+                        {{indexUrl}}
+                    {{/truncate}}                
+                </cite>
+
+                
+                <#-- Summary -->
+                {{#if summary}}
+                    <p class="search-results__desc">
+                        {{#truncate 255}}
+                            {{summary}}  
+                        {{/truncate}}
+                    </p>
+                {{/if}}
+
+                <#-- Metadata can be shown as tags -->
+                <#--  
+                <section class="tags">
+                    <ul class="tags__list">
+                        <li class="tags__item">
+                            Lorem
+                        </li>
+                        <li class="tags__item">
+                            Lorem ipsum
+                        </li>
+                        <li class="tags__item">
+                            Lorem
+                        </li>
+                        <li class="tags__item">
+                            Lorem ipsum
+                        </li>
+                        <li class="tags__item">
+                            Lorem
+                        </li>
+                    </ul>
+                </section>  
+                -->
+                <div class="search-results__bottom">
+                    <a class="btn--link fb-cart__remove"></a>
+                </div>                         
+            </div>
+        </article>
+    </script>
+  
+  </#macro>
