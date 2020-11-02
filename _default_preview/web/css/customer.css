@@ -150,6 +150,37 @@
     }
 }
 
+/* Curator */
+
+.fb-container .module-curator {
+    position: relative;
+}
+
+/* .fb-container .module-curator::after {
+    background: transparent linear-gradient(90deg, transparent 10%, #fff 100%) no-repeat;
+    background-color: transparent;
+    background-image: -webkit-linear-gradient(0deg, rgba(255,255,255,0.001) 10%, #f0f0f0 100%);
+    content: '';
+    display: block;
+    height: 100%;
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    width: 20px;
+    z-index: 2;
+} */
+
+.fb-container .module-curator__list {
+    overflow-y: hidden;
+    overflow-x: auto;
+}
+
+.fb-container .module-curator__item {
+    min-width: 20rem;
+}
+
+
+
 /* Pagination */
 
 /* Add a padding at the bottom so that footer is not so close */
@@ -205,6 +236,10 @@
     }     
 }
 
+.fb-container .initial-search-form .result-sessions__controls {
+    display: none;
+}
+
 .fb-container .flb-cart-box-back{
     color: #e42b12;
     cursor: pointer;
@@ -221,6 +256,11 @@
     font-size: 1.5625rem;
     color: #000;
 }
+
+/* 
+    Remove the "ad" icon before search history due to the markup
+    being borrowed from curator.
+*/
 .fb-container #search-history .module-curator__desc::before {
     display: none;
 }
