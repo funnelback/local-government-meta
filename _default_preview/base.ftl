@@ -34,7 +34,6 @@
         </#if>
 
         <#nested>
-
     </form>
 </#macro>
 
@@ -164,9 +163,8 @@
             <@facets.ClearAllFacets />            
             <@base.LimitDropdown />
             <@base.SortDropdown />
-            <@base.DisplayMode />        
+            <@base.DisplayMode />                    
         </div>
-        <@history_cart.Controls />
     </div>
 </#macro>
 

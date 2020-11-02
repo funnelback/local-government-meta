@@ -189,6 +189,7 @@
 						template: '<span class="text-info float-right">{{>icon-block}} {{>label-block}}</span>',
 						position: 'afterbegin'
 					},
+					/* Trigger to delete an item from the cart */
 					cartItemTrigger: {
 						selector: ".fb-cart__remove",
 						iconDelete: "fas",
@@ -222,22 +223,16 @@
 
 <#macro Controls>
 	<#if question.collection.configuration.valueAsBoolean("ui.modern.session")>
-		<ul>
-			<li class="list-inline-item">
-				<button type="button" tabindex="0" class="btn btn-link">
-				<small>
-					<span class="flb-cart-count"></span>
-				</small>
-				</button>
-			</li>
-			<li class="list-inline-item">
-				<button type="button" tabindex="0" class="btn btn-link session-history-toggle">
-				<small>
-					<span class="fas fa-history"></span> History
-				</small>
-				</button>
-			</li>
-		</ul>
+		
+		<section class="clearfix">
+			<div class="result-sessions__controls">
+				<span class="flb-cart-count"></span>
+				 <a class="session-history-toggle">
+				 	<span class="fas fa-history"></span>
+				 	History
+				</a>
+			<div>
+		</section>
 	</#if>
 </#macro>
 

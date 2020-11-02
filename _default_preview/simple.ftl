@@ -69,6 +69,10 @@
 					<@project.Results />
 				</section>
 			</@s.AfterSearchOnly>
+			<sectionclass="content-wrapper content-wrapper--col">
+				<@history_cart.Cart />
+				<@history_cart.SearchHistory />
+			</section>
 		</main>
 	</div>    
 
@@ -83,11 +87,12 @@
 	<script type="text/javascript" src="/s/resources/${question.collection.id}/${question.profile}/js/runtime.js"></script>
 
 
-	<script src="/stencils/resources/thirdparty/popper/v1.12.3/umd/popper.min.js"></script>
-	<script src="/stencils/resources/thirdparty/jquery/v3.2.1/jquery-3.2.1.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha512-hJSZLjaUow3GsiAkjUBMxN4eaFysMaBvg7j6mkBeo219ZGmSe1eVhKaJJAj5GzGoD0j0Gr2/xNDzjeecdg+OCw==" crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script>
+
 	
-	<script src="/stencils/resources/autocompletion/js/typeahead.bundle-0.11.1.min.js"></script>
-	<script type="text/javascript" src="${GlobalResourcesPrefix}thirdparty/handlebars-4.0.12/handlebars.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/typeahead.js/0.11.1/typeahead.bundle.min.js" integrity="sha512-qOBWNAMfkz+vXXgbh0Wz7qYSLZp6c14R0bZeVX2TdQxWpuKr6yHjBIM69fcF8Ve4GUX6B6AKRQJqiiAmwvmUmQ==" crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.7.6/handlebars.min.js" integrity="sha512-zT3zHcFYbQwjHdKjCu6OMmETx8fJA9S7E6W7kBeFxultf75OPTYUJigEKX58qgyQMi1m1EgenfjMXlRZG8BXaw==" crossorigin="anonymous"></script>
 	<script src="/s/resources/${question.collection.id}/${question.profile}/js/base.js"></script> 
 	<script src="${GlobalResourcesPrefix}js/funnelback.autocompletion-2.6.0.js"></script>
 
@@ -109,7 +114,7 @@
 
 	<#-- Enable session functonality which includes cart and history -->
 	<#if question.collection.configuration.valueAsBoolean("ui.modern.session")>
-		<script type="text/javascript" src="${GlobalResourcesPrefix}thirdparty/es6-promise-4.2.5/es6-promise.auto.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/es6-promise/4.2.8/es6-promise.min.js" integrity="sha512-JMK7ImCd/9VxQM7FWvAT3njqo5iGKkWcOax6Bwzuq48xxFd7/jekKcgN+59ZRwBoEpZvv6Jkwh3fDGrBVWX5vA==" crossorigin="anonymous"></script>
 		<script type="text/javascript" src="${GlobalResourcesPrefix}js/funnelback.session-cart-0.1.js"></script>
 		<script type="text/javascript" src="${GlobalResourcesPrefix}js/funnelback.session-history-0.1.js"></script>
 		<@history_cart.Configuration />
