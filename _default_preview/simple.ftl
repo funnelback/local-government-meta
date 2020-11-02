@@ -64,14 +64,19 @@
 			<@project.SearchForm />
 			<@s.AfterSearchOnly>
 				<@project.Tabs />
-				<section class="content-wrapper content-wrapper--col">
-					<@project.Facets />
-					<@project.Results />
-				</section>
+				 <#-- 
+				 	Would merge the span with the section element but due to the way sessions hide/show functionalty works, 
+				 	we need to separate this into it own element. -->
+				<span id="search-facets-and-results" >
+					<section class="content-wrapper content-wrapper--col search-facets-and-results">
+						<@project.Facets />
+						<@project.Results />
+					</section>
+				</span>
 			</@s.AfterSearchOnly>
-			<sectionclass="content-wrapper content-wrapper--col">
-				<@history_cart.Cart />
+			<section class="content-wrapper search-sessions">
 				<@history_cart.SearchHistory />
+				<@history_cart.Cart />
 			</section>
 		</main>
 	</div>    

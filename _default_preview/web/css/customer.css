@@ -17,6 +17,29 @@
     list-style: none;
 }
 
+.fb-container .btn {
+    cursor: pointer;
+}
+
+/**
+  * Initial search form
+  **/ 
+
+/* 
+    Adjust the presentation of the initial search form so that
+    a white bar does not appear.
+*/
+@media only screen and (min-width: 1025px) {
+    .fb-container .initial-search-form .module-search--bg {
+        padding-bottom: 15rem;
+        padding-top: 15em;
+    }
+    
+    .fb-container .initial-search-form .content-wrapper--col {
+        margin-top: 0;
+    }  
+}
+
 /** 
  * Facets 
  **/
@@ -88,14 +111,6 @@
 
 .fb-container .tabs__item .fas {
     margin-right: 0.5rem;
-}
-
-/* Adjust the presentation of sort and results per page on mobile */
-@media only screen and (min-width: 1025px) {
-    .fb-container .initial-search-form .module-search--bg {
-        padding-bottom: 15rem;
-        padding-top: 15em;
-    }
 }
 
 /* Prevent the search tier from appearing next to a card in card view */
@@ -172,13 +187,25 @@
     flex-wrap: nowrap;
 }
 
+
 .fb-container .search-results__bottom {
     box-sizing: border-box;
 }
 
 /* Sessions */
 
-.fb-container .flb-cart-box-back {
+@media only screen and (min-width: 1025px) {
+    .fb-container #search-cart, .fb-container #search-history {
+        -webkit-box-flex: 0;
+        flex-basis: 100%;
+        margin: 0 auto;
+        max-width: calc( 100% - 24.875rem);
+        width: calc( 100% - 24.875rem);
+        padding-top: 4rem;        
+    }     
+}
+
+.fb-container .flb-cart-box-back{
     color: #e42b12;
     cursor: pointer;
     text-decoration: underline;    
@@ -207,8 +234,10 @@
     color: black;
 }
 
-.fb-container .result-sessions__controls a {
+.fb-container .result-sessions__controls a, .fb-container .session-history-toggle  {
    margin: 0.5rem;
    color: black;
+   cursor: pointer;
+   text-decoration: underline;  
 }
 

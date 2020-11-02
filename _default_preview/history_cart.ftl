@@ -48,12 +48,12 @@
 -->
 <#macro Cart>
 	<#if question.collection.configuration.valueAsBoolean("ui.modern.session")>
+		<#-- 
+			ToDo: Add support for card view. The problem at the moment is that the session 
+			code is a bit too opinionated in injecting it own html markup which is messing with the 
+			cutups.
+		-->
 		<section class="search-cart">
-			<#-- 
-				ToDo: Add support for card view. The problem at the moment is that the session 
-				code is a bit too opinionated in injecting it own html markup which is messing with the 
-				cutups.
-			-->
 			<article id="search-cart" class="search-results__list search-results__list--list-view">
 			
 			</article>
@@ -74,7 +74,7 @@
 
 			<#-- Click history -->
 			<article class="module-curator__list ">
-				<article class="module-curator__item module-curator__item">
+				<article class="module-curator__item">
 					<div class="module-curator__top">
 						<h3 class="module-curator__title">
 							<span class="fa fa-heart"></span> Recently clicked results
@@ -173,7 +173,7 @@
 						clearIcon: 'fas fa-times',
 						clearClasses: "btn btn-xs btn-light",                    
 						emptyMessage: '<span id="flb-cart-empty-message">No items in your shortlist</span>',
-						pageSelector: ['#search-results', '#search-history']
+						pageSelector: ['#search-facets-and-results', '#search-history']
 					},
 					item: {
 						icon: 'fas fa-star',          
@@ -202,7 +202,7 @@
 				
 				new Funnelback.SessionHistory({
 					collection: '${question.collection.id}',
-					pageSelector: ['#search-results', '#search-cart']
+					pageSelector: ['#search-facets-and-results', '#search-cart']
 				});
 			});
 
