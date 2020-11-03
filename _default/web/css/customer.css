@@ -9,6 +9,37 @@
     overflow: initial;
 }
 
+.fb-container .float-right {
+    float: right;
+}
+
+.fb-container .list-unstyled {
+    list-style: none;
+}
+
+.fb-container .btn {
+    cursor: pointer;
+}
+
+/**
+  * Initial search form
+  **/ 
+
+/* 
+    Adjust the presentation of the initial search form so that
+    a white bar does not appear.
+*/
+@media only screen and (min-width: 1025px) {
+    .fb-container .initial-search-form .module-search--bg {
+        padding-bottom: 15rem;
+        padding-top: 15em;
+    }
+    
+    .fb-container .initial-search-form .content-wrapper--col {
+        margin-top: 0;
+    }  
+}
+
 /** 
  * Facets 
  **/
@@ -82,14 +113,6 @@
     margin-right: 0.5rem;
 }
 
-/* Adjust the presentation of sort and results per page on mobile */
-@media only screen and (min-width: 1025px) {
-    .fb-container .initial-search-form .module-search--bg {
-        padding-bottom: 15rem;
-        padding-top: 15em;
-    }
-}
-
 /* Prevent the search tier from appearing next to a card in card view */
 .fb-container .search-tier {
     flex-basis: 100%;
@@ -126,6 +149,37 @@
         flex: 0 0 100%;
     }
 }
+
+/* Curator */
+
+.fb-container .module-curator {
+    position: relative;
+}
+
+/* .fb-container .module-curator::after {
+    background: transparent linear-gradient(90deg, transparent 10%, #fff 100%) no-repeat;
+    background-color: transparent;
+    background-image: -webkit-linear-gradient(0deg, rgba(255,255,255,0.001) 10%, #f0f0f0 100%);
+    content: '';
+    display: block;
+    height: 100%;
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    width: 20px;
+    z-index: 2;
+} */
+
+.fb-container .module-curator__list {
+    overflow-y: hidden;
+    overflow-x: auto;
+}
+
+.fb-container .module-curator__item {
+    min-width: 20rem;
+}
+
+
 
 /* Pagination */
 
@@ -164,6 +218,66 @@
     flex-wrap: nowrap;
 }
 
+
 .fb-container .search-results__bottom {
     box-sizing: border-box;
 }
+
+/* Sessions */
+
+@media only screen and (min-width: 1025px) {
+    .fb-container #search-cart, .fb-container #search-history {
+        -webkit-box-flex: 0;
+        flex-basis: 100%;
+        margin: 0 auto;
+        max-width: calc( 100% - 24.875rem);
+        width: calc( 100% - 24.875rem);
+        padding-top: 4rem;        
+    }     
+}
+
+.fb-container .initial-search-form .result-sessions__controls {
+    display: none;
+}
+
+.fb-container .flb-cart-box-back{
+    color: #e42b12;
+    cursor: pointer;
+    text-decoration: underline;    
+}
+
+.fb-container .flb-cart-box-list {
+    display: flex;
+    flex-wrap: wrap;
+    padding-left: 0;
+}
+
+.fb-container .flb-cart-box-header {
+    font-size: 1.5625rem;
+    color: #000;
+}
+
+/* 
+    Remove the "ad" icon before search history due to the markup
+    being borrowed from curator.
+*/
+.fb-container #search-history .module-curator__desc::before {
+    display: none;
+}
+
+.fb-container .result-sessions__controls {
+    background-color: rgba(255,255,255,0.6);
+    padding: 1rem;
+    border-radius: 1em;
+    float: right;
+    margin-top: 1rem;
+    color: black;
+}
+
+.fb-container .result-sessions__controls a, .fb-container .session-history-toggle  {
+   margin: 0.5rem;
+   color: black;
+   cursor: pointer;
+   text-decoration: underline;  
+}
+

@@ -85,12 +85,12 @@
 						<#list session.clickHistory>
 							<div class="module-curator__desc session-history-click-results">
 								<#items as h>
-									<div>
+									<p>
 										<a href="${h.indexUrl}">${h.title}</a> &middot; <span class="text-info">${prettyTime(h.clickDate)}</span>
 										<#if h.query??>
 											<span class="text-muted"> for &quot;${(h.query!"")?split("|")[0]?trim}&quot;</span>
 										</#if>
-									</div>
+									</p>
 								</#items>
 							</div>
 						</#list>

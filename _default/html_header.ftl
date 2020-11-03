@@ -2,9 +2,9 @@
 <#-- Outputs all the css and related libraries used for the implementation -->
 
 <#-- Template specific code. Avoid changing these files if possible -->
+<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800&display=swap" rel="stylesheet">
 <link href="https://unpkg.com/normalize.css@8.0.1/normalize.css" rel="stylesheet">
 <link href="/s/resources/${question.collection.id}/${question.profile}/css/main.css" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800&display=swap" rel="stylesheet">
 
 
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.10.0/css/all.css">

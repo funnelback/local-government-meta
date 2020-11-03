@@ -7,7 +7,7 @@
 <#--
         Javascript required to configure concierge
 -->
-<#macro AutoComplete>
+<#macro Configuration>
     <#if (question.getCurrentProfileConfig().get("stencils.auto-completion.datasets"))!?has_content>
         jQuery('#query').autocompletion({
             program: '<@s.cfg>auto-completion.program</@s.cfg>',

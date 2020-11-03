@@ -34,7 +34,6 @@
         </#if>
 
         <#nested>
-
     </form>
 </#macro>
 
@@ -164,7 +163,7 @@
             <@facets.ClearAllFacets />            
             <@base.LimitDropdown />
             <@base.SortDropdown />
-            <@base.DisplayMode />        
+            <@base.DisplayMode />                    
         </div>
     </div>
 </#macro>
@@ -280,7 +279,6 @@
         </nav>
     </section>
 </#macro>
-
 
 <#-- 
     Determines if the results are to be displayed normally

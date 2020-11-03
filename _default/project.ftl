@@ -16,37 +16,12 @@
                 <input required name="query" id="query" type="Search query" autofocus class="module-search__query tt-input" autocomplete="off" placeholder="Start your search here…" value="${question.query!}" spellcheck="false" dir="auto"">
 
                 <button type="submit" class="module-search__btn"><span class="sr-only">Search</span></button>                
+
+                <@history_cart.Controls />
+            </a>
             </div>
         </@base.SearchForm>
     </section>
-
-
-    <#-- Enable the cart and history button  -->
-    <#--  
-    <#if question.collection.configuration.valueAsBoolean("ui.modern.session")>
-            <ul class="float-right list-inline">
-                    <li class="list-inline-item">
-                            <button type="button" tabindex="0" class="btn btn-link">
-                                    <small>
-                                            <span class="flb-cart-count"></span>
-                                    </small>
-                            </button>
-                    </li>
-                    <li class="list-inline-item">
-                            <button type="button" tabindex="0" class="btn btn-link session-history-toggle">
-                                    <small>
-                                            <span class="fas fa-history"></span>
-                                            History
-                                    </small>
-                            </button>
-                    </li>
-            </ul>
-    </#if>  
-    -->
-
-    <#-- Hiding recent queries until it as been factored into the design
-        <@history_cart.RecentQueries />
-    -->
 </#macro>
 
 <#macro Tabs>
@@ -56,8 +31,7 @@
 <#-- Outputs the search result section -->
 <#macro Results>
     <div>
-        <section class="search-results">
-
+        <section id="search-results" class="search-results">
             <@facets.FacetBreadBox />
 
             <@base.Blending />
