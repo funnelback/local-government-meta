@@ -107,7 +107,9 @@
     }    
 }
 
-/* Tabs */
+/**
+  * Tabs 
+  **/
 
 .fb-container .tabs__item .fas {
     margin-right: 0.5rem;
@@ -150,7 +152,10 @@
     }
 }
 
-/* Curator */
+/**
+  * Curator 
+  **/
+
 
 .fb-container .module-curator {
     position: relative;
@@ -179,9 +184,9 @@
     min-width: 20rem;
 }
 
-
-
-/* Pagination */
+/**
+  * Pagination 
+  **/
 
 /* Add a padding at the bottom so that footer is not so close */
 @media only screen and (min-width: 1025px) {
@@ -190,7 +195,10 @@
     }
 }
 
-/* Contexual Navigation */ 
+/**
+  * Contextual Navigation 
+  **/
+
 
 /* Add a padding at the bottom so that footer is not so close */
 @media only screen and (min-width: 1025px) {
@@ -199,7 +207,10 @@
     }
 }
 
-/* Blending */
+/**
+  * Blending 
+  **/
+
 
 .fb-container .search-blending {
     margin-left: 0rem;
@@ -211,7 +222,10 @@
     }
 }
 
-/* Results */
+/**
+  * Results 
+  **/
+
 
 .fb-container .search-results__content {
     flex-direction: column;
@@ -223,13 +237,20 @@
     box-sizing: border-box;
 }
 
-/* Sessions */
+/**
+  * Sessions 
+  **/
+
+.fb-container #search-cart, .fb-container #search-history {
+    min-height: 12rem;     
+}  
 
 @media only screen and (min-width: 1025px) {
     .fb-container #search-cart, .fb-container #search-history {
         -webkit-box-flex: 0;
         flex-basis: 100%;
         margin: 0 auto;
+        min-height: 16rem;
         max-width: calc( 100% - 24.875rem);
         width: calc( 100% - 24.875rem);
         padding-top: 4rem;        
