@@ -43,6 +43,7 @@
 <#import "cemetery.ftl" as cemetery />
 <#import "roadworks.ftl" as roadworks />
 <#import "planning_applications.ftl" as planning_applications />
+<#import "twitter.ftl" as twitter />
 
 <!DOCTYPE html>
 <html lang="en">
