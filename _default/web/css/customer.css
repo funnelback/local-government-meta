@@ -111,9 +111,95 @@
   * Tabs 
   **/
 
-.fb-container .tabs__item .fas {
+.fb-container .tabs__item .fas,  
+.fb-container .tabs__item .fab, 
+.fb-container .tabs__item .far {
     margin-right: 0.5rem;
 }
+
+/* Dropdown in tab navigation */
+
+/* 
+    Make the overflow visible so that the tab dropdown
+    is displayed correctly.
+*/
+
+
+@media only screen and (min-width: 1028px)  {
+    .fb-container .tabs__item.dropdown,
+    .fb-container .tabs__list,
+    .fb-container .tabs {
+        overflow: visible;
+        overflow-y: visible;
+    }
+}
+
+.fb-container .dropdown__toggle:hover,
+.fb-container .dropdown__toggle:focus-within {
+    cursor: pointer;
+}
+
+.fb-container .dropdown_menu {
+    list-style: none;
+    background: rgba(0,0,0,0.8);
+    color: #fff;
+    opacity: 0;
+    min-width: 5rem;
+    padding: 0;
+    margin-left:0.625rem;
+    position: absolute;
+    visibility: hidden;
+    display: none;
+    z-index: 10;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    overflow: hidden;
+    transition: all 0.5s ease;
+}
+
+.fb-container .dropdown__toggle:hover > ul,
+.fb-container .dropdown__toggle:focus-within > ul,
+.fb-container .dropdown__menu:hover,
+.fb-container .dropdown__menu:focus {
+    visibility: visible;
+    opacity: 1;
+    display: block
+}
+
+
+.fb-container .dropdown__item {
+    position: relative;
+    text-decoration: none;
+    transition-duration: 0.5s;
+    padding: 1rem 2rem;
+    width: 100%;
+}
+
+.fb-container .dropdown__item:hover,
+.fb-container .dropdown__item:focus-within {
+    background:#e42b12;
+    cursor: pointer;
+}
+
+.fb-container .dropdown__item.disabled {
+    background: inherit;
+    pointer-events: none;
+}
+
+.fb-container .dropdown__item.active {
+    background: rgba(228, 43, 18, 0.9)
+}
+
+.fb-container .dropdown__item a {
+    outline: none;
+    text-decoration: none;
+    color: #fff;
+}
+
+.fb-container .dropdown__item.disabled a {
+    color: #8f8d8d;
+}
+
 
 /* Prevent the search tier from appearing next to a card in card view */
 .fb-container .search-tier {
@@ -236,6 +322,22 @@
 .fb-container .search-results__bottom {
     box-sizing: border-box;
 }
+
+/* Twitter */
+
+.fb-container .search-results__item--twitter {
+    flex-wrap: wrap;
+}
+
+.fb-container .tags.hashtag {
+    margin-top: 1rem;
+}
+
+.fb-container .tags.hashtag .hashtag__link{
+    color: #e42b12;
+    text-decoration: none;
+}
+
 
 /**
   * Sessions 

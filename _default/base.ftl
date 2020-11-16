@@ -19,7 +19,7 @@
     <form action="${question.getCurrentProfileConfig().get("ui.modern.search_link")}" method="GET"<#if class?has_content> class="${class}"</#if>>
         <input type="hidden" name="collection" value="${question.collection.id}">
 
-        <#list ["enc", "form", "scope", "lang", "profile", "userType", "displayMode"] as parameter>
+        <#list ["enc", "form", "scope", "lang", "profile", "userType", "displayMode", "num_ranks"] as parameter>
             <@s.IfDefCGI name=parameter><input type="hidden" name="${parameter}" value="${question.inputParameterMap[parameter]!}"></@s.IfDefCGI>
         </#list>
 

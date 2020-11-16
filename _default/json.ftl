@@ -244,6 +244,6 @@
 -->
 <@compress single_line=true>
   <@Callback>
-    { "response" : <@ProcessNode WHITELIST response.curator /> }
+    { "response" : <@ProcessNode WHITELIST response.resultPacket /> }
   </@Callback>
 </@compress>
