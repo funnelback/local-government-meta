@@ -111,7 +111,9 @@
   * Tabs 
   **/
 
-.fb-container .tabs__item .fas {
+.fb-container .tabs__item .fas,  
+.fb-container .tabs__item .fab, 
+.fb-container .tabs__item .far {
     margin-right: 0.5rem;
 }
 
@@ -326,6 +328,16 @@
 .fb-container .search-results__item--twitter {
     flex-wrap: wrap;
 }
+
+.fb-container .tags.hashtag {
+    margin-top: 1rem;
+}
+
+.fb-container .tags.hashtag .hashtag__link{
+    color: #e42b12;
+    text-decoration: none;
+}
+
 
 /**
   * Sessions 

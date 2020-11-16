@@ -52,8 +52,8 @@
     <article class="search-results__item search-results__item--twitter"  data-fb-result="${(result.indexUrl)!}">
         <figure class="search-results__bg">
             <#if (result.listMetadata["image"][0])!?has_content>
-                <#--  <img class="deferred rounded-circle fb-image-thumbnail" alt="Thumbnail for ${result.title!}" src="/stencils/resources/base/v15.8/img/pixel.gif" data-deferred-src="${result.listMetadata["image"][0]}">   -->
-                <img alt="Thumbnail for ${result.title!}" src="https://source.unsplash.com/random/160x160?${(result.title)!''?url}"> 
+                <img class="deferred rounded-circle fb-image-thumbnail" alt="Thumbnail for ${result.title!}" src="/stencils/resources/base/v15.8/img/pixel.gif" data-deferred-src="${(result.listMetadata["image"]?first)!}">
+                <#--  <img alt="Thumbnail for ${result.title!}" src="https://source.unsplash.com/random/160x160?${(result.title)!''?url}">   -->
             <#else>
                 <img alt="Thumbnail for ${result.title!}" src="https://source.unsplash.com/random/160x160?${(result.title)!''?url}"> 
             </#if>
@@ -67,24 +67,14 @@
                 </#if> 
             </h3>
             <#if (result.date)!?has_content>
-                <time class="icon-after icon-after--twitter" datetime="">
+                <time class="icon-after icon-after--twitter" datetime="${(result.date)!?date}">
                     ${(result.date)!?date} via
                 </time>
             </#if>
         </div>        
         <div class="search-results__content">
             
-            <#-- Pretty version of the url of the document -->
-            <#--  
-            <cite>
-                <@s.Truncate length=90>
-                    ${(result.displayUrl)!}
-                </@s.Truncate>
-                
-            </cite>  
-            -->
 
-            
             <#-- Summary -->
             <p class="search-results__desc">
                 <@s.boldicize>
@@ -92,8 +82,25 @@
                 </@s.boldicize>
             </p>
 
+
+            <#list result.listMetadata["twitterHashTag"]![]>
+                <section class="tags hashtag">                
+                    <ul class="tags__list">  
+                        <#items as hashtag>
+                            <li class="tags__item">
+                                <a class="hashtag__link" href="https://twitter.com/hashtag/${hashtag!}" title="Link to hashtag on twitter"> 
+                                    #${hashtag!}
+                                </a>
+                            </li>                        
+                        </#items>
+                    </ul>
+                </section>  
+            </#list> 
+
             <#-- Display the time which this result has last been visited by the user -->
             <@history_cart.LastVisitedLink result=result/>            
+        
+            <a href="${result.clickTrackingUrl!}" class="btn--link" title="link to twitter post">Read more</a>
         </div>
     </article>
 </#macro>
