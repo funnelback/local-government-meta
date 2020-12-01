@@ -50,14 +50,14 @@
 -->
 <#macro GenericView result cardClass="fb-card--fixed">
     <article class="search-results__item search-results__item--default" data-fb-result="${(result.indexUrl)!}">
-        <figure class="search-results__bg">
+        <#-- Removing the placeholder image for Local Government as it causes friction during presentations -->
+        <#--  <figure class="search-results__bg">
             <#if (result.listMetadata["image"][0])!?has_content>
-                <#--  <img class="deferred rounded-circle fb-image-thumbnail" alt="Thumbnail for ${result.title!}" src="/stencils/resources/base/v15.8/img/pixel.gif" data-deferred-src="${result.listMetadata["image"][0]}">   -->
-                <img alt="Thumbnail for ${result.title!}" src="https://source.unsplash.com/random/160x160?${(result.title)!''?url}"> 
+                <img class="deferred rounded-circle fb-image-thumbnail" alt="Thumbnail for ${result.title!}" src="/stencils/resources/base/v15.8/img/pixel.gif" data-deferred-src="${result.listMetadata["image"][0]}"> 
             <#else>
-                <img alt="Thumbnail for ${result.title!}" src="https://source.unsplash.com/random/160x160?${(result.title)!''?url}"> 
+                <img alt="Thumbnail for ${result.title!}" src="https://source.unsplash.com/random/160x160?${(result.title)!''?url}">
             </#if>
-        </figure>
+        </figure>  -->
         <div class="search-results__content">
             <#if (result.title)!?has_content>
                 <h4 class="search-results__title">

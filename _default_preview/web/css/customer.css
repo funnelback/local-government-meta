@@ -222,7 +222,9 @@
   **/
 @media only screen and (min-width: 1025px) {
     .fb-container .module-search--bg .tt-dataset-planning_applications,
-    .fb-container .module-search--bg .tt-dataset-cemetery {
+    .fb-container .module-search--bg .tt-dataset:nth-child(2),
+    .fb-container .module-search--bg .tt-dataset:nth-child(3)
+    {
         display: -webkit-box;
         display: flex;
         -webkit-box-flex: 0;

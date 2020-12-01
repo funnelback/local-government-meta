@@ -109,3 +109,23 @@
         </div>
     </article>
 </#macro>
+
+<#-- 
+	Handlebars template used to display the current object
+	in concierge.
+--> 
+<#macro AutoCompleteTemplate>
+	<script id="auto-completion-faqs" type="text/x-handlebar-template">
+		<div class="fb-auto-complete--non-organic">
+            <h6>
+                {{extra.disp.metaData.t}}
+            </h6>
+			<div class="details">	
+                {{#if extra.disp.metaData.faqAnswer}}                    
+                    {{#truncate 70}}{{extra.disp.metaData.faqAnswer}}{{/truncate}}                    
+                {{/if}}
+            </div>              
+		</div>    
+	</script>
+</#macro>
+

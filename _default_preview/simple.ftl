@@ -44,7 +44,8 @@
 <#import "roadworks.ftl" as roadworks />
 <#import "planning_applications.ftl" as planning_applications />
 <#import "twitter.ftl" as twitter />
-<#import "faq.ftl" as faq />
+<#import "faqs.ftl" as faqs />
+<#import "rates.ftl" as rates />
 
 <!DOCTYPE html>
 <html lang="en">
@@ -103,13 +104,17 @@
 	<script src="/s/resources/${question.collection.id}/${question.profile}/js/base.js"></script> 
 	<script src="${GlobalResourcesPrefix}js/funnelback.autocompletion-2.6.0.js"></script>
 
+	<script>
 
+	</script>
+	
 	<#-- Output the auto complete templates for concierge -->
-
-	<@cemetery.AutoCompleteTemplate />
+	<@faqs.AutoCompleteTemplate />
 	<@planning_applications.AutoCompleteTemplate />
 	<@results.CartTemplate />
 	
+
+
 	<script>
 		jQuery(document).ready( function() {
 			setupDeferredImages();
@@ -126,6 +131,7 @@
 		<script type="text/javascript" src="${GlobalResourcesPrefix}js/funnelback.session-history-0.1.js"></script>
 		<@history_cart.Configuration />
 	</#if>
+
 
 </body>
 </html>

@@ -137,3 +137,31 @@ if (!Element.prototype.closest) {
         return null
     }
 }
+
+/* 
+    Helper functions to make it easier to template auto complete.
+*/
+if(Handlebars) {
+    Handlebars.registerHelper({
+        // Cut the left part of a string if it matches the provided `toCut` string
+        // Usage: {{#cut "https://"}}{{indexUrl}}{{/cut}}
+        cut: function(toCut, options) {
+        const str = options.fn(this);
+        if (str.indexOf(toCut) === 0) return str.substring(toCut.length);
+        return str;
+        },
+        // Truncate content to provided lenght
+        // Usage: {{#truncate 70}}{{title}}{{/truncate}}
+        truncate: function (len, options) {
+        const str = options.fn(this);
+        if (str && str.length > len && str.length > 0) {
+            var new_str = str + " ";
+            new_str = str.substr (0, len);
+            new_str = str.substr (0, new_str.lastIndexOf(" "));
+            new_str = (new_str.length > 0) ? new_str : str.substr (0, len);
+            return new Handlebars.SafeString (new_str +'...'); 
+        }
+        return str;
+        }
+    });
+} 
