@@ -297,7 +297,7 @@
   } ]
 }, {
   "created" : "2020-12-02T13:44:32.48577Z",
-  "lastModified" : "2020-12-02T14:22:51.234266Z",
+  "lastModified" : "2020-12-02T16:56:14.175721Z",
   "id" : "36517c65-c621-48c4-bdda-8a1f35d64bfc",
   "name" : "[Example] Curator for left - Bins",
   "label" : "DEFAULT",
@@ -312,6 +312,12 @@
       }, {
         "type" : "AllQueryWords",
         "triggerWords" : [ "app" ]
+      }, {
+        "type" : "AllQueryWords",
+        "triggerWords" : [ "rubbish" ]
+      }, {
+        "type" : "AllQueryWords",
+        "triggerWords" : [ "trash" ]
       } ]
     } ]
   },
