@@ -16,6 +16,13 @@
     Implementation specific style changes. It is recommended that changes to the 
     presentation of this implementation should be made here.
 -->
+<link rel="stylesheet" href="${ContextPath}/resources/${(question.collection.id)!}/${(question.profile)!}/css/stencils.css">
+
+
+<#-- 
+    Implementation specific style changes. It is recommended that changes to the 
+    presentation of this implementation should be made here.
+-->
 <link rel="stylesheet" href="${ContextPath}/resources/${(question.collection.id)!}/${(question.profile)!}/css/customer.css">
 
 <#-- Showcase related presentation - Please remove as part of the project -->
