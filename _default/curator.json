@@ -297,7 +297,7 @@
   } ]
 }, {
   "created" : "2020-12-02T13:44:32.48577Z",
-  "lastModified" : "2020-12-02T16:59:49.862955Z",
+  "lastModified" : "2020-12-02T17:02:27.583382Z",
   "id" : "36517c65-c621-48c4-bdda-8a1f35d64bfc",
   "name" : "[Example] Curator for left - Bins",
   "label" : "DEFAULT",
@@ -321,6 +321,9 @@
       }, {
         "type" : "AllQueryWords",
         "triggerWords" : [ "garbage" ]
+      }, {
+        "type" : "AllQueryWords",
+        "triggerWords" : [ "collection" ]
       } ]
     } ]
   },
