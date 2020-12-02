@@ -172,9 +172,9 @@
   } ]
 }, {
   "created" : "2020-08-17T16:12:56.407535Z",
-  "lastModified" : "2020-09-18T00:14:59.254508Z",
+  "lastModified" : "2020-12-02T17:04:42.060544Z",
   "id" : "fe3b1d3b-fa55-4fbe-a154-a3d4ed3c2e32",
-  "name" : "[Example] Bins",
+  "name" : "[Example] Curator on top - Bins",
   "label" : "DEFAULT",
   "enabled" : true,
   "trigger" : {
@@ -190,14 +190,20 @@
       }, {
         "type" : "AllQueryWords",
         "triggerWords" : [ "rubbish" ]
+      }, {
+        "type" : "AllQueryWords",
+        "triggerWords" : [ "garbage" ]
+      }, {
+        "type" : "AllQueryWords",
+        "triggerWords" : [ "trash" ]
       } ]
     } ]
   },
   "actions" : [ {
     "type" : "DisplayUrlAdvert",
     "titleHtml" : "Report street damage or a cleaning issue",
-    "displayUrl" : "https://www.camden.gov.uk/report-street-issue",
-    "linkUrl" : "https://www.camden.gov.uk/report-street-issue",
+    "displayUrl" : "https://www.conncil/report-street-issue",
+    "linkUrl" : "https://www.conncil/report-street-issue",
     "descriptionHtml" : "Tell us about a problem on our streets so that we can have a look.",
     "additionalProperties" : {
       "position" : "center",
@@ -210,8 +216,8 @@
   }, {
     "type" : "DisplayUrlAdvert",
     "titleHtml" : "Recycling and rubbish collection days",
-    "displayUrl" : "https://environmentservices.camden.gov.uk/property?",
-    "linkUrl" : "https://environmentservices.camden.gov.uk/property?",
+    "displayUrl" : "https://environmentservices.gov.uk/property",
+    "linkUrl" : "https://environmentservices.gov.uk/property",
     "descriptionHtml" : "Find out when your rubbish and recycling is collected.",
     "additionalProperties" : {
       "position" : "center",
