@@ -18,6 +18,7 @@
   Display the contextual navigation panel only if there are valid values
 -->
 <#macro ContextualNavigation>
+    <!-- contextual_navigation.ContextNavigation -->
     <@HasContextualNavigation>
         <!-- base.ContextualNavigation -->
         <section class="related-links">

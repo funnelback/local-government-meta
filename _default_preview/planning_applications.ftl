@@ -45,6 +45,7 @@
     @param result An individual result fron the data model
 -->
 <#macro GenericView result cardClass="fb-card--fixed">
+    <!-- planning_applications.GenericView -->
     <article class="search-results__item search-results__item--people" data-fb-result="${result.indexUrl}">
         <figure class="search-results__bg">
             <#if (result.listMetadata["image"][0])!?has_content>
@@ -129,6 +130,7 @@
     in concierge.
 --> 
 <#macro AutoCompleteTemplate>
+    <!-- planning_applications.AutoCompleteTemplate -->
     <script id="auto-completion-planning_applications" type="text/x-handlebar-template">
         <div class="fb-auto-complete--non-organic">
             <h6>

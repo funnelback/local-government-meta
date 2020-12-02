@@ -438,7 +438,7 @@
         This is used to insert content (usually an extra search) between results.
 -->
 <#macro QuickViewTemplates>
-    <!-- base.StandardResults -->
+    <!-- base.QuickViewTemplates -->
     <#list (response.resultPacket.resultsWithTierBars)![] as result>
         <#if result.class.simpleName == "TierBar">
             <#-- Ignore tier bars -->
@@ -473,12 +473,9 @@
 
     <#if .main[resultDisplayLibrary]??>
         <@.main[resultDisplayLibrary].QuickView result=result />
-    <#--  
-    TODO: Add a default template in case one has not been defined
     <#elseif .main["project"]??>
-        <#-- Default Result macro in current namespace 
+        <#-- Default Result macro in current namespace -->
         <@.main["project"].QuickView result=result/>
-    -->
     <#else>
         <div class="alert alert-danger" role="alert">
             <strong>Result template not found</strong>: Template <code>&lt;@<#if resultDisplayLibrary?has_content>${resultDisplayLibrary}<#else>(default namespace)</#if>.Result /&gt;</code>

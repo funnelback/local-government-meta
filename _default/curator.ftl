@@ -10,9 +10,9 @@
     @param position Position attribute to consider from the Curator message.
         Only messages with a position attribute matching this will be displayed. Can be empty to display all messages regardless of position.
 -->
-<#macro Curator position>
+<#macro Curator position sectionCss="">
     <!-- curator.Curator -->
-    <section class="module-curator module-curator--no-bg">
+    <section class="module-curator ${sectionCss}">
         <h2 class="sr-only">Curator</h2>
         <article class="module-curator__list">
             <#list (response.curator.exhibits)![] as exhibit>
@@ -56,13 +56,13 @@
                                         </p>
                                     </#if>
 
-                                    <#-- Output and option explicit the call to action link -->
-                                    <#if (exhibit.additionalProperties.call_to_action_url)!?has_content>
-                                        <a class="btn--link" href="${(exhibit.additionalProperties.call_to_action_url)!}">
-                                            ${(exhibit.additionalProperties.call_to_action_label)!}
-                                        </a>
-                                    </#if>
                                 </div>
+                                <#-- Output and option explicit the call to action link -->
+                                <#if (exhibit.additionalProperties.call_to_action_url)!?has_content>
+                                    <a class="btn--link" href="${(exhibit.additionalProperties.call_to_action_url)!}">
+                                        ${(exhibit.additionalProperties.call_to_action_label)!}
+                                    </a>
+                                </#if>
                             </article>
                         </#if>
                     </#if>

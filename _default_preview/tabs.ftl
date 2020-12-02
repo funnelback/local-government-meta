@@ -35,6 +35,7 @@
     Display tabs, from the FACETED_NAVIGATION extra search
 -->
 <#macro Tabs>
+    <!-- tabs.Tabs -->
     <#list (response.facets)![] as facet>
         <#if facet.allValues?size gt 0 && facet.guessedDisplayType == "TAB">
             <section class="tabs js-tabs content-wrapper">
@@ -110,6 +111,7 @@
          global question which is currently in scope.
 -->
 <#macro Preview extraSearchName documentType="" view="DETAILED" parentQuestion=question>
+    <!-- tabs.Preview -->
     <#assign parentQuestion = question>
     <@fb.ExtraResults name=extraSearchName>
         <#if (response.resultPacket.results)!?has_content>

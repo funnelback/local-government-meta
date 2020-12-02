@@ -6,7 +6,7 @@
 /* Increased the font on large viewports */
 @media only screen and (min-width: 1025px) {
     html {
-        font-size: 0.925rem;
+        font-size: 0.875rem;
     }
 }
 
@@ -25,6 +25,10 @@
 
 .fb-container .btn {
     cursor: pointer;
+}
+
+.fb-container cite {
+    overflow-wrap: anywhere;
 }
 
 /**
@@ -49,6 +53,12 @@
 /** 
  * Facets 
  **/
+
+/* Ensure there is always some margin after facets */
+
+.fb-container .module-filter {
+    margin-bottom: 1.25em;
+}
 
 /* Add support for radio boxes and check boxes */
 .fb-container .module-filter--dark .module-filter__facets-link.round::after {
@@ -214,7 +224,6 @@
 
 .module-curator__title + cite {
     margin: 0 1.8125rem .3125em 1.8125rem;
-    overflow-wrap: anywhere;
 }
 
 .fb-container .search-results__icon--red {
@@ -322,11 +331,20 @@
   **/
 
 
+@media only screen and (min-width: 950px) {
+    .fb-container .content-wrapper--col .search-results__item:nth-child(-n+4) {
+        margin-top: 0;
+    }
+}
+
+.fb-container .search-results__list--list-view .search-results__desc {
+    display: inherit;
+}
+
 .fb-container .search-results__content {
     flex-direction: column;
     flex-wrap: nowrap;
 }
-
 
 .fb-container .search-results__bottom {
     box-sizing: border-box;

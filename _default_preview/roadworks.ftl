@@ -45,11 +45,12 @@
 	@param result An individual result fron the data model
 -->
 <#macro GenericView result cardClass="fb-card--fixed">
+    <!-- roadworks.GenericView -->
     <article class="search-results__item search-results__item--people" data-fb-result="${result.indexUrl}">
         <figure class="search-results__bg">
             <#if (result.listMetadata["image"][0])!?has_content>
                 <img class="deferred rounded-circle fb-image-thumbnail" alt="Thumbnail for ${result.title!}" src="/stencils/resources/base/v15.8/img/pixel.gif" data-deferred-src="https://jobs.ama.org${result.listMetadata["image"][0]}"> 
-            <#else>
+            <#elseif ((question.getCurrentProfileConfig().get("stencils.showcase"))!"FALSE")?upper_case == "TRUE">
                 <img alt="Thumbnail for ${result.title!}" src="https://source.unsplash.com/random/160x160?${(result.listMetadata['roadworksStreet'][0])!''?url}"> 
             </#if>
         </figure>
@@ -66,8 +67,7 @@
             
             <#-- Subtitle -->
             <span class="search-results__sub-title">
-                
-                
+                                
             </span>
             
             <#-- Summary -->
@@ -122,6 +122,7 @@
 
 
 <#macro CartTemplate>
+	<!-- roadworks.CartTemplate -->
 	<script id="cart-template-membership-association-jobs-web" type="text/x-handlebar-template">
 		<div class="card mb-3">
 			<div class="card-body">

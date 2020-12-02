@@ -295,4 +295,38 @@
     "category" : "",
     "removeCollectionUrl" : false
   } ]
+}, {
+  "created" : "2020-12-02T13:44:32.48577Z",
+  "lastModified" : "2020-12-02T14:22:51.234266Z",
+  "id" : "36517c65-c621-48c4-bdda-8a1f35d64bfc",
+  "name" : "[Example] Curator for left - Bins",
+  "label" : "DEFAULT",
+  "enabled" : true,
+  "trigger" : {
+    "type" : "And",
+    "triggers" : [ {
+      "type" : "Or",
+      "triggers" : [ {
+        "type" : "AllQueryWords",
+        "triggerWords" : [ "bins" ]
+      }, {
+        "type" : "AllQueryWords",
+        "triggerWords" : [ "app" ]
+      } ]
+    } ]
+  },
+  "actions" : [ {
+    "type" : "DisplayUrlAdvert",
+    "titleHtml" : "Snap Send Solve",
+    "displayUrl" : "https://download.app",
+    "linkUrl" : "https://download.app",
+    "descriptionHtml" : "If you spot something in our district such as a pothole, vandalism, litter or damaged footpath, you can report it instantly to the District Council from a mobile phone.\n<br /> <br />\nThe app works by identifying the location the photo is taken using the phone's GPS data. It sends an email to the Council from the user's email address, including the incident type, notes, address of incident, photo and the user's contact details.",
+    "additionalProperties" : {
+      "position" : "left",
+      "call_to_action_label" : "DOWNLOAD NOW",
+      "call_to_action_url" : "www.google.com"
+    },
+    "category" : "",
+    "removeCollectionUrl" : false
+  } ]
 } ]

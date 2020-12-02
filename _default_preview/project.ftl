@@ -7,6 +7,7 @@
 -->
 
 <#macro SearchForm>
+    <!-- project.SearchForm -->
     <section class="module-search js-module-search content-wrapper module-search--bg" style="background-image: url('/s/resources/${question.collection.id}/${question.profile}/css/mysource_files/bg-search.png');">
         <h2 class="sr-only">Search module</h2>
         <@base.SearchForm>
@@ -30,6 +31,7 @@
 
 <#-- Outputs the search result section -->
 <#macro Results>
+    <!-- project.Results -->
     <div>
         <section id="search-results" class="search-results">
             <@facets.FacetBreadBox />
@@ -44,7 +46,7 @@
             </#if> 
             
             <@curator.BestBets />                
-            <@curator.Curator position="center" />      
+            <@curator.Curator position="center" sectionCss="module-curator--no-bg" />      
 
             <@base.NoResults />
 
@@ -66,7 +68,7 @@
                 </@fb.ExtraResults>
             </@base.ResultList>
 
-            <@curator.Curator position="bottom" />
+            <@curator.Curator position="bottom" sectionCss="module-curator--no-bg" />
 
             <@base.Paging />
 
@@ -77,10 +79,13 @@
 </#macro>
 
 <#-- Display the facets based on the configurations -->
-<#macro Facets>
-    <#local tabFacets = question.getCurrentProfileConfig().get("stencils.tabs.facets.${(response.customData.stencilsTabsSelectedTab)!}")!>
-
+<#macro SideNavigation>
+    <!-- project.SideNavigation -->
     <div>
+        <#-- Get facets for the current selected tab -->
+        <#local tabFacets = question.getCurrentProfileConfig().get("stencils.tabs.facets.${(response.customData.stencilsTabsSelectedTab)!}")!>
+        
+        <#-- Display facets -->
         <section class="module-filter module-filter--dark js-module-filter">
             <@facets.HasFacets facets=tabFacets>
                 <div class="module-filter__wrapper">
@@ -92,6 +97,10 @@
                 </div>
             </@facets.HasFacets>
         </section>
+
+        <#-- Curator - Left hand side -->
+        <section>
+            <@curator.Curator position="left" />  
+        </section>
     </div>
 </#macro>
-<#-- vim: set expandtab ts=2 sw=2 sts=2 :-->

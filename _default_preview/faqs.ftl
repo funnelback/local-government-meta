@@ -49,14 +49,15 @@
     @param result An individual result fron the data model
 -->
 <#macro GenericView result cardClass="fb-card--fixed">
+    <!-- faqs.GenericView -->
     <article class="search-results__item search-results__item--default" data-fb-result="${(result.indexUrl)!}">
         <figure class="search-results__bg">
             <#if (result.listMetadata["image"][0])!?has_content>
-                <#--  <img class="deferred rounded-circle fb-image-thumbnail" alt="Thumbnail for ${result.title!}" src="/stencils/resources/base/v15.8/img/pixel.gif" data-deferred-src="${result.listMetadata["image"][0]}">   -->
-                <img alt="Thumbnail for ${result.title!}" src="https://source.unsplash.com/collection/73776582/160x160"> 
-            <#else>
+                <img class="deferred rounded-circle fb-image-thumbnail" alt="Thumbnail for ${result.title!}" src="/stencils/resources/base/v15.8/img/pixel.gif" data-deferred-src="${result.listMetadata["image"][0]}">   -->
+            <#elseif ((question.getCurrentProfileConfig().get("stencils.showcase"))!"FALSE")?upper_case == "TRUE"> 
                 <img alt="Thumbnail for ${result.title!}" src="https://source.unsplash.com/collection/73776582/160x160"> 
             </#if>
+        ${(question.getCurrentProfileConfig().get("stencils.showcase"))!"FALSE"?upper_case}     
         </figure>
         <div class="search-results__content">
             <#if (result.title)!?has_content>
@@ -115,6 +116,7 @@
 	in concierge.
 --> 
 <#macro AutoCompleteTemplate>
+    <!-- faqs.AutoCompleteTemplate -->
 	<script id="auto-completion-faqs" type="text/x-handlebar-template">
 		<div class="fb-auto-complete--non-organic">
             <h6>

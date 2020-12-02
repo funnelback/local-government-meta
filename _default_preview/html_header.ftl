@@ -18,6 +18,10 @@
 -->
 <link rel="stylesheet" href="${ContextPath}/resources/${(question.collection.id)!}/${(question.profile)!}/css/stencils.css">
 
+<#-- Showcase related presentation -->
+<#if ((question.getCurrentProfileConfig().get("stencils.showcase"))!"FALSE")?upper_case == "TRUE">
+    <link rel="stylesheet" href="${ContextPath}/resources/${(question.collection.id)!}/${(question.profile)!}/css/showcase.css">
+</#if>
 
 <#-- 
     Implementation specific style changes. It is recommended that changes to the 
@@ -25,6 +29,4 @@
 -->
 <link rel="stylesheet" href="${ContextPath}/resources/${(question.collection.id)!}/${(question.profile)!}/css/customer.css">
 
-<#-- Showcase related presentation - Please remove as part of the project -->
-<link rel="stylesheet" href="${ContextPath}/resources/${(question.collection.id)!}/${(question.profile)!}/css/showcase.css">
 

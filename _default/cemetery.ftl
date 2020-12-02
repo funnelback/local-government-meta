@@ -45,12 +45,12 @@
 	@param result An individual result fron the data model
 -->
 <#macro GenericView result cardClass="fb-card--fixed">
-
+    <!-- cemetery.GenericView -->
     <article class="search-results__item search-results__item--people" data-fb-result="${result.indexUrl}">
         <figure class="search-results__bg">
             <#if (result.listMetadata["image"]?first)!?has_content>
                 <img class="deferred rounded-circle fb-image-thumbnail" alt="Thumbnail for ${result.title!}" src="/stencils/resources/base/v15.8/img/pixel.gif" data-deferred-src="https://jobs.ama.org${result.listMetadata["image"]?first}"> 
-            <#else>
+            <#elseif ((question.getCurrentProfileConfig().get("stencils.showcase"))!"FALSE")?upper_case == "TRUE">
                 <img alt="Thumbnail for ${result.title!}" src="https://source.unsplash.com/random/160x160?${(result.listMetadata["cemeterySurname"]?first)!''?url}"> 
             </#if>
         </figure>
@@ -121,6 +121,7 @@
 	in concierge.
 --> 
 <#macro AutoCompleteTemplate>
+    <!-- cemetery.AutoCompleteTemplate -->
 	<script id="auto-completion-cemetery" type="text/x-handlebar-template">
 		<div class="fb-auto-complete--non-organic">
             <h6>

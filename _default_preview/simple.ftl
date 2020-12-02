@@ -36,10 +36,7 @@
 	These imports are required for the automatic template selection to work
 	The various namespaces (e.g. 'video', 'facebook') need to be on the main scope 
 -->
-<#import "events.ftl" as events />
-<#import "jobs.ftl" as jobs />
 <#import "services.ftl" as services />
-<#import "journals.ftl" as journals />
 <#import "cemetery.ftl" as cemetery />
 <#import "roadworks.ftl" as roadworks />
 <#import "planning_applications.ftl" as planning_applications />
@@ -68,11 +65,11 @@
 			<@s.AfterSearchOnly>
 				<@project.Tabs />
 				 <#-- 
-				 	Would merge the span with the section element but due to the way sessions hide/show functionalty works, 
+				 	Would normally merge the span with the section element but due to the way sessions hide/show functionalty works, 
 				 	we need to separate this into it own element. -->
 				<span id="search-facets-and-results" >
 					<section class="content-wrapper content-wrapper--col search-facets-and-results">
-						<@project.Facets />
+						<@project.SideNavigation />
 						<@project.Results />
 					</section>
 				</span>

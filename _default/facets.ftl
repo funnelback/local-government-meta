@@ -103,6 +103,7 @@
     facets/filter options that have been selected by the user
 --> 
 <#macro FacetBreadBox>
+    <!-- facets.FacetsBreadBox -->
     <#if response.facetExtras.hasSelectedNonTabFacets>
         <section class="filter-list search-results__total clearfix">
             <span class="filter-list__title">Selected filters:</span>
@@ -122,6 +123,7 @@
 </#macro>
 
 <#macro ClearAllFacets>
+    <!-- facets.ClearAllFacets -->
     <#if (response.facetExtras.hasSelectedNonTabFacets)!>
         <a href="${(response.facetExtras.unselectAllFacetsUrl)!}"
         class="search-results__tools-link highlight">Clear all filters</a>
