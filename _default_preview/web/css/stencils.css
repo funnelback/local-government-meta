@@ -6,7 +6,7 @@
 /* Increased the font on large viewports */
 @media only screen and (min-width: 1025px) {
     html {
-        font-size: 0.925rem;
+        font-size: 0.875rem;
     }
 }
 
@@ -25,6 +25,10 @@
 
 .fb-container .btn {
     cursor: pointer;
+}
+
+.fb-container cite {
+    overflow-wrap: anywhere;
 }
 
 /**
@@ -214,7 +218,6 @@
 
 .module-curator__title + cite {
     margin: 0 1.8125rem .3125em 1.8125rem;
-    overflow-wrap: anywhere;
 }
 
 .fb-container .search-results__icon--red {
@@ -321,6 +324,12 @@
   * Results 
   **/
 
+
+@media only screen and (min-width: 950px) {
+    .fb-container .content-wrapper--col .search-results__item:nth-child(-n+4) {
+        margin-top: 0;
+    }
+}
 
 .fb-container .search-results__content {
     flex-direction: column;
