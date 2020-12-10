@@ -2,6 +2,7 @@ import groovy.util.logging.Log4j2
 
 import com.funnelback.publicui.search.model.transaction.SearchTransaction
 import com.funnelback.publicui.search.model.transaction.SearchQuestion.SearchQuestionType
+import com.funnelback.publicui.search.model.transaction.facet.FacetDisplayType
 import com.funnelback.stencils.hook.support.HookLifecycle
 import java.net.URLEncoder
 
@@ -669,6 +670,8 @@ class BrowseModeHookLifecycle implements HookLifecycle {
 	/** Name of the facet containing the primary tabs */
     static final String TABS_FACET_NAME = "Tabs"
 
+	static final String TAB_FACET_GUESSED_DISPLAY_TYPE = "TAB"
+
 	/**
 	 * 
 	 *  
@@ -691,30 +694,49 @@ class BrowseModeHookLifecycle implements HookLifecycle {
 
 
 	}
-
+	
 	public void addSelectedTabFacetToSecondaryTabs(def transaction) {
 
-		// Get the query parameters for the current selected tab
+		// Get 9o9othe query parameters for the current selected tab
 		// Assuming that tabs can only have 1 selected value at any one time
 		String selectedTabQueryParameter = transaction?.response?.facets
 			.find() {
-				facet -> facet.name == "Format"
+				facet -> facet.name == TABS_FACET_NAME
 			}
-			.collect() {
+			.collect(){
 				facet -> facet.selectedValues				
 			}
+			// Flatten an list of array of selected value to just an list of selected value
+			.flatten()
 			.collect() {
 				selectedValue -> selectedValue.queryStringParam
 			}
-			// Convert an array of strings to an array of strings.			
-			.findAll()
-
-		log.error(selectedTabQueryParameter)
+			// Convert an array of strings to an array of strings.
+			//.flatten()			
+			.find()
 
 		// Get all tab facets which are is not the main 
-
-		// Modify the toggle url for each category value
-
+		if(selectedTabQueryParameter != null) {
+			transaction?.response?.facets
+				.findAll() {
+					facet -> facet.guessedDisplayType.equals(FacetDisplayType.TAB) && facet.name != TABS_FACET_NAME
+				}
+				.each() {
+					facet -> 
+					
+					facet.allValues
+						.findAll() {
+							// To be defensive, we only want to add the parameter if it does not already exist.
+							// This may happen in the future if the product changes its behaviour.
+							facetCategory -> facetCategory.toggleUrl.contains(selectedTabQueryParameter) == false
+						}
+						.each() {
+							// Modify the toggle url for each category value so that it retains the current 
+							// selected tab
+							facetCategory -> facetCategory.toggleUrl += "&" + selectedTabQueryParameter
+						}
+				}
+		} 
 	}
 
 	/**
