@@ -82,9 +82,6 @@
     </#if>
 </#macro>
 
-
-facets?split(",")?filter( x -> response.facets?filter(y -> x == y.name && y.allValues?size gt 0)?size gt 0)?size gt 0>
-
 <#--
   Display best bets.
 -->

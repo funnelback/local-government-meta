@@ -9,6 +9,7 @@ new com.funnelback.stencils.hook.StencilHooks().apply(transaction, binding.hasVa
 
 new SearchPreviewHookLifecycle().postProcess(transaction)
 new GroupingResultsHookLifecycle().postProcess(transaction)
+new BrowseModeHookLifecycle().postProcess(transaction)
 
 /**
  * The following functions are used for demo purposes.
@@ -371,7 +372,6 @@ class GroupingResultsHookLifecycle {
 	 */
 		void postProcess(SearchTransaction transaction) {
 		if(isGroupingEnabled(transaction)) {
-			log.error("Running result group code")
 			groupResults(transaction)
 		}
 	}
@@ -464,8 +464,7 @@ class GroupingResultsHookLifecycle {
    *
 	 * @param transaction The funnelback transaction which represents the search
 	 **/
-	public void groupResults(def transaction) {
-		log.error("Sorting script initiated")    
+	public void groupResults(def transaction) {    
 		def profileConfig = transaction.question.getCurrentProfileConfig()
 
 		// Determine the mode
@@ -552,7 +551,6 @@ class GroupingResultsHookLifecycle {
 	 *
 	 **/
 	public void addGroupingDataToDataModel(Closure extractGroupingValue, def transaction) {
-		log.error("Adding grouping data to data model")
 		if(transaction?.response?.resultPacket?.results != null
 			&& transaction?.response?.customData != null) {
 			def results = transaction.response.resultPacket.results		
@@ -571,7 +569,6 @@ class GroupingResultsHookLifecycle {
 	 *
 	 **/
 	public getGroupingData(def results, Closure extractGroupingValue, def transaction) {
-		log.error("Generating grouping data")
 		def profileConfig = transaction.question.getCurrentProfileConfig()
 		
 		// Define the container which will store all the data related to grouping results
@@ -583,7 +580,6 @@ class GroupingResultsHookLifecycle {
 		groupingData.put("mode", groupingMode)
 		
 		// Get a unique list of groups (a.k.a category)
-		log.error("Getting a unique list of categories")
 		def categories = results
 			.collect() {
 				extractGroupingValue(it, transaction)
@@ -591,9 +587,6 @@ class GroupingResultsHookLifecycle {
 			.unique()
 
 		// Get the title as configured by the user and generate the see more link for each group  
-		log.error("Generating titles and more link")
-
-		log.error("Number of categories: ${categories.size()}")
 		def groups = categories
 			.collect() {
 				category ->
@@ -626,7 +619,6 @@ class GroupingResultsHookLifecycle {
 	 *
 	 **/
 	public String getMoreLink(String targetFacet, String targetFacetCategory, def facets) {
-		log.error("Generating more link")
 		// Get the instance of the target facet 
 		def facet = facets.find {			
 			it.name.toUpperCase() == targetFacet.toUpperCase()
@@ -649,3 +641,110 @@ class GroupingResultsHookLifecycle {
 	}
 }
 
+/**
+ * <p>Hook functions to provide a browse experience for a search implementation</p>
+ * There are scenarios where users prefer to browse content such as in a directory
+ * of services or a program finder catalog. This class  adjust the links in the 
+ * primary and secondary tab facets so that the browse option is not being carried 
+ * over between tabs. It will also ensure that the selected facet is respected when
+ * navigating between the secondary category values. 
+ * 
+ * e.g. By default, the following is the default behaviour of the product. 
+ * Given: 
+ * 	- A search implementation with a parimary tab which has three categories; All results, courses, web
+ * 	- A user is on the course tab and want to browse all available courses
+ * 	- Another tab style facets populated with A to Z (i.e. A, B, C, D) facet categories which allows
+ * 		the user to refine by letter.
+ * When
+ * 	- A user changes the refinement from between A to B
+ * Then
+ * 	- The selected facet is lost
+ */
+@Log4j2
+class BrowseModeHookLifecycle implements HookLifecycle {
+
+	/** Key holding the config */
+	static final String CONFIG_KEY_PREFIX = "stencils.tabs.browse_mode"
+
+	/** Name of the facet containing the primary tabs */
+    static final String TABS_FACET_NAME = "Tabs"
+
+	/**
+	 * 
+	 *  
+	 * @param transaction
+	 */
+	void postProcess(SearchTransaction transaction) {
+		if (isBrowseModeEnabled(transaction)) {
+			addSelectedTabFacetToSecondaryTabs(transaction)
+		}
+	}
+
+	/**
+	 * 
+	 * will provide the user a different way to navigate to a 
+     * particular facet or tab
+	 *  
+	 * @param transaction
+	 */
+	public void removeBrowseModeFromFacetLinks(def transaction) {
+
+
+	}
+
+	public void addSelectedTabFacetToSecondaryTabs(def transaction) {
+
+		// Get the query parameters for the current selected tab
+		// Assuming that tabs can only have 1 selected value at any one time
+		String selectedTabQueryParameter = transaction?.response?.facets
+			.find() {
+				facet -> facet.name == "Format"
+			}
+			.collect() {
+				facet -> facet.selectedValues				
+			}
+			.collect() {
+				selectedValue -> selectedValue.queryStringParam
+			}
+			// Convert an array of strings to an array of strings.			
+			.findAll()
+
+		log.error(selectedTabQueryParameter)
+
+		// Get all tab facets which are is not the main 
+
+		// Modify the toggle url for each category value
+
+	}
+
+	/**
+	 * Determines if tab preview should be enabled for this transaction.
+	 *
+	 * @param transaction The funnelback transaction which represents the search
+	 **/
+	public boolean isBrowseModeEnabled(def transaction) {
+		return isMainSearch(transaction) &&
+				isConfigured(transaction)
+	}
+
+	/** 
+	 * Returns true if the current transaction is the main search. 
+	 * i.e. not content auditor, accessibility auditor orfaceted navigation
+	 *
+	 * @param transaction The funnelback transaction which represents the search
+	 **/
+	public boolean isMainSearch(def transaction) {
+		return SearchQuestionType.SEARCH.equals(transaction.question.questionType)
+	}
+
+	/** 
+	 * Returns true if the user has provided enough configurations to enable
+	 * tab previews. 
+	 *
+	 * @param transaction The funnelback transaction which represents the search
+	 **/
+	public boolean isConfigured(def transaction) {		
+		return transaction?.question?.getCurrentProfileConfig().getRawKeys()
+			.find() { it.startsWith(CONFIG_KEY_PREFIX) } ? true : false		
+	}	
+}

@@ -122,6 +122,98 @@
     </#if>
 </#macro>
 
+<#-- Displays facet catergories in a facet as a dropdown list -->
+<#macro DropdownFacet facets=[]>
+    <!-- facets.DropdownFacet -->
+
+    <#-- 
+        Find all the facets with values and determine if we want to display all tabs or just the tabs specified 
+    -->
+    <#local facetsToDisplay = (response.facets![])?filter(facet -> 
+            (!facets?has_content || facets?seq_contains(facet.name)) 
+            && facet.allValues?size gt 0
+        )
+    >
+
+    <#-- Display the facets as a list -->
+    <#list facetsToDisplay as facet>
+        <#list facet.allValues>
+            <section class="dropdown-list">        
+                <span class="sr-only">Refine by ${(facet.name)!}</span>
+                <button class="dropdown-list__link js-dropdown-list__link" aria-haspopup="true" aria-expanded="false">
+                    <#-- Determine what the label of the dropdown should be -->
+                    <#local selectedFacetCategories = facet.allValues?filter(value -> value.selected)>
+
+                    <#if selectedFacetCategories?size gt 0>
+                        <#-- Display all the selected facet categories as the label -->
+                        <span>${(selectedFacetCategories?map(value -> value.label)?join(", "))!}</span>
+                    <#else>
+                        <#-- Display the facet name as the label -->
+                        <span>${(facet.name)!}</span>
+                    </#if>                    
+                </button>
+                <ul class="dropdown-list__list" role="listbox" tabindex="-1"> 
+                    <#items as value>
+                        <li role="option">
+                            <a class="dropdown-list__list-link" title="Refine by ${value}" href="${question.collection.configuration.value("ui.modern.search_link")}${value.toggleUrl!}">
+                                <#if (value.selected)!false>
+                                    <i class="fas fa-check"></i>
+                                </#if>
+                                ${value.label!}
+                            </a>                         
+                        </li>
+                    </#items>          
+                </ul>
+            </section>  
+        </#list>
+    </#list> 
+</#macro>
+
+<#-- 
+    Displays all available facet categories available for a facets
+    as a persistent list. It is intended to be used to display an 
+    A-Z index for browsing documents such as services (in a directory
+    of service) or programs in a Program Finder.
+-->
+<#macro ListFacets facets=[]>
+    <!-- facets.ListFacets -->
+    
+    <#-- 
+        Find all the facets with values and determine if we want to display all tabs or just the tabs specified 
+    -->
+    <#local facetsToDisplay = (response.facets![])?filter(facet -> 
+            (!facets?has_content || facets?seq_contains(facet.name)) 
+            && facet.allValues?size gt 0
+        )
+    >
+    
+    <#-- Display the facets as a list -->
+    <#list facetsToDisplay as facet>
+        <#list facet.allValues>
+            <ul class="module-az__list">        
+                <span class="sr-only">Refine by ${(facet.name)!}</span> 
+                <#items as value>
+                    <li class="module-az__item ${value.selected?then("active","")}">
+                        <#if value.count gt 0>                        
+                            <a href="${question.collection.configuration.value("ui.modern.search_link")}${value.toggleUrl!}" 
+                                class="module-az__link"
+                                title="Refine by ${value.label!} which has about ${(value.count)!"0"?string} results"
+                            >
+                                ${(value.label)!} 
+                                <span class="sr-only">Refine by</span> 
+                            </a>
+                        <#else>
+                            <span>
+                                ${(value.label)!}                         
+                            </span>
+                        </#if>
+                    </li>
+                </#items>          
+            </ul>
+        </#list>
+    </#list>
+</#macro>
+
 <#macro ClearAllFacets>
     <!-- facets.ClearAllFacets -->
     <#if (response.facetExtras.hasSelectedNonTabFacets)!>
@@ -138,14 +230,14 @@
 </#macro>
 
 <#-- Runs the nested code only when a certain facet is selected -->
-<#macro IsSelected facetName="" categoryLabel="">
-    <#if !facetName?has_content || !categoryLabel?has_content>   
+<#macro IsSelected facetName="" categoryLabels=[]>
+    <#if !facetName?has_content || !categoryLabels?has_content>   
         <#-- 
             By default, we want to run the nested code if no valid
             configurations are supplied.
         -->
         <#nested>
-    <#elseif (response.facets![])?filter(facet -> facet.name?upper_case == facetName?upper_case && facet.selectedValues?filter(category -> category.label?upper_case == categoryLabel?upper_case)?size gt 0)?size gt 0>
+    <#elseif (response.facets![])?filter(facet -> facet.name?upper_case == facetName?upper_case && facet.selectedValues?filter(category -> categoryLabels?filter(value -> value?upper_case == category.label?upper_case)?size gt 0)?size gt 0)?size gt 0>
         <#-- 
             Given that valid configurations are supplied, we ony 
             want to show the nested content of the facet has been selected.

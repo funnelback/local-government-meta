@@ -21,9 +21,9 @@
   } ]
 }, {
   "created" : "2020-03-11T14:34:28.23796Z",
-  "lastModified" : "2020-10-20T17:15:44.230751Z",
+  "lastModified" : "2020-12-03T09:16:13.787586Z",
   "id" : "9e45ee31-7d21-44ee-a5ac-f91ea73035d2",
-  "name" : "[Example] Curators to display for \"No Results\"",
+  "name" : "[Example] Curators for \"No Results\"",
   "label" : "DEFAULT",
   "enabled" : true,
   "trigger" : {
@@ -88,9 +88,9 @@
   } ]
 }, {
   "created" : "2020-03-12T14:33:01.536859Z",
-  "lastModified" : "2020-10-20T17:08:16.29323Z",
+  "lastModified" : "2020-12-03T09:16:38.588196Z",
   "id" : "f667e7b1-7136-405b-af29-16e0fee57036",
-  "name" : "[Example] health and corona - center position",
+  "name" : "[Example] Curator in the center - health, corona, covid",
   "label" : "DEFAULT",
   "enabled" : true,
   "trigger" : {
@@ -136,164 +136,10 @@
     "removeCollectionUrl" : false
   } ]
 }, {
-  "created" : "2020-04-08T21:56:46.500816Z",
-  "lastModified" : "2020-10-20T17:03:22.392566Z",
-  "id" : "0f46ff92-62e3-46d2-9a29-f2f9bc2599d9",
-  "name" : "[Example] health and corona - bottom position",
-  "label" : "DEFAULT",
-  "enabled" : true,
-  "trigger" : {
-    "type" : "And",
-    "triggers" : [ {
-      "type" : "Or",
-      "triggers" : [ {
-        "type" : "AllQueryWords",
-        "triggerWords" : [ "health" ]
-      }, {
-        "type" : "AllQueryWords",
-        "triggerWords" : [ "corona" ]
-      }, {
-        "type" : "AllQueryWords",
-        "triggerWords" : [ "covid" ]
-      } ]
-    } ]
-  },
-  "actions" : [ {
-    "type" : "DisplayUrlAdvert",
-    "titleHtml" : "RESEARCH INSIGHT | Access to Health Care",
-    "displayUrl" : "https://www.health.org.uk/funding-and-partnerships/programmes/insight-2019",
-    "linkUrl" : "https://www.health.org.uk/funding-and-partnerships/programmes/insight-2019",
-    "descriptionHtml" : "Access to health services affects the well-being of millions of consumers, and objective or situational access factors, such as distance from facility, often dominate the conversation. However, the reality is that subjective perceptions play just as great a role in consumers’ overall health and well-being.",
-    "additionalProperties" : {
-      "position" : "bottom"
-    },
-    "category" : "",
-    "removeCollectionUrl" : false
-  } ]
-}, {
-  "created" : "2020-08-17T16:48:38.568916Z",
-  "lastModified" : "2020-09-18T00:17:45.108074Z",
-  "id" : "2c27d476-f132-4772-95ad-06fb61b3323f",
-  "name" : "[Example] Term dates",
-  "label" : "DEFAULT",
-  "enabled" : true,
-  "trigger" : {
-    "type" : "And",
-    "triggers" : [ {
-      "type" : "Or",
-      "triggers" : [ {
-        "type" : "AllQueryWords",
-        "triggerWords" : [ "school" ]
-      }, {
-        "type" : "AllQueryWords",
-        "triggerWords" : [ "term", "dates" ]
-      }, {
-        "type" : "AllQueryWords",
-        "triggerWords" : [ "holidays" ]
-      } ]
-    } ]
-  },
-  "actions" : [ {
-    "type" : "DisplayUrlAdvert",
-    "titleHtml" : "Term dates",
-    "displayUrl" : "https://www.camden.gov.uk/term-dates",
-    "linkUrl" : "https://www.camden.gov.uk/term-dates",
-    "descriptionHtml" : "Find out when your child's school term starts. State school term and holiday dates through to summer 2022.",
-    "additionalProperties" : {
-      "call_to_action_label" : "VIEW DATES",
-      "call_to_action_url" : "https://www.camden.gov.uk/term-dates",
-      "class" : "center",
-      "image" : "https://source.unsplash.com/random/160x160?calendar"
-    },
-    "category" : "",
-    "removeCollectionUrl" : false
-  } ]
-}, {
-  "created" : "2020-08-19T16:00:08.117078Z",
-  "lastModified" : "2020-09-18T00:15:46.028089Z",
-  "id" : "878f2174-ef98-48a1-9fdc-9ab1954a587b",
-  "name" : "[Example] Fines",
-  "label" : "DEFAULT",
-  "enabled" : true,
-  "trigger" : {
-    "type" : "And",
-    "triggers" : [ {
-      "type" : "Or",
-      "triggers" : [ {
-        "type" : "AllQueryWords",
-        "triggerWords" : [ "fine" ]
-      }, {
-        "type" : "AllQueryWords",
-        "triggerWords" : [ "fines" ]
-      } ]
-    } ]
-  },
-  "actions" : [ {
-    "type" : "DisplayUrlAdvert",
-    "titleHtml" : "Pay a Penalty Charge Notice",
-    "displayUrl" : "https://www3.camden.gov.uk/pay",
-    "linkUrl" : "https://www3.camden.gov.uk/pay",
-    "descriptionHtml" : "Pay a Penalty Charge Notice (PCN) online",
-    "additionalProperties" : {
-      "call_to_action_url" : "https://www3.camden.gov.uk/pay",
-      "position" : "center",
-      "call_to_action_label" : "Pay now",
-      "image" : "https://source.unsplash.com/random/160x160?fines"
-    },
-    "category" : "",
-    "removeCollectionUrl" : false
-  } ]
-}, {
-  "created" : "2020-12-02T13:44:32.48577Z",
-  "lastModified" : "2020-12-02T17:02:27.583382Z",
-  "id" : "36517c65-c621-48c4-bdda-8a1f35d64bfc",
-  "name" : "[Example] Curator for left - Bins",
-  "label" : "DEFAULT",
-  "enabled" : true,
-  "trigger" : {
-    "type" : "And",
-    "triggers" : [ {
-      "type" : "Or",
-      "triggers" : [ {
-        "type" : "AllQueryWords",
-        "triggerWords" : [ "bins" ]
-      }, {
-        "type" : "AllQueryWords",
-        "triggerWords" : [ "app" ]
-      }, {
-        "type" : "AllQueryWords",
-        "triggerWords" : [ "rubbish" ]
-      }, {
-        "type" : "AllQueryWords",
-        "triggerWords" : [ "trash" ]
-      }, {
-        "type" : "AllQueryWords",
-        "triggerWords" : [ "garbage" ]
-      }, {
-        "type" : "AllQueryWords",
-        "triggerWords" : [ "collection" ]
-      } ]
-    } ]
-  },
-  "actions" : [ {
-    "type" : "DisplayUrlAdvert",
-    "titleHtml" : "Snap Send Solve",
-    "displayUrl" : "https://download.app",
-    "linkUrl" : "https://download.app",
-    "descriptionHtml" : "If you spot something in our district such as a pothole, vandalism, litter or damaged footpath, you can report it instantly to the District Council from a mobile phone.\n<br /> <br />\nThe app works by identifying the location the photo is taken using the phone's GPS data. It sends an email to the Council from the user's email address, including the incident type, notes, address of incident, photo and the user's contact details.",
-    "additionalProperties" : {
-      "position" : "left",
-      "call_to_action_label" : "DOWNLOAD NOW",
-      "call_to_action_url" : "www.google.com"
-    },
-    "category" : "",
-    "removeCollectionUrl" : false
-  } ]
-}, {
   "created" : "2020-08-17T16:12:56.407535Z",
-  "lastModified" : "2020-12-02T17:04:42.060544Z",
+  "lastModified" : "2020-12-03T09:17:06.185081Z",
   "id" : "fe3b1d3b-fa55-4fbe-a154-a3d4ed3c2e32",
-  "name" : "[Example] Curator on top - Bins",
+  "name" : "[Example] Curator on top - bins, rubbish, garbage, trash",
   "label" : "DEFAULT",
   "enabled" : true,
   "trigger" : {
@@ -343,6 +189,163 @@
       "call_to_action_label" : "CHECK YOUR COLLECTION DAY",
       "call_to_action_url" : "https://environmentservices.camden.gov.uk/property?",
       "image" : "https://source.unsplash.com/random/160x160?bins"
+    },
+    "category" : "",
+    "removeCollectionUrl" : false
+  } ]
+}, {
+  "created" : "2020-08-19T16:00:08.117078Z",
+  "lastModified" : "2020-12-03T09:17:39.146201Z",
+  "id" : "878f2174-ef98-48a1-9fdc-9ab1954a587b",
+  "name" : "[Example] Curator in the center - fines",
+  "label" : "DEFAULT",
+  "enabled" : true,
+  "trigger" : {
+    "type" : "And",
+    "triggers" : [ {
+      "type" : "Or",
+      "triggers" : [ {
+        "type" : "AllQueryWords",
+        "triggerWords" : [ "fine" ]
+      }, {
+        "type" : "AllQueryWords",
+        "triggerWords" : [ "fines" ]
+      }, {
+        "type" : "AllQueryWords",
+        "triggerWords" : [ "parking" ]
+      } ]
+    } ]
+  },
+  "actions" : [ {
+    "type" : "DisplayUrlAdvert",
+    "titleHtml" : "Pay a Penalty Charge Notice",
+    "displayUrl" : "https://www3.camden.gov.uk/pay",
+    "linkUrl" : "https://www3.camden.gov.uk/pay",
+    "descriptionHtml" : "Pay a Penalty Charge Notice (PCN) online",
+    "additionalProperties" : {
+      "call_to_action_url" : "https://www3.camden.gov.uk/pay",
+      "position" : "center",
+      "call_to_action_label" : "Pay now",
+      "image" : "https://source.unsplash.com/random/160x160?fines"
+    },
+    "category" : "",
+    "removeCollectionUrl" : false
+  } ]
+}, {
+  "created" : "2020-08-17T16:48:38.568916Z",
+  "lastModified" : "2020-12-03T09:18:07.376916Z",
+  "id" : "2c27d476-f132-4772-95ad-06fb61b3323f",
+  "name" : "[Example] Curator in the center - term dates, school, holidays",
+  "label" : "DEFAULT",
+  "enabled" : true,
+  "trigger" : {
+    "type" : "And",
+    "triggers" : [ {
+      "type" : "Or",
+      "triggers" : [ {
+        "type" : "AllQueryWords",
+        "triggerWords" : [ "school" ]
+      }, {
+        "type" : "AllQueryWords",
+        "triggerWords" : [ "term", "dates" ]
+      }, {
+        "type" : "AllQueryWords",
+        "triggerWords" : [ "holidays" ]
+      } ]
+    } ]
+  },
+  "actions" : [ {
+    "type" : "DisplayUrlAdvert",
+    "titleHtml" : "Term dates",
+    "displayUrl" : "https://www.camden.gov.uk/term-dates",
+    "linkUrl" : "https://www.camden.gov.uk/term-dates",
+    "descriptionHtml" : "Find out when your child's school term starts. State school term and holiday dates through to summer 2022.",
+    "additionalProperties" : {
+      "call_to_action_label" : "VIEW DATES",
+      "call_to_action_url" : "https://www.camden.gov.uk/term-dates",
+      "class" : "center",
+      "image" : "https://source.unsplash.com/random/160x160?calendar"
+    },
+    "category" : "",
+    "removeCollectionUrl" : false
+  } ]
+}, {
+  "created" : "2020-04-08T21:56:46.500816Z",
+  "lastModified" : "2020-12-03T09:18:29.892714Z",
+  "id" : "0f46ff92-62e3-46d2-9a29-f2f9bc2599d9",
+  "name" : "[Example] Curator at the bottom - health, corona, covid",
+  "label" : "DEFAULT",
+  "enabled" : true,
+  "trigger" : {
+    "type" : "And",
+    "triggers" : [ {
+      "type" : "Or",
+      "triggers" : [ {
+        "type" : "AllQueryWords",
+        "triggerWords" : [ "health" ]
+      }, {
+        "type" : "AllQueryWords",
+        "triggerWords" : [ "corona" ]
+      }, {
+        "type" : "AllQueryWords",
+        "triggerWords" : [ "covid" ]
+      } ]
+    } ]
+  },
+  "actions" : [ {
+    "type" : "DisplayUrlAdvert",
+    "titleHtml" : "RESEARCH INSIGHT | Access to Health Care",
+    "displayUrl" : "https://www.health.org.uk/funding-and-partnerships/programmes/insight-2019",
+    "linkUrl" : "https://www.health.org.uk/funding-and-partnerships/programmes/insight-2019",
+    "descriptionHtml" : "Access to health services affects the well-being of millions of consumers, and objective or situational access factors, such as distance from facility, often dominate the conversation. However, the reality is that subjective perceptions play just as great a role in consumers’ overall health and well-being.",
+    "additionalProperties" : {
+      "position" : "bottom"
+    },
+    "category" : "",
+    "removeCollectionUrl" : false
+  } ]
+}, {
+  "created" : "2020-12-02T13:44:32.48577Z",
+  "lastModified" : "2020-12-03T09:19:05.878173Z",
+  "id" : "36517c65-c621-48c4-bdda-8a1f35d64bfc",
+  "name" : "[Example] Curator on the left - bins, app, rubbish, trash, garbage, collection",
+  "label" : "DEFAULT",
+  "enabled" : true,
+  "trigger" : {
+    "type" : "And",
+    "triggers" : [ {
+      "type" : "Or",
+      "triggers" : [ {
+        "type" : "AllQueryWords",
+        "triggerWords" : [ "bins" ]
+      }, {
+        "type" : "AllQueryWords",
+        "triggerWords" : [ "app" ]
+      }, {
+        "type" : "AllQueryWords",
+        "triggerWords" : [ "rubbish" ]
+      }, {
+        "type" : "AllQueryWords",
+        "triggerWords" : [ "trash" ]
+      }, {
+        "type" : "AllQueryWords",
+        "triggerWords" : [ "garbage" ]
+      }, {
+        "type" : "AllQueryWords",
+        "triggerWords" : [ "collection" ]
+      } ]
+    } ]
+  },
+  "actions" : [ {
+    "type" : "DisplayUrlAdvert",
+    "titleHtml" : "Snap Send Solve",
+    "displayUrl" : "https://download.app",
+    "linkUrl" : "https://download.app",
+    "descriptionHtml" : "If you spot something in our district such as a pothole, vandalism, litter or damaged footpath, you can report it instantly to the District Council from a mobile phone.\n<br /> <br />\nThe app works by identifying the location the photo is taken using the phone's GPS data. It sends an email to the Council from the user's email address, including the incident type, notes, address of incident, photo and the user's contact details.",
+    "additionalProperties" : {
+      "position" : "left",
+      "call_to_action_label" : "DOWNLOAD NOW",
+      "call_to_action_url" : "www.google.com"
     },
     "category" : "",
     "removeCollectionUrl" : false

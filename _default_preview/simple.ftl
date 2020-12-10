@@ -23,6 +23,7 @@
 <#import "curator.ftl" as curator />
 <#import "tabs.ftl" as tabs />
 <#import "facets.ftl" as facets />
+<#import "browse_mode.ftl" as browse_mode />
 <#import "contextual_navigation.ftl" as contextual_navigation />
 <#import "history_cart.ftl" as history_cart />
 <#import "auto_complete.ftl" as auto_complete />

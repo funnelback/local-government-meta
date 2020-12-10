@@ -21,9 +21,9 @@
   } ]
 }, {
   "created" : "2020-03-11T14:34:28.23796Z",
-  "lastModified" : "2020-10-20T17:15:44.230751Z",
+  "lastModified" : "2020-12-03T09:16:13.787586Z",
   "id" : "9e45ee31-7d21-44ee-a5ac-f91ea73035d2",
-  "name" : "[Example] Curators to display for \"No Results\"",
+  "name" : "[Example] Curators for \"No Results\"",
   "label" : "DEFAULT",
   "enabled" : true,
   "trigger" : {
@@ -88,9 +88,9 @@
   } ]
 }, {
   "created" : "2020-03-12T14:33:01.536859Z",
-  "lastModified" : "2020-10-20T17:08:16.29323Z",
+  "lastModified" : "2020-12-03T09:16:38.588196Z",
   "id" : "f667e7b1-7136-405b-af29-16e0fee57036",
-  "name" : "[Example] health and corona - center position",
+  "name" : "[Example] Curator in the center - health, corona, covid",
   "label" : "DEFAULT",
   "enabled" : true,
   "trigger" : {
@@ -137,9 +137,9 @@
   } ]
 }, {
   "created" : "2020-04-08T21:56:46.500816Z",
-  "lastModified" : "2020-10-20T17:03:22.392566Z",
+  "lastModified" : "2020-12-03T09:18:29.892714Z",
   "id" : "0f46ff92-62e3-46d2-9a29-f2f9bc2599d9",
-  "name" : "[Example] health and corona - bottom position",
+  "name" : "[Example] Curator at the bottom - health, corona, covid",
   "label" : "DEFAULT",
   "enabled" : true,
   "trigger" : {
@@ -172,9 +172,9 @@
   } ]
 }, {
   "created" : "2020-08-17T16:12:56.407535Z",
-  "lastModified" : "2020-12-02T17:04:42.060544Z",
+  "lastModified" : "2020-12-03T09:17:06.185081Z",
   "id" : "fe3b1d3b-fa55-4fbe-a154-a3d4ed3c2e32",
-  "name" : "[Example] Curator on top - Bins",
+  "name" : "[Example] Curator on top - bins, rubbish, garbage, trash",
   "label" : "DEFAULT",
   "enabled" : true,
   "trigger" : {
@@ -230,9 +230,9 @@
   } ]
 }, {
   "created" : "2020-08-17T16:48:38.568916Z",
-  "lastModified" : "2020-09-18T00:17:45.108074Z",
+  "lastModified" : "2020-12-03T09:18:07.376916Z",
   "id" : "2c27d476-f132-4772-95ad-06fb61b3323f",
-  "name" : "[Example] Term dates",
+  "name" : "[Example] Curator in the center - term dates, school, holidays",
   "label" : "DEFAULT",
   "enabled" : true,
   "trigger" : {
@@ -268,9 +268,9 @@
   } ]
 }, {
   "created" : "2020-08-19T16:00:08.117078Z",
-  "lastModified" : "2020-09-18T00:15:46.028089Z",
+  "lastModified" : "2020-12-03T09:17:39.146201Z",
   "id" : "878f2174-ef98-48a1-9fdc-9ab1954a587b",
-  "name" : "[Example] Fines",
+  "name" : "[Example] Curator in the center - fines",
   "label" : "DEFAULT",
   "enabled" : true,
   "trigger" : {
@@ -283,6 +283,9 @@
       }, {
         "type" : "AllQueryWords",
         "triggerWords" : [ "fines" ]
+      }, {
+        "type" : "AllQueryWords",
+        "triggerWords" : [ "parking" ]
       } ]
     } ]
   },
@@ -303,9 +306,9 @@
   } ]
 }, {
   "created" : "2020-12-02T13:44:32.48577Z",
-  "lastModified" : "2020-12-02T17:02:27.583382Z",
+  "lastModified" : "2020-12-03T09:19:05.878173Z",
   "id" : "36517c65-c621-48c4-bdda-8a1f35d64bfc",
-  "name" : "[Example] Curator for left - Bins",
+  "name" : "[Example] Curator on the left - bins, app, rubbish, trash, garbage, collection",
   "label" : "DEFAULT",
   "enabled" : true,
   "trigger" : {

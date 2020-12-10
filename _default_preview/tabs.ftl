@@ -31,68 +31,79 @@
     defining <#macro SomeMacro>. 
 --> 
 
-<#---
-    Display tabs, from the FACETED_NAVIGATION extra search
+<#--
+    Display tabs
+    @param facets List of tabs to display as a string. The default is that all tabs
+        will be displayed
 -->
-<#macro Tabs>
+<#macro Tabs tabs=[]>
     <!-- tabs.Tabs -->
-    <#list (response.facets)![] as facet>
-        <#if facet.allValues?size gt 0 && facet.guessedDisplayType == "TAB">
-            <section class="tabs js-tabs content-wrapper">
-                <ul class="tabs__list" role="menu">
-                    <#list facet.allValues as value>
-                        <#if value?counter lt (question.getCurrentProfileConfig().get("stencils.tabs.max_display")!"5")?number> 
-                            <li class="tabs__item">
-                                <a <#if value.count gt 0>href="${value.toggleUrl}"</#if> class="tabs__link tabs__link--icon <#if value.selected> active</#if><#if value.count lt 1> tabs__link--disabled </#if>">
-                                    <#if question.getCurrentProfileConfig().get("stencils.tabs.icon.${value.label}")??>
-                                        <span class="${question.getCurrentProfileConfig().get("stencils.tabs.icon.${value.label}")}"></span>
-                                    </#if>                            
-                                    ${value.label}
-                                    <span>(${value.count})</span>
-                                </a>
-                            </li>
-                        </#if>
-                    </#list>                                        
 
-                    <#-- Collapse the remaining tabs into a drop down -->
-                    <#if facet.allValues?size gte (question.getCurrentProfileConfig().get("stencils.tabs.max_display")!"5")?number>              
-                        <li class="tabs__item dropdown">
-                            <span class="dropdown__toggle" href="#" >
-                                
-                                <#-- Determine if a tab is the more dropdown has been selected -->
-                                <#assign maxDisplay = (question.getCurrentProfileConfig().get("stencils.tabs.max_display")!"5")?number>
-                                <#assign noTabs = facet.allValues?size>
-                                <#assign isMoreTabSelected = false>
+    <#-- 
+        Find all the tabs with values and determine if we want to display all tabs or just the tabs specified 
+    -->
+    <#local facets = (response.facets![])?filter(facet -> 
+            facet.guessedDisplayType == "TAB"
+            && facet.allValues?size gt 0
+            && (!tabs?has_content || tabs?seq_contains(facet.name))
+        )
+    >
 
-                                <#if facet.allValues?sequence[maxDisplay-1..noTabs - 1]?filter(value -> value.selected)?size gt 0>
-                                    <#assign isMoreTabSelected = true>
-                                </#if>
-                                
-                                <a class="tabs__link <#if isMoreTabSelected>active</#if>" href="#" aria-haspopup="true" aria-expanded="false" id="tabDropdown">
-                                    More
-                                </a>
-
-                                <#-- Display the additional tabs as a dropdown menu -->
-                                <ul class="dropdown_menu" aria-labelledby="tabDropdown">
-                                    <#list facet.allValues as value>
-                                        <#if value?counter gte (question.getCurrentProfileConfig().get("stencils.tabs.max_display")!"5")?number>
-                                            <li class="dropdown__item <#if value.selected>active</#if><#if value.count lt 1>disabled</#if>">                
-                                                <a title="Refine by ${value.label}" <#if value.count gt 0>href="${value.toggleUrl}"</#if>>
-                                                    <#if question.getCurrentProfileConfig().get("stencils.tabs.icon.${value.label}")??>
-                                                        <span class="${question.getCurrentProfileConfig().get("stencils.tabs.icon.${value.label}")}"></span>
-                                                    </#if>
-                                                    ${value.label!} <span class="search-facet-count">(${value.count})</span>
-                                                </a>
-                                            </li>
-                                        </#if>
-                                    </#list>
-                                </ul>
-                            </span>
-                        </li>                          
+    <#list facets![] as facet>
+        <section class="tabs js-tabs content-wrapper">
+            <ul class="tabs__list" role="menu">
+                <#list facet.allValues as value>
+                    <#if value?counter lt (question.getCurrentProfileConfig().get("stencils.tabs.max_display")!"5")?number> 
+                        <li class="tabs__item">
+                            <a <#if value.count gt 0>href="${value.toggleUrl}"</#if> class="tabs__link tabs__link--icon <#if value.selected> active</#if><#if value.count lt 1> tabs__link--disabled </#if>">
+                                <#if question.getCurrentProfileConfig().get("stencils.tabs.icon.${value.label}")??>
+                                    <span class="${question.getCurrentProfileConfig().get("stencils.tabs.icon.${value.label}")}"></span>
+                                </#if>                            
+                                ${value.label}
+                                <span>(${value.count})</span>
+                            </a>
+                        </li>
                     </#if>
-                </ul>
-            </section>
-        </#if>
+                </#list>                                        
+
+                <#-- Collapse the remaining tabs into a drop down -->
+                <#if facet.allValues?size gte (question.getCurrentProfileConfig().get("stencils.tabs.max_display")!"5")?number>              
+                    <li class="tabs__item dropdown">
+                        <span class="dropdown__toggle" href="#" >
+                            
+                            <#-- Determine if a tab is the more dropdown has been selected -->
+                            <#assign maxDisplay = (question.getCurrentProfileConfig().get("stencils.tabs.max_display")!"5")?number>
+                            <#assign noTabs = facet.allValues?size>
+                            <#assign isMoreTabSelected = false>
+
+                            <#if facet.allValues?sequence[maxDisplay-1..noTabs - 1]?filter(value -> value.selected)?size gt 0>
+                                <#assign isMoreTabSelected = true>
+                            </#if>
+                            
+                            <a class="tabs__link <#if isMoreTabSelected>active</#if>" href="#" aria-haspopup="true" aria-expanded="false" id="tabDropdown">
+                                More
+                            </a>
+
+                            <#-- Display the additional tabs as a dropdown menu -->
+                            <ul class="dropdown_menu" aria-labelledby="tabDropdown">
+                                <#list facet.allValues as value>
+                                    <#if value?counter gte (question.getCurrentProfileConfig().get("stencils.tabs.max_display")!"5")?number>
+                                        <li class="dropdown__item <#if value.selected>active</#if><#if value.count lt 1>disabled</#if>">                
+                                            <a title="Refine by ${value.label}" <#if value.count gt 0>href="${value.toggleUrl}"</#if>>
+                                                <#if question.getCurrentProfileConfig().get("stencils.tabs.icon.${value.label}")??>
+                                                    <span class="${question.getCurrentProfileConfig().get("stencils.tabs.icon.${value.label}")}"></span>
+                                                </#if>
+                                                ${value.label!} <span class="search-facet-count">(${value.count})</span>
+                                            </a>
+                                        </li>
+                                    </#if>
+                                </#list>
+                            </ul>
+                        </span>
+                    </li>                          
+                </#if>
+            </ul>
+        </section>
     </#list>
 </#macro>
 
@@ -137,3 +148,4 @@
         </#if>
     </@fb.ExtraResults>
 </#macro>
+
