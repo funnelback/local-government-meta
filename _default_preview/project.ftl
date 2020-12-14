@@ -12,7 +12,7 @@
         <h2 class="sr-only">Search module</h2>
         <@base.SearchForm>
             <div class="module-search__group">
-                <label for="query" class="sr-only">Search</label>
+                <label for="query" class="sr-only">Search</label>                
                 <input required name="query" id="query" type="Search query" autofocus class="module-search__query tt-input" autocomplete="off" placeholder="Start your search here…" value="${question.query!}" spellcheck="false" dir="auto"">
 
                 <button type="submit" class="module-search__btn"><span class="sr-only">Search</span></button>                

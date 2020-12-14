@@ -78,7 +78,17 @@
             <span class="search-counts-total-matching">${(response.resultPacket.resultsSummary.totalMatching)!?string.number}</span>
             <#if (question.inputParameterMap["s"])!?has_content && question.inputParameterMap["s"]?contains("?:")>
                 <em>collapsed</em> 
-            </#if>search results for <strong class="highlight"><@s.QueryClean></@s.QueryClean></strong> 
+            </#if>
+            search results  
+            
+            <#-- Display the query if it is not the placeholder -->
+            <#if (question.query)!?has_content && 
+                (question.query)!?upper_case != (question.getCurrentProfileConfig().get("stencils.tabs.browse_mode.default_query"))!"">
+                for <strong class="highlight"><@s.QueryClean></@s.QueryClean></strong>
+            <#else>
+                <#-- We normally don't want to display the placeholder value -->
+            </#if>
+
             <#list response.resultPacket.QSups as qsup>
                 or <strong class="highlight">${(qsup.query)!}</strong>
                 <#if qsup_has_next>, </#if>

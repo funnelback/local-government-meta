@@ -53,8 +53,12 @@
 	<meta name="robots" content="nofollow,noindex">
 
 	<@client_includes.HTMLHeader />
-
-	<title><@s.AfterSearchOnly>${question.query!}<@s.IfDefCGI name="query">,&nbsp;</@s.IfDefCGI></@s.AfterSearchOnly><@s.cfg>service_name</@s.cfg></title>
+	
+	<#if (question.query)!?has_content>
+		<title>${question.query!},&nbsp;<@s.cfg>service_name</@s.cfg></title>
+	<#else>
+		<title><@s.cfg>service_name</@s.cfg></title>
+	</#if> 
 
 </head>
 <body>

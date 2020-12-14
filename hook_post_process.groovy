@@ -670,7 +670,23 @@ class BrowseModeHookLifecycle implements HookLifecycle {
 	/** Name of the facet containing the primary tabs */
     static final String TABS_FACET_NAME = "Tabs"
 
-	static final String TAB_FACET_GUESSED_DISPLAY_TYPE = "TAB"
+	/** The config of the placeholder query used to show all results */
+	static final String ALL_RESULTS_QUERY_CONFIG = CONFIG_KEY_PREFIX + ".default_query"
+	
+	/** The default query which will used to return all documents **/
+	static final String DEFAULT_ALL_RESULTS_QUERY = "!PADRENULLQUERY"
+
+	/** 
+		The config to determine if the sort parameter should removed when
+		naivigating between tabs
+	*/
+	static final String REMOVE_SORT_BETWEEN_TABS_CONFIG = CONFIG_KEY_PREFIX + ".remove_sort_between_tabs"
+
+	/** 
+		The config to determine if the browse mode parameter should removed when
+		naivigating between tabs
+	*/
+	static final String REMOVE_BROWSE_MODE_BETWEEN_TABS_CONFIG = CONFIG_KEY_PREFIX + ".remove_browse_mode_between_tabs"
 
 	/**
 	 * 
@@ -679,25 +695,101 @@ class BrowseModeHookLifecycle implements HookLifecycle {
 	 */
 	void postProcess(SearchTransaction transaction) {
 		if (isBrowseModeEnabled(transaction)) {
+			removeAllResultsQueryPlaceholder(transaction)
+			removeBrowseModeFromTabFacetLinks(transaction)
+			removeSortFromTabFacetLinks(transaction)
 			addSelectedTabFacetToSecondaryTabs(transaction)
 		}
 	}
 
 	/**
-	 * 
-	 * will provide the user a different way to navigate to a 
-     * particular facet or tab
+	 * Removes the placeholder query from the search transaction so that
+	 * it is not exposed to the end user. 
 	 *  
 	 * @param transaction
 	 */
-	public void removeBrowseModeFromFacetLinks(def transaction) {
+	void removeAllResultsQueryPlaceholder(SearchTransaction transaction) {
+		
+		def profileConfig = transaction.question.getCurrentProfileConfig()
+		String defaultQuery = profileConfig.get(ALL_RESULTS_QUERY_CONFIG) ?: DEFAULT_ALL_RESULTS_QUERY
 
+		if(transaction?.question?.query?.equalsIgnoreCase(defaultQuery)) {
+			transaction.question.query = ""	
+		}
+	}
 
+	/**
+	 * 
+	 * Removes the browse mode parameter when navigating between the primary tabs
+	 *  
+	 * @param transaction
+	 */
+	public void removeBrowseModeFromTabFacetLinks(def transaction) {
+
+		String removeBrowseMode = transaction?.question?.getCurrentProfileConfig()?.get(REMOVE_SORT_BETWEEN_TABS_CONFIG) ?: "FALSE"
+
+		if(removeBrowseMode.equalsIgnoreCase("TRUE")) {
+			transaction?.response?.facets
+				.find() {
+					// Grab the primary tab
+					facet -> facet.name == TABS_FACET_NAME
+				}
+				.each() {
+					tabfacet ->
+
+					tabfacet.allValues
+						.findAll() {
+							// To be defensive, we only want to run the code when 
+							// the browse mode parameter is present in the url.
+							facetCategory -> facetCategory?.toggleUrl =~ /(?i)browse_mode=/
+						}
+						.each() {
+							// Remove the browse mode select from all tab facet categories.
+							facetCategory ->
+							facetCategory.toggleUrl = facetCategory.toggleUrl.replaceAll(/(?si)browse_mode=[^&]+&/, "")
+							facetCategory.toggleUrl = facetCategory.toggleUrl.replaceAll(/(?si)&browse_mode=[^&]+/, "")
+						}
+				}
+		}
 	}
 	
+	/**
+	 * 
+	 * Removes the sort parameter when navigating between the primary tabs
+	 *  
+	 * @param transaction
+	 */
+	public void removeSortFromTabFacetLinks(def transaction) {
+
+		String removeSort = transaction?.question?.getCurrentProfileConfig()?.get(REMOVE_SORT_BETWEEN_TABS_CONFIG) ?: "FALSE"
+				
+		 if (removeSort.equalsIgnoreCase("TRUE")) {
+			transaction?.response?.facets
+				.find() {
+					// Grab the primary tab
+					facet -> facet.name == TABS_FACET_NAME
+				}
+				.each() {
+					tabfacet ->
+
+					tabfacet.allValues
+						.findAll() {
+							// To be defensive, we only want to run the code when 
+							// the browse mode parameter is present in the url.
+							facetCategory -> facetCategory?.toggleUrl =~ /(?i)sort=/
+						}
+						.each() {
+							// Remove the browse mode select from all tab facet categories.
+							facetCategory ->
+							facetCategory.toggleUrl = facetCategory.toggleUrl.replaceAll(/(?si)sort=[^&]+&/, "")
+							facetCategory.toggleUrl = facetCategory.toggleUrl.replaceAll(/(?si)&sort=[^&]+/, "")
+						}
+				}
+		}
+	}	
 	public void addSelectedTabFacetToSecondaryTabs(def transaction) {
 
-		// Get 9o9othe query parameters for the current selected tab
+		// Get the query parameters for the current selected tab
 		// Assuming that tabs can only have 1 selected value at any one time
 		String selectedTabQueryParameter = transaction?.response?.facets
 			.find() {
@@ -761,7 +853,7 @@ class BrowseModeHookLifecycle implements HookLifecycle {
 
 	/** 
 	 * Returns true if the user has provided enough configurations to enable
-	 * tab previews. 
+	 * browse mode. 
 	 *
 	 * @param transaction The funnelback transaction which represents the search
 	 **/
