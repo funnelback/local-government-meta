@@ -97,12 +97,29 @@
     width: 100%;
 }
 
+.fb-container .module-az__item {
+    width: inherit;
+    min-width: 3.4375rem;
+    text-transform: uppercase;
+}
+
+.fb-container .module-az__link,
+.fb-container .module-az__item > span {
+    padding: 1rem;
+}
+
 /** 
   * Search tools 
   **/
 
 .fb-container .search-results__tools {
     overflow: visible;
+}
+
+@media only screen and (min-width: 1025px){
+    .fb-container .content-wrapper--col .search-results__tools {
+        margin-bottom: 2rem;
+    }
 }
 
 

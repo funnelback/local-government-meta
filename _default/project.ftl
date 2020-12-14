@@ -12,8 +12,7 @@
         <h2 class="sr-only">Search module</h2>
         <@base.SearchForm>
             <div class="module-search__group">
-                <input type="hidden" name="collection" value="program-finder-meta">
-                <label for="query" class="sr-only">Search</label>
+                <label for="query" class="sr-only">Search</label>                
                 <input required name="query" id="query" type="Search query" autofocus class="module-search__query tt-input" autocomplete="off" placeholder="Start your search here…" value="${question.query!}" spellcheck="false" dir="auto"">
 
                 <button type="submit" class="module-search__btn"><span class="sr-only">Search</span></button>                
@@ -26,7 +25,7 @@
 </#macro>
 
 <#macro Tabs>
-    <@tabs.Tabs />
+    <@tabs.Tabs tabs=["Tabs"] />
 </#macro>
 
 <#-- Outputs the search result section -->
@@ -37,6 +36,9 @@
             <@facets.FacetBreadBox />
 
             <@base.Blending />
+            
+            <@browse_mode.BrowseByFilter />
+
             <#-- 
                 Only display the search tools such as sorting when there
                 are at least 1 result 
@@ -78,10 +80,21 @@
     </div>
 </#macro>
 
+<#-- 
+    Display the results with the ability to browse 
+    We want different markup here compared to the standard results.
+    e.g. Additional tab at the top
+-->
+<#-- -->
+
+
 <#-- Display the facets based on the configurations -->
 <#macro SideNavigation>
     <!-- project.SideNavigation -->
     <div>
+        
+        <@browse_mode.BrowseModeToggle />
+
         <#-- Get facets for the current selected tab -->
         <#local tabFacets = question.getCurrentProfileConfig().get("stencils.tabs.facets.${(response.customData.stencilsTabsSelectedTab)!}")!>
         

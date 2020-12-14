@@ -23,6 +23,7 @@
 <#import "curator.ftl" as curator />
 <#import "tabs.ftl" as tabs />
 <#import "facets.ftl" as facets />
+<#import "browse_mode.ftl" as browse_mode />
 <#import "contextual_navigation.ftl" as contextual_navigation />
 <#import "history_cart.ftl" as history_cart />
 <#import "auto_complete.ftl" as auto_complete />
@@ -52,8 +53,12 @@
 	<meta name="robots" content="nofollow,noindex">
 
 	<@client_includes.HTMLHeader />
-
-	<title><@s.AfterSearchOnly>${question.query!}<@s.IfDefCGI name="query">,&nbsp;</@s.IfDefCGI></@s.AfterSearchOnly><@s.cfg>service_name</@s.cfg></title>
+	
+	<#if (question.query)!?has_content>
+		<title>${question.query!},&nbsp;<@s.cfg>service_name</@s.cfg></title>
+	<#else>
+		<title><@s.cfg>service_name</@s.cfg></title>
+	</#if> 
 
 </head>
 <body>

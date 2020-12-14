@@ -78,7 +78,17 @@
             <span class="search-counts-total-matching">${(response.resultPacket.resultsSummary.totalMatching)!?string.number}</span>
             <#if (question.inputParameterMap["s"])!?has_content && question.inputParameterMap["s"]?contains("?:")>
                 <em>collapsed</em> 
-            </#if>search results for <strong class="highlight"><@s.QueryClean></@s.QueryClean></strong> 
+            </#if>
+            search results  
+            
+            <#-- Display the query if it is not the placeholder -->
+            <#if (question.query)!?has_content && 
+                (question.query)!?upper_case != (question.getCurrentProfileConfig().get("stencils.tabs.browse_mode.default_query"))!"">
+                for <strong class="highlight"><@s.QueryClean></@s.QueryClean></strong>
+            <#else>
+                <#-- We normally don't want to display the placeholder value -->
+            </#if>
+
             <#list response.resultPacket.QSups as qsup>
                 or <strong class="highlight">${(qsup.query)!}</strong>
                 <#if qsup_has_next>, </#if>
@@ -137,6 +147,18 @@
     <#return displayMode>
 </#function>
 
+<#--
+    Runs the best code when the specified display mode is selected.
+-->
+<#macro IsDisplayMode mode="LIST">
+    <#if getDisplayMode(question) == mode!?upper_case>
+        <#nested> 
+    </#if>
+</#macro>
+
+<#--
+    Show the various display mode options to the user
+-->
 <#macro DisplayMode>
     <!-- base.displayMode -->
     <a href='${question.getCurrentProfileConfig().get("ui.modern.search_link")}?${removeParam(QueryString, "displayMode")}&displayMode=card' 
@@ -283,6 +305,8 @@
 <#-- 
     Determines if the results are to be displayed normally
     or grouped together by some criteria
+
+    ToDo - Add browsing results to this
 -->
 <#macro ResultList nestedRank=-1>
     <#assign displayMode = getDisplayMode(question)>
@@ -307,7 +331,7 @@
 -->
 <#macro StandardResults view="LIST" nestedRank=-1>
     <!-- base.StandardResults -->
-    <article class="search-results__list <#if getDisplayMode(question)! == 'LIST'>search-results__list--list-view</#if>">
+    <article class="search-results__list <#if getDisplayMode(question)! == 'LIST' || getDisplayMode(question)! == 'BROWSE'>search-results__list--list-view</#if>">
         <#list (response.resultPacket.resultsWithTierBars)![] as result>
             <#if result.class.simpleName == "TierBar">
                 <@TierBar result=result />
@@ -493,3 +517,5 @@
 <#function getCssID input="">
     <#return (input)!?replace('[^A-Za-z0-9-]+', '_', 'r')>
 </#function>
+
+

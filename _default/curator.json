@@ -136,6 +136,41 @@
     "removeCollectionUrl" : false
   } ]
 }, {
+  "created" : "2020-04-08T21:56:46.500816Z",
+  "lastModified" : "2020-12-03T09:18:29.892714Z",
+  "id" : "0f46ff92-62e3-46d2-9a29-f2f9bc2599d9",
+  "name" : "[Example] Curator at the bottom - health, corona, covid",
+  "label" : "DEFAULT",
+  "enabled" : true,
+  "trigger" : {
+    "type" : "And",
+    "triggers" : [ {
+      "type" : "Or",
+      "triggers" : [ {
+        "type" : "AllQueryWords",
+        "triggerWords" : [ "health" ]
+      }, {
+        "type" : "AllQueryWords",
+        "triggerWords" : [ "corona" ]
+      }, {
+        "type" : "AllQueryWords",
+        "triggerWords" : [ "covid" ]
+      } ]
+    } ]
+  },
+  "actions" : [ {
+    "type" : "DisplayUrlAdvert",
+    "titleHtml" : "RESEARCH INSIGHT | Access to Health Care",
+    "displayUrl" : "https://www.health.org.uk/funding-and-partnerships/programmes/insight-2019",
+    "linkUrl" : "https://www.health.org.uk/funding-and-partnerships/programmes/insight-2019",
+    "descriptionHtml" : "Access to health services affects the well-being of millions of consumers, and objective or situational access factors, such as distance from facility, often dominate the conversation. However, the reality is that subjective perceptions play just as great a role in consumers’ overall health and well-being.",
+    "additionalProperties" : {
+      "position" : "bottom"
+    },
+    "category" : "",
+    "removeCollectionUrl" : false
+  } ]
+}, {
   "created" : "2020-08-17T16:12:56.407535Z",
   "lastModified" : "2020-12-03T09:17:06.185081Z",
   "id" : "fe3b1d3b-fa55-4fbe-a154-a3d4ed3c2e32",
@@ -194,44 +229,6 @@
     "removeCollectionUrl" : false
   } ]
 }, {
-  "created" : "2020-08-19T16:00:08.117078Z",
-  "lastModified" : "2020-12-03T09:17:39.146201Z",
-  "id" : "878f2174-ef98-48a1-9fdc-9ab1954a587b",
-  "name" : "[Example] Curator in the center - fines",
-  "label" : "DEFAULT",
-  "enabled" : true,
-  "trigger" : {
-    "type" : "And",
-    "triggers" : [ {
-      "type" : "Or",
-      "triggers" : [ {
-        "type" : "AllQueryWords",
-        "triggerWords" : [ "fine" ]
-      }, {
-        "type" : "AllQueryWords",
-        "triggerWords" : [ "fines" ]
-      }, {
-        "type" : "AllQueryWords",
-        "triggerWords" : [ "parking" ]
-      } ]
-    } ]
-  },
-  "actions" : [ {
-    "type" : "DisplayUrlAdvert",
-    "titleHtml" : "Pay a Penalty Charge Notice",
-    "displayUrl" : "https://www3.camden.gov.uk/pay",
-    "linkUrl" : "https://www3.camden.gov.uk/pay",
-    "descriptionHtml" : "Pay a Penalty Charge Notice (PCN) online",
-    "additionalProperties" : {
-      "call_to_action_url" : "https://www3.camden.gov.uk/pay",
-      "position" : "center",
-      "call_to_action_label" : "Pay now",
-      "image" : "https://source.unsplash.com/random/160x160?fines"
-    },
-    "category" : "",
-    "removeCollectionUrl" : false
-  } ]
-}, {
   "created" : "2020-08-17T16:48:38.568916Z",
   "lastModified" : "2020-12-03T09:18:07.376916Z",
   "id" : "2c27d476-f132-4772-95ad-06fb61b3323f",
@@ -270,10 +267,10 @@
     "removeCollectionUrl" : false
   } ]
 }, {
-  "created" : "2020-04-08T21:56:46.500816Z",
-  "lastModified" : "2020-12-03T09:18:29.892714Z",
-  "id" : "0f46ff92-62e3-46d2-9a29-f2f9bc2599d9",
-  "name" : "[Example] Curator at the bottom - health, corona, covid",
+  "created" : "2020-08-19T16:00:08.117078Z",
+  "lastModified" : "2020-12-03T09:17:39.146201Z",
+  "id" : "878f2174-ef98-48a1-9fdc-9ab1954a587b",
+  "name" : "[Example] Curator in the center - fines",
   "label" : "DEFAULT",
   "enabled" : true,
   "trigger" : {
@@ -282,24 +279,27 @@
       "type" : "Or",
       "triggers" : [ {
         "type" : "AllQueryWords",
-        "triggerWords" : [ "health" ]
+        "triggerWords" : [ "fine" ]
       }, {
         "type" : "AllQueryWords",
-        "triggerWords" : [ "corona" ]
+        "triggerWords" : [ "fines" ]
       }, {
         "type" : "AllQueryWords",
-        "triggerWords" : [ "covid" ]
+        "triggerWords" : [ "parking" ]
       } ]
     } ]
   },
   "actions" : [ {
     "type" : "DisplayUrlAdvert",
-    "titleHtml" : "RESEARCH INSIGHT | Access to Health Care",
-    "displayUrl" : "https://www.health.org.uk/funding-and-partnerships/programmes/insight-2019",
-    "linkUrl" : "https://www.health.org.uk/funding-and-partnerships/programmes/insight-2019",
-    "descriptionHtml" : "Access to health services affects the well-being of millions of consumers, and objective or situational access factors, such as distance from facility, often dominate the conversation. However, the reality is that subjective perceptions play just as great a role in consumers’ overall health and well-being.",
+    "titleHtml" : "Pay a Penalty Charge Notice",
+    "displayUrl" : "https://www3.camden.gov.uk/pay",
+    "linkUrl" : "https://www3.camden.gov.uk/pay",
+    "descriptionHtml" : "Pay a Penalty Charge Notice (PCN) online",
     "additionalProperties" : {
-      "position" : "bottom"
+      "call_to_action_url" : "https://www3.camden.gov.uk/pay",
+      "position" : "center",
+      "call_to_action_label" : "Pay now",
+      "image" : "https://source.unsplash.com/random/160x160?fines"
     },
     "category" : "",
     "removeCollectionUrl" : false
