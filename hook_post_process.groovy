@@ -854,7 +854,6 @@ class QueryHookLifecycle implements HookLifecycle {
 	/** Delimeter used to seperate values for the clear query config */
 	static final String CLEAN_QUERY_DELIMETER = ","
 
-
 	/**
 	 *
 	 * @param transaction
