@@ -265,27 +265,27 @@ class SearchPreviewHookLifecycle implements HookLifecycle {
 
 	Available configurations:
 	
+	stencils.sorting.result_grouping.mode=<COLLECTION|METADATA>
+
 	There are two modes which can be used to group results:
 	COLLECTION - Results will be grouped by the collection they are from
 	METADATA - Results will be grouped by a metadata class 
-
-	stencils.sorting.result_grouping.mode=<COLLECTION|METADATA>
+	
+	stencils.sorting.result_grouping.metadata_class=<metadata class>
 	
 	Required if METADATA mode has been selected. Determines which 
 	metadata class is used to group results.
 	
-	stencils.sorting.result_grouping.metadata_class=<metadata class>
+	stencils.sorting.result_grouping.tabs=<command seperated list of tabs>
 	
 	Allows the ability to restrict the grouping of results to a set of tabs. 
 	If no value is set, then grouping will run on all tabs.
-	
-	stencils.sorting.result_grouping.tabs=<command seperated list of tabs>
 
+	stencils.sorting.result_grouping.target_facet_label.<collection or metadata class>=<new value>
+	
 	Config prefix which allows the user to rename result categories so that 
 	they match facet categories. This is required to generate the "see more" 
 	links. This is normally mandatory for collection based groupings.	
-	
-	stencils.sorting.result_grouping.target_facet_label.<collection or metadata class>=<new value>
 
 	e.g 
 	Given  
@@ -837,8 +837,33 @@ class BrowseModeHookLifecycle implements HookLifecycle {
 }
 
 /**
- * <p>Hook functions to prevent placeholder queries from being displayed to 
- * the end user</p>
+ * 	<p>Hook functions to prevent placeholder queries from being displayed to 
+ * 	the end user</p>
+	
+	Available configurations:
+	
+	stencils.query.clean=<queries>
+
+	<queries> - A comma (,) separated list of queries which will be
+	hidden from the user. The logic works on a whole phrase matching basis.
+
+	i.e.
+
+	stencils.query.clean=!padrenullquery
+
+	Queries which example match "!padrenullquery" will be hidden from the user.
+	However queries such as "!padrnenullquery and something" will not be affected
+
+	A few more examples can be found below:
+	
+	stencils.query.clean=!padrenull,!showall,!asdasd
+
+	The query for "!padrenullquery", "!showall", "!asdasd" will be hidden.
+
+	stencils.query.clean=!padrenull courseName:science
+
+	The query for "!padrenull courseName:science" will be hidden but the query for 
+	"!padrenull" will still be visible.
  * 
  */
 @Log4j2

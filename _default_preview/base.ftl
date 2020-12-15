@@ -88,18 +88,29 @@
             <#else>
                 <#-- We normally don't want to display the placeholder value -->
             </#if>
-
+            
+            <#-- Display any blended queries -->
             <#list response.resultPacket.QSups as qsup>
                 or <strong class="highlight">${(qsup.query)!}</strong>
                 <#if qsup_has_next>, </#if>
             </#list>
         </#if>
 
+        <#-- 
+            Display count for the number of document which match some but
+            not all of the the query terms.
+        -->
         <#if ((response.resultPacket.resultsSummary.partiallyMatching)!0) != 0>
             where <span class="search-counts-fully-matching">${(response.resultPacket.resultsSummary.fullyMatching)!?string.number}</span>
             match all words and <span class="search-counts-partially-matching">${(response.resultPacket.resultsSummary.partiallyMatching)!?string.number}</span>
             match some words.
         </#if>
+        
+        <#-- 
+            Display the count for the number of documents which have been collapsed.
+            The collapsed results functionality prevents similar documents from being 
+            over represented on the search results page.
+        --> 
         <#if ((response.resultPacket.resultsSummary.collapsed)!0) != 0>
             where 
             <span class="search-counts-collapsed">${(response.resultPacket.resultsSummary.collapsed)!}</span>
