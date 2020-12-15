@@ -71,7 +71,7 @@
                 <#local defaultQuery = (question.getCurrentProfileConfig().get("stencils.tabs.browse_mode.default_query"))!"">
 
                 <a class="btn--link" href="${question.getCurrentProfileConfig().get("ui.modern.search_link")}?${removeParam(QueryString, ["browse_mode", "start_rank", "query","sort"])}&browse_mode=true&query=${defaultQuery}&sort=title">
-                    View all services
+                    Browse all our services
                 </a>
             </article>
         </article>

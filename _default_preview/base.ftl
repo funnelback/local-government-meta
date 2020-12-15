@@ -101,8 +101,9 @@
             match some words.
         </#if>
         <#if ((response.resultPacket.resultsSummary.collapsed)!0) != 0>
+            where 
             <span class="search-counts-collapsed">${(response.resultPacket.resultsSummary.collapsed)!}</span>
-            very similar results included.
+            very similar results have been hidden.
         </#if>
     </span>
 </#macro>

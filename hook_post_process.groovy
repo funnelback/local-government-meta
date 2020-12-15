@@ -830,8 +830,7 @@ class BrowseModeHookLifecycle implements HookLifecycle {
 				selectedValue -> selectedValue.label
 			}		
 			.find()		
-		
-		
+				
 		return transaction?.question?.getCurrentProfileConfig().getRawKeys()
 			.find() { it.equalsIgnoreCase("${FACETS_TO_DISPLAY_CONFIG}.${selectedTab}") } ? true : false		
 	}	
@@ -879,6 +878,7 @@ class QueryHookLifecycle implements HookLifecycle {
 		// Remove the user's query if it matches any of the values which is to be cleaned
 		if (transaction?.question?.query && queriesToClean.any{ it.equalsIgnoreCase(transaction.question.query) }){
 			transaction.question.query = ""	
+			transaction?.response?.resultPacket?.queryCleaned = ""
 		}
 	}
 
