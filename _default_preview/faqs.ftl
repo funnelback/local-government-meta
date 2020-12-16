@@ -56,8 +56,7 @@
                 <img class="deferred rounded-circle fb-image-thumbnail" alt="Thumbnail for ${result.title!}" src="/stencils/resources/base/v15.8/img/pixel.gif" data-deferred-src="${result.listMetadata["image"][0]}">   -->
             <#elseif ((question.getCurrentProfileConfig().get("stencils.showcase"))!"FALSE")?upper_case == "TRUE"> 
                 <img alt="Thumbnail for ${result.title!}" src="https://source.unsplash.com/collection/73776582/160x160"> 
-            </#if>
-        ${(question.getCurrentProfileConfig().get("stencils.showcase"))!"FALSE"?upper_case}     
+            </#if>   
         </figure>
         <div class="search-results__content">
             <#if (result.title)!?has_content>

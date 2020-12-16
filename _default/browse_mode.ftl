@@ -6,7 +6,6 @@
 -->
 
 <#-- 
-    BrowseModeToggle 
     Show the browse mode only on certain tabs.
     Each tab will have a different default sort option. 
     - Title for services
@@ -28,6 +27,7 @@
 </#macro>
 
 <#-- Provides the user an option to turn the browse mode off -->
+<#-- TODO - Come up with a UX for toggling off browse mode -->
 <#macro BrowseModeToggleOff>
     <!-- browse_mode.BrowseModeToggle -->            
     <#-- 
@@ -71,7 +71,7 @@
                 <#local defaultQuery = (question.getCurrentProfileConfig().get("stencils.tabs.browse_mode.default_query"))!"">
 
                 <a class="btn--link" href="${question.getCurrentProfileConfig().get("ui.modern.search_link")}?${removeParam(QueryString, ["browse_mode", "start_rank", "query","sort"])}&browse_mode=true&query=${defaultQuery}&sort=title">
-                    View all services
+                    Browse all our services
                 </a>
             </article>
         </article>
@@ -80,7 +80,7 @@
 
 <#-- 
     Outputs the facets which are associated with browsing a 
-    list a list of documents 
+    list of documents 
 -->
 <#macro BrowseByFilter>
     <!-- browse_mode.BrowseByFilter -->
@@ -93,6 +93,10 @@
             <#-- Only print the browse mode filter when it has been configured. -->
             <#if listFacets?filter(x -> x != "")?size gt 0>
                 <section class="module-az">
+                    <#-- 
+                        TODO - Currently this can be hardcoded for each implementation.
+                        Determine if is needed to make this configurable.
+                    -->
                     <#--                  
                     <section class="module-az__filter">
                         I’m a
