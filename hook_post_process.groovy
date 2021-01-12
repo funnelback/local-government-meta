@@ -17,14 +17,13 @@ new QueryHookLifecycle().postProcess(transaction)
  * The following functions are used for demo purposes.
  */
 
-// Remove council specific names
+// Remove council specific names from the results
 transaction?.response?.resultPacket?.results.each() {
 	result ->	
 
 	result.title = result.title.replaceAll(/\s+-\s+Camden Council/, "")
 	result.title = result.title.replaceAll(/\s*\|\s*SF311/, "")
 }
-
 
 // Add the custom sort to the facet so that
 // category letter is sorted in the following format:
@@ -34,13 +33,15 @@ transaction?.response?.resultPacket?.results.each() {
 transaction?.response?.facets
 	.findAll() {
 		facet ->
-		// Search for facets which requires 
+		// Search for facets names which requires the custom sort
+		// Generally, this should be the facet used to create A-Z listing
 		facet.name == "Category letter"
 	}
 	.each() {
 		facet ->
 		facet.setCustomComparator(new facet.comparator.LabelLengthComparator());
 	}
+
 /**
  * <p>Hook functions for provide a preview of a tab powered using extra searches.</p>
  *

@@ -12,8 +12,13 @@
 -->
 <#macro Curator position sectionCss="">
     <!-- curator.Curator -->
-    <section class="module-curator ${sectionCss}">
-        <h2 class="sr-only">Curator</h2>
+    <section class="module-curator ${sectionCss}"
+        role="complementary"
+        aria-labelledby="fb-curator-${position!"center"}">
+        <h2 id="fb-curator-${position!"center"}" 
+            class="sr-only">
+            Curator - ${position!"center"}
+        </h2>
         <article class="module-curator__list">
             <#list (response.curator.exhibits)![] as exhibit>
                 <#if exhibit.category != "BEST_BETS">
@@ -85,12 +90,17 @@
 <#--
   Display best bets.
 -->
-<#macro BestBets>
+<#macro BestBets id="fb-best-bets">
     <!-- curator.BestBets -->
     <#list (response.curator.exhibits)![] as exhibit>
         <#if exhibit.category == "BEST_BETS">   
-            <section class="module-curator module-curator--no-bg">
-                <h2 class="sr-only">Curator</h2>
+            <section class="module-curator module-curator--no-bg" 
+                role="complementary"
+                aria-labelledby="${id}">
+                <h2 id="${id}" 
+                    class="sr-only">
+                    Best bets
+                </h2>
                 <article class="module-curator__list">                  
                     <article class="module-curator__item ${(exhibit.additionalProperties.class)!}">
                         <div class="module-curator__top">

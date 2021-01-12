@@ -9,16 +9,27 @@
 <#macro SearchForm>
     <!-- project.SearchForm -->
     <section class="module-search js-module-search content-wrapper module-search--bg" style="background-image: url('/s/resources/${question.collection.id}/${question.profile}/css/mysource_files/bg-search.png');">
-        <h2 class="sr-only">Search module</h2>
+        <h1 class="sr-only">Search module</h1>
         <@base.SearchForm>
             <div class="module-search__group">
-                <label for="query" class="sr-only">Search</label>                
-                <input required name="query" id="query" type="Search query" autofocus class="module-search__query tt-input" autocomplete="off" placeholder="Start your search here…" value="${question.query!}" spellcheck="false" dir="auto"">
+                <label id="fb-query"for="query" class="sr-only">Search</label>                
+                <input required 
+                    name="query" 
+                    id="query" 
+                    type="Search query" 
+                    autofocus 
+                    class="module-search__query tt-input" 
+                    autocomplete="off" 
+                    placeholder="Start your search here…" 
+                    value="${question.query!}" 
+                    spellcheck="false" 
+                    dir="auto"
+                    aria-labelledby="fb-query"
+                    aria-required="true">
 
                 <button type="submit" class="module-search__btn"><span class="sr-only">Search</span></button>                
 
                 <@history_cart.Controls />
-            </a>
             </div>
         </@base.SearchForm>
     </section>

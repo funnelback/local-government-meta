@@ -43,11 +43,11 @@
 </#macro>
 
 <#-- Provides the user an option to turn the browse mode on -->
-<#macro BrowseModeToggleOn>
+<#macro BrowseModeToggleOn id="fb-browse-mode">
     <!-- browse_mode.BrowseModeToggleOn -->
     <#-- Output the controls to toggle browse mode from off to on -->
-    <section class="module-curator">
-        <h2 class="sr-only">Toggle browse mode controls</h2>
+    <section class="module-curator" role="complementary" aria-labelledby="${id}">
+        <h2 id="${id}" class="sr-only">Toggle browse mode controls</h2>
         <article class="module-curator__list">
             <article class="module-curator__item">
                 <div class="module-curator__top">                                    

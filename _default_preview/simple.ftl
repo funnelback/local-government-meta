@@ -62,6 +62,9 @@
 
 </head>
 <body>
+	<a href="#search-results" class="sr-only" title="Skip to search results">
+		Skip to search results
+	</a>
 	<@client_includes.ContentHeader />
 
 	<div class="fb-container">
