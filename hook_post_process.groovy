@@ -18,14 +18,29 @@ new QueryHookLifecycle().postProcess(transaction)
  */
 
 // Remove council specific names
-
 transaction?.response?.resultPacket?.results.each() {
-	result ->
+	result ->	
 
 	result.title = result.title.replaceAll(/\s+-\s+Camden Council/, "")
 	result.title = result.title.replaceAll(/\s*\|\s*SF311/, "")
 }
 
+
+// Add the custom sort to the facet so that
+// category letter is sorted in the following format:
+// A, B, C ... X, Y, Z, All results,
+// Instead of 
+// A, All results, B, C ... X, Y, Z
+transaction?.response?.facets
+	.findAll() {
+		facet ->
+		// Search for facets which requires 
+		facet.name == "Category letter"
+	}
+	.each() {
+		facet ->
+		facet.setCustomComparator(new facet.comparator.LabelLengthComparator());
+	}
 /**
  * <p>Hook functions for provide a preview of a tab powered using extra searches.</p>
  *
