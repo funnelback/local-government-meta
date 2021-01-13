@@ -22,7 +22,15 @@
             length: 0,
             classes: {
                 dataset: "module-search__item"
-            },    
+            }, 
+            typeahead: {
+                highlight: true,
+                <#-- 
+                    SDUKP-1762
+                    Hint is turned off due to accessibility requirements raised by higher education clients 
+                -->
+                hint: false
+            },   
             datasets:{
                 <#list question.getCurrentProfileConfig().get("stencils.auto-completion.datasets")!?split(",") as dataset>
                     ${dataset}: {

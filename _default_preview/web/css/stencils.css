@@ -116,6 +116,11 @@
     overflow: visible;
 }
 
+/* Ensure that outline is displayed for accessibility */
+.fb-container .dropdown-list__link:focus {
+    outline: revert;
+}    
+
 @media only screen and (min-width: 1025px){
     .fb-container .content-wrapper--col .search-results__tools {
         margin-bottom: 2rem;
@@ -156,7 +161,6 @@
     Make the overflow visible so that the tab dropdown
     is displayed correctly.
 */
-
 
 @media only screen and (min-width: 1028px)  {
     .fb-container .tabs__item.dropdown,
