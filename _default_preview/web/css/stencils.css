@@ -25,6 +25,7 @@
 
 .fb-container .btn {
     cursor: pointer;
+    border: none;
 }
 
 .fb-container cite {
@@ -114,6 +115,11 @@
 
 .fb-container .search-results__tools {
     overflow: visible;
+}
+
+/* Increased the color contrast to meet accessibility standards */
+.fb-container .dropdown-list__link {
+    color: rgba(0,0,0,0.6);
 }
 
 /* Ensure that outline is displayed for accessibility */
@@ -254,28 +260,7 @@
     color: #e42b12;
 }
 
-/** 
-  * Concierge
-  **/
-@media only screen and (min-width: 1025px) {
-    .fb-container .module-search--bg .tt-dataset-planning_applications,
-    .fb-container .module-search--bg .tt-dataset:nth-child(2),
-    .fb-container .module-search--bg .tt-dataset:nth-child(3)
-    {
-        display: -webkit-box;
-        display: flex;
-        -webkit-box-flex: 0;
-        flex: 0 0 50%;
-        flex-wrap: wrap;
-        max-width: 50%;
-        width: 50%;
-    }
 
-    .fb-container .module-search--bg .tt-category {
-        -webkit-box-flex: 0;
-        flex: 0 0 100%;
-    }
-}
 
 /**
   * Curator 
@@ -411,10 +396,15 @@
     display: none;
 }
 
-.fb-container .flb-cart-box-back{
+/* 
+    Presentation for the back to results link for both the cart
+    and the click and search history.
+*/
+.fb-container #flb-cart-box-back, .fb-container .session-history-hide {
     color: #e42b12;
     cursor: pointer;
     text-decoration: underline;    
+    border: none;
 }
 
 .fb-container .flb-cart-box-list {
@@ -423,10 +413,38 @@
     padding-left: 0;
 }
 
-.fb-container .flb-cart-box-header {
+.fb-container #flb-cart-box-header {
     font-size: 1.5625rem;
     color: #000;
 }
+
+/* Remove the padding introduced by the <ul> element. */
+.fb-container ul#flb-cart-box-list {
+    padding-left: 0;
+}
+
+/* 
+    Change the style of the button which removes items from
+    the cart from a button to a link.
+*/
+.fb-container #search-cart .flb-cart-item-trigger {
+    border: none;
+    background: none;
+    color: #e42b12;
+    text-align: left;
+    padding-left: 0;
+    padding-right: 0;
+}
+
+/* 
+    Change the style of the button which adds and removes 
+    things from the cart from a button to a link
+*/
+.fb-container .search-results__item .flb-cart-item-trigger {
+    border: none;
+    background: none;
+}
+
 
 /* 
     Remove the "ad" icon before search history due to the markup
@@ -435,6 +453,7 @@
 .fb-container #search-history .module-curator__desc::before {
     display: none;
 }
+
 
 .fb-container .result-sessions__controls {
     background-color: rgba(255,255,255,0.6);
@@ -445,10 +464,17 @@
     color: black;
 }
 
-.fb-container .result-sessions__controls a, .fb-container .session-history-toggle  {
+/* 
+    Style both cart and click and search history toggles
+    as normal links instead of buttons.
+*/
+.fb-container .result-sessions__controls a, 
+.fb-container .result-sessions__controls button {
    margin: 0.5rem;
    color: black;
    cursor: pointer;
    text-decoration: underline;  
+   background: none;
+   border: none;
 }
 

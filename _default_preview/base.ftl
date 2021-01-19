@@ -302,7 +302,7 @@
 <#macro Paging>
     <!-- base.Paging -->
     <section class="pagination">
-        <nav class="pagination__nav" role="navigation" aria-label="Pagination Navigation">
+        <nav class="pagination__nav" role="navigation" aria-label="Pagination navigation">
             <#-- Previous page -->
             <#if (response.customData.stencilsPaging.previousUrl)??>
                 <div class="pagination__item pagination__item-navigation pagination__item-previous">

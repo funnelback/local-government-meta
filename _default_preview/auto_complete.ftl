@@ -40,7 +40,7 @@
                         show: '${question.getCurrentProfileConfig().get("stencils.auto-completion.datasets.${dataset}.show")!"10"}'
                         <#if dataset != "organic">
                             , template: {
-                                suggestion: jQuery('#auto-completion-${dataset}').text()
+                                suggestion: document.querySelector('#auto-completion-${dataset}').text
                             }
                         </#if>
                         <#-- 
