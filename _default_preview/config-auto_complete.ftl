@@ -9,7 +9,8 @@
 
     Implementers will need to ensure that they include all the appropriate 
     handlebar templates as they will most likely differ from project
-    to project.
+    to project. Search for "TODO" to see all places where this needs to be 
+    reviewed .
 -->
 
 <#import "/web/templates/modernui/funnelback_classic.ftl" as s/>
@@ -100,6 +101,9 @@
                     javascript to the end of the <body> section.
                 -->
                 <!-- Require CSS and javascript - START -->
+                <#-- 
+                    TODO: Add or update the following list include the handlebars templates used for the implementation.
+                -->                
                 <@faqs.AutoCompleteTemplate />
                 <@planning_applications.AutoCompleteTemplate />
 
@@ -158,7 +162,6 @@
 
 <#-- Note: Indentation is off because the leading tabs are shown in the <pre> -->
 
-<!-- Concierge includes -->  
 <#assign requiredJavascript>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script>
@@ -176,8 +179,7 @@
                 <pre>${requiredJavascript!?markup_string}</pre>
 
 <#-- 
-    *Note for implementers*
-    Add or update the following list include the handlebars templates used for the implemetnation
+    TODO: Add or update the following list include the handlebars templates used for the implementation.
 -->
 <#assign autoCompleteTemplate>
 <@faqs.AutoCompleteTemplate />
