@@ -286,7 +286,7 @@
 					cartItemTrigger: {
 						selector: ".fb-cart__remove",
 						iconDelete: "fas",
-						template: '{{>icon-block}} {{>label-block}}',
+						template: '{{>icon-block}}{{>label-block}}',
 						position: 'afterbegin',
 						isLabel: true,
 						labelDelete: "REMOVE FROM SHORTLIST"

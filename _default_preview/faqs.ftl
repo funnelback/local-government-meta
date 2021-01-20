@@ -11,7 +11,7 @@
 
     @param result An individual result fron the data model
     @param view An uppercase string which represents how
-        the result should be displayed. Defaults to DETAILED.
+        the result should be displayed. Defaults to LIST.
 -->
 <#macro Result result view="LIST">
     <#switch view?upper_case>
