@@ -61,16 +61,41 @@
 	</#if>
 </#macro>
 
+<#-- 
+	A handlebars template which is used to display all the items in the cart. 
+-->
+<#macro CartTemplate>
+	<script id="cart-template" type="text/x-handlebars-template">
+		<div>
+			<button id="flb-cart-box-back" class="btn-link highlight" type="button">
+				{{>icon-block icon=backIcon}} {{>label-block label=backLabel}}
+			</button>
+			<h2 id="flb-cart-box-header" class="text-center d-flex justify-content-center align-items-center">
+				{{>icon-block icon=headerIcon}} {{>label-block label=label}}
+				<button id="flb-cart-box-clear" class="btn btn-xs btn-danger btn-clear" type="button">
+				{{>icon-block icon=clearIcon}} {{>label-block label=clearLabel}}
+				</button>
+			</h2>
+			
+			<ul id="flb-cart-box-list" class="list-unstyled"></ul>
+
+		</div>
+	</script>
+</#macro>
+
 <#--
 	Display the click and search history
 -->
 <#macro SearchHistory>
 	<#if question.collection.configuration.valueAsBoolean("ui.modern.session")>
 		<section id="search-history" class="search-history module-curator">
-			<h2 class="box__title">History</h2>
 			<p>
-				<a href="#" class="highlight session-history-hide"><span class="fa fa-arrow-left"></span> Back to results</a>
+				<button href="#" class="highlight session-history-hide">
+					<span class="fa fa-arrow-left"></span> 
+					Back to results
+				</button>
 			</p>
+			<h2 class="box__title">History</h2>
 
 			<#-- Click history -->
 			<article class="module-curator__list ">
@@ -84,14 +109,35 @@
 						<#-- Result for click history -->
 						<#list session.clickHistory>
 							<div class="module-curator__desc session-history-click-results">
-								<#items as h>
-									<p>
-										<a href="${h.indexUrl}">${h.title}</a> &middot; <span class="text-info">${prettyTime(h.clickDate)}</span>
-										<#if h.query??>
-											<span class="text-muted"> for &quot;${(h.query!"")?split("|")[0]?trim}&quot;</span>
-										</#if>
-									</p>
-								</#items>
+								<#-- 
+									The sessions code relies on the click history results
+									to be wrapped in a <ul>
+								--> 
+								<ul>
+									<#items as h>
+										<li class="list-unstyled">
+											<p>
+												<span class="sr-only">
+													Revisit
+												</span>
+												<a href="${h.indexUrl}">${h.title}</a> &middot; 
+												<span class="sr-only">
+													which was visited
+												</span>									
+												<span class="text-info">${prettyTime(h.clickDate)}</span>
+												<#if h.query??>							
+													<span class="text-muted"> 
+														for 
+														<span class="sr-only">
+															the query
+														</span>																								
+														&quot;${(h.query!"")?split("|")[0]?trim}&quot;
+													</span>
+												</#if>
+											</p>
+										</li>
+									</#items>
+								<ul>
 							</div>
 						</#list>
 
@@ -106,7 +152,7 @@
 						</span>
 					</#if>
 				</article>
-				<article class="module-curator__item module-curator__item ">
+				<article class="module-curator__item module-curator__item">
 					<div class="module-curator__top">
 						<h3 class="module-curator__title">
 							<span class="fa fa-search"></span> Recent searches
@@ -116,16 +162,24 @@
 						<#-- Result for search history -->
 						<#list session.searchHistory>
 							<div class="module-curator__desc session-history-search-results">
-								<#items as h>
-									<p>
-										<a href="?${h.searchParams}">
-											${h.originalQuery!} 
-											<small>(${h.totalMatching})</small>
-										</a> 
-										&middot; 
-										<span class="text-info">${prettyTime(h.searchDate)}</span>
-									</p>
-								</#items>
+								<#-- 
+									The sessions code relies on the search history 
+									to be wrapped in a <ul>
+								--> 
+								<ul>
+									<#items as h>
+										<li class="list-unstyled">
+											<p>
+												<a href="?${h.searchParams}" aria-label="View results for '${h.originalQuery!}' which queried ${prettyTime(h.searchDate)}">
+													${h.originalQuery!} 
+													<small>(${h.totalMatching})</small>
+												</a> 
+												&middot; 
+												<span class="text-info">${prettyTime(h.searchDate)}</span>
+											</p>
+										</li>
+									</#items>
+								</ul>
 							</div>
 						</#list>
 						<#-- No results for search history -->
@@ -134,7 +188,7 @@
 						</p>
 					</div>
 					<#if (session.searchHistory)!?has_content>
-						<a class="btn--link session-history-clear-search float-right" href="#" title="Clear click history">										
+						<a class="btn--link session-history-clear-search float-right" href="#" title="Clear recent searches history">										
 							<span class="fa fa-times"></span> Clear					
 						</a>
 					</#if>
@@ -149,14 +203,48 @@
 	</#if>
 </#macro>
 
+<#-- 
+	The default template used to display items in the cart if a 
+	template is not specified via 'stencils.cart.collections' 
+	in profile.cfg.
+-->
+<#macro CartItemTemplate>
+	<!-- history_cart.CartItemTemplate -->
+	<script id="cart-template-default" type="text/x-handlebars-template">
+		<div class="card search-result-default">
+		<div class="card-header cart-item-trigger-parent">
+			<h4>
+			<a href="{{indexUrl}}">{{#truncate 70}}{{title}}{{/truncate}}</a>
+			</h4>
+			<div class="card-subtitle text-muted">
+			<cite>{{#cut "https://"}}{{indexUrl}}{{/cut}}</cite>
+			</div>
+		</div>
+		<div class="card-body">
+			<div class="card-text">
+			{{#if metaData.image}}
+				<img class="img-fluid float-right" alt="{{result.title}}" src="{{metaData.image}}">
+			{{/if}}
+
+			{{#if metaData.c}}
+				{{#if metaData.date}}<small class="text-muted">{{ metaData.date}}:&nbsp;</small>{{/if}}
+				{{metaData.c}}
+			{{/if}}
+			</div>
+		</div>
+		</div>
+	</script>
+</#macro>
 
 <#macro Configuration>
+	<!-- history_cart.Configurations -->
 	<#if question.collection.configuration.valueAsBoolean("ui.modern.session")>
 	  	<#local host=httpRequest.getHeader('host')>
 
 		<script type="text/javascript">
 			window.addEventListener('DOMContentLoaded', function() {
 				new Funnelback.SessionCart({
+        			apiBase: '${question.getCurrentProfileConfig().get("stencils.sessions.cart.api_base")!"https://${host}/s/cart.json"}',
 					collection: '${question.collection.id}',
 					iconPrefix: '',
 					cartCount: {
@@ -177,7 +265,12 @@
 					},
 					item: {
 						icon: 'fas fa-star',          
-						template: document.getElementById('cart-template-local-government-web').text
+						templates: {
+							<#list question.getCurrentProfileConfig().get("stencils.cart.collections")!?split(",") as collection>
+								'${collection}': document.getElementById('cart-template-${collection}').text,
+							</#list>
+						},
+						class: ''
 					},
 					resultItemTrigger: {
 						selector: '.enable-cart-on-result',
@@ -193,7 +286,7 @@
 					cartItemTrigger: {
 						selector: ".fb-cart__remove",
 						iconDelete: "fas",
-						template: '{{>icon-block}} {{>label-block}}',
+						template: '{{>icon-block}}{{>label-block}}',
 						position: 'afterbegin',
 						isLabel: true,
 						labelDelete: "REMOVE FROM SHORTLIST"
@@ -201,33 +294,27 @@
 				});
 				
 				new Funnelback.SessionHistory({
+					searchApiBase: '${question.getCurrentProfileConfig().get("stencils.sessions.history.search.api_base")!"https://${host}/s/search-history.json"}',
+					clickApiBase: '${question.getCurrentProfileConfig().get("stencils.sessions.history.click.api_base")!"https://${host}/s/click-history.json"}',
 					collection: '${question.collection.id}',
 					pageSelector: ['#search-facets-and-results', '#search-cart']
 				});
 			});
-
-			<#-- ToDo - Figure out how to attach handlebar helpers 
-				window.Funnelback.SessionCart.prototype.Handlebars.registerHelper('equal', function(lvalue, rvalue, options) {
-					if (arguments.length < 3)
-						throw new Error("Handlebars Helper equal needs 2 parameters");
-					if( lvalue!=rvalue ) {
-						return options.inverse(this);
-					} else {
-						return options.fn(this);
-					}
-				});
-			-->    
 		</script>
 	</#if>
 </#macro>
 
+<#-- 
+	Displays the controls used to toggle the cart and history and 
+	query history functionality.
+-->
 <#macro Controls>
-	<#if question.collection.configuration.valueAsBoolean("ui.modern.session")>
-		
+	<#if question.collection.configuration.valueAsBoolean("ui.modern.session")>		
+		<!-- history_cart.Controls -->
 		<section class="clearfix">
 			<div class="result-sessions__controls">
 				<span class="flb-cart-count"></span>
-				 <a class="session-history-toggle">
+				 <a class="session-history-toggle" tabindex="0">
 				 	<span class="fas fa-history"></span>
 				 	History
 				</a>

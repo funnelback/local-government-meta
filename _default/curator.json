@@ -20,6 +20,71 @@
     "removeCollectionUrl" : false
   } ]
 }, {
+  "created" : "2020-03-11T14:34:28.23796Z",
+  "lastModified" : "2021-01-12T16:19:46.075795Z",
+  "id" : "9e45ee31-7d21-44ee-a5ac-f91ea73035d2",
+  "name" : "[Example] Curators for \"No Results\"",
+  "label" : "DEFAULT",
+  "enabled" : true,
+  "trigger" : {
+    "type" : "Groovy",
+    "classFile" : "/opt/funnelback/conf/local-government-meta/@groovy/curator/triggers/NoResultTrigger.groovy",
+    "properties" : {
+      "key" : "value"
+    }
+  },
+  "actions" : [ {
+    "type" : "DisplayUrlAdvert",
+    "titleHtml" : "Contact Us",
+    "displayUrl" : "www.local-council.com",
+    "linkUrl" : "www.local-council.com",
+    "descriptionHtml" : "Want to make an enquiry, get something fixed, or just give us some feedback? You can contact us in many ways.\n\nOne of the easiest ways to contact our Customer Services team is to use our below Contact form. The Customer Services email is only monitored during Rangiora office hours. If you have an urgent request outside of office hours, phone 0800 965 468 (0800WMKGOV).",
+    "additionalProperties" : {
+      "position" : "bottom",
+      "image" : "https://source.unsplash.com/random/40x40?email"
+    },
+    "category" : "",
+    "removeCollectionUrl" : false
+  }, {
+    "type" : "DisplayUrlAdvert",
+    "titleHtml" : "Rates and property search",
+    "displayUrl" : "https://rates.gov",
+    "linkUrl" : "https://rates.gov",
+    "descriptionHtml" : "Find out the valuation or rates payable on a property.",
+    "additionalProperties" : {
+      "position" : "center",
+      "call_to_action_label" : "Search rates",
+      "call_to_action_url" : "https://eservices.waimakariri.govt.nz/ePropertyPROD/P1/eRates/RatingInformationSearch.aspx?r=P1.WMKWEBGUEST&f=%24P1.ERA.RATINFO.ENQ",
+      "image" : "https://source.unsplash.com/random/40x40?rates"
+    },
+    "category" : "",
+    "removeCollectionUrl" : false
+  }, {
+    "type" : "DisplayUrlAdvert",
+    "titleHtml" : "Building Consent Search",
+    "displayUrl" : "www.build.consent.search/",
+    "linkUrl" : "www.build.consent.search/",
+    "descriptionHtml" : "Find the current status of your building consent.",
+    "additionalProperties" : {
+      "position" : "center"
+    },
+    "category" : "",
+    "removeCollectionUrl" : false
+  }, {
+    "type" : "DisplayUrlAdvert",
+    "titleHtml" : "Recycling, Rubbish & Organics",
+    "displayUrl" : "https://www.rubbish.com",
+    "linkUrl" : "https://www.rubbish.com",
+    "descriptionHtml" : "The Council provides a number of waste services for the District's residents, businesses, schools and visitors",
+    "additionalProperties" : {
+      "call_to_action_label" : "Sign up",
+      "call_to_action_url" : "https://rethinkrubbish.waimakariri.govt.nz/s/#reminder",
+      "image" : "https://source.unsplash.com/random/40x40?recycling"
+    },
+    "category" : "",
+    "removeCollectionUrl" : false
+  } ]
+}, {
   "created" : "2020-03-12T14:33:01.536859Z",
   "lastModified" : "2020-12-03T09:16:38.588196Z",
   "id" : "f667e7b1-7136-405b-af29-16e0fee57036",
@@ -285,9 +350,9 @@
   } ]
 }, {
   "created" : "2020-03-11T14:34:28.23796Z",
-  "lastModified" : "2021-01-12T16:19:46.075795Z",
-  "id" : "9e45ee31-7d21-44ee-a5ac-f91ea73035d2",
-  "name" : "[Example] Curators for \"No Results\"",
+  "lastModified" : "2021-01-14T15:09:20.389722Z",
+  "id" : "d8ca0e61-6355-4f8d-adfd-09900978799b",
+  "name" : "[Example] Curators for \"No Results\" (Copy)",
   "label" : "DEFAULT",
   "enabled" : true,
   "trigger" : {

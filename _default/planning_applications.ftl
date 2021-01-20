@@ -131,7 +131,7 @@
 --> 
 <#macro AutoCompleteTemplate>
     <!-- planning_applications.AutoCompleteTemplate -->
-    <script id="auto-completion-planning_applications" type="text/x-handlebar-template">
+    <script id="auto-completion-planning_applications" type="text/x-handlebars-template">
         <div class="fb-auto-complete--non-organic">
             <h6>
                 {{extra.disp.metaData.planningApplicationName}}

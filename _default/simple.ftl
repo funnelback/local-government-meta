@@ -62,6 +62,9 @@
 
 </head>
 <body>
+	<a href="#search-results" class="sr-only" title="Skip to search results">
+		Skip to search results
+	</a>
 	<@client_includes.ContentHeader />
 
 	<div class="fb-container">
@@ -106,17 +109,10 @@
 	<script src="/s/resources/${question.collection.id}/${question.profile}/js/base.js"></script> 
 	<script src="${GlobalResourcesPrefix}js/funnelback.autocompletion-2.6.0.js"></script>
 
-	<script>
-
-	</script>
-	
 	<#-- Output the auto complete templates for concierge -->
 	<@faqs.AutoCompleteTemplate />
 	<@planning_applications.AutoCompleteTemplate />
-	<@results.CartTemplate />
-	
-
-
+		
 	<script>
 		jQuery(document).ready( function() {
 			setupDeferredImages();
@@ -125,12 +121,33 @@
 		});
 	</script>
 
-
-	<#-- Enable session functonality which includes cart and history -->
+	<#-- 
+		Enable session functonality which includes cart and click 
+		and query history 
+	-->
 	<#if question.collection.configuration.valueAsBoolean("ui.modern.session")>
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/es6-promise/4.2.8/es6-promise.min.js" integrity="sha512-JMK7ImCd/9VxQM7FWvAT3njqo5iGKkWcOax6Bwzuq48xxFd7/jekKcgN+59ZRwBoEpZvv6Jkwh3fDGrBVWX5vA==" crossorigin="anonymous"></script>
-		<script type="text/javascript" src="${GlobalResourcesPrefix}js/funnelback.session-cart-0.1.js"></script>
-		<script type="text/javascript" src="${GlobalResourcesPrefix}js/funnelback.session-history-0.1.js"></script>
+		<#-- Specifies how the cart is to be presented -->
+		<@results.CartTemplate />
+		
+		<#-- Specifies how each cart item should be presented -->
+		<@history_cart.CartTemplate />
+		<#-- Specifies the presentation of a cart item if a custom one is not specified -->
+		<@history_cart.CartItemTemplate />
+
+		<script nomodule src="https://cdn.jsdelivr.net/npm/es6-promise@4/dist/es6-promise.auto.min.js"></script>
+		
+		<#-- We have replaced the products session code with an extended version for Stencils -->
+		<#if question.profile?contains("_preview")>
+			<#-- 
+				Use the non-minified version for the preview so that 
+				it is easier to step through and investigate bugs 
+			-->
+			<script defer src="/s/resources/${question.collection.id}/${question.profile}/js/funnelback.session-cart-0.1.js"></script>
+			<script defer src="/s/resources/${question.collection.id}/${question.profile}/js/funnelback.session-history-0.1.js"></script>
+		<#else>
+			<script defer src="/s/resources/${question.collection.id}/${question.profile}/js/funnelback.session-cart-0.1.min.js"></script>
+			<script defer src="/s/resources/${question.collection.id}/${question.profile}/js/funnelback.session-history-0.1.min.js"></script>
+		</#if>
 		<@history_cart.Configuration />
 	</#if>
 

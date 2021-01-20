@@ -11,7 +11,7 @@
 
     @param result An individual result fron the data model
     @param view An uppercase string which represents how
-        the result should be displayed. Defaults to DETAILED.
+        the result should be displayed. Defaults to LIST.
 -->
 <#macro Result result view="LIST">
     <#switch view?upper_case>
@@ -95,7 +95,9 @@
                         </@s.boldicize>
                     </a>
 
-                    <span class="enable-cart-on-result"></span>
+                    <span class="enable-cart-on-result float-right" 
+                        aria-label="Add result to the shortlist">
+                    </span>
                 </h4>
             </#if>
             
@@ -243,7 +245,7 @@
 
 <#macro CartTemplate>
     <!-- results.CartTemplate -->
-    <script id="cart-template-local-government-web" type="text/x-handlebar-template">
+    <script id="cart-template-local-government-web" type="text/x-handlebars-template">
         <article class="search-results__item search-results__item--default">
             <figure class="search-results__bg">
                 {{#if metaData.image}}  
@@ -308,7 +310,7 @@
                 </section>  
                 -->
                 <div class="search-results__bottom">
-                    <a class="btn--link fb-cart__remove"></a>
+                    <span class="fb-cart__remove"></span>
                 </div>                         
             </div>
         </article>

@@ -11,7 +11,7 @@
 
     @param result An individual result fron the data model
     @param view An uppercase string which represents how
-        the result should be displayed. Defaults to DETAILED.
+        the result should be displayed. Defaults to LIST.
 -->
 <#macro Result result view="LIST">
     <#switch view?upper_case>
@@ -116,7 +116,7 @@
 --> 
 <#macro AutoCompleteTemplate>
     <!-- faqs.AutoCompleteTemplate -->
-	<script id="auto-completion-faqs" type="text/x-handlebar-template">
+	<script id="auto-completion-faqs" type="text/x-handlebars-template">
 		<div class="fb-auto-complete--non-organic">
             <h6>
                 {{extra.disp.metaData.t}}

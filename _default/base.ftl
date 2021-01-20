@@ -16,11 +16,19 @@
 -->
 <#macro SearchForm preserveTab=true class="">
     <!-- base.SearchForm -->
-    <form action="${question.getCurrentProfileConfig().get("ui.modern.search_link")}" method="GET"<#if class?has_content> class="${class}"</#if>>
+    <form 
+        action="${question.getCurrentProfileConfig().get("ui.modern.search_link")}" 
+        method="GET"
+        role="search"
+        <#if class?has_content>class="${class}"</#if>
+        >
         <input type="hidden" name="collection" value="${question.collection.id}">
 
+        <#-- Output all the parameters which are to persist between queries -->
         <#list ["enc", "form", "scope", "lang", "profile", "userType", "displayMode", "num_ranks"] as parameter>
-            <@s.IfDefCGI name=parameter><input type="hidden" name="${parameter}" value="${question.inputParameterMap[parameter]!}"></@s.IfDefCGI>
+            <@s.IfDefCGI name=parameter>
+                <input type="hidden" name="${parameter}" value="${question.inputParameterMap[parameter]!}">
+            </@s.IfDefCGI>
         </#list>
 
         <#if preserveTab>
@@ -207,7 +215,7 @@
 
   @param options Map of sort options, where keys are the `sort` paratmeter (e.g. `date`) and values the label (e.g. `Date (Newest first)`)
 -->
-<#macro SortDropdown options={
+<#macro SortDropdown id="fb-sort-dropdown" options={
   "": "Relevance",
   "date": "Date (Newest first)",
   "adate": "Date (Oldest first)",
@@ -219,19 +227,31 @@
   "shuffle": "Shuffle"} >
     <!-- base.SortDropdown -->
     <section class="dropdown-list">
-        <button class="dropdown-list__link js-dropdown-list__link" aria-haspopup="true" aria-expanded="false">
+        <span id=${id} class="sr-only">
+            Sort results by
+        </span>
+        <button class="dropdown-list__link js-dropdown-list__link" aria-haspopup="listbox" aria-expanded="false">
             <span>${(options[question.inputParameterMap["sort"]])!"Sort by"}</span>
         </button>
-        <ul class="dropdown-list__list" role="listbox" tabindex="-1"">
+        <ul class="dropdown-list__list" 
+            role="listbox" 
+            tabindex="-1"
+            aria-labelledby=${id}>
             <#list options as key, value>
-                <li role="option">                
-                    <a class="dropdown-list__list-link" title="Sort by ${value}" href="${question.collection.configuration.value("ui.modern.search_link")}?${removeParam(QueryString, "sort")}&sort=${key}">
-                        <#if ((options[question.inputParameterMap["sort"]])!"") == value>
-                            <i class="fas fa-check"></i>
-                        </#if>
-                        ${value}
-                    </a>
-                </li>
+                <#if ((options[question.inputParameterMap["sort"]])!"") == value>
+                    <li role="option" aria-selected="true">                
+                        <a class="dropdown-list__list-link" title="Sort by ${value}" href="${question.collection.configuration.value("ui.modern.search_link")}?${removeParam(QueryString, "sort")}&sort=${key}">
+                                <i class="fas fa-check"></i>
+                            ${value}
+                        </a>
+                    </li>
+                <#else>
+                    <li role="option" aria-selected="false">                
+                        <a class="dropdown-list__list-link" title="Sort by ${value}" href="${question.collection.configuration.value("ui.modern.search_link")}?${removeParam(QueryString, "sort")}&sort=${key}">
+                            ${value}
+                        </a>
+                    </li>                                
+                </#if>
             </#list>
         </ul>
     </section>
@@ -242,22 +262,35 @@
 
   @param limits Array of number of results to provide (defaults to 10, 20, 50)
 -->
-<#macro LimitDropdown limits=[10, 20, 50]>
+<#macro LimitDropdown id="fb-limit-dropdown" limits=[10, 20, 50]>
     <!-- base.LimitDropdown -->
     <section class="dropdown-list">
-        <button class="dropdown-list__link js-dropdown-list__link" aria-haspopup="true" aria-expanded="false">
+        <span id=${id} class="sr-only">
+            Limit the number of results to display
+        </span>    
+        <button class="dropdown-list__link js-dropdown-list__link" aria-haspopup="listbox" aria-expanded="false">
             <span>${question.inputParameterMap["num_ranks"]!"10"}</span>
         </button>
-        <ul class="dropdown-list__list" role="listbox" tabindex="-1"">
+        <ul class="dropdown-list__list" 
+            role="listbox" tabindex="-1"
+            aria-labelledby=${id}>
             <#list limits as limit>
-                <li role="option">
-                    <a class="dropdown-list__list-link" title="Limit to ${limit} results" href="${question.collection.configuration.value("ui.modern.search_link")}?${removeParam(QueryString, "num_ranks")}&num_ranks=${limit}">
-                        <#if ((question.inputParameterMap["num_ranks"]?number)!0) == limit>
+                <#if ((question.inputParameterMap["num_ranks"]?number)!0) == limit>
+                    <#-- Selected case -->
+                    <li role="option" aria-selected="true">
+                        <a class="dropdown-list__list-link" title="Limit to ${limit} results" href="${question.collection.configuration.value("ui.modern.search_link")}?${removeParam(QueryString, "num_ranks")}&num_ranks=${limit}">
                             <i class="fas fa-check"></i>
-                        </#if>
-                        ${limit} results
-                    </a>
-                </li>
+                            ${limit} results
+                        </a>
+                    </li>
+                <#else>
+                    <#-- Unselected case -->
+                    <li role="option" aria-selected="false">
+                        <a class="dropdown-list__list-link" title="Limit to ${limit} results" href="${question.collection.configuration.value("ui.modern.search_link")}?${removeParam(QueryString, "num_ranks")}&num_ranks=${limit}">
+                            ${limit} results
+                        </a>
+                    </li>
+                </#if>
             </#list>
         </ul>
     </section>
@@ -269,12 +302,20 @@
 <#macro Paging>
     <!-- base.Paging -->
     <section class="pagination">
-        <nav class="pagination__nav" aria-label="Pagination Navigation">
+        <nav class="pagination__nav" role="navigation" aria-label="Pagination navigation">
             <#-- Previous page -->
             <#if (response.customData.stencilsPaging.previousUrl)??>
                 <div class="pagination__item pagination__item-navigation pagination__item-previous">
-                    <a class="pagination__link" rel="prev" href="${response.customData.stencilsPaging.previousUrl}">
+                    <a class="pagination__link" 
+                        rel="prev" 
+                        href="${response.customData.stencilsPaging.previousUrl}">
+                        <span class="sr-only">
+                            Go to the
+                        </span>
                         <span class="pagination__label">Prev</span>
+                        <span class="sr-only">
+                            page
+                        </span>
                     </a>
                 </div>
             </#if>
@@ -285,15 +326,17 @@
                 <ul class="pagination__pages-list">
                     <#list response.customData.stencilsPaging.pages as page>
                         <#if page.selected>
-                            <li class="pagination__item pagination__item--active">
-
-                                <span class="pagination__current" aria-label="Current Page, Page ${page.number}">
+                            <li class="pagination__item pagination__item--active" aria-current="page">
+                                <span class="pagination__current">
                                     <span class="pagination__label">${page.number}</span>
                                 </span>                            
                             </li>
                         <#else>                    
                             <li class="pagination__item">
-                                <a class="pagination__link" href="${page.url}" aria-label="Goto Page 1">
+                                <a class="pagination__link" href="${page.url}">
+                                    <span class="sr-only">
+                                        Go to page
+                                    </span>
                                     <span class="pagination__label">${page.number}</span>
                                 </a>
                             </li>
@@ -305,8 +348,16 @@
             <#-- Next page -->
             <#if (response.customData.stencilsPaging.nextUrl)??>            
                 <div class="pagination__item pagination__item-navigation pagination__item-next">
-                    <a class="pagination__link" rel="next" href="${response.customData.stencilsPaging.nextUrl}" >
+                    <a class="pagination__link" 
+                        rel="next" 
+                        href="${response.customData.stencilsPaging.nextUrl}">
+                        <span class="sr-only">
+                            Go to the
+                        </span>
                         <span class="pagination__label">Next</span>
+                        <span class="sr-only">
+                            page
+                        </span>
                     </a>
                 </div>
             </#if> 
