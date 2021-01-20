@@ -97,7 +97,8 @@
 
                 <p> 
                     It would also be beneficial to implement Funnelback's autocomplete
-                    which will improve the user's search experience. Please see xxx
+                    which will improve the user's search experience. Please see
+                    <a href="https://${httpHost!}/s/search.html?collection=${question.collection.id}&form=config-auto_complete">autocomplete configuration</a>
                     for more detail.   
                 </p>                
 
