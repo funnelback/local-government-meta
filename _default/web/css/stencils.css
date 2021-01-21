@@ -1,7 +1,20 @@
-
-
+:root {
+    --red: #da1007;
+}
 
 /* Design overrides made by the vertical products team - Avoid changing these if possible */
+
+/* Colour overrides to make the contrast WCAG 2.1 compliant */
+
+.fb-container .highlight,
+.fb-container cite,
+.fb-container .btn--link {
+    color: var(--red);
+}
+
+.fb-container .btn {
+    background-color: var(--red);
+}
 
 /* Increased the font on large viewports */
 @media only screen and (min-width: 1025px) {
@@ -10,6 +23,7 @@
     }
 }
 
+/* Generic overrides to get the styling to work */
 .fb-container {
     padding-bottom: 0;
     overflow: initial;
@@ -72,7 +86,7 @@
 
 /* Clear all link which will remove all selected categories for the current facet */
 .fb-container .module-filter__facets-clear_all_link {
-    color: #e42b12;
+    color: var(--red);;
     font-size: 1rem;
 }
 
@@ -220,7 +234,7 @@
 
 .fb-container .dropdown__item:hover,
 .fb-container .dropdown__item:focus-within {
-    background:#e42b12;
+    background:var(--red);;
     cursor: pointer;
 }
 
@@ -257,7 +271,7 @@
     display: inline-block;
     vertical-align: middle;
     font-size: 0.8rem;
-    color: #e42b12;
+    color: var(--red);
 }
 
 
@@ -265,7 +279,6 @@
 /**
   * Curator 
   **/
-
 
 .fb-container .module-curator {
     position: relative;
@@ -309,7 +322,6 @@
   * Contextual Navigation 
   **/
 
-
 /* Add a padding at the bottom so that footer is not so close */
 @media only screen and (min-width: 1025px) {
     .fb-container .related-links {
@@ -320,7 +332,6 @@
 /**
   * Blending 
   **/
-
 
 .fb-container .search-blending {
     margin-left: 0rem;
@@ -335,7 +346,6 @@
 /**
   * Results 
   **/
-
 
 @media only screen and (min-width: 950px) {
     .fb-container .content-wrapper--col .search-results__item:nth-child(-n+4) {
@@ -367,7 +377,7 @@
 }
 
 .fb-container .tags.hashtag .hashtag__link{
-    color: #e42b12;
+    color: #var(--red);
     text-decoration: none;
 }
 
@@ -401,7 +411,7 @@
     and the click and search history.
 */
 .fb-container #flb-cart-box-back, .fb-container .session-history-hide {
-    color: #e42b12;
+    color: var(--red);
     cursor: pointer;
     text-decoration: underline;    
     border: none;
@@ -430,7 +440,7 @@
 .fb-container #search-cart .flb-cart-item-trigger {
     border: none;
     background: none;
-    color: #e42b12;
+    color: var(--red);
     text-align: left;
     padding-left: 0;
     padding-right: 0;
@@ -443,8 +453,8 @@
 .fb-container .search-results__item .flb-cart-item-trigger {
     border: none;
     background: none;
+    cursor: pointer;
 }
-
 
 /* 
     Remove the "ad" icon before search history due to the markup

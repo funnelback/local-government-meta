@@ -18,7 +18,7 @@
 <#import "auto_complete.ftl" as auto_complete />
 
 <#-- 
-    Add or update the follow to include templates containing the handlebar templates required
+    TODO: Add or update the follow to include templates containing the handlebar templates required
     for autocomplete.
 -->
 <#import "faqs.ftl" as faqs />
@@ -129,9 +129,9 @@
             <section class="content-wrapper">
                 <h2>CSS</h2>
                 <p>
-                    The following CSS file should be included in the &lt;head&gt; of the document. 
-                </p>
-                
+                    The first step of implementing autocomplete is to include following CSS 
+                    file should be included in the &lt;head&gt; of the document. 
+                </p>                
 
 <#assign cssSnippets>
 <link rel="stylesheet" href="https://${httpHost!}/s/resources/${(question.collection.id)!}/${(question.profile)!}/css/main.css">
@@ -140,8 +140,8 @@
                 <pre>${cssSnippets!?markup_string}</pre>
 
                 <p> 
-                    The presentation relies on the &lt;input&gt; being nested in the following 
-                    structure:
+                    Please keep in mind that the css provided with Funnelback relies on 
+                    the &lt;input&gt; being nested in the following structure:
                     
                     <pre>.fb-container .module-search--bg.module-search .module-search__group</pre>
                     
@@ -161,9 +161,7 @@
 
 
 <#-- Note: Indentation is off because the leading tabs are shown in the <pre> -->
-
 <#assign requiredJavascript>
-
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script>
 <!-- Typeahead handles sending the asynchronous HTTP requests on keystroke with debouncing and caching -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/typeahead.js/0.11.1/typeahead.bundle.min.js" integrity="sha512-qOBWNAMfkz+vXXgbh0Wz7qYSLZp6c14R0bZeVX2TdQxWpuKr6yHjBIM69fcF8Ve4GUX6B6AKRQJqiiAmwvmUmQ==" crossorigin="anonymous"></script>
@@ -172,7 +170,6 @@
 <!-- Funnelback autocomplete library -->
 <script src="https://${httpHost!}/s/${GlobalResourcesPrefix}js/funnelback.autocompletion-2.6.0.js"></script>
 <script src="https://${httpHost!}/s/resources/${question.collection.id}/${question.profile}/js/base.js"></script> 
-
 </#assign>
 
                 <strong>Required javascript libraries</strong>

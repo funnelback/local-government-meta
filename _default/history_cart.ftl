@@ -278,8 +278,14 @@
 						iconAdd: 'far fa-star',
 						labelDelete: '',
 						iconDelete: 'fas fa-star',
-						isLabel: false,
-						template: '<span class="text-info float-right">{{>icon-block}} {{>label-block}}</span>',
+						isLabel: true,
+						<#-- 
+							Labels are required as they are used as the title of the add/remove buttons
+							which is needed for WCAG 2.1. 
+						-->
+						labelAdd: "Add to shortlist",
+						labelDelete: "Remove from shortlist",
+						template: '<span class="text-info float-right">{{>icon-block}} <span class="sr-only">{{>label-block}}</span></span>',
 						position: 'afterbegin'
 					},
 					/* Trigger to delete an item from the cart */

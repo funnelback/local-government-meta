@@ -61,7 +61,9 @@
         <div class="search-results__header">
             <h3 class="search-results__title">
                 <#if (result.listMetadata["author"]?first)!?has_content>
-                    <a href="https://twitter.com/${(result.listMetadata["author"]?first)!}" class="search-results__link">
+                    <a href="https://twitter.com/${(result.listMetadata["author"]?first)!}" 
+                        class="search-results__link"
+                        aria-label="View the profile of @${(result.listMetadata["author"]?first)!}">
                         @${(result.listMetadata["author"]?first)!}
                     </a>
                 </#if> 
@@ -73,15 +75,13 @@
             </#if>
         </div>        
         <div class="search-results__content">
-            
-
+        
             <#-- Summary -->
             <p class="search-results__desc">
                 <@s.boldicize>
                     ${result.summary!?no_esc}
                 </@s.boldicize>
             </p>
-
 
             <#list result.listMetadata["twitterHashTag"]![]>
                 <section class="tags hashtag">                
@@ -100,7 +100,12 @@
             <#-- Display the time which this result has last been visited by the user -->
             <@history_cart.LastVisitedLink result=result/>            
         
-            <a href="${result.clickTrackingUrl!}" class="btn--link" title="link to twitter post">Read more</a>
+            <a href="${result.clickTrackingUrl!}" 
+                class="btn--link" 
+                title="View more on twitter"
+                aria-label="View more on twitter">
+                Read more
+            </a>
         </div>
     </article>
 </#macro>
