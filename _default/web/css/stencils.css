@@ -8,7 +8,10 @@
 
 .fb-container .highlight,
 .fb-container cite,
-.fb-container .btn--link {
+.fb-container .btn--link,
+.fb-container .btn-toggle,  
+.fb-container .tags__item,
+.fb-container .module-filter__facets-link span {
     color: var(--red);
 }
 
@@ -83,6 +86,11 @@
 .fb-container .module-filter--dark .module-filter__facets-link.square::after {
     border-radius: 0;
 }
+
+/* Ensure that outline is displayed for accessibility */
+.fb-container .btn-toggle:focus {
+    outline: revert;
+}    
 
 /* Clear all link which will remove all selected categories for the current facet */
 .fb-container .module-filter__facets-clear_all_link {
@@ -377,7 +385,7 @@
 }
 
 .fb-container .tags.hashtag .hashtag__link{
-    color: #var(--red);
+    color: var(--red);
     text-decoration: none;
 }
 

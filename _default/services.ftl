@@ -52,8 +52,8 @@
 				<#-- Header section usually containing a title and small thumbnail -->
 				<div class="fb-card__header mb-3">
 					<div class="fb-card__header__image">
-						<#if (result.listMetadata["image"][0])!?has_content>
-							<img class="deferred rounded-circle fb-image-thumbnail" alt="Thumbnail for ${result.title!}" src="/stencils/resources/base/v15.8/img/pixel.gif" data-deferred-src="${result.listMetadata["image"][0]}"> 
+						<#if (result.listMetadata["image"]?first)!?has_content>
+							<img class="deferred rounded-circle fb-image-thumbnail" alt="Thumbnail for ${result.title!}" src="/stencils/resources/base/v15.8/img/pixel.gif" data-deferred-src="${result.listMetadata["image"]?first}"> 
 						<#elseif ((question.getCurrentProfileConfig().get("stencils.showcase"))!"FALSE")?upper_case == "TRUE">
 							<img class="rounded-circle fb-image-thumbnail" alt="Thumbnail for ${result.title!}" src="https://source.unsplash.com/random/40x40?${(result.title)!''?url}"> 
 						</#if>
@@ -76,15 +76,13 @@
 					</div>
 				</div>
 				
-				<#--  <img class="card-img-top" alt="Thumbnail for ${result.title!}" src="https://source.unsplash.com/random/344x100?${(result.listMetadata["jobCompanyName"][0])!},marketing">  -->
-
 				<#-- Summary section containing the description and key details of the document -->
 				<div class="fb-card__summary">
-					<#if (result.listMetadata["serviceLocality"][0])!?has_content> 
+					<#if (result.listMetadata["serviceLocality"]?first)!?has_content> 
 						<div class="card-text">
-							<div class="mb-1"> ${(result.listMetadata["serviceLocality"][0])!} </div>
+							<div class="mb-1"> ${(result.listMetadata["serviceLocality"]?first)!} </div>
 							<p class="text-muted small truncate-text">
-								${(result.listMetadata["serviceAddress"][0])!}
+								${(result.listMetadata["serviceAddress"]?first)!}
 							</p>
 						</div>
 					</#if>
@@ -96,19 +94,6 @@
 							</@s.boldicize>
 						</p>
 					</div>
-
-					<#if (result.metaData["jobPosted"])!?has_content>
-						<div class="card-text mb-3">
-							<div class="small">
-								<span>
-									Posted: 
-								</span>
-								<span class="text-muted">
-									${result.metaData["jobPosted"]!}
-								</span>
-							</div>
-						</div>
-					</#if>
 
 					<div class="card-text">
 						<@history_cart.LastVisitedLink result=result/>
