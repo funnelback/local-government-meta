@@ -242,7 +242,7 @@
 
 .fb-container .dropdown__item:hover,
 .fb-container .dropdown__item:focus-within {
-    background:var(--red);;
+    background:var(--red);
     cursor: pointer;
 }
 
@@ -252,7 +252,8 @@
 }
 
 .fb-container .dropdown__item.active {
-    background: rgba(228, 43, 18, 0.9)
+    background-color:var(--red);
+    opacity: 0.9;
 }
 
 .fb-container .dropdown__item a {
