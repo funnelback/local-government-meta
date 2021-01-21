@@ -488,7 +488,7 @@
                         <#-- Display the result based on the configured template -->
                         <#switch ((response.customData["stencilsGroupingResults"].mode)!"")?upper_case>
                             <#case "METADATA">
-                                <#if (result.metaData[group.field])!?has_content>
+                                <#if (result.listMetadata["group.field"]?first)!?has_content>
                                     <@Result result=result view=view />
                                 </#if>
                                 <#break> 

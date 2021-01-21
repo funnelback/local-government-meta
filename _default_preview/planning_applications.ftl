@@ -48,8 +48,8 @@
     <!-- planning_applications.GenericView -->
     <article class="search-results__item search-results__item--people" data-fb-result="${result.indexUrl}">
         <figure class="search-results__bg">
-            <#if (result.listMetadata["image"][0])!?has_content>
-                <img class="deferred rounded-circle fb-image-thumbnail" alt="Thumbnail for ${result.title!}" src="/stencils/resources/base/v15.8/img/pixel.gif" data-deferred-src="https://jobs.ama.org${result.listMetadata["image"][0]}"> 
+            <#if (result.listMetadata["image"]?first)!?has_content>
+                <img class="deferred rounded-circle fb-image-thumbnail" alt="Thumbnail for ${result.title!}" src="/stencils/resources/base/v15.8/img/pixel.gif" data-deferred-src="https://jobs.ama.org${result.listMetadata["image"]?first}"> 
             <#else>
                 <img alt="Thumbnail for ${result.title!}" src="https://source.unsplash.com/random/160x160?${(result.listMetadata["planningApplicationName"]?first)!''?url}"> 
             </#if>
@@ -80,10 +80,10 @@
             <section class="tags">
                 <ul class="tags__list">
                     <li class="tags__item">
-                        ${result.listMetadata["planningSystemStatus"][0]!}
+                        ${(result.listMetadata["planningSystemStatus"]?first)!}
                     </li>
                     <li class="tags__item">
-                        ${result.listMetadata["planningDecisionType"][0]!}
+                        ${(result.listMetadata["planningDecisionType"]?first)!}
                     </li>
                 </ul>
             </section>
@@ -104,14 +104,6 @@
                             </li>
                         </#if>                        
                         
-                        <#if (result.listMetadata["roadworksContactTelephoneNumber"]?first)!?has_content>
-                            <li class="contact__item contact__item--icon contact__item--icon-phone">
-                                <a href="tel:${result.listMetadata["roadworksContactTelephoneNumber"][0]!}" class="contact__link">
-                                    ${(result.listMetadata["roadworksContactTelephoneNumber"]?first)!}
-                                </a>
-                            </li>
-                        </#if>
-
                         <#if (result.listMetadata["planningDevelopeAddress"]?first)!?has_content>
                             <li class="contact__item contact__item--icon contact__item--icon-location">
                                 ${(result.listMetadata["planningDevelopeAddress"]?first)!}

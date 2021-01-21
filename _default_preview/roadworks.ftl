@@ -48,10 +48,10 @@
     <!-- roadworks.GenericView -->
     <article class="search-results__item search-results__item--people" data-fb-result="${result.indexUrl}">
         <figure class="search-results__bg">
-            <#if (result.listMetadata["image"][0])!?has_content>
-                <img class="deferred rounded-circle fb-image-thumbnail" alt="Thumbnail for ${result.title!}" src="/stencils/resources/base/v15.8/img/pixel.gif" data-deferred-src="https://jobs.ama.org${result.listMetadata["image"][0]}"> 
+            <#if (result.listMetadata["image"]?first)!?has_content>
+                <img class="deferred rounded-circle fb-image-thumbnail" alt="Thumbnail for ${result.title!}" src="/stencils/resources/base/v15.8/img/pixel.gif" data-deferred-src="https://jobs.ama.org${result.listMetadata["image"]?first}"> 
             <#elseif ((question.getCurrentProfileConfig().get("stencils.showcase"))!"FALSE")?upper_case == "TRUE">
-                <img alt="Thumbnail for ${result.title!}" src="https://source.unsplash.com/random/160x160?${(result.listMetadata['roadworksStreet'][0])!''?url}"> 
+                <img alt="Thumbnail for ${result.title!}" src="https://source.unsplash.com/random/160x160?${(result.listMetadata['roadworksStreet']?first)!''?url}"> 
             </#if>
         </figure>
         <div class="search-results__content">
@@ -59,7 +59,7 @@
                 <a href="${result.clickTrackingUrl!}" title="${result.liveUrl!}" class="search-results__link">
                     <@s.boldicize>
                         <@s.Truncate length=90>
-                            ${(result.listMetadata["roadworksStreet"][0])!}
+                            ${(result.listMetadata["roadworksStreet"]?first)!}
                         </@s.Truncate>
                     </@s.boldicize>
                 </a>
@@ -80,10 +80,10 @@
             <section class="tags">
                 <ul class="tags__list">
                     <li class="tags__item">
-                        ${result.listMetadata["roadworksWorkStatus"][0]!}
+                        ${(result.listMetadata["roadworksWorkStatus"]?first)!}
                     </li>
                     <li class="tags__item">
-                        ${result.listMetadata["roadworksCategoryOfWorks"][0]!}
+                        ${(result.listMetadata["roadworksCategoryOfWorks"]?first)!}
                     </li>
                 </ul>
             </section>
@@ -102,7 +102,7 @@
                         
                         <#if (result.listMetadata["roadworksContactTelephoneNumber"]?first)!?has_content>
                             <li class="contact__item contact__item--icon contact__item--icon-phone">
-                                <a href="tel:${result.listMetadata["roadworksContactTelephoneNumber"][0]!}" class="contact__link">
+                                <a href="tel:${(result.listMetadata["roadworksContactTelephoneNumber"]?first)!}" class="contact__link">
                                     ${(result.listMetadata["roadworksContactTelephoneNumber"]?first)!}
                                 </a>
                             </li>

@@ -131,7 +131,7 @@
 														<span class="sr-only">
 															the query
 														</span>																								
-														&quot;${(h.query!"")?split("|")[0]?trim}&quot;
+														&quot;${(h.query!"")?split("|")?first?trim}&quot;
 													</span>
 												</#if>
 											</p>

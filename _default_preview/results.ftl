@@ -51,9 +51,9 @@
 <#macro GenericView result cardClass="fb-card--fixed">
     <!-- results.GenericView -->
     <article class="search-results__item search-results__item--default" data-fb-result="${(result.indexUrl)!}">
-            <#if (result.listMetadata["image"][0])!?has_content>
+            <#if (result.listMetadata["image"]?first)!?has_content>
             <figure class="search-results__bg">
-                <img class="deferred rounded-circle fb-image-thumbnail" alt="Thumbnail for ${result.title!}" src="/stencils/resources/base/v15.8/img/pixel.gif" data-deferred-src="${result.listMetadata["image"][0]}"> 
+                <img class="deferred rounded-circle fb-image-thumbnail" alt="Thumbnail for ${result.title!}" src="/stencils/resources/base/v15.8/img/pixel.gif" data-deferred-src="${result.listMetadata["image"]?first}"> 
             </figure>  
             <#-- Removing the placeholder image for Local Government as it causes friction during presentations -->
             <#--  
