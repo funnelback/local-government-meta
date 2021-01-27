@@ -47,6 +47,8 @@ transaction?.response?.facets
 	}
 	.each() {
 		facet ->
+		// The code for the comparator can be found under 
+		// $COLLECTION/@groovy/facet/comparator
 		facet.setCustomComparator(new facet.comparator.LabelLengthComparator());
 	}
 
@@ -58,21 +60,28 @@ transaction?.response?.facets
 /**
  * <p>Hook functions to provide a browse experience for a search implementation</p>
  * There are scenarios where users prefer to browse content such as in a directory
- * of services or a program finder catalog. This class  adjust the links in the 
- * primary and secondary tab facets so that the browse option is not being carried 
- * over between tabs. It will also ensure that the selected facet is respected when
- * navigating between the secondary category values. 
+ * of services or a program finder catalog. 
+ *
+ * This class adjusts the links in the primary and secondary tab facets so that 
+ * the browse option is not being carried over between tabs. It will also ensure that
+ * the selected tab facet is respected when navigating between the secondary category 
+ * values. 
  * 
  * e.g. By default, the following is the default behaviour of the product. 
  * Given: 
- * 	- A search implementation with a parimary tab which has three categories; All results, courses, web
+ * 	- A search implementation with a parimary tab which has three categories; All results, 
+ *		courses, web
  * 	- A user is on the course tab and want to browse all available courses
  * 	- Another tab style facets populated with A to Z (i.e. A, B, C, D) facet categories which allows
  * 		the user to refine by letter.
  * When
- * 	- A user changes the refinement from between A to B
+ * 	- A user changes the refinement from between A to B.
  * Then
- * 	- The selected facet is lost
+ * 	- The user will be sent back to the default tab (All results). 
+ *		i.e. The selected tab of "courses" will be lost.  
+ * 
+ * This class will change it so that the above will be:
+ * - The user will remain on the courses tab with B selected.
  */
 @Log4j2
 class BrowseModeHookLifecycle implements HookLifecycle {
@@ -102,8 +111,6 @@ class BrowseModeHookLifecycle implements HookLifecycle {
 	static final String FACETS_TO_DISPLAY_CONFIG = CONFIG_KEY_PREFIX + ".facets"
 
 	/**
-	 * 
-	 *  
 	 * @param transaction
 	 */
 	void postProcess(SearchTransaction transaction) {
@@ -155,6 +162,18 @@ class BrowseModeHookLifecycle implements HookLifecycle {
 		}
 	}
 
+	/**
+	 * 
+	 * By default, the product strips out parameters related to tabs that 
+	 * are selected. This means that when a user navigates from one
+	 * secondary tab facet to another, the selected value for the primary 
+	 * tab will be lost.
+	 *
+	 * This function aims to add the selected value of the primary tab facet
+	 * back to the secondary tab facet. 
+	 * 
+	 * @param transaction
+	 */
 	public void addSelectedTabFacetToSecondaryTabs(def transaction) {
 
 		// Get the query parameters for the current selected tab
@@ -175,7 +194,7 @@ class BrowseModeHookLifecycle implements HookLifecycle {
 			//.flatten()			
 			.find()
 
-		// Get all tab facets which are is not the main 
+		// Get all tab facets which are not the primary tab facet 
 		if(selectedTabQueryParameter != null) {
 			transaction?.response?.facets
 				.findAll() {
@@ -200,7 +219,7 @@ class BrowseModeHookLifecycle implements HookLifecycle {
 	}
 
 	/**
-	 * Determines if tab preview should be enabled for this transaction.
+	 * Determines if browse mode should be enabled for this transaction.
 	 *
 	 * @param transaction The funnelback transaction which represents the search
 	 **/
