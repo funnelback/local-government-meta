@@ -469,49 +469,41 @@
 <#macro GroupedResults view="LIST">
     <#-- Loop through each grouped result tier -->
     <#if (response.resultPacket.results)!?has_content>
-        <#list (response.customData["stencilsGroupingResults"].groups)![] as group>
-            <div class="mb-3">
+        <article class="search-results__list <#if getDisplayMode(question)! == 'LIST' || getDisplayMode(question)! == 'BROWSE'>search-results__list--list-view</#if>">
+            <#list (response.customData["stencilsGroupingResults"].groups)![] as group>
                 <#-- Create facet link to be used in the title and "see more" -->
                 <#assign searchLink = question.getCurrentProfileConfig().get("ui.modern.search_link")!>
                 <#assign facetLink = (group.url)!"">
 
-                <span>
-                    <h3>
-                        <a class="text-muted" href="${searchLink + facetLink}">           
-                            ${group.label}
-                        </a>
-                    </h3>
-                </span>
+                <a class="highlight search-results__group-label" href="${searchLink + facetLink}">           
+                    ${group.label}
+                </a>
         
-                <ol class="list-unstyled fb-result-set fb-display-mode--${view?lower_case}">
-                    <#list response.resultPacket.results as result>                        
-                        <#-- Display the result based on the configured template -->
-                        <#switch ((response.customData["stencilsGroupingResults"].mode)!"")?upper_case>
-                            <#case "METADATA">
-                                <#if (result.listMetadata["group.field"]?first)!?has_content>
-                                    <@Result result=result view=view />
-                                </#if>
-                                <#break> 
-                            <#case "COLLECTION">
-                                <#if result.collection == (group.field)!"">
-                                    <@Result result=result view=view />
-                                </#if>
-                                <#break>
-                            <#default>                
-                                <#break>
-                        </#switch>         
-                    </#list>
-                </ol>
+                <#list response.resultPacket.results as result>                        
+                    <#-- Display the result based on the configured template -->
+                    <#switch ((response.customData["stencilsGroupingResults"].mode)!"")?upper_case>
+                        <#case "METADATA">
+                            <#if (result.listMetadata["group.field"]?first)!?has_content>
+                                <@Result result=result view=view />
+                            </#if>
+                            <#break> 
+                        <#case "COLLECTION">
+                            <#if result.collection == (group.field)!"">
+                                <@Result result=result view=view />
+                            </#if>
+                            <#break>
+                        <#default>                
+                            <#break>
+                    </#switch>         
+                </#list>
 
                 <#-- See more link -->
-                <span class="clearfix">        
-                    <a href="${searchLink + facetLink}"> 
-                        <i class="fas fa-arrow-right mr-1"></i>
-                        See more ${group.label} 
-                    </a>
-                </span>
-            </div>
-        </#list>    
+                <a href="${searchLink + facetLink}" class="search-results__group-see-more-label highlight"> 
+                    <i class="fas fa-arrow-right mr-1"></i>
+                    See more ${group.label} 
+                </a>
+            </#list>    
+        </article>
     </#if>
 </#macro>
 
