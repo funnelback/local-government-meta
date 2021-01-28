@@ -114,10 +114,20 @@
 	<@planning_applications.AutoCompleteTemplate />
 		
 	<script>
-		jQuery(document).ready( function() {
+		window.addEventListener('DOMContentLoaded', function() {			
 			setupDeferredImages();
 			setupFacetLessMoreButtons(${question.collection.configuration.value("stencils.faceted_navigation.max_displayed_categories", "8")}, '.fb-sidebar__nav');
-			<@auto_complete.Configuration />
+			<@auto_complete.Configuration />				
+			
+			// Make the history button accessible via the keyboard for WCAG 2.1
+			var historyElement = document.querySelectorAll('.session-history-toggle');
+
+			// Add a href which does not reference any valid anchor so that 
+			// hitting enter while the element is in focus will activate
+			// the onclick event
+			historyElement.forEach((element) => {
+				element.setAttribute("href", "#fb-history-placeholder");
+			});
 		});
 	</script>
 
