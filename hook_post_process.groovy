@@ -18,10 +18,10 @@ new QueryHookLifecycle().postProcess(transaction)
 
 // Remove council specific names from the results
 transaction?.response?.resultPacket?.results.each() {
-	result ->	
+    result ->	
 
-	result.title = result.title.replaceAll(/\s+-\s+Camden Council/, "")
-	result.title = result.title.replaceAll(/\s*\|\s*SF311/, "")
+    result.title = result.title.replaceAll(/\s+-\s+Camden Council/, "")
+    result.title = result.title.replaceAll(/\s*\|\s*SF311/, "")
 }
 
 /**
@@ -39,18 +39,18 @@ transaction?.response?.resultPacket?.results.each() {
  * This will be made configurable in version 16.  
  */
 transaction?.response?.facets
-	.findAll() {
-		facet ->
-		// Search for facets names which requires the custom sort
-		// Generally, this should be the facet used to create A-Z listing
-		facet.name == "Category letter"
-	}
-	.each() {
-		facet ->
-		// The code for the comparator can be found under 
-		// $COLLECTION/@groovy/facet/comparator
-		facet.setCustomComparator(new facet.comparator.LabelLengthComparator());
-	}
+    .findAll() {
+        facet ->
+        // Search for facets names which requires the custom sort
+        // Generally, this should be the facet used to create A-Z listing
+        facet.name == "Category letter"
+    }
+    .each() {
+        facet ->
+        // The code for the comparator can be found under 
+        // $COLLECTION/@groovy/facet/comparator
+        facet.setCustomComparator(new facet.comparator.LabelLengthComparator());
+    }
 
 /**
  * The following classes are require to enabled features recently created. 
@@ -86,286 +86,286 @@ transaction?.response?.facets
 @Log4j2
 class BrowseModeHookLifecycle implements HookLifecycle {
 
-	/** Key holding the config */
-	static final String CONFIG_KEY_PREFIX = "stencils.tabs.browse_mode"
+    /** Key holding the config */
+    static final String CONFIG_KEY_PREFIX = "stencils.tabs.browse_mode"
 
-	/** Name of the facet containing the primary tabs */
+    /** Name of the facet containing the primary tabs */
     static final String TABS_FACET_NAME = "Tabs"
 
-	/** The config of the placeholder query used to show all results */
-	static final String ALL_RESULTS_QUERY_CONFIG = CONFIG_KEY_PREFIX + ".default_query"
-	
-	/** The default query which will used to return all documents **/
-	static final String DEFAULT_ALL_RESULTS_QUERY = "!PADRENULLQUERY"
+    /** The config of the placeholder query used to show all results */
+    static final String ALL_RESULTS_QUERY_CONFIG = CONFIG_KEY_PREFIX + ".default_query"
+    
+    /** The default query which will used to return all documents **/
+    static final String DEFAULT_ALL_RESULTS_QUERY = "!PADRENULLQUERY"
 
-	/** 
-		The config to determine which parameters are to be removed 
-		when navigating between tabs when browse mode is enabled.
-	*/
-	static final String REMOVE_PARAMETERS_CONFIG = CONFIG_KEY_PREFIX + ".remove_parameters"
+    /** 
+        The config to determine which parameters are to be removed 
+        when navigating between tabs when browse mode is enabled.
+    */
+    static final String REMOVE_PARAMETERS_CONFIG = CONFIG_KEY_PREFIX + ".remove_parameters"
 
-	/** Delimeter used to seperate values for the remove parameters config*/
-	static final String REMOVE_PARAMETERS_DELIMETER = ","
-	
-	/** The config to determine which facets are used in browse mode */
-	static final String FACETS_TO_DISPLAY_CONFIG = CONFIG_KEY_PREFIX + ".facets"
+    /** Delimeter used to seperate values for the remove parameters config*/
+    static final String REMOVE_PARAMETERS_DELIMETER = ","
+    
+    /** The config to determine which facets are used in browse mode */
+    static final String FACETS_TO_DISPLAY_CONFIG = CONFIG_KEY_PREFIX + ".facets"
 
-	/**
-	 * @param transaction
-	 */
-	void postProcess(SearchTransaction transaction) {
-		if (isBrowseModeEnabled(transaction)) {
-			removeParametersFromTabNavigation(transaction)
-			addSelectedTabFacetToSecondaryTabs(transaction)
-		}
-	}
+    /**
+     * @param transaction
+     */
+    void postProcess(SearchTransaction transaction) {
+        if (isBrowseModeEnabled(transaction)) {
+            removeParametersFromTabNavigation(transaction)
+            addSelectedTabFacetToSecondaryTabs(transaction)
+        }
+    }
 
-	/**
-	 * 
-	 * Removes the browse mode parameter when navigating between the primary tabs
-	 *  
-	 * @param transaction
-	 */
-	public void removeParametersFromTabNavigation(def transaction) {
+    /**
+     * 
+     * Removes the browse mode parameter when navigating between the primary tabs
+     *  
+     * @param transaction
+     */
+    public void removeParametersFromTabNavigation(def transaction) {
 
-		String [] removeParameters = transaction?.question
-										?.getCurrentProfileConfig()
-										?.get(REMOVE_PARAMETERS_CONFIG)
-										?.split(REMOVE_PARAMETERS_DELIMETER)
-										// Required to remove nulls and empty strings
-										?.findAll() ?: []
-		removeParameters.each() {
-			parameter ->
+        String [] removeParameters = transaction?.question
+                                        ?.getCurrentProfileConfig()
+                                        ?.get(REMOVE_PARAMETERS_CONFIG)
+                                        ?.split(REMOVE_PARAMETERS_DELIMETER)
+                                        // Required to remove nulls and empty strings
+                                        ?.findAll() ?: []
+        removeParameters.each() {
+            parameter ->
 
-			transaction?.response?.facets
-				.find() {
-					// Grab the primary tab
-					facet -> facet.name == TABS_FACET_NAME
-				}
-				.each() {
-					tabfacet ->
+            transaction?.response?.facets
+                .find() {
+                    // Grab the primary tab
+                    facet -> facet.name == TABS_FACET_NAME
+                }
+                .each() {
+                    tabfacet ->
 
-					tabfacet.allValues
-						.findAll() {
-							// To be defensive, we only want to run the code when 
-							// the browse mode parameter is present in the url.							
-							facetCategory -> 
-							facetCategory?.toggleUrl =~ /(?i)${parameter}=/
-						}
-						.each() {
-							// Remove the browse mode select from all tab facet categories.
-							facetCategory ->
-							facetCategory.toggleUrl = facetCategory.toggleUrl.replaceAll(/(?i)${parameter}=[^&]+&/, "")
-							facetCategory.toggleUrl = facetCategory.toggleUrl.replaceAll(/(?i)&${parameter}=[^&]+/, "")
-						}
-				}
-		}
-	}
+                    tabfacet.allValues
+                        .findAll() {
+                            // To be defensive, we only want to run the code when 
+                            // the browse mode parameter is present in the url.							
+                            facetCategory -> 
+                            facetCategory?.toggleUrl =~ /(?i)${parameter}=/
+                        }
+                        .each() {
+                            // Remove the browse mode select from all tab facet categories.
+                            facetCategory ->
+                            facetCategory.toggleUrl = facetCategory.toggleUrl.replaceAll(/(?i)${parameter}=[^&]+&/, "")
+                            facetCategory.toggleUrl = facetCategory.toggleUrl.replaceAll(/(?i)&${parameter}=[^&]+/, "")
+                        }
+                }
+        }
+    }
 
-	/**
-	 * 
-	 * By default, the product strips out parameters related to tabs that 
-	 * are selected. This means that when a user navigates from one
-	 * secondary tab facet to another, the selected value for the primary 
-	 * tab will be lost.
-	 *
-	 * This function aims to add the selected value of the primary tab facet
-	 * back to the secondary tab facet. 
-	 * 
-	 * @param transaction
-	 */
-	public void addSelectedTabFacetToSecondaryTabs(def transaction) {
+    /**
+     * 
+     * By default, the product strips out parameters related to tabs that 
+     * are selected. This means that when a user navigates from one
+     * secondary tab facet to another, the selected value for the primary 
+     * tab will be lost.
+     *
+     * This function aims to add the selected value of the primary tab facet
+     * back to the secondary tab facet. 
+     * 
+     * @param transaction
+     */
+    public void addSelectedTabFacetToSecondaryTabs(def transaction) {
 
-		// Get the query parameters for the current selected tab
-		// Assuming that tabs can only have 1 selected value at any one time
-		String selectedTabQueryParameter = transaction?.response?.facets
-			.find() {
-				facet -> facet.name == TABS_FACET_NAME
-			}
-			.collect(){
-				facet -> facet.selectedValues				
-			}
-			// Flatten an list of array of selected value to just an list of selected value
-			.flatten()
-			.collect() {
-				selectedValue -> selectedValue.queryStringParam
-			}
-			// Convert an array of strings to an array of strings.
-			//.flatten()			
-			.find()
+        // Get the query parameters for the current selected tab
+        // Assuming that tabs can only have 1 selected value at any one time
+        String selectedTabQueryParameter = transaction?.response?.facets
+            .find() {
+                facet -> facet.name == TABS_FACET_NAME
+            }
+            .collect(){
+                facet -> facet.selectedValues				
+            }
+            // Flatten an list of array of selected value to just an list of selected value
+            .flatten()
+            .collect() {
+                selectedValue -> selectedValue.queryStringParam
+            }
+            // Convert an array of strings to an array of strings.
+            //.flatten()			
+            .find()
 
-		// Get all tab facets which are not the primary tab facet 
-		if(selectedTabQueryParameter != null) {
-			transaction?.response?.facets
-				.findAll() {
-					facet -> facet.guessedDisplayType.equals(FacetDisplayType.TAB) && facet.name != TABS_FACET_NAME
-				}
-				.each() {
-					facet -> 
-					
-					facet.allValues
-						.findAll() {
-							// To be defensive, we only want to add the parameter if it does not already exist.
-							// This may happen in the future if the product changes its behaviour.
-							facetCategory -> facetCategory.toggleUrl.contains(selectedTabQueryParameter) == false
-						}
-						.each() {
-							// Modify the toggle url for each category value so that it retains the current 
-							// selected tab
-							facetCategory -> facetCategory.toggleUrl += "&" + selectedTabQueryParameter
-						}
-				}
-		} 
-	}
+        // Get all tab facets which are not the primary tab facet 
+        if(selectedTabQueryParameter != null) {
+            transaction?.response?.facets
+                .findAll() {
+                    facet -> facet.guessedDisplayType.equals(FacetDisplayType.TAB) && facet.name != TABS_FACET_NAME
+                }
+                .each() {
+                    facet -> 
+                    
+                    facet.allValues
+                        .findAll() {
+                            // To be defensive, we only want to add the parameter if it does not already exist.
+                            // This may happen in the future if the product changes its behaviour.
+                            facetCategory -> facetCategory.toggleUrl.contains(selectedTabQueryParameter) == false
+                        }
+                        .each() {
+                            // Modify the toggle url for each category value so that it retains the current 
+                            // selected tab
+                            facetCategory -> facetCategory.toggleUrl += "&" + selectedTabQueryParameter
+                        }
+                }
+        } 
+    }
 
-	/**
-	 * Determines if browse mode should be enabled for this transaction.
-	 *
-	 * @param transaction The funnelback transaction which represents the search
-	 **/
-	public boolean isBrowseModeEnabled(def transaction) {
-		return isMainSearch(transaction) &&
-				isConfigured(transaction)
-	}
+    /**
+     * Determines if browse mode should be enabled for this transaction.
+     *
+     * @param transaction The funnelback transaction which represents the search
+     **/
+    public boolean isBrowseModeEnabled(def transaction) {
+        return isMainSearch(transaction) &&
+                isConfigured(transaction)
+    }
 
-	/** 
-	 * Returns true if the current transaction is the main search. 
-	 * i.e. not content auditor, accessibility auditor orfaceted navigation
-	 *
-	 * @param transaction The funnelback transaction which represents the search
-	 **/
-	public boolean isMainSearch(def transaction) {
-		return SearchQuestionType.SEARCH.equals(transaction.question.questionType)
-	}
+    /** 
+     * Returns true if the current transaction is the main search. 
+     * i.e. not content auditor, accessibility auditor orfaceted navigation
+     *
+     * @param transaction The funnelback transaction which represents the search
+     **/
+    public boolean isMainSearch(def transaction) {
+        return SearchQuestionType.SEARCH.equals(transaction.question.questionType)
+    }
 
-	/** 
-	 * Returns true if the user has provided enough configurations to enable
-	 * browse mode on the current selected tab. 
-	 *
-	 * @param transaction The funnelback transaction which represents the search
-	 **/
-	public boolean isConfigured(def transaction) {		
+    /** 
+     * Returns true if the user has provided enough configurations to enable
+     * browse mode on the current selected tab. 
+     *
+     * @param transaction The funnelback transaction which represents the search
+     **/
+    public boolean isConfigured(def transaction) {		
 
-		// Get the query parameters for the current selected tab
-		// Assuming that tabs can only have 1 selected value at any one time
-		String selectedTab = transaction?.response?.facets
-			.find() {
-				facet -> facet.name == TABS_FACET_NAME
-			}
-			.collect(){
-				facet -> facet.selectedValues				
-			}
-			// Flatten an list of array of selected value to just an list of selected value
-			.flatten()
-			.collect() {
-				selectedValue -> selectedValue.label
-			}		
-			.find()		
-				
-		return transaction?.question?.getCurrentProfileConfig().getRawKeys()
-			.find() { it.equalsIgnoreCase("${FACETS_TO_DISPLAY_CONFIG}.${selectedTab}") } ? true : false		
-	}	
+        // Get the query parameters for the current selected tab
+        // Assuming that tabs can only have 1 selected value at any one time
+        String selectedTab = transaction?.response?.facets
+            .find() {
+                facet -> facet.name == TABS_FACET_NAME
+            }
+            .collect(){
+                facet -> facet.selectedValues				
+            }
+            // Flatten an list of array of selected value to just an list of selected value
+            .flatten()
+            .collect() {
+                selectedValue -> selectedValue.label
+            }		
+            .find()		
+                
+        return transaction?.question?.getCurrentProfileConfig().getRawKeys()
+            .find() { it.equalsIgnoreCase("${FACETS_TO_DISPLAY_CONFIG}.${selectedTab}") } ? true : false		
+    }	
 }
 
 /**
  * 	<p>Hook functions to prevent placeholder queries from being displayed to 
  * 	the end user</p>
-	
-	Available configurations:
-	
-	stencils.query.clean=<queries>
+    
+    Available configurations:
+    
+    stencils.query.clean=<queries>
 
-	<queries> - A comma (,) separated list of queries which will be
-	hidden from the user. The logic works on a whole phrase matching basis.
+    <queries> - A comma (,) separated list of queries which will be
+    hidden from the user. The logic works on a whole phrase matching basis.
 
-	i.e.
+    i.e.
 
-	stencils.query.clean=!padrenullquery
+    stencils.query.clean=!padrenullquery
 
-	Queries which example match "!padrenullquery" will be hidden from the user.
-	However queries such as "!padrnenullquery and something" will not be affected
+    Queries which example match "!padrenullquery" will be hidden from the user.
+    However queries such as "!padrnenullquery and something" will not be affected
 
-	A few more examples can be found below:
-	
-	stencils.query.clean=!padrenull,!showall,!asdasd
+    A few more examples can be found below:
+    
+    stencils.query.clean=!padrenull,!showall,!asdasd
 
-	The query for "!padrenullquery", "!showall", "!asdasd" will be hidden.
+    The query for "!padrenullquery", "!showall", "!asdasd" will be hidden.
 
-	stencils.query.clean=!padrenull courseName:science
+    stencils.query.clean=!padrenull courseName:science
 
-	The query for "!padrenull courseName:science" will be hidden but the query for 
-	"!padrenull" will still be visible.
+    The query for "!padrenull courseName:science" will be hidden but the query for 
+    "!padrenull" will still be visible.
  * 
  */
 @Log4j2
 class QueryHookLifecycle implements HookLifecycle {
 
-	/** Key holding the config */
-	static final String CONFIG_KEY_PREFIX = "stencils.query"
+    /** Key holding the config */
+    static final String CONFIG_KEY_PREFIX = "stencils.query"
 
-	/** Config which holds a list of queries to hide from the end user */
-	static final String CLEAN_QUERY_CONFIG = CONFIG_KEY_PREFIX + ".clean"
+    /** Config which holds a list of queries to hide from the end user */
+    static final String CLEAN_QUERY_CONFIG = CONFIG_KEY_PREFIX + ".clean"
 
-	/** Delimeter used to seperate values for the clear query config */
-	static final String CLEAN_QUERY_DELIMETER = ","
+    /** Delimeter used to seperate values for the clear query config */
+    static final String CLEAN_QUERY_DELIMETER = ","
 
-	/**
-	 *
-	 * @param transaction
-	 */
-	void postProcess(SearchTransaction transaction) {
-		if (isQueryEnabled(transaction)) {
-			cleanQuery(transaction)
-		}
-	}
+    /**
+     *
+     * @param transaction
+     */
+    void postProcess(SearchTransaction transaction) {
+        if (isQueryEnabled(transaction)) {
+            cleanQuery(transaction)
+        }
+    }
 
-	/**
-	 * Removes the placeholder query from the search transaction so that
-	 * it is not exposed to the end user. 
-	 *  
-	 * @param transaction
-	 */
-	void cleanQuery(SearchTransaction transaction) {
-		
-		String [] queriesToClean = transaction?.question?.getCurrentProfileConfig()?.get(CLEAN_QUERY_CONFIG)
-									?.split(CLEAN_QUERY_DELIMETER)
-									.findAll() ?: []
+    /**
+     * Removes the placeholder query from the search transaction so that
+     * it is not exposed to the end user. 
+     *  
+     * @param transaction
+     */
+    void cleanQuery(SearchTransaction transaction) {
+        
+        String [] queriesToClean = transaction?.question?.getCurrentProfileConfig()?.get(CLEAN_QUERY_CONFIG)
+                                    ?.split(CLEAN_QUERY_DELIMETER)
+                                    .findAll() ?: []
 
-		// Remove the user's query if it matches any of the values which is to be cleaned
-		if (transaction?.question?.query && queriesToClean.any{ it.equalsIgnoreCase(transaction.question.query) }){
-			transaction.question.query = ""	
-			transaction?.response?.resultPacket?.queryCleaned = ""
-		}
-	}
+        // Remove the user's query if it matches any of the values which is to be cleaned
+        if (transaction?.question?.query && queriesToClean.any{ it.equalsIgnoreCase(transaction.question.query) }){
+            transaction.question.query = ""	
+            transaction?.response?.resultPacket?.queryCleaned = ""
+        }
+    }
 
 
-	/**
-	 * Determines if tab preview should be enabled for this transaction.
-	 *
-	 * @param transaction The funnelback transaction which represents the search
-	 **/
-	public boolean isQueryEnabled(def transaction) {
-		return isMainSearch(transaction) &&
-				isConfigured(transaction)
-	}
+    /**
+     * Determines if tab preview should be enabled for this transaction.
+     *
+     * @param transaction The funnelback transaction which represents the search
+     **/
+    public boolean isQueryEnabled(def transaction) {
+        return isMainSearch(transaction) &&
+                isConfigured(transaction)
+    }
 
-	/** 
-	 * Returns true if the current transaction is the main search. 
-	 * i.e. not content auditor, accessibility auditor orfaceted navigation
-	 *
-	 * @param transaction The funnelback transaction which represents the search
-	 **/
-	public boolean isMainSearch(def transaction) {
-		return SearchQuestionType.SEARCH.equals(transaction.question.questionType)
-	}
+    /** 
+     * Returns true if the current transaction is the main search. 
+     * i.e. not content auditor, accessibility auditor orfaceted navigation
+     *
+     * @param transaction The funnelback transaction which represents the search
+     **/
+    public boolean isMainSearch(def transaction) {
+        return SearchQuestionType.SEARCH.equals(transaction.question.questionType)
+    }
 
-	/** 
-	 * Returns true if the user has provided enough configurations to enable
-	 * the query functions 
-	 *
-	 * @param transaction The funnelback transaction which represents the search
-	 **/
-	public boolean isConfigured(def transaction) {				
-		return transaction?.question?.getCurrentProfileConfig().get(CLEAN_QUERY_CONFIG) ? true : false		
-	}	
+    /** 
+     * Returns true if the user has provided enough configurations to enable
+     * the query functions 
+     *
+     * @param transaction The funnelback transaction which represents the search
+     **/
+    public boolean isConfigured(def transaction) {				
+        return transaction?.question?.getCurrentProfileConfig().get(CLEAN_QUERY_CONFIG) ? true : false		
+    }	
 }
