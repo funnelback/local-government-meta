@@ -54,6 +54,9 @@
                     <div>
                         <h3 class="module-curator__title">
                             <a href="" class="module-curator__link">
+                                <#-- 
+                                    TODO - Update this section to include an appropriate title 
+                                --> 
                                 Directory of services
                             </a>
                         </h3>
@@ -63,7 +66,12 @@
                 <div class="module-curator__content">
                     <#-- Output the description -->
                     <p class="">
-                        We are responsible for providing a range of high quality services. Our residents are at the heart of the services we offer.
+                        <#-- 
+                            TODO - Update this section to include the 
+                            appropriate message or description (if required)
+                        -->                        
+                        We are responsible for providing a range of high quality services. 
+                        Our residents are at the heart of the services we offer.
                     </p>
                 </div>
                 <#-- Output and option explicit the call to action link -->
@@ -71,6 +79,10 @@
                 <#local defaultQuery = (question.getCurrentProfileConfig().get("stencils.tabs.browse_mode.default_query"))!"">
 
                 <a class="btn--link" href="${question.getCurrentProfileConfig().get("ui.modern.search_link")}?${removeParam(QueryString, ["browse_mode", "start_rank", "query","sort"])}&browse_mode=true&query=${defaultQuery}&sort=title">
+                    <#-- 
+                        TODO - Update this section to include an appropriate 
+                        name for the link. 
+                    --> 
                     Browse all our services
                 </a>
             </article>

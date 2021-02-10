@@ -188,7 +188,7 @@
 						</p>
 					</div>
 					<#if (session.searchHistory)!?has_content>
-						<a class="btn--link session-history-clear-search float-right" href="#" title="Clear recent searches history">										
+						<a class="btn--link session-history-clear-search pull-right" href="#" title="Clear recent searches history">										
 							<span class="fa fa-times"></span> Clear					
 						</a>
 					</#if>
@@ -223,7 +223,7 @@
 		<div class="card-body">
 			<div class="card-text">
 			{{#if metaData.image}}
-				<img class="img-fluid float-right" alt="{{result.title}}" src="{{metaData.image}}">
+				<img class="img-fluid pull-right" alt="{{result.title}}" src="{{metaData.image}}">
 			{{/if}}
 
 			{{#if metaData.c}}
@@ -285,7 +285,7 @@
 						-->
 						labelAdd: "Add to shortlist",
 						labelDelete: "Remove from shortlist",
-						template: '<span class="text-info float-right">{{>icon-block}} <span class="sr-only">{{>label-block}}</span></span>',
+						template: '<span class="text-info pull-right">{{>icon-block}} <span class="sr-only">{{>label-block}}</span></span>',
 						position: 'afterbegin'
 					},
 					/* Trigger to delete an item from the cart */

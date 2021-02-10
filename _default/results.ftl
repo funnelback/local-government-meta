@@ -32,7 +32,7 @@
     @param result An individual result fron the data model
 -->
 <#macro ListView result>
-    <@GenericView result=result cardClass="fb-card--list" />
+    <@GenericView result=result />
 </#macro>
 
 <#--
@@ -41,19 +41,19 @@
     @param result An individual result fron the data model
 -->
 <#macro CardView result>
-    <@GenericView result=result cardClass="fb-card--fixed" />
+    <@GenericView result=result />
 </#macro>
 
 <#--
     A generic view used to drive both the the list and card view
     @param result An individual result fron the data model
 -->
-<#macro GenericView result cardClass="fb-card--fixed">
+<#macro GenericView result>
     <!-- results.GenericView -->
     <article class="search-results__item search-results__item--default" data-fb-result="${(result.indexUrl)!}">
             <#if (result.listMetadata["image"]?first)!?has_content>
             <figure class="search-results__bg">
-                <img class="deferred rounded-circle fb-image-thumbnail" alt="Thumbnail for ${result.title!}" src="/stencils/resources/base/v15.8/img/pixel.gif" data-deferred-src="${result.listMetadata["image"]?first}"> 
+                <img class="deferred rounded-circle fb-image-thumbnail" alt="Thumbnail for ${result.title!}" src="//${httpRequest.getHeader('host')}/stencils/resources/base/v15.8/img/pixel.gif" data-deferred-src="${result.listMetadata["image"]?first}"> 
             </figure>  
             <#-- Removing the placeholder image for Local Government as it causes friction during presentations -->
             <#--  
@@ -95,7 +95,7 @@
                         </@s.boldicize>
                     </a>
 
-                    <span class="enable-cart-on-result float-right" 
+                    <span class="enable-cart-on-result pull-right" 
                         aria-label="Add result to the shortlist">
                     </span>
                 </h4>
@@ -127,21 +127,30 @@
                     <li class="tags__item">
                         Lorem ipsum
                     </li>
-                    <li class="tags__item">
-                        Lorem
-                    </li>
-                    <li class="tags__item">
-                        Lorem ipsum
-                    </li>
-                    <li class="tags__item">
-                        Lorem
-                    </li>
                 </ul>
             </section>  
             -->
-
+            
             <#-- Display the time which this result has last been visited by the user -->
-            <@history_cart.LastVisitedLink result=result/>            
+            <@history_cart.LastVisitedLink result=result/>
+
+            <#-- Bottom container -->
+            <#--  
+            <div class="search-results__bottom">
+                <section class="contact js-contact">
+                    <ul class="contact__list">                        
+                        <li class="contact__item">
+                            <span class="search-results__icon--red fas far fa-clock" aria-label="" title=""></span> 
+                            Lorem ipsum
+                        </li>
+                        <li class="contact__item ">
+                            <span class="search-results__icon--red fas far fa-clock" aria-label="" title=""></span> 
+                            Lorem ipsum
+                        </li>
+                    </ul>
+                </section>
+            </div>                                  
+            -->                        
         </div>
     </article>
 </#macro>

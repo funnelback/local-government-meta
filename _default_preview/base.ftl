@@ -199,7 +199,6 @@
 -->
 <#macro SearchTools>
     <div class="search-results__tools clearfix">
-        <h2 class="search-results__tools-title sr-only">Search Funnelback for Local Government</h2>
         <@base.Counts /> 
         <div class="search-results__tools-right">
             <@facets.ClearAllFacets />            
@@ -417,13 +416,13 @@
     <!-- base.TierBar -->
     <#-- A tier bar -->
     <#if result.matched != result.outOf>
-        <h3 class="search-tier text-muted">Results that match ${result.matched} of ${result.outOf} words</h3>
+        <h2 class="search-tier text-muted">Results that match ${result.matched} of ${result.outOf} words</h2>
     <#else>
-        <h3 class="sr-only search-tier">Fully-matching results</h3>
+        <h2 class="sr-only search-tier">Fully-matching results</h2>
     </#if>
     <#-- Print event tier bars if they exist -->
     <#if result.eventDate??>
-        <h3 class="text-muted search-tier">Events on ${result.eventDate?date}</h3>
+        <h2 class="text-muted search-tier">Events on ${result.eventDate?date}</h2>
     </#if>
 </#macro>
 

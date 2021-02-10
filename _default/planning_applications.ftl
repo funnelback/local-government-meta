@@ -28,7 +28,7 @@
     @param result An individual result fron the data model
 -->
 <#macro ListView result>
-    <@GenericView result=result cardClass="fb-card--list" />
+    <@GenericView result=result />
 </#macro>
 
 <#--
@@ -37,24 +37,25 @@
     @param result An individual result fron the data model
 -->
 <#macro CardView result>
-    <@GenericView result=result cardClass="fb-card--fixed" />
+    <@GenericView result=result />
 </#macro>
 
 <#--
     A generic view used to drive both the the list and card view
     @param result An individual result fron the data model
 -->
-<#macro GenericView result cardClass="fb-card--fixed">
+<#macro GenericView result >
     <!-- planning_applications.GenericView -->
     <article class="search-results__item search-results__item--people" data-fb-result="${result.indexUrl}">
         <figure class="search-results__bg">
             <#if (result.listMetadata["image"]?first)!?has_content>
-                <img class="deferred rounded-circle fb-image-thumbnail" alt="Thumbnail for ${result.title!}" src="/stencils/resources/base/v15.8/img/pixel.gif" data-deferred-src="https://jobs.ama.org${result.listMetadata["image"]?first}"> 
+                <img class="deferred rounded-circle fb-image-thumbnail" alt="Thumbnail for ${result.title!}" src="//${httpRequest.getHeader('host')}/stencils/resources/base/v15.8/img/pixel.gif" data-deferred-src="https://jobs.ama.org${result.listMetadata["image"]?first}"> 
             <#else>
                 <img alt="Thumbnail for ${result.title!}" src="https://source.unsplash.com/random/160x160?${(result.listMetadata["planningApplicationName"]?first)!''?url}"> 
             </#if>
         </figure>
         <div class="search-results__content">
+            <#-- Title -->
             <h3 class="search-results__title">
                 <a href="${result.clickTrackingUrl!}" title="${result.liveUrl!}" class="search-results__link">
                     <@s.boldicize>
@@ -77,6 +78,7 @@
                 </@s.boldicize>
             </p>
 
+            <#-- Metadata can be shown as tags -->
             <section class="tags">
                 <ul class="tags__list">
                     <li class="tags__item">
@@ -88,12 +90,15 @@
                 </ul>
             </section>
 
+            <#-- Call to Action (CTA) -->
             <p>
-                <a href="#" class="btn--link">VIEW STATUS</a> 
+                <a href="#" class="btn--link" aria-label="View the status of the planning application">VIEW STATUS</a> 
             </p>
 
+            <#-- Display the time which this result has last been visited by the user -->
             <@history_cart.LastVisitedLink result=result/>
 
+            <#-- Footer -->
             <div class="search-results__bottom">
                 <section class="contact js-contact">
                     <ul class="contact__list">                        

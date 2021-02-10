@@ -32,7 +32,7 @@
     @param result An individual result fron the data model
 -->
 <#macro ListView result>
-    <@GenericView result=result cardClass="fb-card--list" />
+    <@GenericView result=result />
 </#macro>
 
 <#--
@@ -41,19 +41,19 @@
     @param result An individual result fron the data model
 -->
 <#macro CardView result>
-    <@GenericView result=result cardClass="fb-card--fixed" />
+    <@GenericView result=result />
 </#macro>
 
 <#--
     A generic view used to drive both the the list and card view
     @param result An individual result fron the data model
 -->
-<#macro GenericView result cardClass="fb-card--fixed">
+<#macro GenericView result>
     <!-- faqs.GenericView -->
     <article class="search-results__item search-results__item--default" data-fb-result="${(result.indexUrl)!}">
         <figure class="search-results__bg">
             <#if (result.listMetadata["image"]?first)!?has_content>
-                <img class="deferred rounded-circle fb-image-thumbnail" alt="Thumbnail for ${result.title!}" src="/stencils/resources/base/v15.8/img/pixel.gif" data-deferred-src="${result.listMetadata["image"]?first}">   -->
+                <img class="deferred rounded-circle fb-image-thumbnail" alt="Thumbnail for ${result.title!}" src="//${httpRequest.getHeader('host')}/stencils/resources/base/v15.8/img/pixel.gif" data-deferred-src="${result.listMetadata["image"]?first}">   -->
             <#elseif ((question.getCurrentProfileConfig().get("stencils.showcase"))!"FALSE")?upper_case == "TRUE"> 
                 <img alt="Thumbnail for ${result.title!}" src="https://source.unsplash.com/collection/73776582/160x160"> 
             </#if>   

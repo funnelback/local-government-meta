@@ -1,39 +1,16 @@
-:root {
-    --red: #da1007;
-}
 
 /* Design overrides made by the vertical products team - Avoid changing these if possible */
 
-/* Colour overrides to make the contrast WCAG 2.1 compliant */
+/* Helper classes */
 
-.fb-container .highlight,
-.fb-container cite,
-.fb-container .btn--link,
-.fb-container .btn-toggle,  
-.fb-container .tags__item,
-.fb-container .module-filter__facets-link span {
-    color: var(--red);
-}
-
-.fb-container .btn {
-    background-color: var(--red);
-}
-
-/* Increased the font on large viewports */
-@media only screen and (min-width: 1025px) {
-    html {
-        font-size: 0.875rem;
-    }
+.fb-container .wrap {
+    white-space: normal !important;    
 }
 
 /* Generic overrides to get the styling to work */
 .fb-container {
     padding-bottom: 0;
     overflow: initial;
-}
-
-.fb-container .float-right {
-    float: right;
 }
 
 .fb-container .list-unstyled {
@@ -362,8 +339,11 @@
     }
 }
 
-.fb-container .search-results__list--list-view .search-results__desc {
-    display: inherit;
+/* Ensure that the description is shown on mobile */
+.fb-container .search-results__list--list-view .search-results__desc,
+.fb-container .search-results__item--twitter .search-results__content .search-results__desc {
+    display: inline;
+    margin-bottom: 1rem;
 }
 
 .fb-container .search-results__content {
@@ -379,10 +359,6 @@
 
 .fb-container .search-results__item--twitter {
     flex-wrap: wrap;
-}
-
-.fb-container .tags.hashtag {
-    margin-top: 1rem;
 }
 
 .fb-container .tags.hashtag .hashtag__link{
@@ -510,4 +486,60 @@
 .fb-container .search-results__group-see-more-label {
     text-align: right;
     padding-right: 2.1875rem;
+}
+
+/* Result presentation */
+.fb-container .contact__item {
+    display: inline;
+    white-space: nowrap;
+    margin-right: .5rem;
+    margin-bottom: .5rem;
+
+}
+
+@media only screen and (min-width: 1025px) {
+    .fb-container .contact__item {
+        margin-right: 3.125rem;
+    }
+}
+
+/* 
+    Adjust the font size of the description element in search results 
+    so that it is larger than 10px.
+*/
+@media only screen and (min-width: 1025px) and  (max-width: 1920px) {
+    .fb-container .search-results__desc,
+    .fb-container .search-results__list--list-view .search-results__desc {
+        font-size: 1.0375rem;
+    }
+}
+
+/* Facebook results */
+.fb-container .search-results__item__facebook-post h3 {
+    display: flex;
+}
+
+.fb-container .search-results__item__facebook-post .facebook-post__profile-thumbnail {
+    width: 3.75rem;
+    height: 3.75rem;
+    border-radius: 10px;
+    overflow: hidden;
+    flex: 0 0 3.75rem;
+    margin: 0 0.75rem 0.75rem 0;
+}
+
+.fb-container .search-results__item__facebook-post .facebook-post__profile-thumbnail img {
+    width: 3.75rem;
+    height: 3.75rem;
+    object-fit: cover;
+ }
+
+.fb-container .search-results__item__facebook-post .facebook-post__post-link img {
+    height: 16.25rem;
+    width: 100%;
+    object-fit: cover;
+}
+
+.fb-container .search-results__list--list-view .search-results__content::after {
+    width: 0px;    
 }
