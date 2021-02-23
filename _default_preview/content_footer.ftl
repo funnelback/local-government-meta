@@ -1,34 +1,61 @@
-<#ftl encoding="utf-8" output_format="HTML" />
+<#ftl encoding="utf-8"output_format="HTML"/>
+<#-- This template outputs the content of the header -->
 
-<footer class="bg-dark customer">
-  <div class="container">
-    <div class="row">
-      <div class="col-md-4">
-        <h1>Contact</h1>
-        <p>
-          Funnelback City Council<br>
-          1, Funnelback Road<br>
-          Funnelback, FB 12345
-        </p>
-      </div>
-      <div class="col-md-4">
-        <h1>Quick links</h1>
-        <ul class="list-unstyled">
-          <li><a href="#">Copyright and disclaimer</a></li>
-          <li><a href="#">Privacy statement</a></li>
-          <li><a href="#">Accessibility information</a></li>
-        </ul>
-      </div>
-      <div class="col-md-4">
-        <h1>Connect</h1>
-        <br>
-        <ul class="list-inline social">
-          <li class="list-inline-item"><span class="fab fa-facebook-f fa-2x"></span></li>
-          <li class="list-inline-item"><span class="fab fa-twitter fa-2x"></span></li>
-          <li class="list-inline-item"><span class="fab fa-youtube-square fa-2x"></span></li>
-        </ul>
-      </div>
+<footer class="fb-footer">
+    <div class="content-wrapper">
+        <div class="footer-links">
+            <h3 class="footer-links__title">About us</h3>
+            <ul class="footer-links__list">
+                <li class="footer-links__item">
+                    <a href="#" class="footer-links__link">Contact information</a>
+                </li>
+                <li class="footer-links__item">
+                    <a href="#" class="footer-links__link">Our site</a>
+                </li>
+                <li class="footer-links__item">
+                    <a href="#" class="footer-links__link">Meet the team</a>
+                </li>
+            </ul>
+        </div>
+
+        <div class="footer-links">
+            <h3 class="footer-links__title">Quick Links</h3>
+            <ul class="footer-links__list">
+                <li class="footer-links__item">
+                    <a href="#" class="footer-links__link">Terms and conditions</a>
+                </li>
+                <li class="footer-links__item">
+                    <a href="#" class="footer-links__link">Privacy</a>
+                </li>
+                <li class="footer-links__item">
+                    <a href="#" class="footer-links__link">Sitemap</a>
+                </li>
+            </ul>
+        </div>
+
+        <div class="footer-links">
+            <h3 class="footer-links__title">Connections</h3>
+            <ul class="footer-links__list">
+                <li class="footer-links__item footer-links__item--icon">
+                    <a href="#" class="footer-links__link">
+                        <img src="/s/resources/${question.collection.id}/${question.profile}/css/mysource_files/instagram.svg" width="auto" height="auto" alt="Go to instagram">
+                    </a>
+                </li>
+                <li class="footer-links__item footer-links__item--icon">
+                    <a href="#" class="footer-links__link">
+                        <img src="/s/resources/${question.collection.id}/${question.profile}/css/mysource_files/fb.svg" width="auto" height="auto" alt="Go to FB">
+                    </a>
+                </li>
+                <li class="footer-links__item footer-links__item--icon">
+                    <a href="#" class="footer-links__link">
+                        <img src="/s/resources/${question.collection.id}/${question.profile}/css/mysource_files/twitter.svg" width="auto" height="auto" alt="Go to twitter">
+                    </a>
+                </li>
+            </ul>
+        </div>
+
     </div>
-  </div>
+
 </footer>
+<!-- /.footer -->
 <#-- vim: set expandtab ts=2 sw=2 sts=2 :-->

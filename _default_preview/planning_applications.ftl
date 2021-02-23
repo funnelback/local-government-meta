@@ -2,201 +2,156 @@
 <#import "base.ftl" as base />
 
 <#-- 
-  Macro decides how each result should be presented. 
+    Macro decides how each result should be presented. 
 
-  @param result An individual result fron the data model
-  @param view An uppercase string which represents how
-    the result should be displayed. Defaults to DETAILED.
+    @param result An individual result fron the data model
+    @param view An uppercase string which represents how
+        the result should be displayed. Defaults to DETAILED.
 -->
 <#macro Result result=result view="LIST">
-  <#switch view?upper_case>
-    <#case "CARD">
-      <@CardView result=result />
-      <#break>
-    <#case "LIST">
-      <#-- Determine if results should be hidden or not -->
-      <@ListView result=result />
-      <#break>
-    <#default>
-      <@ListView result=result />
-  </#switch>
+    <#switch view?upper_case>
+        <#case "CARD">
+            <@CardView result=result />
+            <#break>
+        <#case "LIST">
+            <#-- Determine if results should be hidden or not -->
+            <@ListView result=result />
+            <#break>
+        <#default>
+            <@ListView result=result />
+    </#switch>
 </#macro>
 
 <#--
-  Stardard view of a result which is to be displayed in the 
-  main section of the search engine result page (SERP)
-  @param result An individual result fron the data model
+    Stardard view of a result which is to be displayed in the 
+    main section of the search engine result page (SERP)
+    @param result An individual result fron the data model
 -->
 <#macro ListView result>
-  <@GenericView result=result cardClass="fb-card--list" />
+    <@GenericView result=result />
 </#macro>
 
 <#--
-  Card view of a result which is to be displayed in the 
-  main section of the search engine result page (SERP)
-  @param result An individual result fron the data model
+    Card view of a result which is to be displayed in the 
+    main section of the search engine result page (SERP)
+    @param result An individual result fron the data model
 -->
 <#macro CardView result>
-  <@GenericView result=result cardClass="fb-card--fixed" />
+    <@GenericView result=result />
 </#macro>
 
 <#--
-  A generic view used to drive both the the list and card view
-  @param result An individual result fron the data model
+    A generic view used to drive both the the list and card view
+    @param result An individual result fron the data model
 -->
-<#macro GenericView result cardClass="fb-card--fixed">
-  <li class="search-result search-result-job" data-fb-result="${result.indexUrl}">
-    <div class="card ${cardClass!''}">
- 
-      <div class="card-body fb-card__body ">        
-
-        <#-- Header section usually containing a title and small thumbnail -->
-        <div class="fb-card__header mb-3">
-          <div class="fb-card__header__image">
-            <#if (result.listMetadata["image"][0])!?has_content>
-              <img class="deferred rounded-circle fb-image-thumbnail" alt="Thumbnail for ${result.title!}" src="/stencils/resources/base/v15.8/img/pixel.gif" data-deferred-src="https://jobs.ama.org${result.listMetadata["image"][0]}"> 
+<#macro GenericView result >
+    <!-- planning_applications.GenericView -->
+    <article class="search-results__item search-results__item--people" data-fb-result="${result.indexUrl}">
+        <figure class="search-results__bg">
+            <#if (result.listMetadata["image"]?first)!?has_content>
+                <img class="deferred rounded-circle fb-image-thumbnail" alt="Thumbnail for ${result.title!}" src="//${httpRequest.getHeader('host')}/stencils/resources/base/v15.8/img/pixel.gif" data-deferred-src="https://jobs.ama.org${result.listMetadata["image"]?first}"> 
             <#else>
-              <span class="fas fa-pencil-ruler fb-text-icon-round"></span>
-              <#--  <img class="rounded-circle fb-image-thumbnail" alt="Thumbnail for ${result.title!}" src="https://source.unsplash.com/random/40x40?${(result.listMetadata["planningApplicationName"][0])!}">   -->
+                <img alt="Thumbnail for ${result.title!}" src="https://source.unsplash.com/random/160x160?${(result.listMetadata["planningApplicationName"]?first)!''?url}"> 
             </#if>
-          </div>
-
-          <div class="fb-card__header__title">
-            <div class="card-title">          
-              <#if (result.listMetadata["planningApplicationName"][0])!?has_content>
-                <h5>
-                  <a href="${result.clickTrackingUrl!}" title="${result.liveUrl!}">
+        </figure>
+        <div class="search-results__content">
+            <#-- Title -->
+            <h3 class="search-results__title">
+                <a href="${result.clickTrackingUrl!}" title="${result.liveUrl!}" class="search-results__link">
                     <@s.boldicize>
-                      <@s.Truncate length=90>
-                        ${(result.listMetadata["planningApplicationName"][0])!}
-                      </@s.Truncate>
+                        <@s.Truncate length=90>
+                            ${(result.listMetadata["planningApplicationName"]?first)!}
+                        </@s.Truncate>
                     </@s.boldicize>
-                  </a>
-                </h5>            
-              </#if>
-            </div>
-          </div>
-        </div>
-        
-        <#-- Summary section containing the description and key details of the document -->
-        <div class="fb-card__summary">
-          <#if (result.listMetadata["planningWardName"][0])!?has_content> 
-            <div class="card-text">
-              <div class="mb-1"> ${(result.listMetadata["planningWardName"][0])!} </div>
-              <p class="text-muted small truncate-text">
-                <span class="fas fa-fw fa-map-marker-alt"></span>
-                ${(result.listMetadata["planningDevelopeAddress"][0])!}
-              </p>
-            </div>
-          </#if>
-
-          <div class="card-text">
-            <p class="text-muted">
-              <@s.boldicize>
-                <@s.Truncate length=170>
-                  ${result.summary!?no_esc}
-                </@s.Truncate>
-              </@s.boldicize>
+                </a>
+            </h3>
+            
+            <#-- Subtitle -->
+            <span class="search-results__sub-title">
+                ${(result.listMetadata["planningWardName"]?first)!}                
+            </span>
+            
+            <#-- Summary -->
+            <p class="search-results__desc">
+                <@s.boldicize>
+                    ${result.summary!?no_esc}
+                </@s.boldicize>
             </p>
-          </div>
 
-          <#if (result.metaData["planningRegisteredDate"])!?has_content>
-            <div class="card-text mb-3">
-              <div class="small">
-                <span>
-                  Registered: 
-                </span>
-                <span class="text-muted">
-                  ${result.metaData["planningRegisteredDate"]!}
-                </span>
-              </div>
-            </div>
-          </#if>
+            <#-- Metadata can be shown as tags -->
+            <section class="tags">
+                <ul class="tags__list">
+                    <li class="tags__item">
+                        ${(result.listMetadata["planningSystemStatus"]?first)!}
+                    </li>
+                    <li class="tags__item">
+                        ${(result.listMetadata["planningDecisionType"]?first)!}
+                    </li>
+                </ul>
+            </section>
 
-          <div class="card-text">
+            <#-- Call to Action (CTA) -->
+            <p>
+                <a href="#" class="btn--link" aria-label="View the status of the planning application">VIEW STATUS</a> 
+            </p>
+
+            <#-- Display the time which this result has last been visited by the user -->
             <@history_cart.LastVisitedLink result=result/>
-          </div>
-        </div>   
-        
-        <#-- Additional information such as metadata -->
-        <div class="fb-card__additional-info">
-          <hr class="mt-3 mb-3" />
 
-          <div class="card-text">
-            <p class="small text-muted">
-              Additional information
-            </p>
-
-            <#if (result.listMetadata["planningSystemStatus"][0])!?has_content>
-              <span class="badge badge-pill badge-light">
-                ${result.listMetadata["planningSystemStatus"][0]!}
-              </span>
-            </#if> 
-
-            <#if (result.listMetadata["planningDecisionType"][0])!?has_content>
-              <span class="badge badge-pill badge-light">
-                ${result.listMetadata["planningDecisionType"][0]!}
-              </span>
-            </#if> 
-
-            <#if (result.listMetadata["jobType"][0])!?has_content>
-              <span class="badge badge-pill badge-light">
-                ${result.listMetadata["planningCaseOfficerTeam"][0]!}
-              </span>
-            </#if> 
-          </div>
+            <#-- Footer -->
+            <div class="search-results__bottom">
+                <section class="contact js-contact">
+                    <ul class="contact__list">                        
+                        <#if (result.listMetadata["planningRegisteredDate"]?first)!?has_content>
+                           <li class="contact__item">
+                                <span class="search-results__icon--red far fa-clock" title="Registered date"></span>
+                                ${(result.listMetadata["planningRegisteredDate"]?first)!}
+                            </li>
+                        </#if>                        
+                        
+                        <#if (result.listMetadata["planningDevelopeAddress"]?first)!?has_content>
+                            <li class="contact__item contact__item--icon contact__item--icon-location">
+                                ${(result.listMetadata["planningDevelopeAddress"]?first)!}
+                            </li>
+                        </#if>                        
+                    </ul>
+                </section>
+            </div>            
         </div>
-
-        <#-- Key call to actions (CTA) -->
-        <div class="fb-card__actions"> 
-          <a href="#" class="card-link fb-color-secondary mt-4" data-toggle="modal" data-target="#signupModal" >VIEW STATUS</a>
-        </div>
-
-      </div>
-    </div>
-  </li>
+    </article>
 </#macro>
 
 
 <#-- 
-  Handlebars template used to display the current object
-  in concierge.
+    Handlebars template used to display the current object
+    in concierge.
 --> 
 <#macro AutoCompleteTemplate>
-  <script id="auto-completion-planning_applications" type="text/x-handlebar-template">
-    <div class="fb-auto-complete--non-organic">
-      {{#if extra.disp.metaData.image}}
-        <img class="rounded-circle fb-auto-complete__primary_visual" src="{{extra.disp.metaData.image}}" alt="{{extra.disp.title}}" />
-      {{else}}
-        <span class="fas fa-pencil-ruler fb-text-icon-round mr-3"></span> 
-      {{/if}}
-      <div class="fb-auto-complete--non-organic__body">
-        <h6 class="fb-auto-complete__body__primary-text">{{extra.disp.metaData.planningApplicationName}}</h6>
-        <div class="fb-auto-complete__body__metadata text-muted">
-          <#--  <span class="text-capitalize">{{extra.disp.metaData.peopleRole}}</span>  -->
-          {{#if extra.disp.metaData.planningWardName}}
-            <span class="text-capitalize">{{extra.disp.metaData.planningWardName}}</span>
-          {{/if}}
+    <!-- planning_applications.AutoCompleteTemplate -->
+    <script id="auto-completion-planning_applications" type="text/x-handlebars-template">
+        <div class="fb-auto-complete--non-organic">
+            <h6>
+                {{extra.disp.metaData.planningApplicationName}}
+            </h6>
+            <div class="details">
+                {{#if extra.disp.metaData.planningWardName}}
+                    <div class="text-capitalize">{{extra.disp.metaData.planningWardName}}</div>
+                {{/if}}
 
-          {{#if extra.disp.metaData.planningDevelopeAddress}}
-            <div class="fb-auto-complete__body__metadata text-muted">
-              <small>
-                <span class="fas fa-map-marker-alt text-muted" aria-hidden="true"></span> 
-                {{extra.disp.metaData.planningDevelopeAddress}}
-              </small>
-            </div>
-          {{/if}}
+                {{#if extra.disp.metaData.planningDevelopeAddress}}
+                    <div class="fb-auto-complete__body__metadata text-muted">
+                        <span class="fas fa-map-marker-alt text-muted" aria-hidden="true"></span> 
+                        {{extra.disp.metaData.planningDevelopeAddress}}
+                    </div>
+                {{/if}}
 
-          {{#if extra.disp.metaData.planningRegisteredDate}}
-            <div class="fb-auto-complete__body__metadata text-muted">
-              <small>
-                <span class="fas fa-calendar-alt text-muted" aria-hidden="true"></span> 
-                Registered on {{extra.disp.metaData.planningRegisteredDate}}
-              </small>
+                {{#if extra.disp.metaData.planningRegisteredDate}}
+                    <div class="fb-auto-complete__body__metadata text-muted">
+                        <span class="fas fa-calendar-alt text-muted" aria-hidden="true"></span> 
+                        Registered on {{extra.disp.metaData.planningRegisteredDate}}
+                    </div>
+                {{/if}}
             </div>
-          {{/if}}
         </div>
-      </div>
-    </div>
-  </script>
+    </script>
 </#macro>

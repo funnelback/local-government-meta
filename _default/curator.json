@@ -21,9 +21,9 @@
   } ]
 }, {
   "created" : "2020-03-11T14:34:28.23796Z",
-  "lastModified" : "2020-03-11T18:12:05.02024Z",
+  "lastModified" : "2021-01-12T16:19:46.075795Z",
   "id" : "9e45ee31-7d21-44ee-a5ac-f91ea73035d2",
-  "name" : "[Custom Groovy Trigger] FAQ Banner to display when there are no results",
+  "name" : "[Example] Curators for \"No Results\"",
   "label" : "DEFAULT",
   "enabled" : true,
   "trigger" : {
@@ -34,16 +34,61 @@
     }
   },
   "actions" : [ {
-    "type" : "DisplayMessage",
-    "messageHtml" : "<div class=\"row no-gutters border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative\">\n  <div class=\"col p-4 d-flex flex-column position-static\">\n    <strong class=\"d-inline-block mb-2 text-primary\">Promotion</strong>\n    <h3 class=\"mb-0\">Frequently Asked Questions</h3>\n    <ul>\n      <li><a href=\"https://myama.force.com/s/article/How-do-I-renew-my-AMA-membership\"><span>How do I renew my AMA membership?</span></a></li>\n      <li><a href=\"https://myama.force.com/s/article/How-to-access-PCM-certification-exams\"><span>How to access PCM certification exams.</span></a></li>\n      <li><a href=\"https://myama.force.com/s/article/How-Do-I-Use-a-Group-Code\"><span>How Do I Use a Group Code?</span></a></li>\n    </ul>\n    <a href=\"#\" class=\"stretched-link\">See more</a>\n  </div>\n  <div class=\"col-auto d-none d-lg-block\">\n    <img src=\"https://www.ama.org/wp-content/uploads/2020/02/bruce-mars-DBGwy7s3QY0-unsplash.jpg?resize=486%2C365\" alt=\"...\" width=\"350\">\n  </div>\n</div>",
-    "additionalProperties" : { },
-    "category" : ""
+    "type" : "DisplayUrlAdvert",
+    "titleHtml" : "Contact Us",
+    "displayUrl" : "www.local-council.com",
+    "linkUrl" : "www.local-council.com",
+    "descriptionHtml" : "Want to make an enquiry, get something fixed, or just give us some feedback? You can contact us in many ways.\n\nOne of the easiest ways to contact our Customer Services team is to use our below Contact form. The Customer Services email is only monitored during Rangiora office hours. If you have an urgent request outside of office hours, phone 0800 965 468 (0800WMKGOV).",
+    "additionalProperties" : {
+      "position" : "bottom",
+      "image" : "https://source.unsplash.com/random/40x40?email"
+    },
+    "category" : "",
+    "removeCollectionUrl" : false
+  }, {
+    "type" : "DisplayUrlAdvert",
+    "titleHtml" : "Rates and property search",
+    "displayUrl" : "https://rates.gov",
+    "linkUrl" : "https://rates.gov",
+    "descriptionHtml" : "Find out the valuation or rates payable on a property.",
+    "additionalProperties" : {
+      "position" : "center",
+      "call_to_action_label" : "Search rates",
+      "call_to_action_url" : "https://eservices.waimakariri.govt.nz/ePropertyPROD/P1/eRates/RatingInformationSearch.aspx?r=P1.WMKWEBGUEST&f=%24P1.ERA.RATINFO.ENQ",
+      "image" : "https://source.unsplash.com/random/40x40?rates"
+    },
+    "category" : "",
+    "removeCollectionUrl" : false
+  }, {
+    "type" : "DisplayUrlAdvert",
+    "titleHtml" : "Building Consent Search",
+    "displayUrl" : "www.build.consent.search/",
+    "linkUrl" : "www.build.consent.search/",
+    "descriptionHtml" : "Find the current status of your building consent.",
+    "additionalProperties" : {
+      "position" : "center"
+    },
+    "category" : "",
+    "removeCollectionUrl" : false
+  }, {
+    "type" : "DisplayUrlAdvert",
+    "titleHtml" : "Recycling, Rubbish & Organics",
+    "displayUrl" : "https://www.rubbish.com",
+    "linkUrl" : "https://www.rubbish.com",
+    "descriptionHtml" : "The Council provides a number of waste services for the District's residents, businesses, schools and visitors",
+    "additionalProperties" : {
+      "call_to_action_label" : "Sign up",
+      "call_to_action_url" : "https://rethinkrubbish.waimakariri.govt.nz/s/#reminder",
+      "image" : "https://source.unsplash.com/random/40x40?recycling"
+    },
+    "category" : "",
+    "removeCollectionUrl" : false
   } ]
 }, {
   "created" : "2020-03-12T14:33:01.536859Z",
-  "lastModified" : "2020-04-22T12:12:07.759544Z",
+  "lastModified" : "2020-12-03T09:16:38.588196Z",
   "id" : "f667e7b1-7136-405b-af29-16e0fee57036",
-  "name" : "[Example] health and corona - center position",
+  "name" : "[Example] Curator in the center - health, corona, covid",
   "label" : "DEFAULT",
   "enabled" : true,
   "trigger" : {
@@ -56,25 +101,43 @@
       }, {
         "type" : "AllQueryWords",
         "triggerWords" : [ "corona" ]
+      }, {
+        "type" : "AllQueryWords",
+        "triggerWords" : [ "covid" ]
       } ]
     } ]
   },
   "actions" : [ {
-    "type" : "DisplayMessage",
-    "messageHtml" : "<!-- Corona Virus -->\n<div class=\"card fb-card--fluid\">\n\n  <div class=\"card-body fb-card__body\">        \n\n    <!-- Header section usually containing a title and small thumbnail -->\n    <div class=\"fb-card__header mb-3 border-bottom\">\n      <div class=\"fb-card__header__image\">\n          <img class=\"rounded-circle fb-image-thumbnail\" alt=\"Thumbnail for ${result.title!}\" src=\"https://www.who.int/images/default-source/health-topics/coronavirus/coronavirus-getty.tmb-479v.jpg?Culture=en&sfvrsn=db0aa632_6\"> \n        </#if>\n      </div>\n\n      <div class=\"fb-card__header__title\">\n        <div class=\"card-title\">          \n          <h6>\n            <a href=\"#\" data-toggle=\"modal\" data-target=\"#signupModal\">\n              COVID-19 Crisis\n            </a>\n          </h6>            \n        </div>\n      </div>\n    </div>\n    \n    <!-- Summary section containing the description and key details of the document -->\n    <div class=\"fb-card__summary\">\n      <div class=\"card-text\">\n        <p>\n<i class=\"fas fa-ad\"></i>\n          We are communicators. We are helpers. We have the skills to spark inspiration, support, determination and hope – many of the things necessary to overcome adversity and the crisis our world is facing. These curated resources will be updated regularly to support you while you lead through these fast-changing times.\n        </p>\n      </div>\n\n    </div>   \n\n  </div>\n</div>",
-    "additionalProperties" : { },
-    "category" : ""
+    "type" : "DisplayUrlAdvert",
+    "titleHtml" : "Prevent the spread - what you need to do",
+    "displayUrl" : "https://www.nhs.uk/conditions/coronavirus-covid-19/",
+    "linkUrl" : "https://www.nhs.uk/conditions/coronavirus-covid-19/social-distancing/what-you-need-to-do/",
+    "descriptionHtml" : "Everyone must stay at home to help stop coronavirus (COVID-19) spreading. Wash your hands with soap and water often to reduce the risk of infection.",
+    "additionalProperties" : {
+      "image" : "https://source.unsplash.com/random/160x160?nhs"
+    },
+    "category" : "",
+    "removeCollectionUrl" : false
   }, {
-    "type" : "DisplayMessage",
-    "messageHtml" : "<!-- Corona Virus -->\n<div class=\"card fb-card--fluid\">\n\n  <div class=\"card-body fb-card__body\">        \n\n    <!-- Header section usually containing a title and small thumbnail -->\n    <div class=\"fb-card__header mb-3 border-bottom\">\n      <div class=\"fb-card__header__image\">\n          <img class=\"rounded-circle fb-image-thumbnail\" alt=\"Thumbnail for ${result.title!}\" src=\"https://source.unsplash.com/random/40x40?virus\"> \n        </#if>\n      </div>\n\n      <div class=\"fb-card__header__title\">\n        <div class=\"card-title\">          \n          <h6>\n            <a href=\"#\" data-toggle=\"modal\" data-target=\"#signupModal\">\n              Prevent the spread - what you need to do\n            </a>\n          </h6>            \n        </div>\n      </div>\n    </div>\n    \n    <!-- Summary section containing the description and key details of the document -->\n    <div class=\"fb-card__summary\">\n      <div class=\"card-text\">\n        <p>\n          <i class=\"fas fa-ad\"></i>         \n          Everyone must stay at home to help stop coronavirus (COVID-19) spreading. Wash your hands with soap and water often to reduce the risk of infection.\n        </p>\n      </div>\n\n    </div>   \n\n  </div>\n</div>",
-    "additionalProperties" : { },
-    "category" : ""
+    "type" : "DisplayUrlAdvert",
+    "titleHtml" : "Current Alert Level",
+    "displayUrl" : "https://covid19.waimakariri.govt.nz/app",
+    "linkUrl" : "https://covid19.waimakariri.govt.nz/app",
+    "descriptionHtml" : "New Zealand is at Alert Level 1.\n\nAuckland joined the rest of New Zealand at Alert Level 1 at 11:59pm on Wednesday 7 October.",
+    "additionalProperties" : {
+      "position" : "center",
+      "call_to_action_label" : "See more",
+      "call_to_action_url" : "https://covid19.govt.nz/alert-system/alert-level-1/",
+      "image" : "https://source.unsplash.com/random/40x40?covid"
+    },
+    "category" : "",
+    "removeCollectionUrl" : false
   } ]
 }, {
   "created" : "2020-04-08T21:56:46.500816Z",
-  "lastModified" : "2020-04-22T12:12:18.011618Z",
+  "lastModified" : "2020-12-03T09:18:29.892714Z",
   "id" : "0f46ff92-62e3-46d2-9a29-f2f9bc2599d9",
-  "name" : "[Example] health and corona - bottom position",
+  "name" : "[Example] Curator at the bottom - health, corona, covid",
   "label" : "DEFAULT",
   "enabled" : true,
   "trigger" : {
@@ -87,29 +150,87 @@
       }, {
         "type" : "AllQueryWords",
         "triggerWords" : [ "corona" ]
+      }, {
+        "type" : "AllQueryWords",
+        "triggerWords" : [ "covid" ]
       } ]
     } ]
   },
   "actions" : [ {
-    "type" : "DisplayMessage",
-    "messageHtml" : "<!-- Corona Virus -->\n<div class=\"card fb-card--fluid\">\n\n  <div class=\"card-body fb-card__body\">        \n\n    <!-- Header section usually containing a title and small thumbnail -->\n    <div class=\"fb-card__header mb-3 border-bottom\">\n      <div class=\"fb-card__header__image\">\n          <img class=\"rounded-circle fb-image-thumbnail\" alt=\"Thumbnail for ${result.title!}\" src=\"https://source.unsplash.com/random/40x40?health\"> \n        </#if>\n      </div>\n\n      <div class=\"fb-card__header__title\">\n        <div class=\"card-title\">          \n          <h6>\n            <a href=\"#\" data-toggle=\"modal\" data-target=\"#signupModal\">\n              RESEARCH INSIGHT | Access to Health Care\n            </a>\n          </h6>            \n        </div>\n      </div>\n    </div>\n    \n    <!-- Summary section containing the description and key details of the document -->\n    <div class=\"fb-card__summary\">\n      <div class=\"card-text\">\n        <p>\n          <i class=\"fas fa-ad\"></i>         \n          Access to health services affects the well-being of millions of consumers, and objective or situational access factors, such as distance from facility, often dominate the conversation. However, the reality is that subjective perceptions play just as great a role in consumers’ overall health and well-being. \n        </p>\n      </div>\n\n    </div>   \n\n  </div>\n</div>",
+    "type" : "DisplayUrlAdvert",
+    "titleHtml" : "RESEARCH INSIGHT | Access to Health Care",
+    "displayUrl" : "https://www.health.org.uk/funding-and-partnerships/programmes/insight-2019",
+    "linkUrl" : "https://www.health.org.uk/funding-and-partnerships/programmes/insight-2019",
+    "descriptionHtml" : "Access to health services affects the well-being of millions of consumers, and objective or situational access factors, such as distance from facility, often dominate the conversation. However, the reality is that subjective perceptions play just as great a role in consumers’ overall health and well-being.",
     "additionalProperties" : {
       "position" : "bottom"
     },
-    "category" : ""
+    "category" : "",
+    "removeCollectionUrl" : false
+  } ]
+}, {
+  "created" : "2020-08-17T16:12:56.407535Z",
+  "lastModified" : "2020-12-03T09:17:06.185081Z",
+  "id" : "fe3b1d3b-fa55-4fbe-a154-a3d4ed3c2e32",
+  "name" : "[Example] Curator on top - bins, rubbish, garbage, trash",
+  "label" : "DEFAULT",
+  "enabled" : true,
+  "trigger" : {
+    "type" : "And",
+    "triggers" : [ {
+      "type" : "Or",
+      "triggers" : [ {
+        "type" : "AllQueryWords",
+        "triggerWords" : [ "bins" ]
+      }, {
+        "type" : "AllQueryWords",
+        "triggerWords" : [ "bin" ]
+      }, {
+        "type" : "AllQueryWords",
+        "triggerWords" : [ "rubbish" ]
+      }, {
+        "type" : "AllQueryWords",
+        "triggerWords" : [ "garbage" ]
+      }, {
+        "type" : "AllQueryWords",
+        "triggerWords" : [ "trash" ]
+      } ]
+    } ]
+  },
+  "actions" : [ {
+    "type" : "DisplayUrlAdvert",
+    "titleHtml" : "Report street damage or a cleaning issue",
+    "displayUrl" : "https://www.conncil/report-street-issue",
+    "linkUrl" : "https://www.conncil/report-street-issue",
+    "descriptionHtml" : "Tell us about a problem on our streets so that we can have a look.",
+    "additionalProperties" : {
+      "position" : "center",
+      "call_to_action_label" : "REPORT DAMAGE",
+      "call_to_action_url" : "https://www.camden.gov.uk/report-street-issue",
+      "image" : "https://source.unsplash.com/random/160x160?damage"
+    },
+    "category" : "",
+    "removeCollectionUrl" : false
   }, {
-    "type" : "DisplayMessage",
-    "messageHtml" : "<!-- Corona Virus -->\n<div class=\"card fb-card--fluid\">\n\n  <div class=\"card-body fb-card__body\">        \n\n    <!-- Header section usually containing a title and small thumbnail -->\n    <div class=\"fb-card__header mb-3 border-bottom\">\n      <div class=\"fb-card__header__image\">\n          <img class=\"rounded-circle fb-image-thumbnail\" alt=\"Thumbnail for ${result.title!}\" src=\"https://source.unsplash.com/random/40x40?female\"> \n        </#if>\n      </div>\n\n      <div class=\"fb-card__header__title\">\n        <div class=\"card-title\">          \n          <h6>\n            <a href=\"#\" data-toggle=\"modal\" data-target=\"#signupModal\">\n              Health Habits of Female Millennials\n            </a>\n          </h6>            \n        </div>\n      </div>\n    </div>\n    \n    <!-- Summary section containing the description and key details of the document -->\n    <div class=\"fb-card__summary\">\n      <div class=\"card-text\">\n        <p>\n          <i class=\"fas fa-ad\"></i>         \n          America’s shifting demographics are highly visible in the millennial generation. Consisting of about a third of Americans, this generation is far more racially diverse than any generation before it. Millennial women’s attitudes toward health and the healthcare system are different than previous generations, too, and millennials are consuming healthcare in different ways than older generations did.          </p>\n      </div>\n\n    </div>   \n\n  </div>\n</div>",
+    "type" : "DisplayUrlAdvert",
+    "titleHtml" : "Recycling and rubbish collection days",
+    "displayUrl" : "https://environmentservices.gov.uk/property",
+    "linkUrl" : "https://environmentservices.gov.uk/property",
+    "descriptionHtml" : "Find out when your rubbish and recycling is collected.",
     "additionalProperties" : {
-      "position" : "bottom"
+      "position" : "center",
+      "call_to_action_label" : "CHECK YOUR COLLECTION DAY",
+      "call_to_action_url" : "https://environmentservices.camden.gov.uk/property?",
+      "image" : "https://source.unsplash.com/random/160x160?bins"
     },
-    "category" : ""
+    "category" : "",
+    "removeCollectionUrl" : false
   } ]
 }, {
   "created" : "2020-08-17T16:48:38.568916Z",
-  "lastModified" : "2020-08-17T16:53:30.24414Z",
+  "lastModified" : "2020-12-03T09:18:07.376916Z",
   "id" : "2c27d476-f132-4772-95ad-06fb61b3323f",
-  "name" : "[Example] Term dates",
+  "name" : "[Example] Curator in the center - term dates, school, holidays",
   "label" : "DEFAULT",
   "enabled" : true,
   "trigger" : {
@@ -129,56 +250,25 @@
     } ]
   },
   "actions" : [ {
-    "type" : "DisplayMessage",
-    "messageHtml" : "<!-- Term dates -->\n<div class=\"card fb-card--fluid\">\n    <div class=\"card-body fb-card__body\">        \n        <!-- Header section usually containing a title and small thumbnail -->\n        <div class=\"fb-card__header mb-3 border-bottom\">\n            <div class=\"fb-card__header__image\">\n                <img class=\"rounded-circle fb-image-thumbnail\" alt=\"Thumbnail for reporting damage\" src=\"https://upload.wikimedia.org/wikipedia/commons/c/cd/Circle-icons-calendar.svg\"> \n            </div>\n    \n            <div class=\"fb-card__header__title\">\n                <div class=\"card-title\">          \n                    <h5>\n                        <a href=\"https://www.camden.gov.uk/term-dates\">\n                            Term dates\n                        </a>\n                    </h5>            \n                </div>\n            </div>\n        </div>\n        \n        <!-- Summary section containing the description and key details of the document -->\n        <div class=\"fb-card__summary\">\n            <div class=\"card-text\">\n                <p>\n                    <i class=\"fas fa-ad\"></i>\n                    Find out when your child's school term starts. State school term and holiday dates through to summer 2022.\n                </p>\n            </div>\n        </div>   \n\n        <div class=\"fb-card__actions\"> \n            <a href=\"https://www.camden.gov.uk/term-dates\" class=\"card-link fb-color-secondary mt-4 small\">\n                VIEW DATES\n            </a>\n        </div>\n    </div>\n</div>",
+    "type" : "DisplayUrlAdvert",
+    "titleHtml" : "Term dates",
+    "displayUrl" : "https://www.camden.gov.uk/term-dates",
+    "linkUrl" : "https://www.camden.gov.uk/term-dates",
+    "descriptionHtml" : "Find out when your child's school term starts. State school term and holiday dates through to summer 2022.",
     "additionalProperties" : {
-      "position" : "center"
+      "call_to_action_label" : "VIEW DATES",
+      "call_to_action_url" : "https://www.camden.gov.uk/term-dates",
+      "class" : "center",
+      "image" : "https://source.unsplash.com/random/160x160?calendar"
     },
-    "category" : ""
-  } ]
-}, {
-  "created" : "2020-08-17T16:12:56.407535Z",
-  "lastModified" : "2020-08-18T07:55:55.357582Z",
-  "id" : "fe3b1d3b-fa55-4fbe-a154-a3d4ed3c2e32",
-  "name" : "[Example] Bins",
-  "label" : "DEFAULT",
-  "enabled" : true,
-  "trigger" : {
-    "type" : "And",
-    "triggers" : [ {
-      "type" : "Or",
-      "triggers" : [ {
-        "type" : "AllQueryWords",
-        "triggerWords" : [ "bins" ]
-      }, {
-        "type" : "AllQueryWords",
-        "triggerWords" : [ "bin" ]
-      }, {
-        "type" : "AllQueryWords",
-        "triggerWords" : [ "rubbish" ]
-      } ]
-    } ]
-  },
-  "actions" : [ {
-    "type" : "DisplayMessage",
-    "messageHtml" : "<!-- Bins -->\n<div class=\"card fb-card--fluid\">\n    <div class=\"card-body fb-card__body\">        \n        <!-- Header section usually containing a title and small thumbnail -->\n        <div class=\"fb-card__header mb-3 border-bottom\">\n            <div class=\"fb-card__header__image\">\n                <img class=\"rounded-circle fb-image-thumbnail\" alt=\"Thumbnail for ${result.title!}\" src=\"https://environmentservices.camden.gov.uk/cl/img/services/communal-green.jpg\"> \n            </div>\n    \n            <div class=\"fb-card__header__title\">\n                <div class=\"card-title\">          \n                    <h5>\n                        <a href=\"https://environmentservices.camden.gov.uk/property?\">\n                            Recycling and rubbish collection days\n                        </a>\n                    </h5>            \n                </div>\n            </div>\n        </div>\n        \n        <!-- Summary section containing the description and key details of the document -->\n        <div class=\"fb-card__summary\">\n            <div class=\"card-text\">\n                <p>\n                    <i class=\"fas fa-ad\"></i>\n                    Find out when your rubbish and recycling is collected.\n                </p>\n            </div>\n        </div>   \n\n        <div class=\"fb-card__actions\"> \n            <a href=\"https://environmentservices.camden.gov.uk/property?\" class=\"card-link fb-color-secondary mt-4 small\">\n                CHECK YOUR COLLECTION DAY\n            </a>\n        </div>\n    </div>\n</div>",
-    "additionalProperties" : {
-      "position" : "center"
-    },
-    "category" : ""
-  }, {
-    "type" : "DisplayMessage",
-    "messageHtml" : "<!-- Street damage -->\n<div class=\"card fb-card--fluid\">\n    <div class=\"card-body fb-card__body\">        \n        <!-- Header section usually containing a title and small thumbnail -->\n        <div class=\"fb-card__header mb-3 border-bottom\">\n            <div class=\"fb-card__header__image\">\n                <img class=\"rounded-circle fb-image-thumbnail\" alt=\"Thumbnail for reporting damage\" src=\"https://forms.camden.gov.uk/cus/images/icons/edit.png\"> \n            </div>\n    \n            <div class=\"fb-card__header__title\">\n                <div class=\"card-title\">          \n                    <h5>\n                        <a href=\"https://www.camden.gov.uk/report-street-issue\">\n                            Report street damage or a cleaning issue\n                        </a>\n                    </h5>            \n                </div>\n            </div>\n        </div>\n        \n        <!-- Summary section containing the description and key details of the document -->\n        <div class=\"fb-card__summary\">\n            <div class=\"card-text\">\n                <p>\n                    <i class=\"fas fa-ad\"></i>\n                    Tell us about a problem on our streets so that we can have a look.\n                </p>\n            </div>\n        </div>   \n\n        <div class=\"fb-card__actions\"> \n            <a href=\"https://www.camden.gov.uk/report-street-issue\" class=\"card-link fb-color-secondary mt-4 small\">\n                REPORT DAMAGE\n            </a>\n        </div>\n    </div>\n</div>",
-    "additionalProperties" : {
-      "position" : "center"
-    },
-    "category" : ""
+    "category" : "",
+    "removeCollectionUrl" : false
   } ]
 }, {
   "created" : "2020-08-19T16:00:08.117078Z",
-  "lastModified" : "2020-08-19T16:00:08.131633Z",
+  "lastModified" : "2020-12-03T09:17:39.146201Z",
   "id" : "878f2174-ef98-48a1-9fdc-9ab1954a587b",
-  "name" : "[Example] Fines",
+  "name" : "[Example] Curator in the center - fines",
   "label" : "DEFAULT",
   "enabled" : true,
   "trigger" : {
@@ -191,15 +281,136 @@
       }, {
         "type" : "AllQueryWords",
         "triggerWords" : [ "fines" ]
+      }, {
+        "type" : "AllQueryWords",
+        "triggerWords" : [ "parking" ]
       } ]
     } ]
   },
   "actions" : [ {
-    "type" : "DisplayMessage",
-    "messageHtml" : "<!-- Parking fines -->\n<div class=\"card fb-card--fluid\">\n    <div class=\"card-body fb-card__body\">        \n        <!-- Header section usually containing a title and small thumbnail -->\n        <div class=\"fb-card__header mb-3 border-bottom\">\n            <div class=\"fb-card__header__image\">\n                <img class=\"rounded-circle fb-image-thumbnail\" alt=\"Thumbnail for parking fines\" src=\"https://www.islington.gov.uk/-/media/images/page-icons/parking/pcnintro.svg?la=en&hash=9F3D2F17EFBD6D65BFA557C00697440C4C51B06E\"> \n            </div>\n    \n            <div class=\"fb-card__header__title\">\n                <div class=\"card-title\">          \n                    <h5>\n                        <a href=\"https://www3.camden.gov.uk/pay/\">\n                            Pay a Penalty Charge Notice\n                        </a>\n                    </h5>            \n                </div>\n            </div>\n        </div>\n        \n        <!-- Summary section containing the description and key details of the document -->\n        <div class=\"fb-card__summary\">\n            <div class=\"card-text\">\n                <p>\n                    <i class=\"fas fa-ad\"></i>\n                    Pay a Penalty Charge Notice (PCN) online\n                </p>\n            </div>\n        </div>   \n\n        <div class=\"fb-card__actions\"> \n            <a href=\"https://www3.camden.gov.uk/pay/\"\" class=\"card-link fb-color-secondary mt-4 small\">\n                PAY NOW\n            </a>\n        </div>\n    </div>\n</div>",
+    "type" : "DisplayUrlAdvert",
+    "titleHtml" : "Pay a Penalty Charge Notice",
+    "displayUrl" : "https://www3.camden.gov.uk/pay",
+    "linkUrl" : "https://www3.camden.gov.uk/pay",
+    "descriptionHtml" : "Pay a Penalty Charge Notice (PCN) online",
+    "additionalProperties" : {
+      "call_to_action_url" : "https://www3.camden.gov.uk/pay",
+      "position" : "center",
+      "call_to_action_label" : "Pay now",
+      "image" : "https://source.unsplash.com/random/160x160?fines"
+    },
+    "category" : "",
+    "removeCollectionUrl" : false
+  } ]
+}, {
+  "created" : "2020-12-02T13:44:32.48577Z",
+  "lastModified" : "2021-01-12T16:17:49.681397Z",
+  "id" : "36517c65-c621-48c4-bdda-8a1f35d64bfc",
+  "name" : "[Example] Curator on the left - bins, app, rubbish, trash, garbage, collection",
+  "label" : "DEFAULT",
+  "enabled" : true,
+  "trigger" : {
+    "type" : "And",
+    "triggers" : [ {
+      "type" : "Or",
+      "triggers" : [ {
+        "type" : "AllQueryWords",
+        "triggerWords" : [ "bins" ]
+      }, {
+        "type" : "AllQueryWords",
+        "triggerWords" : [ "app" ]
+      }, {
+        "type" : "AllQueryWords",
+        "triggerWords" : [ "rubbish" ]
+      }, {
+        "type" : "AllQueryWords",
+        "triggerWords" : [ "trash" ]
+      }, {
+        "type" : "AllQueryWords",
+        "triggerWords" : [ "garbage" ]
+      }, {
+        "type" : "AllQueryWords",
+        "triggerWords" : [ "collection" ]
+      } ]
+    } ]
+  },
+  "actions" : [ {
+    "type" : "DisplayUrlAdvert",
+    "titleHtml" : "Snap Send Solve",
+    "displayUrl" : "https://download.app",
+    "linkUrl" : "https://download.app",
+    "descriptionHtml" : "If you spot something in our district such as a pothole, vandalism, litter or damaged footpath, you can report it instantly to the District Council from a mobile phone.\n<br /> <br />\nThe app works by identifying the location the photo is taken using the phone's GPS data. It sends an email to the Council from the user's email address, including the incident type, notes, address of incident, photo and the user's contact details.",
+    "additionalProperties" : {
+      "position" : "left",
+      "call_to_action_label" : "DOWNLOAD APP",
+      "call_to_action_url" : "www.google.com"
+    },
+    "category" : "",
+    "removeCollectionUrl" : false
+  } ]
+}, {
+  "created" : "2020-03-11T14:34:28.23796Z",
+  "lastModified" : "2021-01-14T15:09:20.389722Z",
+  "id" : "d8ca0e61-6355-4f8d-adfd-09900978799b",
+  "name" : "[Example] Curators for \"No Results\" (Copy)",
+  "label" : "DEFAULT",
+  "enabled" : true,
+  "trigger" : {
+    "type" : "Groovy",
+    "classFile" : "/opt/funnelback/conf/local-government-meta/@groovy/curator/triggers/NoResultTrigger.groovy",
+    "properties" : {
+      "key" : "value"
+    }
+  },
+  "actions" : [ {
+    "type" : "DisplayUrlAdvert",
+    "titleHtml" : "Contact Us",
+    "displayUrl" : "www.local-council.com",
+    "linkUrl" : "www.local-council.com",
+    "descriptionHtml" : "Want to make an enquiry, get something fixed, or just give us some feedback? You can contact us in many ways.\n\nOne of the easiest ways to contact our Customer Services team is to use our below Contact form. The Customer Services email is only monitored during Rangiora office hours. If you have an urgent request outside of office hours, phone 0800 965 468 (0800WMKGOV).",
+    "additionalProperties" : {
+      "position" : "bottom",
+      "image" : "https://source.unsplash.com/random/40x40?email"
+    },
+    "category" : "",
+    "removeCollectionUrl" : false
+  }, {
+    "type" : "DisplayUrlAdvert",
+    "titleHtml" : "Rates and property search",
+    "displayUrl" : "https://rates.gov",
+    "linkUrl" : "https://rates.gov",
+    "descriptionHtml" : "Find out the valuation or rates payable on a property.",
+    "additionalProperties" : {
+      "position" : "center",
+      "call_to_action_label" : "Search rates",
+      "call_to_action_url" : "https://eservices.waimakariri.govt.nz/ePropertyPROD/P1/eRates/RatingInformationSearch.aspx?r=P1.WMKWEBGUEST&f=%24P1.ERA.RATINFO.ENQ",
+      "image" : "https://source.unsplash.com/random/40x40?rates"
+    },
+    "category" : "",
+    "removeCollectionUrl" : false
+  }, {
+    "type" : "DisplayUrlAdvert",
+    "titleHtml" : "Building Consent Search",
+    "displayUrl" : "www.build.consent.search/",
+    "linkUrl" : "www.build.consent.search/",
+    "descriptionHtml" : "Find the current status of your building consent.",
     "additionalProperties" : {
       "position" : "center"
     },
-    "category" : ""
+    "category" : "",
+    "removeCollectionUrl" : false
+  }, {
+    "type" : "DisplayUrlAdvert",
+    "titleHtml" : "Recycling, Rubbish & Organics",
+    "displayUrl" : "https://www.rubbish.com",
+    "linkUrl" : "https://www.rubbish.com",
+    "descriptionHtml" : "The Council provides a number of waste services for the District's residents, businesses, schools and visitors",
+    "additionalProperties" : {
+      "call_to_action_label" : "Sign up",
+      "call_to_action_url" : "https://rethinkrubbish.waimakariri.govt.nz/s/#reminder",
+      "image" : "https://source.unsplash.com/random/40x40?recycling"
+    },
+    "category" : "",
+    "removeCollectionUrl" : false
   } ]
 } ]
