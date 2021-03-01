@@ -170,7 +170,6 @@
     }
 }
 
-
 @media only screen and (max-width: 768px) {
     .fb-container .search-results__tools-right {
         float: none;
@@ -185,14 +184,19 @@
     
     .fb-container .dropdown-list__link {
         width: 100%;
-    }    
+    }
+    
+    /* Ensure that the drop down is displayed in the viewport on tablet */
+    .fb-container .dropdown-list__list{
+        left: inherit;
+    }        
 }
 
 /* 
     Reduce the size of dropdown so that it suits the small numbers
     found in the limit dropdown.
 */
-.fb-container  .fb-limit-dropdown .dropdown-list__list {
+.fb-container .fb-limit-dropdown .dropdown-list__list {
     min-width: 9rem;
 }
 
