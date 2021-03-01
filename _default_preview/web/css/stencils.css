@@ -391,6 +391,11 @@
     display: none;
 }
 
+/* Hide search history and cart on the initial load */
+.fb-container section#search-history {
+    display: none;
+}
+
 /* 
     Presentation for the back to results link for both the cart
     and the click and search history.
