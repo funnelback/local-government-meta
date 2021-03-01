@@ -207,6 +207,14 @@
     margin-right: 0.5rem;
 }
 
+/* 
+    Ensure there is enough padding between the facet category label
+    and the count.
+*/
+.fb-container .tabs__item .search-facet-count {
+    margin-left: 0.25rem;
+}
+
 /* Dropdown in tab navigation */
 
 /* 

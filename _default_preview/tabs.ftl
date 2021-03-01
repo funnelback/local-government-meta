@@ -30,7 +30,7 @@
                                     <span class="${question.getCurrentProfileConfig().get("stencils.tabs.icon.${value.label}")}"></span>
                                 </#if>                            
                                 ${value.label}
-                                <span>(${value.count})</span>
+                                <span class="search-facet-count">(${value.count})</span>
                             </a>
                         </li>
                     </#if>
@@ -88,7 +88,7 @@
                                 <span class="${question.getCurrentProfileConfig().get("stencils.tabs.icon.${value.label}")}"></span>
                             </#if>                            
                             ${value.label}
-                            <span>(${value.count})</span>
+                            <span class="search-facet-count">(${value.count})</span>
                         </a>
                     </li>
                 </#list>                                        
