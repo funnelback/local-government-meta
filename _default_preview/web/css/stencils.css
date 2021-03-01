@@ -388,6 +388,10 @@
         margin-left: -2.1875rem;
         margin-right: -2.1875rem;
     }
+
+    .fb-container .search-results__item {
+        border-radius: 0;
+    }
 }
 
 /* Ensure that the description is shown on mobile */
@@ -417,6 +421,12 @@
     text-decoration: none;
 }
 
+/* Videos */
+
+/* Show images on mobile */
+.fb-container .search-results__list--list-view .search-results__item--video .search-results__bg {
+    display: inline-block;
+}
 
 /**
   * Sessions 
@@ -446,7 +456,6 @@
 .fb-container section#search-history {
     display: none;
 }
-
 
 /* 
     Presentation for the back to results link for both the cart
@@ -505,7 +514,6 @@
 .fb-container #search-history .module-curator__desc::before {
     display: none;
 }
-
 
 .fb-container .result-sessions__controls {
     background-color: rgba(255,255,255,0.6);
