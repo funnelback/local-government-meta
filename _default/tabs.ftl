@@ -1,36 +1,3 @@
-<#-- Not to be used in production -->
-
-<#-- This file should be replaced by a copy of the Stencils file when
-    deploying, to allow customization. Explicitly fail if the collection is not
-    the showcase collection. To fix it, copy the file from
-    $SEARCH_HOME/share/stencils/libraries/... -->
-<#if question.collection.id == 'higher-education-meta' || 
-    question.collection.id == 'membership-association-meta' >
-    <#include "/share/stencils/libraries/tabs/tabs.ftl">
-<#else>
-    <#-- Create a dummy version of a tabs.ftl macro, as a way to display
-        the error message -->
-    <#macro Tabs>
-        <div class="alert alert-danger">
-            <p><code>tabs.ftl</code> is currently directly including the Stencils
-            file. This is discouraged as Stencils changes will break the collection
-            templates. Please make a copy of <code>tabs.ftl</code> instead, from the
-            Stencils sources (<code>$SEARCH_HOME/share/stencils/libraries/</code>).</p>
-
-            <p>Subsequent template processing will fail until this is fixed.</p>
-        </div>
-    </#macro>
-</#if>
-
-
-<#-- 
-    Macros specific to Vertical Product instance 
-    These can override those found in Stencils. 
-    i.e. Given /share/stencils/libraries/foo.ftl defines @SomeMacro,
-    and is included is this template, it can be overriden by 
-    defining <#macro SomeMacro>. 
---> 
-
 <#--
     Display tabs
     @param facets List of tabs to display as a string. The default is that all tabs
@@ -50,7 +17,7 @@
     >
 
     <#list facets![] as facet>
-        <section class="tabs js-tabs content-wrapper">
+        <section class="tabs js-tabs content-wrapper desktop">
             <ul class="tabs__list" role="menu" aria-label="Tab navigation">
                 <#list facet.allValues as value>
                     <#if value?counter lt (question.getCurrentProfileConfig().get("stencils.tabs.max_display")!"5")?number> 
@@ -63,7 +30,7 @@
                                     <span class="${question.getCurrentProfileConfig().get("stencils.tabs.icon.${value.label}")}"></span>
                                 </#if>                            
                                 ${value.label}
-                                <span>(${value.count})</span>
+                                <span class="search-facet-count">(${value.count})</span>
                             </a>
                         </li>
                     </#if>
@@ -107,6 +74,26 @@
                 </#if>
             </ul>
         </section>
+
+        <#-- Tabs on mobile - We want to show all tabs as a list no matter how big -->
+        <section class="tabs js-tabs content-wrapper tablet mobile">
+            <ul class="tabs__list" role="menu" aria-label="Tab navigation">
+                <#list facet.allValues as value>
+                    <li class="tabs__item" role="none">
+                        <a <#if value.count gt 0>href="${value.toggleUrl}"</#if> 
+                            class="tabs__link tabs__link--icon <#if value.selected> active</#if><#if value.count lt 1> tabs__link--disabled </#if>"
+                            role="menuitem"
+                            tabindex="-1">
+                            <#if question.getCurrentProfileConfig().get("stencils.tabs.icon.${value.label}")??>
+                                <span class="${question.getCurrentProfileConfig().get("stencils.tabs.icon.${value.label}")}"></span>
+                            </#if>                            
+                            ${value.label}
+                            <span class="search-facet-count">(${value.count})</span>
+                        </a>
+                    </li>
+                </#list>                                        
+            </ul>
+        </section>        
     </#list>
 </#macro>
 

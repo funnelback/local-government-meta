@@ -444,7 +444,7 @@ window.Funnelback.SessionCart = (function() {
       Item.templates = Object.entries(options.item.templates).reduce(function(templates, [collection, template]) {
         templates[collection] = HandlebarsUtil.compile(template)
         return templates
-      });
+      },{});
       Item.listElement = ElementUtil.findOnce(options.item.selector);
       if (!Item.listElement) console.warn('No element was found with provided selector "' + options.item.selector + '"');
     },

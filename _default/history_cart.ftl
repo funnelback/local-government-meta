@@ -1,28 +1,4 @@
-<#-- This file should be replaced by a copy of the Stencils file when
-	deploying, to allow customization. Explicitly fail if the collection is not
-	the showcase collection. To fix it, copy the file from
-	$SEARCH_HOME/share/stencils/libraries/... -->
-<#if question.collection.id == 'higher-education-meta' || 
-	question.collection.id == 'membership-association-meta' ||
-	question.collection.id == 'local-government-meta'  
-	>
-	<#include "/share/stencils/libraries/base/history_cart.ftl">
-<#else>
-	<#-- Create a dummy version of a history_cart.ftl macro, as a way to display
-		the error message -->
-	<#macro LastVisitedLink result>
-		<div class="alert alert-danger">
-			<p><code>history_cart.ftl</code> is currently directly including the Stencils
-			file. This is discouraged as Stencils changes will break the collection
-			templates. Please make a copy of <code>history_cart.ftl</code> instead, from the
-			Stencils sources (<code>$SEARCH_HOME/share/stencils/libraries/</code>).</p>
-
-			<p>Subsequent template processing will fail until this is fixed.</p>
-		</div>
-	</#macro>
-</#if>
-
-<#-- Macro overrides specific for Funnelback for Local Government -->
+<#ftl encoding="utf-8" output_format="HTML" />
 
 <#--
 	Display a "Last visited X time ago" link for a result
@@ -65,6 +41,7 @@
 	A handlebars template which is used to display all the items in the cart. 
 -->
 <#macro CartTemplate>
+	<!-- history_cart::CartTemplate -->
 	<script id="cart-template" type="text/x-handlebars-template">
 		<div>
 			<button id="flb-cart-box-back" class="btn-link highlight" type="button">
@@ -188,7 +165,7 @@
 						</p>
 					</div>
 					<#if (session.searchHistory)!?has_content>
-						<a class="btn--link session-history-clear-search pull-right" href="#" title="Clear recent searches history">										
+						<a class="btn--link session-history-clear-search float-right" href="#" title="Clear recent searches history">										
 							<span class="fa fa-times"></span> Clear					
 						</a>
 					</#if>
@@ -223,7 +200,7 @@
 		<div class="card-body">
 			<div class="card-text">
 			{{#if metaData.image}}
-				<img class="img-fluid pull-right" alt="{{result.title}}" src="{{metaData.image}}">
+				<img class="img-fluid float-right" alt="{{result.title}}" src="{{metaData.image}}">
 			{{/if}}
 
 			{{#if metaData.c}}
@@ -266,9 +243,7 @@
 					item: {
 						icon: 'fas fa-star',          
 						templates: {
-							<#list question.getCurrentProfileConfig().get("stencils.cart.collections")!?split(",") as collection>
-								'${collection}': document.getElementById('cart-template-${collection}').text,
-							</#list>
+							<@CartTemplatesConfig />
 						},
 						class: ''
 					},
@@ -285,7 +260,7 @@
 						-->
 						labelAdd: "Add to shortlist",
 						labelDelete: "Remove from shortlist",
-						template: '<span class="text-info pull-right">{{>icon-block}} <span class="sr-only">{{>label-block}}</span></span>',
+						template: '<span class="text-info float-right">{{>icon-block}} <span class="sr-only">{{>label-block}}</span></span>',
 						position: 'afterbegin'
 					},
 					/* Trigger to delete an item from the cart */
@@ -329,3 +304,38 @@
 	</#if>
 </#macro>
 
+<#-- Output the config required to configure the cart templates -->
+<#macro CartTemplatesConfig >
+	<#-- 
+		Output the default template which is used when no cart template 
+		is explicitly defined.
+	-->
+	'default': document.getElementById('cart-template-default').text
+	<#if (question.getCurrentProfileConfig().getRawKeys())!?has_content>		
+		,
+		<#-- 
+			Output the custom cart templates config based on the 
+			user's configurations 
+		-->
+		<#list question.getCurrentProfileConfig().getRawKeys()?filter(key -> key?lower_case?starts_with("stencils.template.shortlist.")) as key>
+			<#local collection = key?keep_after_last(".")>
+			<#local templateName = question.getCurrentProfileConfig().get(key)>
+			'${collection}': document.getElementById('cart-template-${templateName}').text
+			<#if key_has_next>,</#if>
+		</#list> 
+	</#if>
+</#macro>
+
+<#-- 
+	Attempts to find and output all cart templates across all available
+	namespaces. It is assummed that cart templates are macros defined with 
+	the name <#macro CartTemplate> </#macro>.
+-->
+<#macro CartTemplatesForResults>
+	<!-- history_cart::CartTemplatesForResults -->
+	<#list .main as key, namespace >
+		<#if (namespace)!?is_hash && (namespace.CartTemplate)!?is_directive && key != "history_cart">
+			<@namespace.CartTemplate />
+		</#if>
+	</#list>
+</#macro>

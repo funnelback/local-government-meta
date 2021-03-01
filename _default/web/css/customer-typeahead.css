@@ -12,8 +12,11 @@
     background-color: #f0f0f0; 
 }
 
+/* 
+    TODO - Review if you need to adjust the presentation of the channels 
+    in concierge 
+*/
 @media only screen and (min-width: 1025px) {
-    .fb-container .module-search--bg .tt-dataset-planning_applications,
     .fb-container .module-search--bg .tt-dataset:nth-child(2),
     .fb-container .module-search--bg .tt-dataset:nth-child(3)
     {
@@ -30,4 +33,9 @@
         -webkit-box-flex: 0;
         flex: 0 0 100%;
     }
+}
+
+/* Hide empty sections in concierge */
+.fb-container .module-search .tt-dataset:empty {
+    display: none;
 }

@@ -254,7 +254,7 @@
 
 <#macro CartTemplate>
     <!-- results.CartTemplate -->
-    <script id="cart-template-local-government-web" type="text/x-handlebars-template">
+    <script id="cart-template-default" type="text/x-handlebars-template">
         <article class="search-results__item search-results__item--default">
             <figure class="search-results__bg">
                 {{#if metaData.image}}  
