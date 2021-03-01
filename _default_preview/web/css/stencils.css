@@ -2,9 +2,6 @@
     --red: #da1007;
 }
 
-
-
-
 /* Design overrides made by the vertical products team - Avoid changing these if possible */
 
 /* Helper classes */
@@ -65,6 +62,7 @@
 .fb-container cite {
     overflow-wrap: anywhere;
 }
+
 
 /**
   * Initial search form
@@ -356,9 +354,21 @@
   * Results 
   **/
 
-@media only screen and (min-width: 950px) {
+@media only screen and (min-width: 1025px) {
     .fb-container .content-wrapper--col .search-results__item:nth-child(-n+4) {
         margin-top: 0;
+    }
+}
+
+/* 
+    Remove the margin on results mobile & tablet so that search results 
+    use more of the available screen real estate.
+*/
+@media only screen and (max-width: 768px) {
+    .fb-container .search-results__list {
+        width: inherit;
+        margin-left: -2.1875rem;
+        margin-right: -2.1875rem;
     }
 }
 
