@@ -226,7 +226,7 @@
   "durl": "URL (Z-A)",
   "shuffle": "Shuffle"} >
     <!-- base.SortDropdown -->
-    <section class="dropdown-list">
+    <section class="dropdown-list ${id}">
         <span id=${id} class="sr-only">
             Sort results by
         </span>
@@ -264,7 +264,7 @@
 -->
 <#macro LimitDropdown id="fb-limit-dropdown" limits=[10, 20, 50]>
     <!-- base.LimitDropdown -->
-    <section class="dropdown-list">
+    <section class="dropdown-list ${id}">
         <span id=${id} class="sr-only">
             Limit the number of results to display
         </span>    

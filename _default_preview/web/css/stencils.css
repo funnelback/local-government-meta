@@ -188,6 +188,14 @@
     }    
 }
 
+/* 
+    Reduce the size of dropdown so that it suits the small numbers
+    found in the limit dropdown.
+*/
+.fb-container  .fb-limit-dropdown .dropdown-list__list {
+    min-width: 9rem;
+}
+
 /**
   * Tabs 
   **/
