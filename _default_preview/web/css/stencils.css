@@ -191,6 +191,16 @@
 /**
   * Tabs 
   **/
+
+/* Ensure that the text of tabs is aligned in the center */
+.fb-container .tabs__link--icon::before {
+    margin-right: 0;
+}
+
+.fb-container .tabs__link--icon {
+    padding-left: 0.4375rem
+}
+
 .fb-container .tabs__item .fas,  
 .fb-container .tabs__item .fab, 
 .fb-container .tabs__item .far {
