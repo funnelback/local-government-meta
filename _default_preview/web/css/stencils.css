@@ -1,11 +1,51 @@
+:root {
+    --red: #da1007;
+}
+
+
+
 
 /* Design overrides made by the vertical products team - Avoid changing these if possible */
 
 /* Helper classes */
-
 .fb-container .wrap {
     white-space: normal !important;    
 }
+
+/* Show things based on resolution */
+@media only screen and (max-width: 360px) {    
+    .fb-container .tablet,
+    .fb-container .desktop {
+        display: none;
+    }
+
+    .fb-container .mobile {
+        display: inherit;
+    }
+}  
+
+@media only screen and (min-width: 360px) and (max-width: 1025px) {
+    .fb-container .mobile,
+    .fb-container .desktop {
+        display: none;
+    }
+
+    .fb-container .tablet {
+        display: inherit;
+    }
+}  
+
+@media only screen and (min-width: 1025px) {
+    .fb-container .mobile,
+    .fb-container .tablet {
+        display: none;
+    }
+
+    .fb-container .desktop {
+        display: inherit;
+    }
+}
+
 
 /* Generic overrides to get the styling to work */
 .fb-container {
@@ -153,7 +193,6 @@
 /**
   * Tabs 
   **/
-
 .fb-container .tabs__item .fas,  
 .fb-container .tabs__item .fab, 
 .fb-container .tabs__item .far {
@@ -260,8 +299,6 @@
     color: var(--red);
 }
 
-
-
 /**
   * Curator 
   **/
@@ -269,20 +306,6 @@
 .fb-container .module-curator {
     position: relative;
 }
-
-/* .fb-container .module-curator::after {
-    background: transparent linear-gradient(90deg, transparent 10%, #fff 100%) no-repeat;
-    background-color: transparent;
-    background-image: -webkit-linear-gradient(0deg, rgba(255,255,255,0.001) 10%, #f0f0f0 100%);
-    content: '';
-    display: block;
-    height: 100%;
-    position: absolute;
-    right: 0;
-    bottom: 0;
-    width: 20px;
-    z-index: 2;
-} */
 
 .fb-container .module-curator__list {
     overflow-y: hidden;
@@ -395,6 +418,7 @@
 .fb-container section#search-history {
     display: none;
 }
+
 
 /* 
     Presentation for the back to results link for both the cart
@@ -512,7 +536,7 @@
     Adjust the font size of the description element in search results 
     so that it is larger than 10px.
 */
-@media only screen and (min-width: 1025px) and  (max-width: 1920px) {
+@media only screen and (min-width: 1025px) and (max-width: 1920px) {
     .fb-container .search-results__desc,
     .fb-container .search-results__list--list-view .search-results__desc {
         font-size: 1.0375rem;
