@@ -105,7 +105,7 @@
 <script src="/s/resources/${question.collection.id}/${question.profile}/js/base.js"></script> 
 
 <#-- Funnelback auto-complete -->
-<script src="${GlobalResourcesPrefix}js/funnelback.autocompletion-2.6.0.js"></script>
+<script src="https://${httpHost!}/s/resources/${question.collection.id}/${question.profile}/js/funnelback.autocompletion-2.6.0.stencils.js"></script>
 
 <#-- Output the auto complete templates for concierge -->
 <@faqs.AutoCompleteTemplate />

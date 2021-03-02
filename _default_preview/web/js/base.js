@@ -141,14 +141,23 @@ if (!Element.prototype.closest) {
 /* 
     Helper functions to make it easier to template auto complete.
     
-    Note: Ideally, we would add it to its own namespace such as 
-    window.Funnelback.Handlebars = Handlebars.create()
-    However, the autocomplete code code used by the product
-    relies on the global Handlebars instance. 
-
+    ToDo: Some helper functions are in the customised cart library.
+    We should investigate if we can move them here to minimise the gap 
+    between Product code and what we have customised. 
 */
-if(Handlebars) {
-    Handlebars.registerHelper({
+
+/* Use the same instance of handlesbars across all Funnelback features */
+if (!window.Funnelback) window.Funnelback = {}; // create namespace
+if (!Handlebars) {
+	throw new Error('Handlebars must be included (https://handlebarsjs.com/)')
+}
+
+if (!window.Funnelback.Handlebars) {
+	window.Funnelback.Handlebars = Handlebars.create();
+}
+
+if(window.Funnelback.Handlebars) {
+    window.Funnelback.Handlebars.registerHelper({
         // Cut the left part of a string if it matches the provided `toCut` string
         // Usage: {{#cut "https://"}}{{indexUrl}}{{/cut}}
         cut: function(toCut, options) {
