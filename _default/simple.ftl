@@ -92,11 +92,11 @@
 	<@client_includes.ContentFooter />
 
 	<#-- Third parties -->
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha512-hJSZLjaUow3GsiAkjUBMxN4eaFysMaBvg7j6mkBeo219ZGmSe1eVhKaJJAj5GzGoD0j0Gr2/xNDzjeecdg+OCw==" crossorigin="anonymous"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script>	
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha512-hJSZLjaUow3GsiAkjUBMxN4eaFysMaBvg7j6mkBeo219ZGmSe1eVhKaJJAj5GzGoD0j0Gr2/xNDzjeecdg+OCw==" crossorigin="anonymous"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/typeahead.js/0.11.1/typeahead.bundle.min.js" integrity="sha512-qOBWNAMfkz+vXXgbh0Wz7qYSLZp6c14R0bZeVX2TdQxWpuKr6yHjBIM69fcF8Ve4GUX6B6AKRQJqiiAmwvmUmQ==" crossorigin="anonymous"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.7.6/handlebars.min.js" integrity="sha512-zT3zHcFYbQwjHdKjCu6OMmETx8fJA9S7E6W7kBeFxultf75OPTYUJigEKX58qgyQMi1m1EgenfjMXlRZG8BXaw==" crossorigin="anonymous"></script>
-	
+
 	<#-- 
 		Libraries required by the design developed by the Stencils cutup team. 
 		Avoid changing these if possible.
@@ -114,10 +114,11 @@
 	<script type="text/javascript" src="/s/resources/${question.collection.id}/${question.profile}/js/main.js"></script>
 
 	<#-- Stencils specific code -->
-	<script src="/s/resources/${question.collection.id}/${question.profile}/js/base.js"></script> 
-	
+	<script src="/s/resources/${question.collection.id}/${question.profile}/js/stencils.js"></script> 
+	<script src="/s/resources/${question.collection.id}/${question.profile}/js/handlebars-helpers.js"></script> 
+		
 	<#-- Funnelback auto-complete -->
-	<script src="${GlobalResourcesPrefix}js/funnelback.autocompletion-2.6.0.js"></script>
+	<script src="/s/resources/${question.collection.id}/${question.profile}/js/funnelback.autocompletion-2.6.0.stencils.js"></script>
 
 	<#-- Output the auto complete templates for concierge -->
 	<@faqs.AutoCompleteTemplate />
@@ -126,7 +127,6 @@
 	<script>
 		window.addEventListener('DOMContentLoaded', function() {			
 			setupDeferredImages();
-			setupFacetLessMoreButtons(${question.collection.configuration.value("stencils.faceted_navigation.max_displayed_categories", "8")}, '.fb-sidebar__nav');
 			<@auto_complete.Configuration />				
 			
 			// Make the history button accessible via the keyboard for WCAG 2.1
@@ -146,13 +146,17 @@
 		and query history 
 	-->
 	<#if question.collection.configuration.valueAsBoolean("ui.modern.session")>
-		<#-- Specifies how the cart is to be presented -->
-		<@results.CartTemplate />
+		<#-- 
+			Automatically includ the cart template for all document types defined
+			across available namespaces. i.e. You won't need to explicitly 
+			do calls like <@courses.CartTemplate> to include the Handlebars templates 
+			as this macro will automatically be include it for you.   
+		-->
+		<@history_cart.CartTemplatesForResults />
 		
 		<#-- Specifies how each cart item should be presented -->
 		<@history_cart.CartTemplate />
-		<#-- Specifies the presentation of a cart item if a custom one is not specified -->
-		<@history_cart.CartItemTemplate />
+		
 
 		<script nomodule src="https://cdn.jsdelivr.net/npm/es6-promise@4/dist/es6-promise.auto.min.js"></script>
 		
@@ -165,12 +169,11 @@
 			<script defer src="/s/resources/${question.collection.id}/${question.profile}/js/funnelback.session-cart-0.1.js"></script>
 			<script defer src="/s/resources/${question.collection.id}/${question.profile}/js/funnelback.session-history-0.1.js"></script>
 		<#else>
-			<script defer src="/s/resources/${question.collection.id}/${question.profile}/js/funnelback.session-cart-0.1.min.js"></script>
+			<script type="module" defer src="/s/resources/${question.collection.id}/${question.profile}/js/funnelback.session-cart-0.1.module.min.js"></script>
+      		<script nomodule defer src="/s/resources/${question.collection.id}/${question.profile}/js/funnelback.session-cart-0.1.legacy.min.js"></script>
 			<script defer src="/s/resources/${question.collection.id}/${question.profile}/js/funnelback.session-history-0.1.min.js"></script>
 		</#if>
 		<@history_cart.Configuration />
 	</#if>
-
-
 </body>
 </html>

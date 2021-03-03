@@ -19,6 +19,13 @@
  */
 if (!window.Funnelback) window.Funnelback = {}; // create namespace
 
+if (!Handlebars) {
+  throw new Error('Handlebars must be included (https://handlebarsjs.com/)');
+}
+if (!window.Funnelback.Handlebars) {
+  window.Funnelback.Handlebars = Handlebars.create();
+}
+
 
 // While best practice is to normally include polyfills as an external dependency,
 // for these two functions, its more convenient to include them with this file
@@ -125,7 +132,7 @@ window.Funnelback.SessionCart = (function() {
   /**
    * Create isolated Handlebars environment
    */
-  Constructor.prototype.Handlebars = Handlebars.create();
+  Constructor.prototype.Handlebars = window.Funnelback.Handlebars;
 
   /**
    * Initialise cart widget with provided options
@@ -444,7 +451,7 @@ window.Funnelback.SessionCart = (function() {
       Item.templates = Object.entries(options.item.templates).reduce(function(templates, [collection, template]) {
         templates[collection] = HandlebarsUtil.compile(template)
         return templates
-      });
+      }, {});
       Item.listElement = ElementUtil.findOnce(options.item.selector);
       if (!Item.listElement) console.warn('No element was found with provided selector "' + options.item.selector + '"');
     },
@@ -606,7 +613,7 @@ window.Funnelback.SessionCart = (function() {
   };
 
   const Templates = {
-    // List of partia templates registered with Handlebars
+    // List of partial templates registered with Handlebars
     // Usage ie. {{>icon-block}}, {{>badge-block}}
     partial: {
       badge: '<span class="badge">{{count}}</span>',
@@ -700,29 +707,6 @@ window.Funnelback.SessionCart = (function() {
   };
 
   HandlebarsUtil.registerPartial(Templates.partial);
-
-  Constructor.prototype.Handlebars.registerHelper({
-    // Cut the left part of a string if it matches the provided `toCut` string
-    // Usage: {{#cut "https://"}}{{indexUrl}}{{/cut}}
-    cut: function(toCut, options) {
-      const str = options.fn(this);
-      if (str.indexOf(toCut) === 0) return str.substring(toCut.length);
-      return str;
-    },
-    // Truncate content to provided lenght
-    // Usage: {{#truncate 70}}{{title}}{{/truncate}}
-    truncate: function (len, options) {
-      const str = options.fn(this);
-      if (str && str.length > len && str.length > 0) {
-          var new_str = str + " ";
-          new_str = str.substr (0, len);
-          new_str = str.substr (0, new_str.lastIndexOf(" "));
-          new_str = (new_str.length > 0) ? new_str : str.substr (0, len);
-          return new Constructor.prototype.Handlebars.SafeString (new_str +'...'); 
-      }
-      return str;
-    }
-  });
 
   return Constructor;
 }());

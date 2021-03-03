@@ -115,9 +115,13 @@
                 <script src="https://cdnjs.cloudflare.com/ajax/libs/typeahead.js/0.11.1/typeahead.bundle.min.js" integrity="sha512-qOBWNAMfkz+vXXgbh0Wz7qYSLZp6c14R0bZeVX2TdQxWpuKr6yHjBIM69fcF8Ve4GUX6B6AKRQJqiiAmwvmUmQ==" crossorigin="anonymous"></script>
                 <!-- Handlebars is used to render client-side templates -->
                 <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.7.6/handlebars.min.js" integrity="sha512-zT3zHcFYbQwjHdKjCu6OMmETx8fJA9S7E6W7kBeFxultf75OPTYUJigEKX58qgyQMi1m1EgenfjMXlRZG8BXaw==" crossorigin="anonymous"></script>
-                <!-- Funnelback autocomplete library -->
-                <script src="https://${httpHost!}/s/${GlobalResourcesPrefix}js/funnelback.autocompletion-2.6.0.js"></script>
-                <script src="https://${httpHost!}/s/resources/${question.collection.id}/${question.profile}/js/base.js"></script> 
+
+                <!-- Stencils specific code -->
+                <script src="https://${httpHost!}/s/resources/${question.collection.id}/${question.profile}/js/handlebars-helpers.js"></script>  
+
+                <!-- Funnelback auto-complete -->
+                <script src="https://${httpHost!}/s/resources/${question.collection.id}/${question.profile}/js/funnelback.autocompletion-2.6.0.stencils.js"></script>
+
 
                 <script>
                     <@auto_complete.Configuration />
@@ -168,8 +172,11 @@
 <!-- Handlebars is used to render client-side templates -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.7.6/handlebars.min.js" integrity="sha512-zT3zHcFYbQwjHdKjCu6OMmETx8fJA9S7E6W7kBeFxultf75OPTYUJigEKX58qgyQMi1m1EgenfjMXlRZG8BXaw==" crossorigin="anonymous"></script>
 <!-- Funnelback autocomplete library -->
-<script src="https://${httpHost!}/s/${GlobalResourcesPrefix}js/funnelback.autocompletion-2.6.0.js"></script>
-<script src="https://${httpHost!}/s/resources/${question.collection.id}/${question.profile}/js/base.js"></script> 
+<!-- Stencils specific code -->
+<script src="https://${httpHost!}/s/resources/${question.collection.id}/${question.profile}/js/handlebars-helpers.js"></script>  
+
+<!-- Funnelback auto-complete -->
+<script src="https://${httpHost!}/s/resources/${question.collection.id}/${question.profile}/js/funnelback.autocompletion-2.6.0.stencils.js"></script>
 </#assign>
 
                 <strong>Required javascript libraries</strong>

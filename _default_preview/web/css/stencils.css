@@ -1,11 +1,48 @@
+:root {
+    --red: #da1007;
+}
 
 /* Design overrides made by the vertical products team - Avoid changing these if possible */
 
 /* Helper classes */
-
 .fb-container .wrap {
     white-space: normal !important;    
 }
+
+/* Show things based on resolution */
+@media only screen and (max-width: 360px) {    
+    .fb-container .tablet,
+    .fb-container .desktop {
+        display: none;
+    }
+
+    .fb-container .mobile {
+        display: inherit;
+    }
+}  
+
+@media only screen and (min-width: 360px) and (max-width: 1025px) {
+    .fb-container .mobile,
+    .fb-container .desktop {
+        display: none;
+    }
+
+    .fb-container .tablet {
+        display: inherit;
+    }
+}  
+
+@media only screen and (min-width: 1025px) {
+    .fb-container .mobile,
+    .fb-container .tablet {
+        display: none;
+    }
+
+    .fb-container .desktop {
+        display: inherit;
+    }
+}
+
 
 /* Generic overrides to get the styling to work */
 .fb-container {
@@ -25,6 +62,7 @@
 .fb-container cite {
     overflow-wrap: anywhere;
 }
+
 
 /**
   * Initial search form
@@ -132,7 +170,6 @@
     }
 }
 
-
 @media only screen and (max-width: 768px) {
     .fb-container .search-results__tools-right {
         float: none;
@@ -147,17 +184,47 @@
     
     .fb-container .dropdown-list__link {
         width: 100%;
-    }    
+    }
+    
+    /* Ensure that the drop down is displayed in the viewport on tablet */
+    .fb-container .dropdown-list__list{
+        left: inherit;
+    }        
+}
+
+/* 
+    Reduce the size of dropdown so that it suits the small numbers
+    found in the limit dropdown.
+*/
+.fb-container .fb-limit-dropdown .dropdown-list__list {
+    min-width: 9rem;
 }
 
 /**
   * Tabs 
   **/
 
+/* Ensure that the text of tabs is aligned in the center */
+.fb-container .tabs__link--icon::before {
+    margin-right: 0;
+}
+
+.fb-container .tabs__link--icon {
+    padding-left: 0.4375rem
+}
+
 .fb-container .tabs__item .fas,  
 .fb-container .tabs__item .fab, 
 .fb-container .tabs__item .far {
     margin-right: 0.5rem;
+}
+
+/* 
+    Ensure there is enough padding between the facet category label
+    and the count.
+*/
+.fb-container .tabs__item .search-facet-count {
+    margin-left: 0.25rem;
 }
 
 /* Dropdown in tab navigation */
@@ -260,8 +327,6 @@
     color: var(--red);
 }
 
-
-
 /**
   * Curator 
   **/
@@ -269,20 +334,6 @@
 .fb-container .module-curator {
     position: relative;
 }
-
-/* .fb-container .module-curator::after {
-    background: transparent linear-gradient(90deg, transparent 10%, #fff 100%) no-repeat;
-    background-color: transparent;
-    background-image: -webkit-linear-gradient(0deg, rgba(255,255,255,0.001) 10%, #f0f0f0 100%);
-    content: '';
-    display: block;
-    height: 100%;
-    position: absolute;
-    right: 0;
-    bottom: 0;
-    width: 20px;
-    z-index: 2;
-} */
 
 .fb-container .module-curator__list {
     overflow-y: hidden;
@@ -333,9 +384,25 @@
   * Results 
   **/
 
-@media only screen and (min-width: 950px) {
+@media only screen and (min-width: 1025px) {
     .fb-container .content-wrapper--col .search-results__item:nth-child(-n+4) {
         margin-top: 0;
+    }
+}
+
+/* 
+    Remove the margin on results mobile & tablet so that search results 
+    use more of the available screen real estate.
+*/
+@media only screen and (max-width: 768px) {
+    .fb-container .search-results__list {
+        width: inherit;
+        margin-left: -2.1875rem;
+        margin-right: -2.1875rem;
+    }
+
+    .fb-container .search-results__item {
+        border-radius: 0;
     }
 }
 
@@ -366,6 +433,12 @@
     text-decoration: none;
 }
 
+/* Videos */
+
+/* Show images on mobile */
+.fb-container .search-results__list--list-view .search-results__item--video .search-results__bg {
+    display: inline-block;
+}
 
 /**
   * Sessions 
@@ -388,6 +461,11 @@
 }
 
 .fb-container .initial-search-form .result-sessions__controls {
+    display: none;
+}
+
+/* Hide search history and cart on the initial load */
+.fb-container section#search-history {
     display: none;
 }
 
@@ -449,7 +527,6 @@
     display: none;
 }
 
-
 .fb-container .result-sessions__controls {
     background-color: rgba(255,255,255,0.6);
     padding: 1rem;
@@ -507,7 +584,7 @@
     Adjust the font size of the description element in search results 
     so that it is larger than 10px.
 */
-@media only screen and (min-width: 1025px) and  (max-width: 1920px) {
+@media only screen and (min-width: 1025px) and (max-width: 1920px) {
     .fb-container .search-results__desc,
     .fb-container .search-results__list--list-view .search-results__desc {
         font-size: 1.0375rem;
