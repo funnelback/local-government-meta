@@ -384,6 +384,15 @@
   * Results 
   **/
 
+/* Show images for standard results which includes instagram */
+.fb-container .search-results__list--list-view .search-results__item--default .search-results__bg {
+    display: block;
+}
+  
+.fb-container .search-results__list--list-view .search-results__item--default img {
+    height: 16.25rem;    
+}
+
 @media only screen and (min-width: 1025px) {
     .fb-container .content-wrapper--col .search-results__item:nth-child(-n+4) {
         margin-top: 0;
@@ -398,11 +407,15 @@
     .fb-container .search-results__list {
         width: inherit;
         margin-left: -2.1875rem;
-        margin-right: -2.1875rem;
+        margin-right: -2.1875rem;     
+
     }
 
+    .fb-container .content-wrapper--col .search-results__list--list-view .search-results__item,
     .fb-container .search-results__item {
         border-radius: 0;
+        margin-top: 0rem;         
+        margin-bottom: 0.475rem    
     }
 }
 
