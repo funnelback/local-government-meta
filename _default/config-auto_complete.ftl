@@ -206,11 +206,29 @@
                 <strong>Autocomplete configurations</strong>
                 <p>In the snippet below, the #query selector must be replaced with a CSS selector that targets the &lt;input&gt; element in your search bar. 
                 For example, if your &lt;input&gt; has an id of "search-input", then replace #query with #search-input
-                <pre>${configSnippet?markup_string?replace("suggest.json", "https://" + httpHost + "/s/suggest.json")}</pre>
+                <pre class="ftl-markup-string">${configSnippet?markup_string?replace("suggest.json", "https://" + httpHost + "/s/suggest.json")}</pre>
             </section>
         </main><!-- /.main -->
     </div>
     
     <@client_includes.ContentFooter />
+
+    <#-- 
+    Funnelback automatically inserts a "zero-width space" between consecutive curly brace characters
+    to prevent an XSS vulnerability for AngularJS executing code between curly braces.
+    (See patch 15.20.0.19)
+
+    This has the adverse effect of also inserting the "zero-width space" into the Handlebars templates
+    when `?markup_string` is called, because Handlebars also uses double curly braces. When these templates
+    are copy/pasted into the client CMS, they will have the invisible character which breaks Handlebars,
+    yet the templates will *appear* to be correct.
+    -->
+    <script>
+    // Remove zero-width space from Handlebars templates 
+    Array.from(document.querySelectorAll('.ftl-markup-string')).forEach(pre => {
+        pre.innerText = pre.innerText.replace(/[\u200B-\u200D\uFEFF]/g, '')
+    })
+    </script>
+
 </body>
 </html>
