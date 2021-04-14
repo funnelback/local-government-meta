@@ -14,7 +14,7 @@
  * @param imageSelector CSS selector to find the images to process
  */
 
-const setupDeferredImages = (imageSelector = 'img.deferred') => {
+ const setupDeferredImages = (imageSelector = 'img.deferred') => {
     const images = document.querySelectorAll(imageSelector)
     for (let i = 0; i < images.length; i++) {
         const image = images[i]
@@ -24,35 +24,5 @@ const setupDeferredImages = (imageSelector = 'img.deferred') => {
             image.onerror = null
         }
         image.setAttribute('src', image.getAttribute('data-deferred-src'))
-    }
-}
-
-/* Element.prototype.matches polyfill for IE */
-/* https://developer.mozilla.org/en-US/docs/Web/API/Element/matches */
-if (!Element.prototype.matches) {
-  Element.prototype.matches = 
-      Element.prototype.matchesSelector || 
-      Element.prototype.mozMatchesSelector ||
-      Element.prototype.msMatchesSelector || 
-      Element.prototype.oMatchesSelector || 
-      Element.prototype.webkitMatchesSelector ||
-      function(s) {
-        var matches = (this.document || this.ownerDocument).querySelectorAll(s),
-            i = matches.length;
-        while (--i >= 0 && matches.item(i) !== this) {}
-        return i > -1;            
-      };
-}
-
-/* Element.prototype.closest polyfill for IE */
-/* https://developer.mozilla.org/en-US/docs/Web/API/Element/closest */
-if (!Element.prototype.closest) {
-    Element.prototype.closest = function(s) {
-        var el = this
-        do {
-            if (el.matches(s)) return el
-            el = el.parentElement || el.parentNode
-        } while (el !== null && el.nodeType === 1)
-        return null
     }
 }
