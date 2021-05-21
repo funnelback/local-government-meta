@@ -22,12 +22,16 @@ window.Funnelback.Handlebars.registerHelper({
     // Usage: {{#truncate 70}}{{title}}{{/truncate}}
     truncate: function (len, options) {
       const str = options.fn(this);
-      if (str && str.length > len) {
-          let newStr = str + " ";
-          newStr = str.slice(0, len);
-          newStr = str.slice(0, newStr.lastIndexOf(" "));
-          newStr = (newStr.length > 0) ? newStr : str.slice(0, len);
-          return new window.Funnelback.Handlebars.SafeString(newStr +'...'); 
+      if (str) {
+        const trimStr = str.trim(); // apply trim() after the null check
+        if (trimStr.length > len && trimStr.length > 0) {
+          var new_str = trimStr + " ";
+          new_str = trimStr.substr (0, len);
+          new_str = trimStr.substr (0, new_str.lastIndexOf(" "));
+          new_str = (new_str.length > 0) ? new_str : trimStr.substr (0, len);
+          return new Constructor.prototype.Handlebars.SafeString (new_str +'...');
+        }
+        return trimStr;
       }
       return str;
     },
