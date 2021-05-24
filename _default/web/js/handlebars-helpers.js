@@ -29,7 +29,7 @@ window.Funnelback.Handlebars.registerHelper({
           new_str = trimStr.substr (0, len);
           new_str = trimStr.substr (0, new_str.lastIndexOf(" "));
           new_str = (new_str.length > 0) ? new_str : trimStr.substr (0, len);
-          return new Constructor.prototype.Handlebars.SafeString (new_str +'...');
+          return new window.Funnelback.Handlebars.SafeString(newStr +'...');
         }
         return trimStr;
       }
