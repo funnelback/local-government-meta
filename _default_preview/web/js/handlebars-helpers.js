@@ -21,17 +21,13 @@ window.Funnelback.Handlebars.registerHelper({
     // Truncate content to provided length
     // Usage: {{#truncate 70}}{{title}}{{/truncate}}
     truncate: function (len, options) {
-      const str = options.fn(this);
-      if (str) {
-        const trimStr = str.trim(); // apply trim() after the null check
-        if (trimStr.length > len && trimStr.length > 0) {
-          var newStr = trimStr + " ";
-          newStr = trimStr.substr (0, len);
-          newStr = trimStr.substr (0, newStr.lastIndexOf(" "));
-          newStr = (newStr.length > 0) ? newStr : trimStr.substr (0, len);
+      const str = options.fn(this).trim();
+      if (str && str.length > len) {
+          let newStr = str + " ";
+          newStr = str.slice(0, len);
+          newStr = str.slice(0, newStr.lastIndexOf(" "));
+          newStr = (newStr.length > 0) ? newStr : str.slice(0, len);
           return new window.Funnelback.Handlebars.SafeString(newStr +'...'); 
-        }
-        return trimStr;
       }
       return str;
     },
