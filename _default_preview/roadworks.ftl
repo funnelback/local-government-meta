@@ -131,12 +131,12 @@
 					<h4>
 						<span class="fas fa-briefcase text-muted pull-right small mr-2" title="Job"></span>
 						<a href="{{indexUrl}}">
-							{{#if metaData.jobPositionTitle}} 
+							{{#if.listMetadata.jobPositionTitle[0]}} 
 								{{metaData.jobPositionTitle}}  
 							{{/if}}
 						</a>
 
-						{{#if metaData.jobType}}                 
+						{{#if.listMetadata.jobType[0]}}                 
 							<span class="text-muted small">
 								({{metaData.jobType}})
 							</span>
@@ -145,14 +145,14 @@
 				</div>
 
 				<#-- Card subtitle -->
-				{{#if metaData.jobCompanyName}}
+				{{#if.listMetadata.jobCompanyName[0]}}
 					<div class="card-subtitle">
 						{{metaData.jobCompanyName}}  
 					</div>        
 				{{/if}}
 
 				<#-- Location -->
-				{{#if metaData.jobLocation}}
+				{{#if.listMetadata.jobLocation[0]}}
 					<div class="card-text text-muted small">
 						{{metaData.jobLocation}}  
 					</div>        
@@ -161,7 +161,7 @@
 
 				<div class="card-text clearfix mt-3">          
 					<#-- TODO - metadata coud have multiple values. Need to add logic to split and take the first one
-						{{#if metaData.image}}            
+						{{#if.listMetadata.image[0]}}            
 							<img class="img-fluid pull-right ml-3 mb-3" alt="Thumbnail for {{title}}" src="https://jobs.ama.org{{metaData.image}} />"> 
 						{{/if}}  
 					-->
@@ -174,7 +174,7 @@
 						</p>
 					{{/if}}
 
-					{{#if metaData.jobSalary}}
+					{{#if.listMetadata.jobSalary[0]}}
 						<div class="card-text text-muted small">
 							<span class="text-muted">
 								{{metaData.jobSalary}}  
@@ -183,7 +183,7 @@
 					{{/if}}
 				</div>        
 
-				{{#if metaData.jobPosted}}
+				{{#if.listMetadata.jobPosted[0]}}
 					<div class="card-text">
 						<div class="text-right small">
 							<span>

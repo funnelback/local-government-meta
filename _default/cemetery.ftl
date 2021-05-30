@@ -125,23 +125,23 @@
 	<script id="auto-completion-cemetery" type="text/x-handlebars-template">
 		<div class="fb-auto-complete--non-organic">
             <h6>
-                {{extra.disp.metaData.cemeterySurname}}, {{extra.disp.metaData.cemeteryFirstName}}
+                {{extra.disp.listMetadata.cemeterySurname[0]}}, {{extra.disp.listMetadata.cemeteryFirstName[0]}}
             </h6>
 			<div class="details">	
                 Passed away on
-                {{#if extra.disp.metaData.cemeteryDateDied}}
-                    {{extra.disp.metaData.cemeteryDateDied}}
+                {{#if extra.disp.listMetadata.cemeteryDateDied[0]}}
+                    {{extra.disp.listMetadata.cemeteryDateDied[0]}}
                 {{/if}}        
 
-                {{#if extra.disp.metaData.cemeteryAge}}
+                {{#if extra.disp.listMetadata.cemeteryAge[0]}}
                     at the age of
-                    {{extra.disp.metaData.cemeteryAge}}
-                    {{extra.disp.metaData.cemeteryAgeUnit}}
+                    {{extra.disp.listMetadata.cemeteryAge[0]}}
+                    {{extra.disp.listMetadata.cemeteryAgeUnit[0]}}
                 {{/if}}  
 
-                {{#if extra.disp.metaData.cemeteryCemetery}}
+                {{#if extra.disp.listMetadata.cemeteryCemetery[0]}}
                     <div>
-                        Burried at {{extra.disp.metaData.cemeteryCemetery}}
+                        Burried at {{extra.disp.listMetadata.cemeteryCemetery[0]}}
                     </div>
                 {{/if}}
             </div>              

@@ -28,7 +28,7 @@
         <#-- Output all the parameters which are to persist between queries -->
         <#list ["enc", "form", "scope", "lang", "profile", "userType", "displayMode", "num_ranks"] as parameter>
             <@s.IfDefCGI name=parameter>
-                <input type="hidden" name="${parameter}" value="${question.inputParameterMap[parameter]!}">
+                <input type="hidden" name="${parameter}" value="${question.inputParameters[parameter]?first!}">
             </@s.IfDefCGI>
         </#list>
 
@@ -85,7 +85,7 @@
             <span class="search-counts-page-start">${(response.resultPacket.resultsSummary.currStart)!}</span> -
             <span class="search-counts-page-end">${(response.resultPacket.resultsSummary.currEnd)!}</span> of
             <span class="search-counts-total-matching">${(response.resultPacket.resultsSummary.totalMatching)!?string.number}</span>
-            <#if (question.inputParameterMap["s"])!?has_content && question.inputParameterMap["s"]?contains("?:")>
+            <#if (question.inputParameters["s"]?first)!?has_content && question.inputParameters["s"]?first?contains("?:")>
                 <em>collapsed</em> 
             </#if>
             search results  
@@ -154,9 +154,9 @@
     <#assign displayMode = ""> 
 
     <#-- Get the mode that is currently configured -->
-    <#if (question.inputParameterMap["displayMode"])!?has_content>
+    <#if (question.inputParameters["displayMode"]?first)!?has_content>
         <#-- Get the value from the user's selection -->
-        <#assign displayMode = question.inputParameterMap["displayMode"]!?upper_case>
+        <#assign displayMode = question.inputParameters["displayMode"]?first!?upper_case>
     <#elseif (question.getCurrentProfileConfig().get("stencils.results.display_mode"))!?has_content>
         <#-- Get the value from profile config -->
         <#assign displayMode = question.getCurrentProfileConfig().get("stencils.results.display_mode")!?upper_case>
@@ -231,14 +231,14 @@
             Sort results by
         </span>
         <button class="dropdown-list__link js-dropdown-list__link" aria-haspopup="listbox" aria-expanded="false">
-            <span>${(options[question.inputParameterMap["sort"]])!"Sort by"}</span>
+            <span>${(options[question.inputParameters["sort"]?first])!"Sort by"}</span>
         </button>
         <ul class="dropdown-list__list" 
             role="listbox" 
             tabindex="-1"
             aria-labelledby=${id}>
             <#list options as key, value>
-                <#if ((options[question.inputParameterMap["sort"]])!"") == value>
+                <#if ((options[question.inputParameters["sort"]?first])!"") == value>
                     <li role="option" aria-selected="true">                
                         <a class="dropdown-list__list-link" title="Sort by ${value}" href="${question.collection.configuration.value("ui.modern.search_link")}?${removeParam(QueryString, "sort")}&sort=${key}">
                                 <i class="fas fa-check"></i>
@@ -269,13 +269,13 @@
             Limit the number of results to display
         </span>    
         <button class="dropdown-list__link js-dropdown-list__link" aria-haspopup="listbox" aria-expanded="false">
-            <span>${question.inputParameterMap["num_ranks"]!"10"}</span>
+            <span>${question.inputParameters["num_ranks"]?first!"10"}</span>
         </button>
         <ul class="dropdown-list__list" 
             role="listbox" tabindex="-1"
             aria-labelledby=${id}>
             <#list limits as limit>
-                <#if ((question.inputParameterMap["num_ranks"]?number)!0) == limit>
+                <#if ((question.inputParameters["num_ranks"]?first?number)!0) == limit>
                     <#-- Selected case -->
                     <li role="option" aria-selected="true">
                         <a class="dropdown-list__list-link" title="Limit to ${limit} results" href="${question.collection.configuration.value("ui.modern.search_link")}?${removeParam(QueryString, "num_ranks")}&num_ranks=${limit}">

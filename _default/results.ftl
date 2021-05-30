@@ -257,7 +257,7 @@
     <script id="cart-template-default" type="text/x-handlebars-template">
         <article class="search-results__item search-results__item--default">
             <figure class="search-results__bg">
-                {{#if metaData.image}}  
+                {{#if.listMetadata.image[0]}}  
                     <img class="card-img-top" alt="Thumbnail for {{title}}" src="{{metaData.image}}" /> 
                 <#-- Show a placeholder image for showcase -->
                 <#if ((question.getCurrentProfileConfig().get("stencils.showcase"))!"FALSE")?upper_case == "TRUE">

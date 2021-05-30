@@ -131,24 +131,24 @@
     <script id="auto-completion-planning_applications" type="text/x-handlebars-template">
         <div class="fb-auto-complete--non-organic">
             <h6>
-                {{extra.disp.metaData.planningApplicationName}}
+                {{extra.disp.listMetadata.planningApplicationName[0]}}
             </h6>
             <div class="details">
-                {{#if extra.disp.metaData.planningWardName}}
-                    <div class="text-capitalize">{{extra.disp.metaData.planningWardName}}</div>
+                {{#if extra.disp.listMetadata.planningWardName[0]}}
+                    <div class="text-capitalize">{{extra.disp.listMetadata.planningWardName[0]}}</div>
                 {{/if}}
 
-                {{#if extra.disp.metaData.planningDevelopeAddress}}
+                {{#if extra.disp.listMetadata.planningDevelopeAddress[0]}}
                     <div class="fb-auto-complete__body__metadata text-muted">
                         <span class="fas fa-map-marker-alt text-muted" aria-hidden="true"></span> 
-                        {{extra.disp.metaData.planningDevelopeAddress}}
+                        {{extra.disp.listMetadata.planningDevelopeAddress[0]}}
                     </div>
                 {{/if}}
 
-                {{#if extra.disp.metaData.planningRegisteredDate}}
+                {{#if extra.disp.listMetadata.planningRegisteredDate[0]}}
                     <div class="fb-auto-complete__body__metadata text-muted">
                         <span class="fas fa-calendar-alt text-muted" aria-hidden="true"></span> 
-                        Registered on {{extra.disp.metaData.planningRegisteredDate}}
+                        Registered on {{extra.disp.listMetadata.planningRegisteredDate[0]}}
                     </div>
                 {{/if}}
             </div>
