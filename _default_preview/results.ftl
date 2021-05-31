@@ -199,43 +199,6 @@
                                 <dt>Credits:</dt>
                                 <dd>${(result.listMetadata["courseCredit"]?first)!} credits</dd>
                             </#if>                    
-                            <#if (result.listMetadata["programCampus"]?first)!?has_content>
-                                <dt>Campus:</dt>
-                                <dd>${(result.listMetadata["programCampus"]?first)!} </dd>
-                            </#if>
-                            <#if (result.listMetadata["stencilsDeliveryMethod"]?first)!?has_content >
-                                <dt>Delivery method:</dt>
-                                <dd>${(result.listMetadata["stencilsDeliveryMethod"]?first)!} </dd>
-                            </#if>
-                            <#if (result.listMetadata["programLengthYears"]?first)!?has_content &&
-                                ((result.listMetadata["programLengthYears"]?first)!"0") != "0">
-                                <dt>Duration:</dt>
-                                <dd>${(result.listMetadata["programLengthYears"]?first)!} years</dd>
-                            </#if>                                                                              
-                            <#if (result.listMetadata["programFaculty"]?first)!?has_content >
-                                <dt>Faculty:</dt>
-                                <dd>${(result.listMetadata["programFaculty"]?first)!} </dd>
-                            </#if>                                                  
-                            <#if (result.listMetadata["stencilsDepartment"]?first)!?has_content >
-                                <dt>Department:</dt>
-                                <dd>${(result.listMetadata["stencilsDepartment"]?first)!} </dd>
-                            </#if>                                                  
-                            <#if (result.listMetadata["programStatus"]?first)!?has_content >
-                                <dt>Status:</dt>
-                                <dd>${(result.listMetadata["programStatus"]?first)!} </dd>
-                            </#if>                                                  
-                            <#if (result.listMetadata["courseCode"]?first)!?has_content >
-                                <dt>Code:</dt>
-                                <dd>${(result.listMetadata["courseCode"]?first)!} </dd>
-                            </#if>
-                            <#if (result.listMetadata["courseNumber"]?first)!?has_content >
-                                <dt>Number:</dt>
-                                <dd>${(result.listMetadata["courseNumber"]?join(", "))!} </dd>
-                            </#if>
-                            <#if (result.listMetadata["programLength"]?first)!?has_content >
-                                <dt>Length:</dt>
-                                <dd>${(result.listMetadata["programLength"]?first)!} </dd>
-                            </#if>
                             <#if (result.listMetadata["stencilsTermCodes"]?first)!?has_content >
                                 <dt>Term codes:</dt>
                                 <dd>${(result.listMetadata["stencilsTermCodes"]?join(", "))!} </dd>
@@ -257,7 +220,7 @@
     <script id="cart-template-default" type="text/x-handlebars-template">
         <article class="search-results__item search-results__item--default">
             <figure class="search-results__bg">
-                {{#if.listMetadata.image[0]}}  
+                {{#if metaData.image}}  
                     <img class="card-img-top" alt="Thumbnail for {{title}}" src="{{metaData.image}}" /> 
                 <#-- Show a placeholder image for showcase -->
                 <#if ((question.getCurrentProfileConfig().get("stencils.showcase"))!"FALSE")?upper_case == "TRUE">
@@ -270,9 +233,7 @@
                 {{#if title}} 
                     <h4 class="search-results__title">
                         <a href="{{indexUrl}}" title="{{title}}" class="search-results__link">
-                            {{#truncate 255}}
-                                {{title}}  
-                            {{/truncate}}
+                            {{#truncate 255}}{{title}}{{/truncate}}
                         </a>
 
                         <span class="enable-cart-on-result"></span>
@@ -281,9 +242,7 @@
                 
                 <#-- Pretty version of the url of the document -->
                 <cite>
-                    {{#truncate 90}}
-                        {{indexUrl}}
-                    {{/truncate}}                
+                    {{#truncate 90}}{{indexUrl}}{{/truncate}}                
                 </cite>
 
                 

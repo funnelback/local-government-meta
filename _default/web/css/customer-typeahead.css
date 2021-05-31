@@ -27,11 +27,11 @@
         flex-wrap: wrap;
         max-width: 50%;
         width: 50%;
+        flex-direction: column;
     }
 
     .fb-container .module-search--bg .tt-category {
         -webkit-box-flex: 0;
-        flex: 0 0 100%;
     }
 }
 

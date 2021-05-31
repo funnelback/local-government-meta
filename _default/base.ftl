@@ -304,15 +304,17 @@
     <section class="pagination">
         <nav class="pagination__nav" role="navigation" aria-label="Pagination navigation">
             <#-- Previous page -->
-            <#if (response.customData.stencilsPaging.previousUrl)??>
+            <#if (response.customData.stencils.pagination.previous)??>
                 <div class="pagination__item pagination__item-navigation pagination__item-previous">
                     <a class="pagination__link" 
                         rel="prev" 
-                        href="${response.customData.stencilsPaging.previousUrl}">
+                        href="${(response.customData.stencils.pagination.previous.url)!}">
                         <span class="sr-only">
                             Go to the
                         </span>
-                        <span class="pagination__label">Prev</span>
+                        <span class="pagination__label">
+                            ${(response.customData.stencils.pagination.previous.label)!"Prev"}
+                        </span>
                         <span class="sr-only">
                             page
                         </span>
@@ -321,14 +323,14 @@
             </#if>
 
             <#-- Sibling pages -->
-            <#if (response.customData.stencilsPaging.pages)!?has_content &&
-                response.customData.stencilsPaging.pages?size gt 1>
+            <#if (response.customData.stencils.pagination.pages)!?has_content &&
+                response.customData.stencils.pagination.pages?size gt 1>
                 <ul class="pagination__pages-list">
-                    <#list response.customData.stencilsPaging.pages as page>
+                    <#list response.customData.stencils.pagination.pages as page>
                         <#if page.selected>
                             <li class="pagination__item pagination__item--active" aria-current="page">
                                 <span class="pagination__current">
-                                    <span class="pagination__label">${page.number}</span>
+                                    <span class="pagination__label">${page.label}</span>
                                 </span>                            
                             </li>
                         <#else>                    
@@ -337,7 +339,7 @@
                                     <span class="sr-only">
                                         Go to page
                                     </span>
-                                    <span class="pagination__label">${page.number}</span>
+                                    <span class="pagination__label">${page.label}</span>
                                 </a>
                             </li>
                         </#if>
@@ -346,15 +348,17 @@
             </#if>
 
             <#-- Next page -->
-            <#if (response.customData.stencilsPaging.nextUrl)??>            
+            <#if (response.customData.stencils.pagination.next)??>            
                 <div class="pagination__item pagination__item-navigation pagination__item-next">
                     <a class="pagination__link" 
                         rel="next" 
-                        href="${response.customData.stencilsPaging.nextUrl}">
+                        href="${(response.customData.stencils.pagination.next.url)!}">
                         <span class="sr-only">
                             Go to the
                         </span>
-                        <span class="pagination__label">Next</span>
+                        <span class="pagination__label">
+                            ${(response.customData.stencils.pagination.next.label)!"Next"}
+                        </span>
                         <span class="sr-only">
                             page
                         </span>
