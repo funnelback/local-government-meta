@@ -15,7 +15,7 @@
     <!-- browse_mode.BrowseModeToggle -->
     <#-- Check to see if browse mode config has been setup for the current selected tab -->
     <#if (question.getCurrentProfileConfig().get("stencils.tabs.browse_mode.facets.${(response.customData.stencilsTabsSelectedTab)!}"))!?has_content>
-        <#switch (question.inputParameterMap["browse_mode"])!?upper_case>
+        <#switch (question.inputParameters["browse_mode"]?first)!?upper_case>
             <#case "TRUE">
             <#case "ON">
             <#case "1">
@@ -96,7 +96,7 @@
 -->
 <#macro BrowseByFilter>
     <!-- browse_mode.BrowseByFilter -->
-    <#switch (question.inputParameterMap["browse_mode"])!?upper_case>
+    <#switch (question.inputParameters["browse_mode"]?first)!?upper_case>
         <#case "TRUE">
             
             <#-- Get the list of list facets to be displayed which has been configured by the user -->               

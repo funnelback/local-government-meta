@@ -119,11 +119,11 @@
 	<script id="auto-completion-faqs" type="text/x-handlebars-template">
 		<div class="fb-auto-complete--non-organic">
             <h6>
-                {{extra.disp.metaData.t}}
+                {{extra.disp.title}}
             </h6>
 			<div class="details">	
-                {{#if extra.disp.metaData.faqAnswer}}                    
-                    {{#truncate 70}}{{extra.disp.metaData.faqAnswer}}{{/truncate}}                    
+                {{#if extra.disp.listMetadata.faqAnswer}}                    
+                    {{#truncate 70}}{{extra.disp.listMetadata.faqAnswer}}{{/truncate}}                    
                 {{/if}}
             </div>              
 		</div>    

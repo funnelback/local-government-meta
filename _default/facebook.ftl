@@ -8,7 +8,7 @@
   @param result An individual result fron the data model
 -->
 <#macro Result result>
-  <#switch result.metaData["facebookType"]!"">
+  <#switch result.listMetadata["facebookType"]?first!"">
     <#case "PAGE">
       <@PageResult result=result />
       <#break>
@@ -20,11 +20,11 @@
       <#break>
     <#default>
       <div class="alert alert-danger" role="alert">
-        <#if !result.metaData["facebookType"]!?has_content>
+        <#if !result.listMetadata["facebookType"]?first!?has_content>
           <strong>Facebook content type not available</strong>: Ensure the content possesses a
           <code>facebookType</code> metadata and that it is returned in the data model.
         <#else>
-          <strong>Unsupported Facebook content type "${result.metaData["facebookType"]!}":</strong>
+          <strong>Unsupported Facebook content type "${result.listMetadata["facebookType"]?first!}":</strong>
           You may need to create a result template for this content type
         </#if>
       </div>
@@ -44,7 +44,7 @@
           <div class="media-body">
             <i class="fab fa-facebook-square float-right text-muted" aria-hidden="true"></i>
             <h4>
-              <a href="${result.clickTrackingUrl!}" title="${result.liveUrl!}">${result.metaData["author"]!"Unknown author"}</a>
+              <a href="${result.clickTrackingUrl!}" title="${result.liveUrl!}">${result.listMetadata["author"]?first!"Unknown author"}</a>
             </h4>
             <div class="card-subtitle text-muted">
               ${result.date?date?string("MMMM dd, yyyy")} via Facebook
@@ -54,15 +54,15 @@
         </div>
 
         <div class="card-text mt-3">
-          <@s.boldicize>${response.customData.stencilsMethods.linkify(result.metaData["c"]!)?no_esc}</@s.boldicize>
+          <@s.boldicize>${response.customData.stencilsMethods.linkify(result.listMetadata["c"]?first!)?no_esc}</@s.boldicize>
 
-          <#if result.metaData["facebookPostLink"]??>
+          <#if result.listMetadata["facebookPostLink"]?first??>
             <hr>
-            <#if result.metaData["image"]??>
-              <img class="img-fluid float-right ml-3 deferred" alt="Thumbnail for ${result.title!}" src="/stencils/resources/base/v15.8/img/pixel.gif" data-deferred-src="<@base.MultiValuedMetadataDisplayFirst metadata=result.metaData["image"]! />">
+            <#if result.listMetadata["image"]?first??>
+              <img class="img-fluid float-right ml-3 deferred" alt="Thumbnail for ${result.title!}" src="/stencils/resources/base/v15.8/img/pixel.gif" data-deferred-src="<@base.MultiValuedMetadataDisplayFirst metadata=result.listMetadata["image"]?first! />">
             </#if>
-            <h5><a href="${result.metaData["facebookPostLink"]!}">${result.metaData["facebookPostLinkName"]!}</a></h5>
-            <p><@s.Truncate length=120>${result.metaData["facebookPostLinkDescription"]!}</@s.Truncate></p>
+            <h5><a href="${result.listMetadata["facebookPostLink"]?first!}">${result.listMetadata["facebookPostLinkName"]?first!}</a></h5>
+            <p><@s.Truncate length=120>${result.listMetadata["facebookPostLinkDescription"]?first!}</@s.Truncate></p>
           </#if>
         </div>
       </div>
@@ -89,7 +89,7 @@
 
               </h4>
               <div class="card-subtitle text-muted">
-                <a class="text-muted" href="${result.metaData["facebookProfileUrl"]!}">${result.metaData["author"]!"Unknown author"}</a> via Facebook
+                <a class="text-muted" href="${result.listMetadata["facebookProfileUrl"]?first!}">${result.listMetadata["author"]?first!"Unknown author"}</a> via Facebook
                 <@history_cart.LastVisitedLink result=result/>
               </div>
             </div>
@@ -110,12 +110,12 @@
                 </div>
               </div>
 
-              <#if result.metaData["d"]??>
+              <#if result.listMetadata["d"]?first??>
                 <div class="text-center">
                   <small>
-                    ${result.metaData["d"]?datetime("yyyy-MM-dd HH:mm:ss.S z")?time?string.short}
-                    <#if result.metaData["facebookEventEndDateTime"]??>
-                      - ${result.metaData["facebookEventEndDateTime"]!?datetime("yyyy-MM-dd HH:mm:ss.S z")?time?string.short}
+                    ${result.listMetadata["d"]?first?datetime("yyyy-MM-dd HH:mm:ss.S z")?time?string.short}
+                    <#if result.listMetadata["facebookEventEndDateTime"]?first??>
+                      - ${result.listMetadata["facebookEventEndDateTime"]?first!?datetime("yyyy-MM-dd HH:mm:ss.S z")?time?string.short}
                     </#if>
                   </small>
                 </div>
@@ -123,21 +123,21 @@
             </div>
 
             <div class="col-md-10">
-              <#if result.metaData["image"]??>
-                <img class="img-fluid float-right ml-3" alt="Thumbnail for ${result.title!}" src="<@base.MultiValuedMetadataDisplayFirst metadata=result.metaData["image"]! />">
+              <#if result.listMetadata["image"]?first??>
+                <img class="img-fluid float-right ml-3" alt="Thumbnail for ${result.title!}" src="<@base.MultiValuedMetadataDisplayFirst metadata=result.listMetadata["image"]?first! />">
               </#if>
               
-              <p><@s.boldicize><@s.Truncate length=250>${response.customData.stencilsMethods.linkify(result.metaData["c"]!)?no_esc}</@s.Truncate></@s.boldicize></p>
+              <p><@s.boldicize><@s.Truncate length=250>${response.customData.stencilsMethods.linkify(result.listMetadata["c"]?first!)?no_esc}</@s.Truncate></@s.boldicize></p>
             </div>
 
           </div>
         </div>
       </div>
 
-      <#if result.metaData["facebookEventLocation"]??>
+      <#if result.listMetadata["facebookEventLocation"]?first??>
         <div class="card-footer">
           <span class="fas fa-fw fa-map-marker-alt text-muted"></span>
-          <a class="text-muted" href="https://maps.google.com/?q=${result.metaData["facebookEventCoordinates"]!result.metaData["facebookEventLocation"]}" target="_blank">${result.metaData["facebookEventLocation"]!}</a>
+          <a class="text-muted" href="https://maps.google.com/?q=${result.listMetadata["facebookEventCoordinates"]?first!result.listMetadata["facebookEventLocation"]?first}" target="_blank">${result.listMetadata["facebookEventLocation"]?first!}</a>
         </div>
       </#if>
     </div>
@@ -156,37 +156,37 @@
           <div class="media-body">
             <i class="fab fa-facebook-square float-right text-muted" aria-hidden="true"></i>
             <h4>
-              <a href="${result.clickTrackingUrl!}" title="${result.liveUrl!}">${result.metaData["author"]!"Unknown author"}</a>
+              <a href="${result.clickTrackingUrl!}" title="${result.liveUrl!}">${result.listMetadata["author"]?first!"Unknown author"}</a>
             </h4>
             <div class="card-subtitle text-muted">
-              ${result.metaData["facebookPageCity"]!}, ${result.metaData["facebookPageCountry"]!}
+              ${result.listMetadata["facebookPageCity"]?first!}, ${result.listMetadata["facebookPageCountry"]?first!}
               <@history_cart.LastVisitedLink result=result/>
             </div>
           </div>
         </div>
 
         <div class="card-text mt-3">
-          <p><@s.boldicize>${response.customData.stencilsMethods.linkify(result.metaData["c"]!)?no_esc}</@s.boldicize></p>
+          <p><@s.boldicize>${response.customData.stencilsMethods.linkify(result.listMetadata["c"]?first!)?no_esc}</@s.boldicize></p>
 
-          <#if result.metaData["facebookPageInfo"]??>
+          <#if result.listMetadata["facebookPageInfo"]?first??>
               <span class="fas fa-fw fa-info-circle text-muted"></span>
-              ${response.customData.stencilsMethods.linkify(result.metaData["facebookPageInfo"]!)?no_esc}
+              ${response.customData.stencilsMethods.linkify(result.listMetadata["facebookPageInfo"]?first!)?no_esc}
           </#if>
         </div>
       </div>
 
       <div class="card-footer">
         <div class="row">
-          <#if result.metaData["facebookPageWebsite"]??>
+          <#if result.listMetadata["facebookPageWebsite"]?first??>
             <div class="col">
               <span class="fas fa-fw fa-globe text-muted"></span>
-              <a class="text-muted" href="tel:${result.metaData["facebookPageWebsite"]!}">${result.metaData["facebookPageWebsite"]!}</a>
+              <a class="text-muted" href="tel:${result.listMetadata["facebookPageWebsite"]?first!}">${result.listMetadata["facebookPageWebsite"]?first!}</a>
             </div>
           </#if>
-          <#if result.metaData["facebookPagePhone"]??>
+          <#if result.listMetadata["facebookPagePhone"]?first??>
             <div class="col">
               <span class="fas fa-fw fa-phone text-muted"></span>
-              <a class="text-muted" href="tel:${result.metaData["facebookPagePhone"]!}">${result.metaData["facebookPagePhone"]!}</a>
+              <a class="text-muted" href="tel:${result.listMetadata["facebookPagePhone"]?first!}">${result.listMetadata["facebookPagePhone"]?first!}</a>
             </div>
           </#if>
         </div>

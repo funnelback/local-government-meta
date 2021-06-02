@@ -30,8 +30,7 @@
 <#import "curator.ftl" as curator />
 <#import "extra_search.ftl" as extra_search />
 <#import "results.ftl" as results />
-
-<#import "/share/stencils/libraries/base/client_includes.ftl" as client_includes />
+<#import "client_includes.ftl" as client_includes />
 
 <#-- Specific result styling imports
 	These imports are required for the automatic template selection to work

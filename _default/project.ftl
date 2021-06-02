@@ -107,7 +107,7 @@
         <@browse_mode.BrowseModeToggle />
 
         <#-- Get facets for the current selected tab -->
-        <#local tabFacets = question.getCurrentProfileConfig().get("stencils.tabs.facets.${(response.customData.stencilsTabsSelectedTab)!}")!>
+        <#local tabFacets = question.getCurrentProfileConfig().get("stencils.tabs.facets.${(response.customData.stencils.tabs.selected)!}")!>
         
         <#-- Display facets -->
         <section class="module-filter module-filter--dark js-module-filter">

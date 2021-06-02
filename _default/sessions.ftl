@@ -21,10 +21,10 @@
   <nav class="navbar navbar-default">
     <div class="collapse navbar-collapse">
       <form class="navbar-form navbar-left form-inline" action="${question.collection.configuration.value("ui.modern.search_link")}" method="GET">
-        <input type="hidden" name="collection" value="${question.inputParameterMap["collection"]!}">
-        <@s.IfDefCGI name="form"><input type="hidden" name="form" value="${question.inputParameterMap["form"]!}"></@s.IfDefCGI>
+        <input type="hidden" name="collection" value="${question.inputParameters["collection"]?first!}">
+        <@s.IfDefCGI name="form"><input type="hidden" name="form" value="${question.inputParameters["form"]?first!}"></@s.IfDefCGI>
         <div class="form-group">
-          <input required name="query" id="query" title="Search query" type="text" value="${question.inputParameterMap["query"]!}" accesskey="q" placeholder="Search <@s.cfg>service_name</@s.cfg>&hellip;" class="form-control query">
+          <input required name="query" id="query" title="Search query" type="text" value="${question.inputParameters["query"]?first!}" accesskey="q" placeholder="Search <@s.cfg>service_name</@s.cfg>&hellip;" class="form-control query">
         </div>
         <button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-search"></span> Search</button>
       </form>
