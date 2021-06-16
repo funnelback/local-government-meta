@@ -14,7 +14,7 @@
 <#macro BrowseModeToggle>
     <!-- browse_mode.BrowseModeToggle -->
     <#-- Check to see if browse mode config has been setup for the current selected tab -->
-    <#if (question.getCurrentProfileConfig().get("stencils.tabs.browse_mode.facets.${(response.customData.stencilsTabsSelectedTab)!}"))!?has_content>
+    <#if (question.getCurrentProfileConfig().get("stencils.tabs.browse_mode.facets.${(response.customData.stencils.tabs.selected)!}"))!?has_content>
         <#switch (question.inputParameters["browse_mode"]?first)!?upper_case>
             <#case "TRUE">
             <#case "ON">
@@ -76,7 +76,7 @@
                 </div>
                 <#-- Output and option explicit the call to action link -->
                 
-                <#local defaultQuery = (question.getCurrentProfileConfig().get("stencils.tabs.browse_mode.default_query"))!"">
+                <#local defaultQuery = (question.getCurrentProfileConfig().get("stencils.tabs.browse_mode.default_query"))!"!FunDoesNotExist:padrenull">
 
                 <a class="btn--link" href="${question.getCurrentProfileConfig().get("ui.modern.search_link")}?${removeParam(QueryString, ["browse_mode", "start_rank", "query","sort"])}&browse_mode=true&query=${defaultQuery}&sort=title">
                     <#-- 
@@ -100,7 +100,7 @@
         <#case "TRUE">
             
             <#-- Get the list of list facets to be displayed which has been configured by the user -->               
-            <#local listFacets = (question.getCurrentProfileConfig().get("stencils.tabs.browse_mode.facets.${(response.customData.stencilsTabsSelectedTab)!}"))!?split(",")![]>
+            <#local listFacets = (question.getCurrentProfileConfig().get("stencils.tabs.browse_mode.facets.${(response.customData.stencils.tabs.selected)!}"))!?split(",")![]>
             
             <#-- Only print the browse mode filter when it has been configured. -->
             <#if listFacets?filter(x -> x != "")?size gt 0>
