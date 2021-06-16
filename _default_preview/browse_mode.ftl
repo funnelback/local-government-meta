@@ -76,7 +76,7 @@
                 </div>
                 <#-- Output and option explicit the call to action link -->
                 
-                <#local defaultQuery = (question.getCurrentProfileConfig().get("stencils.tabs.browse_mode.default_query"))!"">
+                <#local defaultQuery = (question.getCurrentProfileConfig().get("stencils.tabs.browse_mode.default_query"))!"!FunDoesNotExist:padrenull">
 
                 <a class="btn--link" href="${question.getCurrentProfileConfig().get("ui.modern.search_link")}?${removeParam(QueryString, ["browse_mode", "start_rank", "query","sort"])}&browse_mode=true&query=${defaultQuery}&sort=title">
                     <#-- 
