@@ -59,7 +59,8 @@
 <#import "results.cemetery.ftl" as cemetery />
 <#import "results.planning_applications.ftl" as planning_applications />
 <#import "results.faqs.ftl" as faqs />
-
+<#import "results.rates.ftl" as rates />
+<#import "results.roadworks.ftl" as roadworks />
 
 <!DOCTYPE html>
 <html lang="en" class="stencils">
