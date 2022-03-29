@@ -56,6 +56,8 @@
 <#import "results.events.ftl" as events />
 <#import "results.twitter.ftl" as twitter />
 <#import "results.instagram.ftl" as instagram />
+<#import "results.cemetery.ftl" as cemetery />
+
 
 <!DOCTYPE html>
 <html lang="en" class="stencils">

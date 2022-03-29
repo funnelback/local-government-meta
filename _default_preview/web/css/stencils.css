@@ -50,6 +50,10 @@
     border: none;
 }
 
+.stencils__main .tier-bar {
+    width: 100%;
+}
+
 /* Sessions controls */
 .stencils .result-sessions__controls {
     background-color: rgba(255,255,255,0.6);
