@@ -57,6 +57,7 @@
 <#import "results.twitter.ftl" as twitter />
 <#import "results.instagram.ftl" as instagram />
 <#import "results.cemetery.ftl" as cemetery />
+<#import "results.planning_applications.ftl" as planning_applications />
 
 
 <!DOCTYPE html>
