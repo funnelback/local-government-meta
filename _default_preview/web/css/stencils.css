@@ -2,634 +2,126 @@
     --red: #da1007;
 }
 
-/* Design overrides made by the vertical products team - Avoid changing these if possible */
+/* Design overrides specific to the implementation of stencils - Avoid changing these if possible */
 
-/* Helper classes */
-.fb-container .wrap {
-    white-space: normal !important;    
+/* Add some space between the icon and text for tabs */
+.stencils .tab__button .fas {
+    margin-right: 0.25rem;
 }
 
-/* Show things based on resolution */
-@media only screen and (max-width: 360px) {    
-    .fb-container .tablet,
-    .fb-container .desktop {
-        display: none;
-    }
+/* ******************************** */
+/* Move this into the Design System */
+/* ******************************** */
 
-    .fb-container .mobile {
-        display: inherit;
-    }
-}  
+.stencils__main .funnelback-search {
+    max-width: 100rem;
+}
 
-@media only screen and (min-width: 360px) and (max-width: 1025px) {
-    .fb-container .mobile,
-    .fb-container .desktop {
-        display: none;
-    }
+.stencils__main .hero-banner {
+    z-index: auto;
+}
 
-    .fb-container .tablet {
-        display: inherit;
-    }
-}  
+.stencils__main .hero-banner__contents {
+    z-index: 4;
+}
 
-@media only screen and (min-width: 1025px) {
-    .fb-container .mobile,
-    .fb-container .tablet {
-        display: none;
-    }
-
-    .fb-container .desktop {
-        display: inherit;
+@media (min-width: 768px) {
+    .stencils__main .autocomplete-concierge {
+        margin: 0;
     }
 }
 
 
-/* Generic overrides to get the styling to work */
-.fb-container {
-    padding-bottom: 0;
-    overflow: initial;
+.stencils__main #autocomplete-input {
+    padding: 0.75rem 1.75em;
+    border-radius: 10px 0 0 10px;    
 }
 
-.fb-container .list-unstyled {
-    list-style: none;
+.stencils__main .autocomplete-concierge__submit {
+    border-radius: 0 10px 10px 0;
 }
 
-.fb-container .btn {
-    cursor: pointer;
+.stencils__main .autocomplete-concierge__submit svg {
+    height: 32px;
+    width: 32px;
+}
+
+.stencils__main .autocomplete-concierge__form-wrapper {
     border: none;
 }
 
-.fb-container cite {
-    overflow-wrap: anywhere;
-}
-
-
-/**
-  * Initial search form
-  **/ 
-
-/* 
-    Adjust the presentation of the initial search form so that
-    a white bar does not appear.
-*/
-@media only screen and (min-width: 1025px) {
-    .fb-container .initial-search-form .module-search--bg {
-        padding-bottom: 15rem;
-        padding-top: 15em;
-    }
-    
-    .fb-container .initial-search-form .content-wrapper--col {
-        margin-top: 0;
-    }  
-}
-
-/** 
- * Facets 
- **/
-
-/* Ensure there is always some margin after facets */
-
-.fb-container .module-filter {
-    margin-bottom: 1.25em;
-}
-
-/* Add support for radio boxes and check boxes */
-.fb-container .module-filter--dark .module-filter__facets-link.round::after {
-    border-radius: 50%;
-}
-
-.fb-container .module-filter--dark .module-filter__facets-link.square::after {
-    border-radius: 0;
-}
-
-/* Ensure that outline is displayed for accessibility */
-.fb-container .btn-toggle:focus {
-    outline: revert;
-}    
-
-/* Clear all link which will remove all selected categories for the current facet */
-.fb-container .module-filter__facets-clear_all_link {
-    color: var(--red);;
-    font-size: 1rem;
-}
-
-.fb-container .module-filter__facets-clear_all_link::after {
-    display: none;
-}
-
-/* Facet breadcrumb */
-.fb-container .search-results__total {
-    float: none;
-}
-
-.fb-container .filter-list__title {
-    font-size: 1.25rem;
-    margin-bottom: 1em;
-}
-
-.fb-container .filter-list__list {
-    margin: 1.5rem 0 0 0;
-}
-
-.fb-container .module-filter__list, .fb-container .module-filter__wrapper-mobile {
-    width: 100%;
-}
-
-.fb-container .module-az__item {
-    width: inherit;
-    min-width: 3.4375rem;
-    text-transform: uppercase;
-}
-
-.fb-container .module-az__link,
-.fb-container .module-az__item > span {
-    padding: 1rem;
-}
-
-/** 
-  * Search tools 
-  **/
-
-.fb-container .search-results__tools {
-    overflow: visible;
-}
-
-/* Increased the color contrast to meet accessibility standards */
-.fb-container .dropdown-list__link {
-    color: rgba(0,0,0,0.6);
-}
-
-/* Ensure that outline is displayed for accessibility */
-.fb-container .dropdown-list__link:focus {
-    outline: revert;
-}    
-
-@media only screen and (min-width: 1025px){
-    .fb-container .content-wrapper--col .search-results__tools {
-        margin-bottom: 2rem;
-    }
-}
-
-@media only screen and (max-width: 768px) {
-    .fb-container .search-results__tools-right {
-        float: none;
-        width: 100%;
-        padding-top: 1em;
-    }
-
-    .fb-container .dropdown-list {
-        margin-bottom: 1.5em;
-        width: 100%;
-    }
-    
-    .fb-container .dropdown-list__link {
-        width: 100%;
-    }
-    
-    /* Ensure that the drop down is displayed in the viewport on tablet */
-    .fb-container .dropdown-list__list{
-        left: inherit;
-    }        
-}
-
-/* 
-    Reduce the size of dropdown so that it suits the small numbers
-    found in the limit dropdown.
-*/
-.fb-container .fb-limit-dropdown .dropdown-list__list {
-    min-width: 9rem;
-}
-
-/**
-  * Tabs 
-  **/
-
-/* Ensure that the text of tabs is aligned in the center */
-.fb-container .tabs__link--icon::before {
-    margin-right: 0;
-}
-
-.fb-container .tabs__link--icon {
-    padding-left: 0.4375rem
-}
-
-.fb-container .tabs__item .fas,  
-.fb-container .tabs__item .fab, 
-.fb-container .tabs__item .far {
-    margin-right: 0.5rem;
-}
-
-/* 
-    Ensure there is enough padding between the facet category label
-    and the count.
-*/
-.fb-container .tabs__item .search-facet-count {
-    margin-left: 0.25rem;
-}
-
-/* Dropdown in tab navigation */
-
-/* 
-    Make the overflow visible so that the tab dropdown
-    is displayed correctly.
-*/
-
-@media only screen and (min-width: 1028px)  {
-    .fb-container .tabs__item.dropdown,
-    .fb-container .tabs__list,
-    .fb-container .tabs {
-        overflow: visible;
-        overflow-y: visible;
-    }
-}
-
-.fb-container .dropdown__toggle:hover,
-.fb-container .dropdown__toggle:focus-within {
-    cursor: pointer;
-}
-
-.fb-container .dropdown_menu {
-    list-style: none;
-    background: rgba(0,0,0,0.8);
-    color: #fff;
-    opacity: 0;
-    min-width: 5rem;
-    padding: 0;
-    margin-left:0.625rem;
-    position: absolute;
-    visibility: hidden;
-    display: none;
-    z-index: 10;
-    border-bottom-left-radius: 10px;
-    border-bottom-right-radius: 10px;
-    overflow: hidden;
-    transition: all 0.5s ease;
-}
-
-.fb-container .dropdown__toggle:hover > ul,
-.fb-container .dropdown__toggle:focus-within > ul,
-.fb-container .dropdown__menu:hover,
-.fb-container .dropdown__menu:focus {
-    visibility: visible;
-    opacity: 1;
-    display: block
-}
-
-
-.fb-container .dropdown__item {
-    position: relative;
-    text-decoration: none;
-    transition-duration: 0.5s;
-    padding: 1rem 2rem;
-    width: 100%;
-}
-
-.fb-container .dropdown__item:hover,
-.fb-container .dropdown__item:focus-within {
-    background:var(--red);
-    cursor: pointer;
-}
-
-.fb-container .dropdown__item.disabled {
-    background: inherit;
-    pointer-events: none;
-}
-
-.fb-container .dropdown__item.active {
-    background-color:var(--red);
-    opacity: 0.9;
-}
-
-.fb-container .dropdown__item a {
-    outline: none;
-    text-decoration: none;
-    color: #fff;
-}
-
-.fb-container .dropdown__item.disabled a {
-    color: #8f8d8d;
-}
-
-
-/* Prevent the search tier from appearing next to a card in card view */
-.fb-container .search-tier {
-    flex-basis: 100%;
-}
-
-.module-curator__title + cite {
-    margin: 0 1.8125rem .3125em 1.8125rem;
-}
-
-.fb-container .search-results__icon--red {
-    display: inline-block;
-    vertical-align: middle;
-    font-size: 0.8rem;
-    color: var(--red);
-}
-
-/**
-  * Curator 
-  **/
-
-.fb-container .module-curator {
-    position: relative;
-}
-
-.fb-container .module-curator__list {
-    overflow-y: hidden;
-    overflow-x: auto;
-}
-
-.fb-container .module-curator__item {
-    min-width: 20rem;
-}
-
-/**
-  * Pagination 
-  **/
-
-/* Add a padding at the bottom so that footer is not so close */
-@media only screen and (min-width: 1025px) {
-    .fb-container .pagination {
-        margin: 2.8125rem 0 2.8125rem 0;
-    }
-}
-
-/**
-  * Contextual Navigation 
-  **/
-
-/* Add a padding at the bottom so that footer is not so close */
-@media only screen and (min-width: 1025px) {
-    .fb-container .related-links {
-        margin: 2.8125rem 0 2.8125rem 0;
-    }
-}
-
-/**
-  * Blending 
-  **/
-
-.fb-container .search-blending {
-    margin-left: 0rem;
-}
-
-@media only screen and (min-width: 1025px) {
-    .fb-container .search-blending {
-        margin-left: 1.25rem;
-    }
-}
-
-/**
-  * Results 
-  **/
-
-/* Show images for standard results which includes instagram */
-.fb-container .search-results__list--list-view .search-results__item--default .search-results__bg {
-    display: block;
-}
-  
-.fb-container .search-results__list--list-view .search-results__item--default img {
-    height: 16.25rem;    
-}
-
-@media only screen and (min-width: 1025px) {
-    .fb-container .content-wrapper--col .search-results__item:nth-child(-n+4) {
-        margin-top: 0;
-    }
-}
-
-/* 
-    Remove the margin on results mobile & tablet so that search results 
-    use more of the available screen real estate.
-*/
-@media only screen and (max-width: 768px) {
-    .fb-container .search-results__list {
-        width: inherit;
-        margin-left: -2.1875rem;
-        margin-right: -2.1875rem;     
-
-    }
-
-    .fb-container .content-wrapper--col .search-results__list--list-view .search-results__item,
-    .fb-container .search-results__item {
-        border-radius: 0;
-        margin-top: 0rem;         
-        margin-bottom: 0.475rem    
-    }
-}
-
-/* Ensure that the description is shown on mobile */
-.fb-container .search-results__list--list-view .search-results__desc,
-.fb-container .search-results__item--twitter .search-results__content .search-results__desc {
-    display: inline;
-    margin-bottom: 1rem;
-}
-
-.fb-container .search-results__content {
-    flex-direction: column;
-    flex-wrap: nowrap;
-}
-
-.fb-container .search-results__bottom {
-    box-sizing: border-box;
-}
-
-/* Twitter */
-
-.fb-container .search-results__item--twitter {
-    flex-wrap: wrap;
-}
-
-.fb-container .tags.hashtag .hashtag__link{
-    color: var(--red);
-    text-decoration: none;
-}
-
-/* Videos */
-
-/* Show images on mobile */
-.fb-container .search-results__list--list-view .search-results__item--video .search-results__bg {
-    display: inline-block;
-}
-
-/**
-  * Sessions 
-  **/
-
-.fb-container #search-cart, .fb-container #search-history {
-    min-height: 12rem;     
-}  
-
-@media only screen and (min-width: 1025px) {
-    .fb-container #search-cart, .fb-container #search-history {
-        -webkit-box-flex: 0;
-        flex-basis: 100%;
-        margin: 0 auto;
-        min-height: 16rem;
-        max-width: calc( 100% - 24.875rem);
-        width: calc( 100% - 24.875rem);
-        padding-top: 4rem;        
-    }     
-}
-
-.fb-container .initial-search-form .result-sessions__controls {
-    display: none;
-}
-
-/* Hide search history and cart on the initial load */
-.fb-container section#search-history {
-    display: none;
-}
-
-/* 
-    Presentation for the back to results link for both the cart
-    and the click and search history.
-*/
-.fb-container #flb-cart-box-back, .fb-container .session-history-hide {
-    color: var(--red);
-    cursor: pointer;
-    text-decoration: underline;    
-    border: none;
-}
-
-.fb-container .flb-cart-box-list {
-    display: flex;
-    flex-wrap: wrap;
-    padding-left: 0;
-}
-
-.fb-container #flb-cart-box-header {
-    font-size: 1.5625rem;
-    color: #000;
-}
-
-/* Remove the padding introduced by the <ul> element. */
-.fb-container ul#flb-cart-box-list {
-    padding-left: 0;
-}
-
-/* 
-    Change the style of the button which removes items from
-    the cart from a button to a link.
-*/
-.fb-container #search-cart .flb-cart-item-trigger {
-    border: none;
-    background: none;
-    color: var(--red);
-    text-align: left;
-    padding-left: 0;
-    padding-right: 0;
-}
-
-/* 
-    Change the style of the button which adds and removes 
-    things from the cart from a button to a link
-*/
-.fb-container .search-results__item .flb-cart-item-trigger {
-    border: none;
-    background: none;
-    cursor: pointer;
-}
-
-/* 
-    Remove the "ad" icon before search history due to the markup
-    being borrowed from curator.
-*/
-.fb-container #search-history .module-curator__desc::before {
-    display: none;
-}
-
-.fb-container .result-sessions__controls {
+/* Sessions controls */
+.stencils .result-sessions__controls {
     background-color: rgba(255,255,255,0.6);
-    padding: 1rem;
+    padding: 0.5rem;
     border-radius: 1em;
-    float: right;
-    margin-top: 1rem;
+    align-self: flex-end;
+    margin-top: 0.75rem;
+    margin-bottom: 1.25rem;
+    color: black;    
+    width: max-content;
+    font-size: 1rem;
+    margin-left: auto;
+}
+
+.stencils .result-sessions__controls a, 
+.stencils .result-sessions__controls button {
+    margin: 0.5rem;
     color: black;
+    cursor: pointer;
+    text-decoration: underline;
+    background: none;
+    border: none;
 }
 
-/* 
-    Style both cart and click and search history toggles
-    as normal links instead of buttons.
-*/
-.fb-container .result-sessions__controls a, 
-.fb-container .result-sessions__controls button {
-   margin: 0.5rem;
-   color: black;
-   cursor: pointer;
-   text-decoration: underline;  
-   background: none;
-   border: none;
-}
-
-/* Grouping results */
-.fb-container .search-results__group-label,
-.fb-container .search-results__group-see-more-label {
+#search-history {
+    display: none;
     width: 100%;
-    margin: 1rem;
-    margin-left: 2.1875rem;
-    text-decoration: none;
-    display: block;
+    padding: 1rem;
 }
 
-.fb-container .search-results__group-see-more-label {
-    text-align: right;
-    padding-right: 2.1875rem;
+.flb-cart-item-trigger {
+    --pnp-typeface-margin: 0.75rem;
+    background-color: inherit;
+    border: none;
+    color: #da1007;
+    font: inherit;
+    font-size: 100%;
+    font-size: 1.125rem;
+    font-weight: 700;
+    line-height: 1.625rem;
+    margin: 0.625rem 0 0.75rem;
+    padding: 0.25rem;
+    vertical-align: baseline;    
 }
 
-/* Result presentation */
-.fb-container .contact__item {
-    display: inline;
-    white-space: nowrap;
-    margin-right: .5rem;
-    margin-bottom: .5rem;
-
+.enable-cart-on-result.listing-item__action:hover,
+.enable-cart-on-result.listing-item__action:focus {
+    background-color: transparent;
+    cursor: pointer;    
 }
 
-@media only screen and (min-width: 1025px) {
-    .fb-container .contact__item {
-        margin-right: 3.125rem;
-    }
+.flb-cart-item-trigger, #flb-cart-box-clear {
+    cursor: pointer;
+    transition: color,background-color .3s ease-in-out;
+    border-radius: 1rem;    
 }
 
-/* 
-    Adjust the font size of the description element in search results 
-    so that it is larger than 10px.
-*/
-@media only screen and (min-width: 1025px) and (max-width: 1920px) {
-    .fb-container .search-results__desc,
-    .fb-container .search-results__list--list-view .search-results__desc {
-        font-size: 1.0375rem;
-    }
+.flb-cart-box-item {
+    list-style: none;
 }
 
-/* Facebook results */
-.fb-container .search-results__item__facebook-post h3 {
-    display: flex;
+#flb-cart-box-list {
+    padding-left: 0;
 }
 
-.fb-container .search-results__item__facebook-post .facebook-post__profile-thumbnail {
-    width: 3.75rem;
-    height: 3.75rem;
-    border-radius: 10px;
-    overflow: hidden;
-    flex: 0 0 3.75rem;
-    margin: 0 0.75rem 0.75rem 0;
+.flb-cart-item-trigger:hover,
+.flb-cart-item-trigger:focus {
+    background-color: #da1007;
+    color: white; 
 }
 
-.fb-container .search-results__item__facebook-post .facebook-post__profile-thumbnail img {
-    width: 3.75rem;
-    height: 3.75rem;
-    object-fit: cover;
- }
-
-.fb-container .search-results__item__facebook-post .facebook-post__post-link img {
-    height: 16.25rem;
+.search-cart {
     width: 100%;
-    object-fit: cover;
-}
-
-.fb-container .search-results__list--list-view .search-results__content::after {
-    width: 0px;    
+    padding: 0.25rem;
 }
