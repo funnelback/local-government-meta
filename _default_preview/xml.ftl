@@ -52,8 +52,6 @@
     "fileType"
     "tier"
     "metaData"
-    <#--  TODO - Find out why this causes the template to error -->
-    <#--  "listMetadata"  --> 
     "customData"
     "docNum"
     "exploreLink"
@@ -64,6 +62,9 @@
     "explain"
     "indexUrl"
     "documentVisibleToUser"
+    <#-- Metadata values -->
+    "listMetadata"
+    "image"
     <#-- Spelling suggestions -->
     "spell"
     <#-- Best bets -->
@@ -120,7 +121,7 @@
             Note: Need to ensure that this test appears above the test for strings
             as hashes are also treated as strings.
         -->
-        <#if (node)!?has_content && (node.getClass()!)!?has_content && node.getClass().isEnum()>
+        <#if (node)!?has_content && node.getClass?is_method && node.getClass().isEnum?is_method && node.getClass().isEnum()>
             <#--
             Unfortuantely, enumerations are also considered hashes which when
             processed normally, looks like:
