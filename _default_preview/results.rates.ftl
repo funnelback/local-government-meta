@@ -70,34 +70,15 @@
                             </@s.boldicize>
                         </h3>
                     </a>
-
-                    <#--  Subtitle -->
-                    <#if (result.listMetadata["peoplePosition"]?first)!?has_content>
-                        <div class="listing-item__subtitle">
-                            ${(result.listMetadata["peoplePosition"]?first)!}
-
-                            <#if (result.listMetadata["peoplePosition"]?first)!?has_content>            
-                                - ${(result.listMetadata["peopleDepartment"]?first)!}                
-                            </#if>
-                        </div>
-                    </#if>
                 </div>
-            </#if>
-            
+            </#if>            
             
             <#-- Body -->
             <div class="listing-item__body">
-                <#-- Summary -->
-                <div class="listing-item__summary">
-                    <@s.boldicize>
-                        Year: ${(result.listMetadata["ratesYear"]?first)!}   
-                    </@s.boldicize>
-                </div>
-
                 <#if result.collapsed??>
                     <div class="listing-item__summary">
                         <a class="listing-item__action" href="?${removeParam(QueryString, ["start_rank","duplicate_start_rank"])}&amp;s=%3F:${result.collapsed.signature}&amp;fmo=on&amp;collapsing=off">
-                            See more 
+                            SEE MORE 
                         </a>
                     </div>
                 </#if>

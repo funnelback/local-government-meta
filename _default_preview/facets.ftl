@@ -90,8 +90,8 @@
     <!-- facets::FacetCategories -->
     <div
         role="listbox"
-        <#if facet.guessedDisplayType == "CHECKBOX">aria-multiselectable</#if>
-        aria-label=${facet.name}
+        <#if facet.guessedDisplayType == "CHECKBOX">aria-multiselectable="true"</#if>
+        aria-label="${facet.name}"
         class="
         facet-group__list
         facet-group__type-${(facet.guessedDisplayType?lower_case)?replace('_','-')}

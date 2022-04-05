@@ -69,17 +69,9 @@
                             </@s.boldicize>
                         </h3>
                     </a>
-
-                    <#-- Subtitle -->
-                    <#if (result.listMetadata["planningWardName"]?first)!?has_content>
-                        <div class="listing-item__subtitle">
-                            ${(result.listMetadata["planningWardName"]?first)!}     
-                        </div>
-                    </#if>
                 </div>
             </#if>
-            
-            
+                        
             <#-- Body -->
             <div class="listing-item__body">
                 <#-- Summary -->
@@ -109,30 +101,6 @@
 
             <#-- Display the time which this result has last been visited by the user -->
             <@sessions.LastVisitedLink result=result/> 
-
-            <#-- Footer -->
-            <div class="listing-item__footer">
-                <#if (result.listMetadata["programLengthYears"]?first)!?has_content>
-                    <div class="listing-item__footer-block listing-item__footer-block">
-                        <svg class="svg-icon svg-icon--small">
-                            <title>Duration</title>
-                            <use href="#time">
-                            </use>
-                        </svg>
-                        ${(result.listMetadata["programLengthYears"]?first)!} years
-                    </div>
-                </#if>
-
-                <#if (result.listMetadata["programCampus"]?first)!?has_content>
-                    <div class="listing-item__footer-block listing-item__footer-block">
-                        <svg class="svg-icon svg-icon--small">
-                            <title>Campus</title>
-                            <use href="#map"></use>
-                        </svg>
-                        ${(result.listMetadata["programCampus"]?first)!}
-                    </div> 
-                </#if>
-            </div>                                        
         </div>
     </article>    
 </#macro>

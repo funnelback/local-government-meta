@@ -64,12 +64,7 @@
                     </@s.boldicize>
                 </a>
             </h3>
-            
-            <#-- Subtitle -->
-            <span class="search-results__sub-title">
-                ${(result.listMetadata["planningWardName"]?first)!}                
-            </span>
-            
+                                
             <#-- Summary -->
             <p class="search-results__desc">
                 <@s.boldicize>              

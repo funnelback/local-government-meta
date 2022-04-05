@@ -68,17 +68,9 @@
                             </@s.boldicize>
                         </h3>
                     </a>
-
-                    <#--  Subtitle -->
-                    <#if (result.listMetadata["peoplePosition"]?first)!?has_content>
-                        <div class="listing-item__subtitle">
-                            ${(result.listMetadata["planningWardName"]?first)!}      
-                        </div>
-                    </#if>
                 </div>
             </#if>
-            
-            
+                        
             <#-- Body -->
             <div class="listing-item__body">
                 <#-- Summary -->
@@ -110,7 +102,7 @@
                 <#if (result.listMetadata["planningRegisteredDate"]?first)!?has_content>                
                     <div class="listing-item__footer-block listing-item__footer-block">
                         <svg class="svg-icon svg-icon--small">
-                            <title>Contact email</title>
+                            <title>Registered date</title>
                             <use href="#calendar"></use>
                         </svg>
                         ${(result.listMetadata["planningRegisteredDate"]?first)!}
