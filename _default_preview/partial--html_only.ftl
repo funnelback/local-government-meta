@@ -9,8 +9,7 @@
   e.g. Squiz Matrix Neo Templates: https://marketplace-dev.squiz.systems/hugo/fb-search-esi 
 -->
 
-
-#-- Core Funnelback imports -->
+<#-- Core Funnelback imports -->
 <#import "/web/templates/modernui/funnelback_classic.ftl" as s/>
 <#import "/web/templates/modernui/funnelback.ftl" as fb />
 
@@ -37,13 +36,13 @@
     These imports are required for the automatic template selection to work
     The various namespaces (e.g. 'video', 'facebook') need to be on the main scope 
 -->
-<#import "services.ftl" as services />
-<#import "cemetery.ftl" as cemetery />
-<#import "roadworks.ftl" as roadworks />
-<#import "planning_applications.ftl" as planning_applications />
+<#import "project.ftl" as project />
+<#import "courses.ftl" as courses />
+<#import "people.ftl" as people />
+<#import "video.ftl" as video />
+<#import "facebook.ftl" as facebook />
+<#import "events.ftl" as events />
 <#import "twitter.ftl" as twitter />
-<#import "faqs.ftl" as faqs />
-<#import "rates.ftl" as rates />
 
 <#-- Used to send absolute URLs for resources -->
 <#assign httpHost=httpRequest.getHeader('host')>
@@ -69,11 +68,14 @@
             <@history_cart.Cart />
         </section>
     </main>
-</div>
+</div>    
 
 <#-- Output the auto complete templates for concierge -->
-<@faqs.AutoCompleteTemplate />
-<@planning_applications.AutoCompleteTemplate />
+<#-- 
+    TODO - Ensure that the relevant templates are included for auto-complete.
+-->
+<@courses.AutoCompleteTemplate />
+<@people.AutoCompleteTemplate />
 
 <#-- 
     Enable session functonality which includes cart and click 
@@ -93,4 +95,5 @@
     <#-- Specifies the presentation of a cart item if a custom one is not specified -->
     <@history_cart.CartItemTemplate />
 </#if>
+ 
 <#-- vim: set expandtab ts=2 sw=2 sts=2 :-->

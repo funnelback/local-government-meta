@@ -1,4 +1,6 @@
 <#ftl encoding="utf-8" output_format="HTML" />
+<#--  TODO - Update to suit the new design system  -->
+
 <#-- 
   This template contains markup and logic related to the 
   providing the ability for users to browse documents 
@@ -12,9 +14,9 @@
     - Date for social media
 -->
 <#macro BrowseModeToggle>
-    <!-- browse_mode.BrowseModeToggle -->
+    <!-- browse_mode::BrowseModeToggle -->
     <#-- Check to see if browse mode config has been setup for the current selected tab -->
-    <#if (question.getCurrentProfileConfig().get("stencils.tabs.browse_mode.facets.${(response.customData.stencils.tabs.selected)!}"))!?has_content>
+    <#if (question.getCurrentProfileConfig().get("stencils.tabs.browse_mode.facets.${(response.customData.stencilsTabsSelectedTab)!}"))!?has_content>
         <#switch (question.inputParameters["browse_mode"]?first)!?upper_case>
             <#case "TRUE">
             <#case "ON">
@@ -29,7 +31,7 @@
 <#-- Provides the user an option to turn the browse mode off -->
 <#-- TODO - Come up with a UX for toggling off browse mode -->
 <#macro BrowseModeToggleOff>
-    <!-- browse_mode.BrowseModeToggle -->            
+    <!-- browse_mode::BrowseModeToggleOff -->            
     <#-- 
         Output the controls to toggle browse mode from on to off 
         TODO - Need to decide how to handles the users query. Do we 
@@ -44,7 +46,7 @@
 
 <#-- Provides the user an option to turn the browse mode on -->
 <#macro BrowseModeToggleOn id="fb-browse-mode">
-    <!-- browse_mode.BrowseModeToggleOn -->
+    <!-- browse_mode::BrowseModeToggleOn -->
     <#-- Output the controls to toggle browse mode from off to on -->
     <section class="module-curator" role="complementary" aria-labelledby="${id}">
         <h2 id="${id}" class="sr-only">Toggle browse mode controls</h2>
@@ -76,7 +78,7 @@
                 </div>
                 <#-- Output and option explicit the call to action link -->
                 
-                <#local defaultQuery = (question.getCurrentProfileConfig().get("stencils.tabs.browse_mode.default_query"))!"!FunDoesNotExist:padrenull">
+                <#local defaultQuery = (question.getCurrentProfileConfig().get("stencils.tabs.browse_mode.default_query"))!"">
 
                 <a class="btn--link" href="${question.getCurrentProfileConfig().get("ui.modern.search_link")}?${removeParam(QueryString, ["browse_mode", "start_rank", "query","sort"])}&browse_mode=true&query=${defaultQuery}&sort=title">
                     <#-- 
@@ -95,12 +97,12 @@
     list of documents 
 -->
 <#macro BrowseByFilter>
-    <!-- browse_mode.BrowseByFilter -->
+    <!-- browse_mode::BrowseByFilter -->
     <#switch (question.inputParameters["browse_mode"]?first)!?upper_case>
         <#case "TRUE">
             
             <#-- Get the list of list facets to be displayed which has been configured by the user -->               
-            <#local listFacets = (question.getCurrentProfileConfig().get("stencils.tabs.browse_mode.facets.${(response.customData.stencils.tabs.selected)!}"))!?split(",")![]>
+            <#local listFacets = (question.getCurrentProfileConfig().get("stencils.tabs.browse_mode.facets.${(response.customData.stencilsTabsSelectedTab)!}"))!?split(",")![]>
             
             <#-- Only print the browse mode filter when it has been configured. -->
             <#if listFacets?filter(x -> x != "")?size gt 0>

@@ -21,8 +21,8 @@
     TODO: Add or update the follow to include templates containing the handlebar templates required
     for autocomplete.
 -->
-<#import "faqs.ftl" as faqs />
-<#import "planning_applications.ftl" as planning_applications />
+<#import "people.ftl" as people />
+<#import "courses.ftl" as courses />
 
 <#-- Used to send absolute URLs for resources -->
 <#assign httpHost=httpRequest.getHeader('host')>
@@ -104,8 +104,8 @@
                 <#-- 
                     TODO: Add or update the following list include the handlebars templates used for the implementation.
                 -->                
-                <@faqs.AutoCompleteTemplate />
-                <@planning_applications.AutoCompleteTemplate />
+                <@courses.AutoCompleteTemplate />
+                <@people.AutoCompleteTemplate />
 
                 <link rel="stylesheet" href="https://${httpHost!}/s/resources/${(question.collection.id)!}/${(question.profile)!}/css/main.css">
                 <link rel="stylesheet" href="https://${httpHost!}/s/resources/${(question.collection.id)!}/${(question.profile)!}/css/customer-typeahead.css">
@@ -186,8 +186,8 @@
     TODO: Add or update the following list include the handlebars templates used for the implementation.
 -->
 <#assign autoCompleteTemplate>
-<@faqs.AutoCompleteTemplate />
-<@planning_applications.AutoCompleteTemplate />
+<@people.AutoCompleteTemplate />
+<@courses.AutoCompleteTemplate />
 </#assign>
 
                 <strong>Handlebars templates</strong>
@@ -196,7 +196,7 @@
                     each channel. The required templates can be found below:
                 </p>
 
-                <pre>${autoCompleteTemplate!?markup_string}</pre>
+                <pre class="ftl-markup-string">${autoCompleteTemplate!?markup_string}</pre>
 
 <#assign configSnippet>
 <script>
