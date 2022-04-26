@@ -51,7 +51,7 @@
             <#if (result.listMetadata["image"]?first)!?has_content>
                 <img class="deferred rounded-circle fb-image-thumbnail" alt="Thumbnail for ${result.title!}" src="//${httpRequest.getHeader('host')}/stencils/resources/base/v15.8/img/pixel.gif" data-deferred-src="https://jobs.ama.org${result.listMetadata["image"]?first}"> 
             <#elseif ((question.getCurrentProfileConfig().get("stencils.showcase"))!"FALSE")?upper_case == "TRUE">
-                <img alt="Thumbnail for ${result.title!}" src="https://source.unsplash.com/random/160x160?${(result.listMetadata["cemeterySurname"]?first)!''?url}"> 
+                <img class="listing-item__image" alt="Thumbnail for ${result.title!}" src="https://picsum.photos/300/300?sig=${(result.listMetadata["cemeterySurname"]?first)!''?url}"> 
             </#if>
         </figure>
         <div class="search-results__content">
@@ -64,12 +64,7 @@
                     </@s.boldicize>
                 </a>
             </h3>
-            
-            <#-- Subtitle -->
-            <span class="search-results__sub-title">
-                ${(result.listMetadata["planningWardName"]?first)!}                
-            </span>
-            
+                                
             <#-- Summary -->
             <p class="search-results__desc">
                 <@s.boldicize>              

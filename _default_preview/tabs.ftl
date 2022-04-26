@@ -1,11 +1,12 @@
+<#ftl encoding="utf-8" output_format="HTML" />
+
 <#--
     Display tabs
     @param facets List of tabs to display as a string. The default is that all tabs
         will be displayed
 -->
 <#macro Tabs tabs=[]>
-    <!-- tabs.Tabs -->
-
+    <!-- tabs::Tabs -->
     <#-- 
         Find all the tabs with values and determine if we want to display all tabs or just the tabs specified 
     -->
@@ -17,86 +18,76 @@
     >
 
     <#list facets![] as facet>
-        <section class="tabs js-tabs content-wrapper desktop">
-            <ul class="tabs__list" role="menu" aria-label="Tab navigation">
-                <#list facet.allValues as value>
-                    <#if value?counter lt (question.getCurrentProfileConfig().get("stencils.tabs.max_display")!"5")?number> 
-                        <li class="tabs__item" role="none">
-                            <a <#if value.count gt 0>href="${value.toggleUrl}"</#if> 
-                                class="tabs__link tabs__link--icon <#if value.selected> active</#if><#if value.count lt 1> tabs__link--disabled </#if>"
-                                role="menuitem"
-                                tabindex="-1">
+        <div class="tabs tabs--center">
+            <div class="tab__list" role="tablist">
+                <div class="tab-list__nav" data-tab-group-element="tab-list-nav">
+                    <#-- 
+                        Show all the tabs as individual buttons. 
+                        Note: Even though storybook uses buttons, we want to use anchors here 
+                        so that request are submitted when click which will display the new results.
+                    -->
+                    <#list facet.allValues as value>
+
+                        <#if value.count gt 0>
+                            <a class="tab__button <#if value.selected>tab__button--active</#if>" 
+                                id="${base.getCssID(value.label)+value_index}" 
+                                role="tab" 
+                                aria-selected="${(value.selected)!?string('true','false')}"
+                                aria-controls="0-tab" 
+                                tabindex="0" 
+                                data-tab-group-control="${base.getCssID(value.label)+value_index}"
+                                href="${value.toggleUrl}"
+                            > 
+                                <#-- Display the icon if it is configured -->
                                 <#if question.getCurrentProfileConfig().get("stencils.tabs.icon.${value.label}")??>
                                     <span class="${question.getCurrentProfileConfig().get("stencils.tabs.icon.${value.label}")}"></span>
                                 </#if>                            
-                                ${value.label}
-                                <span class="search-facet-count">(${value.count})</span>
+
+                                ${value.label}                            
+                                &nbsp; <#--  Prevent the count from being glued to the value  -->
+                                <span class="tabs__count">(${value.count})</span>                             
                             </a>
-                        </li>
-                    </#if>
-                </#list>                                        
+                        <#else>
+                            <span class="tab__button <#if value.selected>tab__button--active</#if> tab__button--disabled" 
+                                id="${base.getCssID(value.label)+value_index}" 
+                                role="tab" 
+                                aria-selected="${(value.selected)!?string('true','false')}"
+                                aria-controls="0-tab" 
+                                tabindex="0" 
+                                data-tab-group-control="${base.getCssID(value.label)+value_index}"
+                            > 
+                                <#-- Display the icon if it is configured -->
+                                <#if question.getCurrentProfileConfig().get("stencils.tabs.icon.${value.label}")??>
+                                    <span class="${question.getCurrentProfileConfig().get("stencils.tabs.icon.${value.label}")}"></span>
+                                </#if>                            
 
-                <#-- Collapse the remaining tabs into a drop down -->
-                <#if facet.allValues?size gte (question.getCurrentProfileConfig().get("stencils.tabs.max_display")!"5")?number>              
-                    <li class="tabs__item dropdown">
-                        <span class="dropdown__toggle" href="#" >
-                            
-                            <#-- Determine if a tab is the more dropdown has been selected -->
-                            <#assign maxDisplay = (question.getCurrentProfileConfig().get("stencils.tabs.max_display")!"5")?number>
-                            <#assign noTabs = facet.allValues?size>
-                            <#assign isMoreTabSelected = false>
+                                ${value.label}                            
+                                &nbsp; <#--  Prevent the count from being glued to the value  -->
+                                <span class="tabs__count">(${value.count})</span>                             
+                            </span>
+                        </#if>
+                    </#list>                                        
 
-                            <#if facet.allValues?sequence[maxDisplay-1..noTabs - 1]?filter(value -> value.selected)?size gt 0>
-                                <#assign isMoreTabSelected = true>
-                            </#if>
-                            
-                            <a class="tabs__link <#if isMoreTabSelected>active</#if>" href="#" aria-haspopup="true" aria-expanded="false" id="tabDropdown">
-                                More
-                            </a>
-
-                            <#-- Display the additional tabs as a dropdown menu -->
-                            <ul class="dropdown_menu" aria-labelledby="tabDropdown">
-                                <#list facet.allValues as value>
-                                    <#if value?counter gte (question.getCurrentProfileConfig().get("stencils.tabs.max_display")!"5")?number>
-                                        <li class="dropdown__item <#if value.selected>active</#if><#if value.count lt 1>disabled</#if>">                
-                                            <a title="Refine by ${value.label}" <#if value.count gt 0>href="${value.toggleUrl}"</#if>>
-                                                <#if question.getCurrentProfileConfig().get("stencils.tabs.icon.${value.label}")??>
-                                                    <span class="${question.getCurrentProfileConfig().get("stencils.tabs.icon.${value.label}")}"></span>
-                                                </#if>
-                                                ${value.label!} <span class="search-facet-count">(${value.count})</span>
-                                            </a>
-                                        </li>
-                                    </#if>
-                                </#list>
-                            </ul>
-                        </span>
-                    </li>                          
-                </#if>
-            </ul>
-        </section>
-
-        <#-- Tabs on mobile - We want to show all tabs as a list no matter how big -->
-        <section class="tabs js-tabs content-wrapper tablet mobile">
-            <ul class="tabs__list" role="menu" aria-label="Tab navigation">
-                <#list facet.allValues as value>
-                    <li class="tabs__item" role="none">
-                        <a <#if value.count gt 0>href="${value.toggleUrl}"</#if> 
-                            class="tabs__link tabs__link--icon <#if value.selected> active</#if><#if value.count lt 1> tabs__link--disabled </#if>"
-                            role="menuitem"
-                            tabindex="-1">
-                            <#if question.getCurrentProfileConfig().get("stencils.tabs.icon.${value.label}")??>
-                                <span class="${question.getCurrentProfileConfig().get("stencils.tabs.icon.${value.label}")}"></span>
-                            </#if>                            
-                            ${value.label}
-                            <span class="search-facet-count">(${value.count})</span>
-                        </a>
-                    </li>
-                </#list>                                        
-            </ul>
-        </section>        
-    </#list>
+                    <#-- 
+                        Display the show more button which will be visible whent he viewport 
+                        is smaller than the available space to show all the tabs.
+                    -->
+                    <div class="tab-list-nav-overflow-menu__wrapper" data-tab-group-element="overflow-menu-wrapper">
+                        <button class="tab-list-nav-overflow-menu__button" type="button" data-tab-group-element="overflow-menu-button" aria-labelledby="View more">
+                            <span class="sr-only">show more tabs</span>
+                            <svg class="svg-icon">
+                                <use href="#overflow-menu"></use>
+                            </svg>
+                        </button>
+                        <div class="tab-list-nav__overflow-menu" data-tab-group-element="overflow-menu-container"></div>
+                    </div>                    
+                </div>
+            </div>
+        </div>
+     </#list>
 </#macro>
 
+<#--  TODO - Update to suit the new design system  -->
 <#-- 
     Provides preview of a tab. This allows the user to see 
     a sample of the results on another tab without having to click
@@ -112,7 +103,7 @@
          global question which is currently in scope.
 -->
 <#macro Preview extraSearchName documentType="" view="DETAILED" parentQuestion=question>
-    <!-- tabs.Preview -->
+    <!-- tabs::Preview -->
     <#assign parentQuestion = question>
     <@fb.ExtraResults name=extraSearchName>
         <#if (response.resultPacket.results)!?has_content>
