@@ -69,8 +69,7 @@
                         </h3>
                     </a>
                 </div>
-            </#if>
-            
+            </#if>            
             
             <#-- Body -->
             <div class="listing-item__body">
@@ -89,11 +88,16 @@
                         <li class="listing-item__tag">${faqType}</li>
                     </#list>
                 </ul>
+
+                <#-- Call to Action (CTA) -->                        
+                <#--  <a href="${result.clickTrackingUrl!}" class="listing-item__action">VIEW MORE</a>   -->
+                <span class="enable-cart-on-result listing-item__action" 
+                    aria-label="Add result to the shortlist">
+                </span>                    
             </div>          
 
             <#-- Display the time which this result has last been visited by the user -->
-            <@sessions.LastVisitedLink result=result/> 
-
+            <@sessions.LastVisitedLink result=result/>           
         </div>
     </article>    
 </#macro>
@@ -136,3 +140,76 @@
         </div>
     </script>
 </#macro>
+
+<#-- Output the cart template -->
+<#macro ShortlistTemplate>
+    <!-- results.faqs::ShortlistTemplate -->    
+    <#-- 
+        Note: Cart templates as assigned to document types in profile.cfg/collection.cfg using 
+        the following configuration:
+
+        stencils.template.shortlist.<collection>=<type> 
+        
+        e.g. stencils.template.shortlist.higher-education-meta=programs
+
+        For this to function correctly, the ID must be in the following format:
+        id="shorlist-template-<type>".
+
+        e.g. id="shorlist-template-programs"
+    -->
+    <script id="shortlist-template-faqs" type="text/x-handlebars-template">
+        <article class="listing-item listing-item--program listing-item--background-grey10 listing-item--color-black" data-fb-result="{{indexUrl}}">   
+
+            {{#if metaData.image}} 
+                <div class="listing-item__image-wrapper">
+                    <img class="listing-item__image" alt="Thumbnail for {{title}}" src="{{metaData.image}}"> 
+                </div> 
+                <#-- Show a placeholder image for showcase -->     
+                <#if ((question.getCurrentProfileConfig().get("stencils.showcase"))!"FALSE")?upper_case == "TRUE">
+                    {{else}}
+                    <div class="listing-item__image-wrapper">
+                        <img class="listing-item__image" alt="Thumbnail for {{title}}" src="https://picsum.photos/300/300?sig={{title}}">
+                    </div>
+                </#if>
+            {{/if}} 
+            <div class="listing-item__content">
+                <#-- Title -->
+                {{#if title}} 
+                    <div class="listing-item__header">
+                        <a href="{{indexUrl}}" title="{{title}}" class="listing-item__title-link">
+                            <h3 class="listing-item__title">
+                                {{#truncate 255}}
+                                    {{title}}  
+                                {{/truncate}}
+                            </h3>
+                        </a>
+                    </div>
+                {{/if}} 
+                
+                
+                <#-- Body -->
+                <div class="listing-item__body">
+                    <#-- Summary -->
+                    {{#if metaData.faqAnswer}} 
+                        <div class="listing-item__summary">
+                            {{#truncate 255}}
+                                {{metaData.faqAnswer}}  
+                            {{/truncate}}
+                        </div>
+                    {{/if}} 
+
+                    <#-- Metadata should as tags/pills -->        
+                    <ul aria-label="Result tags" class="listing-item__tags">                                    
+                        {{#list metaData.faqType}}
+                            <li class="listing-item__tag">{{ this }}</li>
+                        {{/list}}
+                    </ul>
+
+                    <p>
+                        <span class="fb-cart__remove"></span>
+                    </p>
+                </div>                                     
+            </div>
+        </article>    
+    </script>
+  </#macro>

@@ -91,7 +91,7 @@
                 </ul>
 
                 <#-- Call to Action (CTA) -->                        
-                <a href="${result.clickTrackingUrl!}" class="listing-item__action">VIEW STATUS</a> 
+                <a href="${result.clickTrackingUrl!}" class="listing-item__action">VIEW STATUS</a>
             </div>          
 
             <#-- Display the time which this result has last been visited by the user -->
@@ -111,8 +111,8 @@
                 <#if (result.listMetadata["planningDevelopementAddress"]?first)!?has_content>
                     <div class="listing-item__footer-block listing-item__footer-block">
                         <svg class="svg-icon svg-icon--small">
-                        <title>Time</title>
-                        <use href="#map"></use>
+                            <title>Time</title>
+                            <use href="#map"></use>
                         </svg>
                         ${(result.listMetadata["planningDevelopementAddress"]?first)!}
                     </div>
@@ -122,41 +122,107 @@
     </article>    
 </#macro>
 
+<#-- Output the cart template -->
+<#macro ShortlistTemplate>
+    <!-- results.planning_applications::ShortlistTemplate -->    
+    <#-- 
+        Note: Cart templates as assigned to document types in profile.cfg/collection.cfg using 
+        the following configuration:
 
-<#-- 
-    Handlebars template used to display the current object
-    in concierge.
---> 
-<#macro AutoCompleteTemplate>
-    <!-- results.people::AutoCompleteTemplate -->
-    <script id="auto-completion-people" type="text/x-handlebars-template">
-        <div class="fb-auto-complete--non-organic">
-            <h6>
-                {{{extra.disp.listMetadata.peopleFirstName.[0]}}}
-                {{{extra.disp.listMetadata.peopleLastName.[0]}}}
-            </h6>
-            <div class="details">
-                {{#if extra.disp.listMetadata.peopleDepartment.[0]}}
-                    <div class="fb-auto-complete__body__metadata">
-                        <span class="far fa-building" aria-hidden="true" aria-label="Department" title="Department"></span> 
-                        {{{extra.disp.listMetadata.peopleDepartment.[0]}}}
-                    </div>
-                {{/if}}
+        stencils.template.shortlist.<collection>=<type> 
+        
+        e.g. stencils.template.shortlist.higher-education-meta=programs
 
-                {{#if extra.disp.listMetadata.peoplePhone.[0]}}
-                    <div class="fb-auto-complete__body__metadata">
-                        <span class="fas fa-map-marker-alt" aria-hidden="true" aria-label="Phone" title="Phone"></span> 
-                        {{{extra.disp.listMetadata.peoplePhone.[0]}}}
-                    </div>
-                {{/if}}
+        For this to function correctly, the ID must be in the following format:
+        id="shorlist-template-<type>".
 
-                {{#if extra.disp.listMetadata.peopleEmail.[0]}}
-                    <div class="fb-auto-complete__body__metadata">
-                        <span class="far fa-envelope" aria-hidden="true" aria-label="Email" title="DepartmEmailent"></span> 
-                        {{{extra.disp.listMetadata.peopleEmail.[0]}}}
+        e.g. id="shorlist-template-programs"
+    -->
+    <script id="shortlist-template-planning_applications" type="text/x-handlebars-template">
+        <article class="listing-item listing-item--program listing-item--background-grey10 listing-item--color-black" data-fb-result="{{indexUrl}}">   
+
+            {{#if metaData.image}} 
+                <div class="listing-item__image-wrapper">
+                    <img class="listing-item__image" alt="Thumbnail for {{title}}" src="{{metaData.image}}"> 
+                </div> 
+                <#-- Show a placeholder image for showcase -->     
+                <#if ((question.getCurrentProfileConfig().get("stencils.showcase"))!"FALSE")?upper_case == "TRUE">
+                    {{else}}
+                    <div class="listing-item__image-wrapper">
+                        <img class="listing-item__image" alt="Thumbnail for {{title}}" src="https://picsum.photos/300/300?sig={{title}}">
                     </div>
-                {{/if}}
+                </#if>
+            {{/if}} 
+            <div class="listing-item__content">
+                <#-- Title -->
+                {{#if metaData.planningApplicationName}} 
+                    <div class="listing-item__header">
+                        <a href="{{indexUrl}}" title="{{metaData.planningApplicationName}}" class="listing-item__title-link">
+                            <h3 class="listing-item__title">
+                                {{#truncate 255}}
+                                    {{metaData.planningApplicationName}}         
+                                {{/truncate}}
+                            </h3>
+                        </a>
+                    </div>
+                {{/if}} 
+                
+                
+                <#-- Body -->
+                <div class="listing-item__body">
+                    <#-- Summary -->
+                    {{#if metaData.c}} 
+                        <div class="listing-item__summary">
+                            {{#truncate 555}}
+                                {{metaData.c}}  
+                            {{/truncate}}
+                        </div>
+                    {{/if}} 
+
+                    <#-- Metadata should as tags/pills -->        
+                    <ul aria-label="Result tags" class="listing-item__tags">                                    
+                        {{#list metaData.planningSystemStatus joinWith=", "}}
+                            <li class="listing-item__tag">{{ this }}</li>
+                        {{/list}}
+
+                        {{#list metaData.planningDecisionType joinWith=", "}}
+                            <li class="listing-item__tag">{{ this }}</li>
+                        {{/list}}
+                    </ul>
+
+                    <p>
+                        <span class="fb-cart__remove"></span>
+                    </p>
+
+                    <span class="enable-cart-on-result listing-item__action" 
+                            aria-label="Add result to the shortlist">
+                    </span> 
+                </div>          
+
+                <#-- Footer -->                    
+                <div class="listing-item__footer">
+                    {{#if metaData.planningRegisteredDate}} 
+                        <div class="listing-item__footer-block listing-item__footer-block">
+                            <svg class="svg-icon svg-icon--small">
+                                <title>Registered date</title>
+                                <use href="#calendar"></use>
+                            </svg>                            
+                            {{metaData.planningRegisteredDate}} years
+                        </div>
+                    {{/if}} 
+
+                    {{#if metaData.planningDevelopementAddress}} 
+                        <div class="listing-item__footer-block listing-item__footer-block">
+                            <svg class="svg-icon svg-icon--small">
+                                <title>Time</title>
+                                <use href="#map"></use>
+                            </svg>
+                            {{metaData.planningDevelopementAddress}}
+                        </div> 
+                    {{/if}} 
+                </div>                                        
             </div>
-        </div>
+        </article>    
     </script>
-</#macro>
+  
+  </#macro>

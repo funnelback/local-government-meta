@@ -47,9 +47,9 @@
     <!-- results.cemetery::GenericView -->
     <article class="listing-item listing-item--program listing-item--background-grey10 listing-item--color-black" data-fb-result="${(result.indexUrl)!}">   
 
-        <#if (result.listMetadata["programImage"]?first)!?has_content >
+        <#if (result.listMetadata["image"]?first)!?has_content >
             <div class="listing-item__image-wrapper">
-                <img class="deferred listing-item__image" alt="Thumbnail for ${result.title!}" src="//${httpRequest.getHeader('host')}/s/resources/${question.collection.id}/${question.profile}/img/pixel.gif" data-deferred-src="${(result.listMetadata["programImage"]?first)!}"> 
+                <img class="deferred listing-item__image" alt="Thumbnail for ${result.title!}" src="//${httpRequest.getHeader('host')}/s/resources/${question.collection.id}/${question.profile}/img/pixel.gif" data-deferred-src="${(result.listMetadata["image"]?first)!}"> 
             </div>  
         <#elseif ((question.getCurrentProfileConfig().get("stencils.showcase"))!"FALSE")?upper_case == "TRUE">
             <div class="listing-item__image-wrapper">
@@ -97,6 +97,11 @@
                         </#if>
                     </@s.boldicize>
                 </div>
+
+                <span class="enable-cart-on-result listing-item__action" 
+                        aria-label="Add result to the shortlist">
+                </span> 
+
             </div>          
 
             <#-- Display the time which this result has last been visited by the user -->
@@ -140,7 +145,7 @@
 
 <#-- Output the cart template -->
 <#macro ShortlistTemplate>
-    <!-- results.programs::Shortlist -->    
+    <!-- results.cemetery::ShortlistTemplate -->    
     <#-- 
         Note: Cart templates as assigned to document types in profile.cfg/collection.cfg using 
         the following configuration:
@@ -154,12 +159,12 @@
 
         e.g. id="shorlist-template-programs"
     -->
-    <script id="shortlist-template-programs" type="text/x-handlebars-template">
+    <script id="shortlist-template-cemetery" type="text/x-handlebars-template">
         <article class="listing-item listing-item--program listing-item--background-grey10 listing-item--color-black" data-fb-result="{{indexUrl}}">   
 
-            {{#if metaData.programImage}} 
+            {{#if metaData.image}} 
                 <div class="listing-item__image-wrapper">
-                    <img class="listing-item__image" alt="Thumbnail for {{title}}" src="{{metaData.programImage}}"> 
+                    <img class="listing-item__image" alt="Thumbnail for {{title}}" src="{{metaData.image}}"> 
                 </div> 
                 <#-- Show a placeholder image for showcase -->     
                 <#if ((question.getCurrentProfileConfig().get("stencils.showcase"))!"FALSE")?upper_case == "TRUE">
@@ -171,91 +176,41 @@
             {{/if}} 
             <div class="listing-item__content">
                 <#-- Title -->
-                {{#if title}} 
-                    <div class="listing-item__header">
-                        <a href="{{indexUrl}}" title="{{title}}" class="listing-item__title-link">
-                            <h3 class="listing-item__title">
-                                {{#truncate 255}}
-                                    {{title}}  
-                                {{/truncate}}
-                            </h3>
-                        </a>
-
-                        <#-- Subtitle -->
-                        {{#if metaData.programFaculty}}  
-                            <div class="listing-item__subtitle">
-                                {{metaData.programFaculty}}       
-                            </div>
-                        {{/if}} 
-
-                        <#-- Pretty version of the url of the document -->
-                        {{#if indexUrl}}  
-                            <cite class="listing-item__subtitle listing-item__subtitle--highlight">
-                                {{indexUrl}}
-                            </cite>
-                        {{/if}} 
-                    </div>
-                {{/if}} 
-                
+                <div class="listing-item__header">
+                    <a href="{{indexUrl}}" title="{{title}}" class="listing-item__title-link">
+                        <h3 class="listing-item__title">
+                            {{metaData.cemeterySurname}}, {{metaData.cemeteryFirstName}}
+                        </h3>
+                    </a>
+                </div>                
                 
                 <#-- Body -->
                 <div class="listing-item__body">
                     <#-- Summary -->
-                    {{#if metaData.c}} 
-                        <div class="listing-item__summary">
-                            {{#truncate 255}}
-                                {{metaData.c}}  
-                            {{/truncate}}
-                        </div>
-                    {{/if}} 
+                    <div class="listing-item__summary">
 
-                    <#-- Metadata should as tags/pills -->        
-                    <ul aria-label="Result tags" class="listing-item__tags">                                    
-                        {{#list metaData.programCredentialType joinWith=", "}}
-                            <li class="listing-item__tag">{{ this }}</li>
-                        {{/list}}
+                        Passed away
+                            {{#if metaData.cemeteryDateDied}} 
+                                on  {{metaData.cemeteryDateDied}}
+                            {{/if}} 
+                        
+                        {{#if metaData.cemeteryAge}} 
+                            at the age of {{metaData.cemeteryAge}}
+                        {{/if}} 
 
-                        {{#list metaData.stencilsDeliveryMethod joinWith=", "}}
-                            <li class="listing-item__tag">{{ this }}</li>
-                        {{/list}}
-
-                        {{#list metaData.programCredits joinWith=", "}}
-                            <li class="listing-item__tag">{{ this }} credits</li>
-                        {{/list}}
-                    </ul>
+                        {{#if metaData.cemeteryCemetery}} 
+                            <br />
+                            Burried at {{metaData.cemeteryCemetery}} 
+                            {{#if metaData.cemeteryDateBuried}} 
+                                on  {{metaData.cemeteryDateBuried}}
+                            {{/if}} 
+                        {{/if}} 
+                    </div>
 
                     <p>
                         <span class="fb-cart__remove"></span>
                     </p>
-
-                    <span class="enable-cart-on-result listing-item__action" 
-                            aria-label="Add result to the shortlist">
-                    </span> 
                 </div>          
-
-                <#-- Footer -->                    
-                <div class="listing-item__footer">
-                    {{#if metaData.programLengthYears}} 
-                        <div class="listing-item__footer-block listing-item__footer-block">
-                            <svg class="svg-icon svg-icon--small">
-                                <title>Duration</title>
-                                <use href="#time">
-                                </use>
-                            </svg>
-                            {{metaData.programLengthYears}} years
-                        </div>
-                    {{/if}} 
-
-                    {{#if metaData.programCampus}} 
-                        <div class="listing-item__footer-block listing-item__footer-block">
-                            <svg class="svg-icon svg-icon--small">
-                                <title>Campus</title>
-                                <use href="#map"></use>
-                            </svg>
-                            {{metaData.programCampus}}
-                        </div> 
-                    {{/if}} 
-                </div>                                        
             </div>
         </article>    
     </script>
