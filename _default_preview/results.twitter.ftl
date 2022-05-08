@@ -123,6 +123,9 @@
 
                 <#-- Call to Action (CTA) -->                        
                 <a href="${result.clickTrackingUrl!}" class="listing-item__action">VIEW TWEET</a> 
+                <span class="enable-cart-on-result listing-item__action" 
+                        aria-label="Add result to the shortlist">
+                </span>                 
             </div>          
 
             <#-- Display the time which this result has last been visited by the user -->
@@ -130,3 +133,97 @@
         </div>
     </article>    
 </#macro>
+
+<#-- Output the cart template -->
+<#macro ShortlistTemplate>
+    <!-- results.twitter::Shortlist -->    
+    <#-- 
+        Note: Cart templates as assigned to document types in profile.cfg/collection.cfg using 
+        the following configuration:
+
+        stencils.template.shortlist.<collection>=<type> 
+        
+        e.g. stencils.template.shortlist.higher-education-meta=programs
+
+        For this to function correctly, the ID must be in the following format:
+        id="shorlist-template-<type>".
+
+        e.g. id="shorlist-template-programs"
+    -->
+    <script id="shortlist-template-twitter" type="text/x-handlebars-template">
+        <article class="listing-item listing-item--twitter listing-item--background-grey10 listing-item--color-black" data-fb-result="{{indexUrl}}">   
+
+            {{#if metaData.image}} 
+                <div class="listing-item__image-wrapper">
+                    <img class="listing-item__image" alt="Thumbnail for {{title}}" src="{{metaData.image}}"> 
+                </div> 
+                <#-- Show a placeholder image for showcase -->     
+                <#if ((question.getCurrentProfileConfig().get("stencils.showcase"))!"FALSE")?upper_case == "TRUE">
+                    {{else}}
+                    <div class="listing-item__image-wrapper">
+                        <img class="listing-item__image" 
+                            alt="Thumbnail for {{title}}" 
+                            src="https://picsum.photos/300/300?sig={{title}}"
+                        >
+                    </div>
+                </#if>
+            {{/if}} 
+            <div class="listing-item__content">
+                <#-- Title -->
+                {{#if metaData.author}} 
+                    <div class="listing-item__header">
+                        <a 
+                            href="{{indexUrl}}" 
+                            class="listing-item__title-link"
+                            title="{{metaData.author}}"  
+                            aria-label="View the profile of @{{metaData.author}}"
+                        >
+                            <h3 class="listing-item__title">
+                                {{#truncate 255}}
+                                    {{metaData.author}}  
+                                {{/truncate}}
+                            </h3>
+                        </a>
+
+                        <div class="listing-item__subtitle">
+                            <span
+                                class="
+                                listing-item__subtitle-block
+                                listing-item__subtitle-block--highlight
+                                "
+                            >
+                                <svg aria-hidden="true" class="svg-icon">
+                                <use href="#logo-twitter"></use>
+                                </svg>
+                                via twitter
+                            </span>
+                        </div>
+                    </div>
+                {{/if}} 
+                                
+                <#-- Body -->
+                <div class="listing-item__body">
+                    <#-- Summary -->
+                    {{#if metaData.c}} 
+                        <div class="listing-item__summary">
+                            {{#truncate 255}}
+                                {{metaData.c}}  
+                            {{/truncate}}
+                        </div>
+                    {{/if}} 
+
+                    <#-- Metadata should as tags/pills -->        
+                    <ul aria-label="Result tags" class="listing-item__tags">                                    
+                        {{#list metaData.twitterHashTag}}
+                            <li class="listing-item__tag"># {{this}}</li>
+                        {{/list}}
+                    </ul>
+
+                    <p>
+                        <span class="fb-cart__remove"></span>
+                    </p>
+                </div>                                                
+            </div>
+        </article>    
+    </script>
+  </#macro>

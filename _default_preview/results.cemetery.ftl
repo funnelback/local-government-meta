@@ -45,7 +45,7 @@
 -->
 <#macro GenericView result>
     <!-- results.cemetery::GenericView -->
-    <article class="listing-item listing-item--program listing-item--background-grey10 listing-item--color-black" data-fb-result="${(result.indexUrl)!}">   
+    <article class="listing-item listing-item--cemetery listing-item--background-grey10 listing-item--color-black" data-fb-result="${(result.indexUrl)!}">   
 
         <#if (result.listMetadata["image"]?first)!?has_content >
             <div class="listing-item__image-wrapper">
@@ -160,7 +160,7 @@
         e.g. id="shorlist-template-programs"
     -->
     <script id="shortlist-template-cemetery" type="text/x-handlebars-template">
-        <article class="listing-item listing-item--program listing-item--background-grey10 listing-item--color-black" data-fb-result="{{indexUrl}}">   
+        <article class="listing-item listing-item--cemetery listing-item--background-grey10 listing-item--color-black" data-fb-result="{{indexUrl}}">   
 
             {{#if metaData.image}} 
                 <div class="listing-item__image-wrapper">
@@ -214,5 +214,4 @@
             </div>
         </article>    
     </script>
-  
   </#macro>

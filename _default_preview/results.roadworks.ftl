@@ -45,7 +45,7 @@
 -->
 <#macro GenericView result>
     <!--results.roadworks::GenericView -->
-    <article class="listing-item listing-item--people listing-item--background-grey10 listing-item--color-black" data-fb-result="${(result.indexUrl)!}">
+    <article class="listing-item listing-item--roadworks listing-item--background-grey10 listing-item--color-black" data-fb-result="${(result.indexUrl)!}">
         <#if (result.listMetadata["image"]?first)!?has_content>
             <div class="listing-item__image-wrapper">
                 <img class="deferred listing-item__image" alt="Thumbnail for ${result.title!}" src="//${httpRequest.getHeader('host')}/s/resources/${question.collection.id}/${question.profile}/img/pixel.gif" data-deferred-src="${(result.listMetadata["image"]?first)!}"> 
@@ -92,6 +92,10 @@
                 </ul>
                 <#-- Call to Action (CTA) -->                        
                 <a href="${result.clickTrackingUrl!}" class="listing-item__action">SHOW ON MAP</a>
+
+                                <span class="enable-cart-on-result listing-item__action" 
+                        aria-label="Add result to the shortlist">
+                </span> 
             </div>          
 
             <#-- Display the time which this result has last been visited by the user -->
@@ -130,4 +134,114 @@
         </div>
     </article>    
 </#macro>
+
+<#-- Output the cart template -->
+<#macro ShortlistTemplate>
+    <!-- results.roadworks::ShortlistTemplate -->    
+    <#-- 
+        Note: Cart templates as assigned to document types in profile.cfg/collection.cfg using 
+        the following configuration:
+
+        stencils.template.shortlist.<collection>=<type> 
+        
+        e.g. stencils.template.shortlist.higher-education-meta=programs
+
+        For this to function correctly, the ID must be in the following format:
+        id="shorlist-template-<type>".
+
+        e.g. id="shorlist-template-programs"
+    -->
+    <script id="shortlist-template-roadworks" type="text/x-handlebars-template">
+        <article class="listing-item listing-item--roadworks listing-item--background-grey10 listing-item--color-black" data-fb-result="{{indexUrl}}">   
+
+            {{#if metaData.image}} 
+                <div class="listing-item__image-wrapper">
+                    <img class="listing-item__image" alt="Thumbnail for {{title}}" src="{{metaData.image}}"> 
+                </div> 
+                <#-- Show a placeholder image for showcase -->     
+                <#if ((question.getCurrentProfileConfig().get("stencils.showcase"))!"FALSE")?upper_case == "TRUE">
+                    {{else}}
+                    <div class="listing-item__image-wrapper">
+                        <img class="listing-item__image" alt="Thumbnail for {{title}}" src="https://picsum.photos/300/300?sig={{title}}">
+                    </div>
+                </#if>
+            {{/if}} 
+            <div class="listing-item__content">
+                <#-- Title -->
+                {{#if metaData.roadworksStreet}} 
+                    <div class="listing-item__header">
+                        <a href="{{indexUrl}}" title="{{metaData.roadworksStreet}}" class="listing-item__title-link">
+                            <h3 class="listing-item__title">
+                                {{#truncate 255}}
+                                    {{metaData.roadworksStreet}}  
+                                {{/truncate}}
+                            </h3>
+                        </a>
+                    </div>
+                {{/if}}                 
+                
+                <#-- Body -->
+                <div class="listing-item__body">
+                    <#-- Summary -->
+                    {{#if summary}} 
+                        <div class="listing-item__summary">
+                            {{#truncate 255}}
+                                {{summary}}  
+                            {{/truncate}}
+                        </div>
+                    {{/if}} 
+
+                    <#-- Metadata should as tags/pills -->        
+                    <ul aria-label="Result tags" class="listing-item__tags">                                    
+                        {{#list metaData.roadworksWorkStatus joinWith=", "}}
+                            <li class="listing-item__tag">{{ this }}</li>
+                        {{/list}}
+
+                        {{#list metaData.roadworksCategoryOfWorks joinWith=", "}}
+                            <li class="listing-item__tag">{{ this }}</li>
+                        {{/list}}
+                    </ul>
+
+                    <p>
+                        <span class="fb-cart__remove"></span>
+                    </p>
+                </div>          
+
+                <#-- Footer -->                    
+                <div class="listing-item__footer">
+                    {{#if metaData.roadworksStartDate}} 
+                        <div class="listing-item__footer-block listing-item__footer-block">
+                            <svg class="svg-icon svg-icon--small">
+                                <title>Time</title>
+                                <use href="#time">
+                                </use>
+                            </svg>
+                            {{metaData.roadworksStartDate}} years
+                        </div>
+                    {{/if}} 
+
+                    {{#if metaData.roadworksContactTelephoneNumber}} 
+                        <div class="listing-item__footer-block listing-item__footer-block">
+                            <svg class="svg-icon svg-icon--small">
+                                <title>Phone</title>
+                                <use href="#phone"></use>
+                            </svg>
+                            {{metaData.roadworksContactTelephoneNumber}}
+                        </div> 
+                    {{/if}}
+
+                    {{#if metaData.roadworksLocality}} 
+                        <div class="listing-item__footer-block listing-item__footer-block">
+                            <svg class="svg-icon svg-icon--small">
+                                <title>Locality</title>
+                                <use href="#map"></use>
+                            </svg>
+                            {{metaData.roadworksLocality}}
+                        </div> 
+                    {{/if}}
+                </div>                                        
+            </div>
+        </article>    
+    </script>
+  </#macro>
 

@@ -45,7 +45,7 @@
 -->
 <#macro GenericView result>
     <!--results.planning_applications::GenericView -->
-    <article class="listing-item listing-item--people listing-item--background-grey10 listing-item--color-black" data-fb-result="${(result.indexUrl)!}">
+    <article class="listing-item listing-item--planning_application listing-item--background-grey10 listing-item--color-black" data-fb-result="${(result.indexUrl)!}">
         <#if (result.listMetadata["image"]?first)!?has_content>
             <div class="listing-item__image-wrapper">
                 <img class="deferred listing-item__image" alt="Thumbnail for ${result.title!}" src="//${httpRequest.getHeader('host')}/s/resources/${question.collection.id}/${question.profile}/img/pixel.gif" data-deferred-src="${(result.listMetadata["image"]?first)!}"> 
@@ -138,8 +138,8 @@
 
         e.g. id="shorlist-template-programs"
     -->
-    <script id="shortlist-template-planning_applications" type="text/x-handlebars-template">
-        <article class="listing-item listing-item--program listing-item--background-grey10 listing-item--color-black" data-fb-result="{{indexUrl}}">   
+    <script id="shortlist-template-planning_application" type="text/x-handlebars-template">
+        <article class="listing-item listing-item--planning_application listing-item--background-grey10 listing-item--color-black" data-fb-result="{{indexUrl}}">   
 
             {{#if metaData.image}} 
                 <div class="listing-item__image-wrapper">
@@ -165,8 +165,7 @@
                             </h3>
                         </a>
                     </div>
-                {{/if}} 
-                
+                {{/if}}                 
                 
                 <#-- Body -->
                 <div class="listing-item__body">
@@ -193,10 +192,6 @@
                     <p>
                         <span class="fb-cart__remove"></span>
                     </p>
-
-                    <span class="enable-cart-on-result listing-item__action" 
-                            aria-label="Add result to the shortlist">
-                    </span> 
                 </div>          
 
                 <#-- Footer -->                    
@@ -224,5 +219,4 @@
             </div>
         </article>    
     </script>
-  
   </#macro>
