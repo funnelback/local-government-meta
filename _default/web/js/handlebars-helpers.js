@@ -67,6 +67,13 @@ window.Funnelback.Handlebars.registerHelper({
     list: function (list, options) {
       const delimiter = options.hash.delimiter || '|'
       const joinWith = options.hash.joinWith || ''
-      return list.split(delimiter).map(item => options.fn(item)).join(joinWith)
+      
+      if(list === undefined) {
+        return null
+      }
+      else {
+        return list.split(delimiter).map(item => options.fn(item)).join(joinWith)
+      }
+
     },
 });
