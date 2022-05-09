@@ -100,31 +100,6 @@
 					</div>
 				</div>   
 
-				<#-- Additional information such as metadata -->
-				<#--  <div class="fb-card__additional-info">
-					<hr class="mt-3 mb-3" />
-
-					<div class="card-text">
-						<p class="small text-muted">
-							Additional information
-						</p>
-						<span class="badge badge-pill badge-light">
-							$70,000
-						</span>
-						<span class="badge badge-pill badge-light">
-							full time
-						</span>          
-
-						<span class="badge badge-pill badge-light">
-							something else
-						</span>    
-
-						<span class="badge badge-pill badge-light">
-							another thing
-						</span>    
-					</div>
-				</div>  -->
-
 				<#-- Key call to actions (CTA) -->
 				<div class="fb-card__actions"> 
 					<a href="#" class="card-link fb-color-secondary mt-4" data-toggle="modal" data-target="#signupModal" >VIEW</a>
