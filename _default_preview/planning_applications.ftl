@@ -120,38 +120,3 @@
         </div>
     </article>
 </#macro>
-
-
-<#-- 
-    Handlebars template used to display the current object
-    in concierge.
---> 
-<#macro AutoCompleteTemplate>
-    <!-- planning_applications.AutoCompleteTemplate -->
-    <script id="auto-completion-planning_applications" type="text/x-handlebars-template">
-        <div class="fb-auto-complete--non-organic">
-            <h6>
-                {{extra.disp.listMetadata.planningApplicationName}}
-            </h6>
-            <div class="details">
-                {{#if extra.disp.listMetadata.planningWardName}}
-                    <div class="text-capitalize">{{extra.disp.listMetadata.planningWardName}}</div>
-                {{/if}}
-
-                {{#if extra.disp.listMetadata.planningDevelopeAddress}}
-                    <div class="fb-auto-complete__body__metadata text-muted">
-                        <span class="fas fa-map-marker-alt text-muted" aria-hidden="true"></span> 
-                        {{extra.disp.listMetadata.planningDevelopeAddress}}
-                    </div>
-                {{/if}}
-
-                {{#if extra.disp.listMetadata.planningRegisteredDate}}
-                    <div class="fb-auto-complete__body__metadata text-muted">
-                        <span class="fas fa-calendar-alt text-muted" aria-hidden="true"></span> 
-                        Registered on {{extra.disp.listMetadata.planningRegisteredDate}}
-                    </div>
-                {{/if}}
-            </div>
-        </div>
-    </script>
-</#macro>
