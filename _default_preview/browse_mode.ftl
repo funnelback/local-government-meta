@@ -16,7 +16,7 @@
 <#macro BrowseModeToggle>
     <!-- browse_mode::BrowseModeToggle -->
     <#-- Check to see if browse mode config has been setup for the current selected tab -->
-    <#if (question.getCurrentProfileConfig().get("stencils.tabs.browse_mode.facets.${(response.customData.stencilsTabsSelectedTab)!}"))!?has_content>
+    <#if (question.getCurrentProfileConfig().get("stencils.tabs.browse_mode.facets.${(response.customData.stencils.tabs.selected)!}"))!?has_content>
         <#switch (question.inputParameters["browse_mode"]?first)!?upper_case>
             <#case "TRUE">
             <#case "ON">
@@ -48,45 +48,41 @@
 <#macro BrowseModeToggleOn id="fb-browse-mode">
     <!-- browse_mode::BrowseModeToggleOn -->
     <#-- Output the controls to toggle browse mode from off to on -->
-    <section class="module-curator" role="complementary" aria-labelledby="${id}">
+    <section class="curator" role="complementary" aria-labelledby="${id}">
         <h2 id="${id}" class="sr-only">Toggle browse mode controls</h2>
         <article class="module-curator__list">
-            <article class="module-curator__item">
-                <div class="module-curator__top">                                    
-                    <div>
+            <article class="listing-item listing-item--promoted listing-item--background-grey10 listing-item--color-black">
+                <div class="listing-item__content">                                    
+                    <div class="listing-item__header">
                         <h3 class="module-curator__title">
-                            <a href="" class="module-curator__link">
-                                <#-- 
-                                    TODO - Update this section to include an appropriate title 
-                                --> 
-                                Directory of services
-                            </a>
+                            <#-- 
+                                TODO - Update this section to include an appropriate title 
+                            --> 
+                            Directory of services
                         </h3>
-                    </div>
-                    
-                </div>                    
-                <div class="module-curator__content">
-                    <#-- Output the description -->
-                    <p class="">
-                        <#-- 
-                            TODO - Update this section to include the 
-                            appropriate message or description (if required)
-                        -->                        
-                        We are responsible for providing a range of high quality services. 
-                        Our residents are at the heart of the services we offer.
-                    </p>
-                </div>
-                <#-- Output and option explicit the call to action link -->
-                
-                <#local defaultQuery = (question.getCurrentProfileConfig().get("stencils.tabs.browse_mode.default_query"))!"">
+                    </div>                    
+                    <div class="listing-item__body">
+                        <#-- Output the description -->
+                        <div class="listing-item__summary">
+                            <#-- 
+                                TODO - Update this section to include the 
+                                appropriate message or description (if required)
+                            -->                        
+                            We are responsible for providing a range of high quality services. 
+                            Our residents are at the heart of the services we offer.
+                        </div>
+                        <#-- Output and option explicit the call to action link -->                    
+                        <#local defaultQuery = (question.getCurrentProfileConfig().get("stencils.tabs.browse_mode.default_query"))!"">
 
-                <a class="btn--link" href="${question.getCurrentProfileConfig().get("ui.modern.search_link")}?${removeParam(QueryString, ["browse_mode", "start_rank", "query","sort"])}&browse_mode=true&query=${defaultQuery}&sort=title">
-                    <#-- 
-                        TODO - Update this section to include an appropriate 
-                        name for the link. 
-                    --> 
-                    Browse all our services
-                </a>
+                        <a class="listing-item__action" href="${question.getCurrentProfileConfig().get("ui.modern.search_link")}?${removeParam(QueryString, ["browse_mode", "start_rank", "query","sort"])}&browse_mode=true&s=${defaultQuery}&sort=title">
+                            <#-- 
+                                TODO - Update this section to include an appropriate 
+                                name for the link. 
+                            --> 
+                            Browse all our services
+                        </a>
+                    </div>
+                </div>                    
             </article>
         </article>
     </section>    

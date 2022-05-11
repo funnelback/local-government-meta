@@ -127,6 +127,8 @@
 				</div>
 
 				<div class="funnelback-search__side" id="funnelbach-search-facets">					
+					<@browse_mode.BrowseModeToggle />
+
 					<#-- Get facets for the current selected tab -->
 					<#assign tabFacets = question.getCurrentProfileConfig().get("stencils.tabs.facets.${(response.customData.stencils.tabs.selected)!}")!>
 
