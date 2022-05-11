@@ -102,30 +102,28 @@
         <#case "TRUE">
             
             <#-- Get the list of list facets to be displayed which has been configured by the user -->               
-            <#local listFacets = (question.getCurrentProfileConfig().get("stencils.tabs.browse_mode.facets.${(response.customData.stencilsTabsSelectedTab)!}"))!?split(",")![]>
+            <#local listFacets = (question.getCurrentProfileConfig().get("stencils.tabs.browse_mode.facets.${(response.customData.stencils.tabs.selected)!}"))!?split(",")![]>
             
             <#-- Only print the browse mode filter when it has been configured. -->
             <#if listFacets?filter(x -> x != "")?size gt 0>
-                <section class="module-az">
-                    <#-- 
-                        TODO - Currently this can be hardcoded for each implementation.
-                        Determine if is needed to make this configurable.
-                    -->
-                    <#--                  
-                    <section class="module-az__filter">
-                        I’m a
-                        <@facets.DropdownFacet facets=["Radio"] />
-                        looking to study in
-                        <@facets.DropdownFacet facets=["Date"] />
-                        I’m interested in a career in
-                        <@facets.DropdownFacet facets=["Format"] /> 
-                        . I’d like to study
-                        <@facets.DropdownFacet facets=["Format"] />
-                    </section>  
-                    -->
-                                    
-                    <@facets.ListFacets facets=listFacets />
-                </section>
+                <#-- 
+                    TODO - Currently this can be hardcoded for each implementation.
+                    Determine if is needed to make this configurable.
+                -->
+                <#--                  
+                <section class="module-az__filter">
+                    I’m a
+                    <@facets.DropdownFacet facets=["Radio"] />
+                    looking to study in
+                    <@facets.DropdownFacet facets=["Date"] />
+                    I’m interested in a career in
+                    <@facets.DropdownFacet facets=["Format"] /> 
+                    . I’d like to study
+                    <@facets.DropdownFacet facets=["Format"] />
+                </section>  
+                -->
+                                
+                <@facets.ListFacets facets=listFacets />
             </#if>
             <#break>
         <#default>        
