@@ -99,6 +99,7 @@
 
 			<div class="funnelback-search no-wysiwyg">			
 				<div class="funnelback-search__body" id="funnelbach-search-body">
+					<@browse_mode.BrowseByFilter />						
 					<h2 class="funnelback-search__title">Results</h2>
 					
 					<@search_tools.SearchTools />
@@ -107,7 +108,7 @@
 					<@spelling_suggestions.SpellingSuggestions />
 					<@facets_breadcrumbs.Breadcrumb />
 
-					<@s.AfterSearchOnly>						
+					<@s.AfterSearchOnly>
 						<@curator.HasCuratorOrBestBet position="top">
 							<@curator.Curator position="top" />
 						</@curator.HasCuratorOrBestBet>
@@ -139,7 +140,6 @@
 					<@curator.HasCuratorOrBestBet position="left">
 						<@curator.Curator position="left" />
 					</@curator.HasCuratorOrBestBet>
-
 				</div>
 				
 				<@sessions.SearchHistoryAndShortlist />
