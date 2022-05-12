@@ -13,40 +13,40 @@
     - Title for services
     - Date for social media
 -->
-<#macro BrowseModeToggle>
-    <!-- browse_mode::BrowseModeToggle -->
+<#macro AZToggle>
+    <!-- a-z_listing::AZToggle -->
     <#-- Check to see if browse mode config has been setup for the current selected tab -->
-    <#if (question.getCurrentProfileConfig().get("stencils.tabs.browse_mode.facets.${(response.customData.stencils.tabs.selected)!}"))!?has_content>
-        <#switch (question.inputParameters["browse_mode"]?first)!?upper_case>
+    <#if (question.getCurrentProfileConfig().get("stencils.tabs.a-z_listing.facets.${(response.customData.stencils.tabs.selected)!}"))!?has_content>
+        <#switch (question.inputParameters["a-z_listing"]?first)!?upper_case>
             <#case "TRUE">
             <#case "ON">
             <#case "1">
                 <#break>
             <#default>
-                <@BrowseModeToggleOn />
+                <@AZToggleOn />
         </#switch>
     </#if>
 </#macro>
 
 <#-- Provides the user an option to turn the browse mode off -->
 <#-- TODO - Come up with a UX for toggling off browse mode -->
-<#macro BrowseModeToggleOff>
-    <!-- browse_mode::BrowseModeToggleOff -->            
+<#macro AZToggleOff>
+    <!-- a-z_listing::AZToggleOff -->            
     <#-- 
         Output the controls to toggle browse mode from on to off 
         TODO - Need to decide how to handles the users query. Do we 
         retain it or do we do something else?
     -->
     <#--  
-        <a class="btn--link" href="${question.getCurrentProfileConfig().get("ui.modern.search_link")}?${removeParam(QueryString, ["browse_mode", "start_rank","query"])}}">
+        <a class="btn--link" href="${question.getCurrentProfileConfig().get("ui.modern.search_link")}?${removeParam(QueryString, ["a-z_listing", "start_rank","query"])}}">
             Back to search view                        
         </a>  
     -->
 </#macro>
 
 <#-- Provides the user an option to turn the browse mode on -->
-<#macro BrowseModeToggleOn id="fb-browse-mode">
-    <!-- browse_mode::BrowseModeToggleOn -->
+<#macro AZToggleOn id="fb-browse-mode">
+    <!-- a-z_listing::AZToggleOn -->
     <#-- Output the controls to toggle browse mode from off to on -->
     <section class="curator" role="complementary" aria-labelledby="${id}">
         <h2 id="${id}" class="sr-only">Toggle browse mode controls</h2>
@@ -72,9 +72,9 @@
                             Our residents are at the heart of the services we offer.
                         </div>
                         <#-- Output and option explicit the call to action link -->                    
-                        <#local defaultQuery = (question.getCurrentProfileConfig().get("stencils.tabs.browse_mode.default_query"))!"">
+                        <#local defaultQuery = (question.getCurrentProfileConfig().get("stencils.tabs.a-z_listing.default_query"))!"">
 
-                        <a class="listing-item__action" href="${question.getCurrentProfileConfig().get("ui.modern.search_link")}?${removeParam(QueryString, ["browse_mode", "start_rank", "query","sort"])}&browse_mode=true&s=${defaultQuery}&sort=title">
+                        <a class="listing-item__action" href="${question.getCurrentProfileConfig().get("ui.modern.search_link")}?${removeParam(QueryString, ["a-z_listing", "start_rank", "query","sort"])}&a-z_listing=true&s=${defaultQuery}&sort=title">
                             <#-- 
                                 TODO - Update this section to include an appropriate 
                                 name for the link. 
@@ -92,13 +92,13 @@
     Outputs the facets which are associated with browsing a 
     list of documents 
 -->
-<#macro BrowseByFilter>
-    <!-- browse_mode::BrowseByFilter -->
-    <#switch (question.inputParameters["browse_mode"]?first)!?upper_case>
+<#macro AZListingFilter>
+    <!-- a-z_listing::AZListingFilter -->
+    <#switch (question.inputParameters["a-z_listing"]?first)!?upper_case>
         <#case "TRUE">
             
             <#-- Get the list of list facets to be displayed which has been configured by the user -->               
-            <#local listFacets = (question.getCurrentProfileConfig().get("stencils.tabs.browse_mode.facets.${(response.customData.stencils.tabs.selected)!}"))!?split(",")![]>
+            <#local listFacets = (question.getCurrentProfileConfig().get("stencils.tabs.a-z_listing.facets.${(response.customData.stencils.tabs.selected)!}"))!?split(",")![]>
             
             <#-- Only print the browse mode filter when it has been configured. -->
             <#if listFacets?filter(x -> x != "")?size gt 0>
@@ -118,7 +118,7 @@
                     <@facets.DropdownFacet facets=["Format"] />
                 </section>  
                 -->
-                                
+                <h2>Browse by:</h2>                
                 <@facets.ListFacets facets=listFacets />
             </#if>
             <#break>
