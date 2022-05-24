@@ -149,38 +149,6 @@
     </article>
 </#macro>
 
-<#-- 
-	Handlebars template used to display the current object
-	in concierge.
---> 
-<#macro AutoCompleteTemplate>
-    <!-- results.courses::AutoCompleteTemplate -->
-	<script id="auto-completion-courses" type="text/x-handlebars-template">
-		<div class="fb-auto-complete--non-organic">
-            <h6>
-                {{extra.disp.title}}
-            </h6>
-
-            <div class="details">
-                {{#if extra.disp.listMetadata.courseSubject.[0]}}
-                    <div class="fb-auto-complete__body__metadata text-muted">
-                        {{extra.disp.listMetadata.courseSubject.[0]}} 
-                        {{#if extra.disp.listMetadata.courseNumber.[0]}}
-                            ({{extra.disp.listMetadata.courseNumber.[0]}})
-                        {{/if}} 
-                    </div>
-                {{/if}}
-
-                {{#if extra.disp.listMetadata.courseTerm.[0]}}
-                    <div class="fb-auto-complete__body__metadata text-muted">
-                        {{extra.disp.listMetadata.courseTerm.[0]}}
-                    </div>
-                {{/if}}
-            </div>      
-		</div>    
-	</script>
-</#macro>
-
 <#-- Output the cart template -->
 <#macro CartTemplate>
     <!-- result.courses::CartTemplate -->    
