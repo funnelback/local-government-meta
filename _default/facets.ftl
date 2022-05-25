@@ -18,13 +18,13 @@
     -->
     <div class="facet funnelback-facet no-wysiwyg" data-component="facet">
         <#--  Title for all facets -->
-        <div class="facet__title">
-            Refine your results
+        <div class="facet__group">
             <button 
                 type="button" 
-                class="facet-group__title facet-group__title--open facet-groups__controller" 
+                class="facet-group__title facet-group__title--open facet-groups-controller" 
                 data-component="collapse-all"
             >
+                Refine your results
                 <svg class="svg-icon svg-icon--closed">
                     <use href="#add"></use>
                 </svg>
@@ -34,7 +34,11 @@
                 <span class="sr-only">Collapse all facets</span>
             </button>
         </div>
-        <div class="facet-groups">
+        <div 
+            class="facet-groups"
+            data-component="facet-group-content"
+            aria-hidden="true"
+        >
             <#list facetNames as facetName>
                 <#list response.facets![] as facet>
                     <#--  

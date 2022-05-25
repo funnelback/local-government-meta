@@ -47,13 +47,13 @@
                 </div>
             </div>
             <img 
-                src="/s/resources/default~sp-stencils-resources-meta/showcase/images/university_background-02.png" 
+                src="//${httpRequest.getHeader('host')!}/s/resources/${question.collection.id}/${question.profile}/img/hero-banner-background.png" 
                 alt="Alt text description" 
                 class="hero-banner__image hero-banner__image--top" 
-                srcset="/s/resources/default~sp-stencils-resources-meta/showcase/images/university_background-02.png 1600w,
-                        /s/resources/default~sp-stencils-resources-meta/showcase/images/university_background-02.png 1000w,
-                        /s/resources/default~sp-stencils-resources-meta/showcase/images/university_background-02.png 800w,
-                        /s/resources/default~sp-stencils-resources-meta/showcase/images/university_background-02.png 450w"
+                srcset="//${httpRequest.getHeader('host')!}/s/resources/${question.collection.id}/${question.profile}/img/hero-banner-background.png 1600w,
+                        //${httpRequest.getHeader('host')!}/s/resources/${question.collection.id}/${question.profile}/img/hero-banner-background.png 1000w,
+                        //${httpRequest.getHeader('host')!}/s/resources/${question.collection.id}/${question.profile}/img/hero-banner-background.png 800w,
+                        //${httpRequest.getHeader('host')!}/s/resources/${question.collection.id}/${question.profile}/img/hero-banner-background.png 450w"
             >
         </div>
     </div>
