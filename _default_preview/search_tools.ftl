@@ -100,7 +100,10 @@
     <#-- Get the mode that is currently configured -->
     <#if (question.inputParameters["displayMode"]?first)!?has_content>
         <#-- Get the value from the user's selection -->
-        <#assign displayMode = question.inputParameters["displayMode"]?first!?upper_case>
+        <#assign displayMode = question.inputParameters["displayMode"]?first!?upper_case>    
+    <#elseif (question.getCurrentProfileConfig().get("stencils.results.display_mode."+ response.customData.stencils.tabs.selected))!?has_content>
+        <#-- Get the value from the profile config to see if a default has been specified from tabs. -->
+        <#assign displayMode = question.getCurrentProfileConfig().get("stencils.results.display_mode."+ response.customData.stencils.tabs.selected)!?upper_case>
     <#elseif (question.getCurrentProfileConfig().get("stencils.results.display_mode"))!?has_content>
         <#-- Get the value from profile config -->
         <#assign displayMode = question.getCurrentProfileConfig().get("stencils.results.display_mode")!?upper_case>
