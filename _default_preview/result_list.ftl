@@ -13,7 +13,6 @@
 -->
 <#macro ResultList nestedRank=-1>
     <#assign displayMode = search_tools.getDisplayMode(question)>
-
     <#if (response.customData["stencilsGroupingResults"].mode)!?has_content>
         <@GroupedResults view=displayMode/>
     <#else>
