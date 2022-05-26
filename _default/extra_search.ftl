@@ -19,9 +19,8 @@
 		 global question which is currently in scope.
 -->
 <#macro Preview extraSearchName documentType="" view="List">
-    <!-- rates.GenericView -->
+    <!-- extra_search::Preview -->
     <@fb.ExtraResults name=extraSearchName>
-        <!-- extra_search.Preview -->
         <div class="content-wrapper">
             <h3 class="search-results__section-title">${documentType}</h3>
             <#-- 
@@ -39,9 +38,10 @@
             </#if>
             
             <#-- Display the results from this extra search -->
-            <@base.NoResults />
-            <@base.ResultList />
-            <@base.QuickViewTemplates />
+            <@no_results.NoResults />
+            <@result_list.ResultList />
+            <#--  TODO - Add quickview  -->
+            <#--  <@base.QuickViewTemplates />  -->
 
         </div>
     </@fb.ExtraResults>

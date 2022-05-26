@@ -14,7 +14,7 @@
  * @param imageSelector CSS selector to find the images to process
  */
 
- const setupDeferredImages = (imageSelector = 'img.deferred') => {
+const setupDeferredImages = (imageSelector = 'img.deferred') => {
     const images = document.querySelectorAll(imageSelector)
     for (let i = 0; i < images.length; i++) {
         const image = images[i]

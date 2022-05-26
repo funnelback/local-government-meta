@@ -1,16 +1,12 @@
 <#ftl encoding="utf-8" output_format="HTML" />
 <#-- 
   This template contains markup and logic related to the 
-  faceted navigation feature.
+  faceted navigation feature. It provides the markup and logic
+  to display both the facet and facet categories.
 -->
 
-<#--
-    Generates facets
-
-    @param facets Comma delimited list of facet names to display. If not set all facets are displayed
---->
-<#macro Facets facets="">
-    <!-- facets.Facets -->
+<#macro Facets facets="" maxCategories=6 >
+    <!-- facets::Facets -->
     <#local facetNames = [] />
     <#if facets != "">
         <#local facetNames = facets?split(",") />
@@ -19,112 +15,140 @@
     <#-- 
         List the provided names first rather than the facet order, to
         to preserve the order that was passed in 
-        -->
-    <ul class="module-filter__list">
-        <#list facetNames as facetName>
-            <#list response.facets![] as facet>
-                <#if facetNames?size lt 1  || facetName == facet.name>
-                    <#if facet.allValues?size gt 0>
-                        <li class="module-filter__item">
-                            <span class="module-filter__item-title" aria-haspopup="true" aria-expanded="true"
-                                tabindex="0">
-                                ${facet.name}
-                            </span>
+    -->
+    <div class="facet funnelback-facet no-wysiwyg" data-component="facet">
+        <#--  Title for all facets -->
+        <div class="facet__group">
+            <button 
+                type="button" 
+                class="facet-group__title facet-group__title--open facet-groups-controller" 
+                data-component="collapse-all"
+            >
+                Refine your results
+                <svg class="svg-icon svg-icon--closed">
+                    <use href="#add"></use>
+                </svg>
+                <svg class="svg-icon svg-icon--open">
+                    <use href="#subtract"></use>
+                </svg>
+                <span class="sr-only">Collapse all facets</span>
+            </button>
+        </div>
+        <div 
+            class="facet-groups"
+            data-component="facet-group-content"
+            aria-hidden="true"
+        >
+            <#list facetNames as facetName>
+                <#list response.facets![] as facet>
+                    <#--  
+                        Show only the facets which have been configured. 
+                        If nothing has been configured, we want all facets 
+                        by default.
+                    -->
+                    <#if facetName == facet.name || facetNames?has_content == false>
+                        <#if facet.allValues?size gt 0>
+                            <#--  Facet  -->
+                            <div class="facet-group" data-component="facet-group">
+                                <#--  
+                                    Show the name of the facet as a heading which allows the 
+                                    user to expland and collapse the associated facet categories.  
+                                -->
+                                <button 
+                                    type="button" 
+                                    class="facet-group__title facet-group__title--open"
+                                    data-component="facet-group-control" 
+                                    >
+                                    ${facet.name}
+                                    <svg class="svg-icon svg-icon--closed">
+                                        <use href="#add"></use>
+                                    </svg>
+                                    <svg class="svg-icon svg-icon--open">
+                                        <use href="#subtract"></use>
+                                    </svg>
+                                </button>
 
-                            <div class="module-filter__facets">
-                                <div class="content-wrapper">
-                                    <ul class="module-filter__facets-list" role="menu">
-                                        <#list facet.allValues as value>
-                                            <li class="module-filter__facets-item" role="menuitem">
-                                                <#if facet.guessedDisplayType == "RADIO_BUTTON">
-                                                    <!-- Radio facets -->
-                                                    <a href="${value.toggleUrl!}" class="module-filter__facets-link round ${value.selected?then("active","")}">
-                                                        ${value.label} 
-                                                        <span>
-                                                            ${(value.count)!"0"?string}
-                                                        </span>                                                    
-                                                    </a>                                                      
-                                                <#elseif facet.guessedDisplayType == "CHECKBOX">
-                                                    <!-- Checkbox facets -->
-                                                    <a href="${value.toggleUrl!}" class="module-filter__facets-link square ${value.selected?then("active","")}">
-                                                        ${value.label} 
-                                                        <span>
-                                                            ${(value.count)!"0"?string}
-                                                        </span>
-                                                    </a>
-                                                <#elseif value.selected>
-                                                    <!-- Drilldown facets -->
-                                                    <a href="${value.toggleUrl!}" class="module-filter__facets-link ${value.selected?then("active","")}">
-                                                        <#if facet.guessedDisplayType == "SINGLE_DRILL_DOWN" && value?counter gt 1>
-                                                            <span class="text-muted ml-${value?counter}">&#8627;</span>                                                                                                                        
-                                                        </#if>
-                                                        ${value.label} 
-                                                        (${(value.count)!"0"?string})
-                                                    </a>                                                        
-                                                <#else>
-                                                    <a href="${value.toggleUrl!}" class="module-filter__facets-link square ${value.selected?then("active","")}">
-                                                        ${value.label}
-                                                        <span>
-                                                            ${(value.count)!"0"?string}
-                                                        </span>                                                        
-                                                    </a>                                                      
-                                                </#if>
-                                            </li>
-                                        </#list>
-                                        <#-- 
-                                            Display a "Clear all" link except for radio button type facets
-                                            as they already have an "all" value 
-                                        -->
-                                        <#if facet.selected && facet.guessedDisplayType != "RADIO_BUTTON">
-                                            <li class="module-filter__facets-item" role="menuitem">
-                                                <a class="module-filter__facets-link module-filter__facets-clear_all_link" href="${facet.unselectAllUrl}">
-                                                    clear all
-                                                </a>
-                                            </li>                                        
-                                        </#if>                                        
-                                    </ul>
-                                    <button class="btn-toggle" data-show="3" data-more="+ More" data-less="- Less">
-                                        <span class="btn-toggle__text">+ More</span>
-                                        <span class="btn-toggle__more">(6)</span>
-                                    </button>
-
-                                </div>
+                                <#--  Facet categories  -->
+                                <@FacetCategories facet=facet maxCategories=maxCategories />
+                                      
+                                <#--  Clear all link - Provide the ability to remove all selections from the current facet.  -->
+                                <#if facet.selected>
+                                    <a href="${facet.unselectAllUrl}" class="facet-group__clear" title="Remove all '${facet.name}' refinements">
+                                        <svg class="svg-icon svg-icon--large">
+                                        <title>Close search</title>
+                                        <use href="#close"></use>
+                                        </svg> Clear all
+                                    </a>
+                                </#if>
                             </div>
-                        </li>
-                    </#if>
-                </#if>
-            </#list>
-        </#list>
-    </ul>                             
-</#macro>
-
-<#--
-    Display the facet bread crumb which describes the 
-    facets/filter options that have been selected by the user
---> 
-<#macro FacetBreadBox>
-    <!-- facets.FacetsBreadBox -->
-    <#if response.facetExtras.hasSelectedNonTabFacets>
-        <section class="filter-list search-results__total clearfix">
-            <span class="filter-list__title">Selected filters:</span>
-            <ul class="filter-list__list">
-                <#list response.facets as facet>
-                    <#if facet.selected && facet.guessedDisplayType != "TAB">
-                        <#list facet.selectedValues as value>
-                            <li class="filter-list__item">
-                                <a href="${value.toggleUrl}" title="Remove '${facet.name}: ${value.label}'" class="filter-list__link"><span class="sr-only">Clear filter </span><strong>${facet.name}:</strong> ${value.label}</a>
-                            </li>
-                        </#list>
+                        </#if>
                     </#if>
                 </#list>
-            </ul>
-        </section>
-    </#if>
+            </#list>
+        </div>
+    </div>
 </#macro>
 
+<#--  Display all the facet categories for the given facet.  -->
+<#macro FacetCategories facet maxCategories=6>
+    <!-- facets::FacetCategories -->
+    <div
+        role="listbox"
+        <#if facet.guessedDisplayType == "CHECKBOX">aria-multiselectable="true"</#if>
+        aria-label="${facet.name}"
+        class="
+        facet-group__list
+        facet-group__type-${(facet.guessedDisplayType?lower_case)?replace('_','-')}
+        facet-group__list--open
+        "
+        data-component="facet-group-content"
+        data-type="${(facet.guessedDisplayType?lower_case)?replace('_','-')}"
+    >
+        <#list facet.allValues as category>
+            <a 
+                <#if facet.guessedDisplayType == "CHECKBOX" || facet.guessedDisplayType == "RADIO_BUTTON">
+                    aria-selected="${category.selected?then('true', 'false')}"
+                <#elseif facet.guessedDisplayType == "SINGLE_DRILL_DOWN" && category.selected>
+                    aria-selected="true"                  
+                </#if> 
+                role="option" 
+                class="facet-group__list-item ${category.selected?then("facet-group__list-item-selected","unchecked")}  <#if category_index gt 5>facet-group__list-item--hidden</#if>" 
+                href="${category.toggleUrl!}" 
+                title="Refine by '${category.label}'" 
+                data-component="facet-group__list-item">
+                
+                <#--  Display a little symbol to signify a drill down facet has been selected.  -->
+                <#if facet.guessedDisplayType == "SINGLE_DRILL_DOWN" && category.selected>
+                    <i class="fas fa-level-up-alt"></i>
+                </#if> 
+                ${category.label}  
+
+                <#if category.count?? && !category.selected>
+                    <span class="facet-group__results-number">${category.count}</span>
+                </#if>
+            </a>
+        </#list>
+
+        <#if facet.allValues?size gt maxCategories?number >
+            <button
+                type="button"
+                class="facet-group__show-more"
+                data-component="facet-group-show-more-button"
+            >
+                <svg class="svg-icon"><use href="#add"></use></svg>
+                Show more
+                <span class="facet-group-show-more__hidden-items-count">
+                    ( ${facet.allValues?size - maxCategories?number} )
+                </span>
+            </button>
+        </#if>
+    </div>
+</#macro>
+
+<#--  TODO - Update to suit the new design system  -->
 <#-- Displays facet catergories in a facet as a dropdown list -->
 <#macro DropdownFacet facets=[]>
-    <!-- facets.DropdownFacet -->
+    <!-- facets::DropdownFacet -->
 
     <#-- 
         Find all the facets with values and determine if we want to display all tabs or just the tabs specified 
@@ -189,33 +213,43 @@
     
     <#-- Display the facets as a list -->
     <#list facetsToDisplay as facet>
-        <#list facet.allValues>
-            <ul class="module-az__list">        
-                <span class="sr-only">Refine by ${(facet.name)!}</span> 
-                <#items as value>
-                    <li class="module-az__item ${value.selected?then("active","")}">
-                        <#if value.count gt 0>                        
-                            <a href="${question.collection.configuration.value("ui.modern.search_link")}${value.toggleUrl!}" 
-                                class="module-az__link"
-                                title="Refine by ${value.label!} which has about ${(value.count)!"0"?string} results"
-                            >
-                                ${(value.label)!} 
-                                <span class="sr-only">Refine by</span> 
-                            </a>
-                        <#else>
-                            <span>
-                                ${(value.label)!}                         
-                            </span>
-                        </#if>
-                    </li>
-                </#items>          
-            </ul>
-        </#list>
+        <div class="az-index">
+            <#list facet.allValues>
+                <ul class="az-index__list">        
+                    <span class="sr-only">Refine by ${(facet.name)!}</span> 
+                    <#items as value>
+                        <li class="az-index__list-item">
+                            <#if value.count gt 0>
+                            <#-- Enabled case -->                        
+                                <a href="${question.collection.configuration.value("ui.modern.search_link")}${value.toggleUrl!}" 
+                                    class="az-index__link ${value.selected?then("active","")}"
+                                    title="Refine by ${value.label!} which has about ${(value.count)!"0"?string} results"
+                                >
+                                    <span class="sr-only">Navigate to</span> 
+                                    ${(value.label)!} 
+                                </a>                            
+                            <#else>
+                            <#-- Disabled case -->                        
+                                <span
+                                    aria-disabled="true"
+                                    class="az-index__link disabled"
+                                >
+                                    <span class="sr-only">
+                                        Navigate to
+                                    </span>
+                                    ${(value.label)!}                                                             
+                                <span>
+                            </#if>
+                        </li>
+                    </#items>          
+                </ul>
+            </#list>
+        </div>
     </#list>
 </#macro>
 
 <#macro ClearAllFacets>
-    <!-- facets.ClearAllFacets -->
+    <!-- facets::ClearAllFacets -->
     <#if (response.facetExtras.hasSelectedNonTabFacets)!>
         <a href="${(response.facetExtras.unselectAllFacetsUrl)!}"
         class="search-results__tools-link highlight">Clear all filters</a>
@@ -257,3 +291,6 @@
         <#nested>
     </#if>
 </#macro>
+
+
+

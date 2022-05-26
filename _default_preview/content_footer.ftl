@@ -1,5 +1,11 @@
 <#ftl encoding="utf-8"output_format="HTML"/>
-<#-- This template outputs the content of the header -->
+<#-- 
+    Hardcoded footer which can be used if dynamically getting the 
+    footer is not possible.
+
+    The example below is simple a sample and currently not being 
+    active used in any Stencil demo.
+-->
 
 <footer class="fb-footer">
     <div class="content-wrapper">
