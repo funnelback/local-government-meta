@@ -30,7 +30,7 @@
 <#import "facets.ftl" as facets />
 <#import "tier_bars.ftl" as tier_bars />
 <#import "pagination.ftl" as pagination />
-<#import "browse_mode.ftl" as browse_mode />
+<#import "a-z_listing.ftl" as az_listing />
 <#import "contextual_navigation.ftl" as contextual_navigation />
 <#import "auto_complete.ftl" as auto_complete />
 <#import "auto_complete.concierge.ftl" as concierge />
@@ -99,6 +99,7 @@
 
 			<div class="funnelback-search no-wysiwyg">			
 				<div class="funnelback-search__body" id="funnelbach-search-body">
+					<@az_listing.AZListingFilter />						
 					<h2 class="funnelback-search__title">Results</h2>
 					
 					<@search_tools.SearchTools />
@@ -107,7 +108,7 @@
 					<@spelling_suggestions.SpellingSuggestions />
 					<@facets_breadcrumbs.Breadcrumb />
 
-					<@s.AfterSearchOnly>						
+					<@s.AfterSearchOnly>
 						<@curator.HasCuratorOrBestBet position="top">
 							<@curator.Curator position="top" />
 						</@curator.HasCuratorOrBestBet>
@@ -126,6 +127,8 @@
 				</div>
 
 				<div class="funnelback-search__side" id="funnelbach-search-facets">					
+					<@az_listing.AZToggle />
+
 					<#-- Get facets for the current selected tab -->
 					<#assign tabFacets = question.getCurrentProfileConfig().get("stencils.tabs.facets.${(response.customData.stencils.tabs.selected)!}")!>
 
@@ -139,7 +142,6 @@
 					<@curator.HasCuratorOrBestBet position="left">
 						<@curator.Curator position="left" />
 					</@curator.HasCuratorOrBestBet>
-
 				</div>
 				
 				<@sessions.SearchHistoryAndShortlist />

@@ -18,13 +18,13 @@
     -->
     <div class="facet funnelback-facet no-wysiwyg" data-component="facet">
         <#--  Title for all facets -->
-        <div class="facet__title">
-            Refine your results
+        <div class="facet__group">
             <button 
                 type="button" 
-                class="facet-group__title facet-group__title--open facet-groups__controller" 
+                class="facet-group__title facet-group__title--open facet-groups-controller" 
                 data-component="collapse-all"
             >
+                Refine your results
                 <svg class="svg-icon svg-icon--closed">
                     <use href="#add"></use>
                 </svg>
@@ -34,7 +34,11 @@
                 <span class="sr-only">Collapse all facets</span>
             </button>
         </div>
-        <div class="facet-groups">
+        <div 
+            class="facet-groups"
+            data-component="facet-group-content"
+            aria-hidden="true"
+        >
             <#list facetNames as facetName>
                 <#list response.facets![] as facet>
                     <#--  
@@ -209,28 +213,38 @@
     
     <#-- Display the facets as a list -->
     <#list facetsToDisplay as facet>
-        <#list facet.allValues>
-            <ul class="module-az__list">        
-                <span class="sr-only">Refine by ${(facet.name)!}</span> 
-                <#items as value>
-                    <li class="module-az__item ${value.selected?then("active","")}">
-                        <#if value.count gt 0>                        
-                            <a href="${question.collection.configuration.value("ui.modern.search_link")}${value.toggleUrl!}" 
-                                class="module-az__link"
-                                title="Refine by ${value.label!} which has about ${(value.count)!"0"?string} results"
-                            >
-                                ${(value.label)!} 
-                                <span class="sr-only">Refine by</span> 
-                            </a>
-                        <#else>
-                            <span>
-                                ${(value.label)!}                         
-                            </span>
-                        </#if>
-                    </li>
-                </#items>          
-            </ul>
-        </#list>
+        <div class="az-index">
+            <#list facet.allValues>
+                <ul class="az-index__list">        
+                    <span class="sr-only">Refine by ${(facet.name)!}</span> 
+                    <#items as value>
+                        <li class="az-index__list-item">
+                            <#if value.count gt 0>
+                            <#-- Enabled case -->                        
+                                <a href="${question.collection.configuration.value("ui.modern.search_link")}${value.toggleUrl!}" 
+                                    class="az-index__link ${value.selected?then("active","")}"
+                                    title="Refine by ${value.label!} which has about ${(value.count)!"0"?string} results"
+                                >
+                                    <span class="sr-only">Navigate to</span> 
+                                    ${(value.label)!} 
+                                </a>                            
+                            <#else>
+                            <#-- Disabled case -->                        
+                                <span
+                                    aria-disabled="true"
+                                    class="az-index__link disabled"
+                                >
+                                    <span class="sr-only">
+                                        Navigate to
+                                    </span>
+                                    ${(value.label)!}                                                             
+                                <span>
+                            </#if>
+                        </li>
+                    </#items>          
+                </ul>
+            </#list>
+        </div>
     </#list>
 </#macro>
 
