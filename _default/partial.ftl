@@ -40,13 +40,13 @@
     These imports are required for the automatic template selection to work
     The various namespaces (e.g. 'video', 'facebook') need to be on the main scope 
 -->
-<#import "services.ftl" as services />
-<#import "cemetery.ftl" as cemetery />
-<#import "roadworks.ftl" as roadworks />
-<#import "planning_applications.ftl" as planning_applications />
+<#import "project.ftl" as project />
+<#import "courses.ftl" as courses />
+<#import "people.ftl" as people />
+<#import "video.ftl" as video />
+<#import "facebook.ftl" as facebook />
+<#import "events.ftl" as events />
 <#import "twitter.ftl" as twitter />
-<#import "faqs.ftl" as faqs />
-<#import "rates.ftl" as rates />
 
 <#-- Used to send absolute URLs for resources -->
 <#assign httpHost=httpRequest.getHeader('host')>
@@ -109,8 +109,11 @@
 <script src="https://${httpHost!}/s/resources/${question.collection.id}/${question.profile}/js/funnelback.autocompletion-2.6.0.stencils.js"></script>
 
 <#-- Output the auto complete templates for concierge -->
-<@faqs.AutoCompleteTemplate />
-<@planning_applications.AutoCompleteTemplate />
+<#-- 
+    TODO - Ensure that the relevant templates are included for auto-complete.
+-->
+<@courses.AutoCompleteTemplate />
+<@people.AutoCompleteTemplate />
     
 <script>
     jQuery(document).ready( function() {
