@@ -12,7 +12,7 @@
 -->
 <#macro Shortlist>
 	<#if question.collection.configuration.valueAsBoolean("ui.modern.session")>
-		<section class="search-cart" id="search-cart" class="search-results__list search-results__list--list-view">
+		<section class="search-cart" id="search-cart" class="search-results__list search-results__list--list-view" style="display: none;">
 		</section>
 	</#if>
 </#macro>
