@@ -90,7 +90,7 @@
 	
 	<#--  <@client_includes.ContentHeader />  -->
 
-		<div class="stencils__main">
+		<div class="stencils__main local-government">
 					
 			<@hero_banner.SearchForm />
 
