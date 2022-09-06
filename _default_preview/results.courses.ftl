@@ -150,8 +150,8 @@
 </#macro>
 
 <#-- Output the cart template -->
-<#macro CartTemplate>
-    <!-- result.courses::CartTemplate -->    
+<#macro ShortlistTemplate>
+    <!-- result.courses::ShortlistTemplate -->    
     <#-- 
         Note: Cart templates as assigned to document types in profile.cfg/collection.cfg using 
         the following configuration:
