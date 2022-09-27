@@ -144,9 +144,10 @@
 					</@curator.HasCuratorOrBestBet>
 				</div>
 				
-				<@sessions.SearchHistoryAndShortlist />
 			</div>				
 		</div>
+	
+	<@sessions.SearchHistoryAndShortlist />
 
 	<#-- Third parties -->
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script>	
@@ -192,18 +193,8 @@
 		<script nomodule src="https://cdn.jsdelivr.net/npm/es6-promise@4/dist/es6-promise.auto.min.js"></script>
 		
 		<#-- We have replaced the products session code with an extended version for Stencils -->
-		<#if question.profile?contains("_preview")>
-			<#-- 
-				Use the non-minified version for the preview so that 
-				it is easier to step through and investigate bugs 
-			-->
-			<script defer src="/s/resources/${question.collection.id}/${question.profile}/js/funnelback.session-cart-0.1.js"></script>
-			<script defer src="/s/resources/${question.collection.id}/${question.profile}/js/funnelback.session-history-0.1.js"></script>
-		<#else>
-			<script type="module" defer src="/s/resources/${question.collection.id}/${question.profile}/js/funnelback.session-cart-0.1.module.min.js"></script>
-      		<script nomodule defer src="/s/resources/${question.collection.id}/${question.profile}/js/funnelback.session-cart-0.1.legacy.min.js"></script>
-			<script defer src="/s/resources/${question.collection.id}/${question.profile}/js/funnelback.session-history-0.1.min.js"></script>
-		</#if>
+		<script defer src="/s/resources/${question.collection.id}/${question.profile}/js/funnelback.session-cart-0.1.js"></script>
+		<script defer src="/s/resources/${question.collection.id}/${question.profile}/js/funnelback.session-history-0.1.js"></script>
 		<@sessions.Configuration />
 	</#if>
 </body>
