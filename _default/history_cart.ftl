@@ -199,12 +199,12 @@
 		</div>
 		<div class="card-body">
 			<div class="card-text">
-			{{#if.listMetadata.image[0]}}
+			{{#if.listMetadata.image.[0]}}
 				<img class="img-fluid float-right" alt="{{result.title}}" src="{{metaData.image}}">
 			{{/if}}
 
-			{{#if.listMetadata.c[0]}}
-				{{#if.listMetadata.date[0]}}<small class="text-muted">{{.listMetadata.date[0]}}:&nbsp;</small>{{/if}}
+			{{#if.listMetadata.c.[0]}}
+				{{#if.listMetadata.date.[0]}}<small class="text-muted">{{.listMetadata.date[0]}}:&nbsp;</small>{{/if}}
 				{{metaData.c}}
 			{{/if}}
 			</div>
