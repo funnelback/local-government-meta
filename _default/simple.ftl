@@ -62,6 +62,9 @@
 <#import "results.rates.ftl" as rates />
 <#import "results.roadworks.ftl" as roadworks />
 
+<#-- Used to send absolute URLs for resources -->
+<#assign httpHost=httpRequest.getHeader('host')!"">
+
 <!DOCTYPE html>
 <html lang="en" class="stencils">
 <head>
@@ -84,68 +87,70 @@
 		<#include "utilities.icons.ftl" />
 	</div>
 
-	<a href="#search-results" class="sr-only" title="Skip to search results">
-		Skip to search results asdsa
+	<a href="#funnelbach-search-body" class="sr-only" title="Skip to search results">
+		Skip to search results
 	</a>
-	
+
+	<#--  
+		Uncomment this if you would like to use include urls to inject 
+		the client's header.
+	-->
 	<#--  <@client_includes.ContentHeader />  -->
 
-		<div class="stencils__main local-government">
-					
-			<@hero_banner.SearchForm />
+	<div class="stencils__main local-government">				
+		<@hero_banner.SearchForm />
 
-			<#assign defaultTab = question.getCurrentProfileConfig().get("stencils.tabs.default_tabs_facet_name")!"Tabs">
-			<@tabs.Tabs tabs=[defaultTab] />
+		<#assign defaultTab = question.getCurrentProfileConfig().get("stencils.tabs.default_tabs_facet_name")!"Tabs">
+		<@tabs.Tabs tabs=[defaultTab] />
 
-			<div class="funnelback-search no-wysiwyg">			
-				<div class="funnelback-search__body" id="funnelbach-search-body">
-					<@az_listing.AZListingFilter />						
-					<h2 class="funnelback-search__title">Results</h2>
-					
-					<@search_tools.SearchTools />
-					
-					<@query_blending.QueryBlending />
-					<@spelling_suggestions.SpellingSuggestions />
-					<@facets_breadcrumbs.Breadcrumb />
-
-					<@s.AfterSearchOnly>
-						<@curator.HasCuratorOrBestBet position="top">
-							<@curator.Curator position="top" />
-						</@curator.HasCuratorOrBestBet>
-
-						<@no_results.NoResults />
-						<@result_list.ResultList />
-
-						<@curator.HasCuratorOrBestBet position="bottom">
-							<@curator.Curator position="bottom" />
-						</@curator.HasCuratorOrBestBet>
-
-					</@s.AfterSearchOnly>
-
-					<@pagination.Pagination />
-					<@contextual_navigation.ContextualNavigation />
-				</div>
-
-				<div class="funnelback-search__side" id="funnelbach-search-facets">					
-					<@az_listing.AZToggle />
-
-					<#-- Get facets for the current selected tab -->
-					<#assign tabFacets = question.getCurrentProfileConfig().get("stencils.tabs.facets.${(response.customData.stencils.tabs.selected)!}")!>
-
-					<@facets.HasFacets facets=tabFacets>
-						<@facets.Facets 
-							facets=tabFacets 
-							maxCategories=question.getCurrentProfileConfig().get("stencils.faceted_navigation.max_displayed_categories")!
-						/>
-					</@facets.HasFacets>
-
-					<@curator.HasCuratorOrBestBet position="left">
-						<@curator.Curator position="left" />
-					</@curator.HasCuratorOrBestBet>
-				</div>
+		<div class="funnelback-search no-wysiwyg">			
+			<div class="funnelback-search__body" id="funnelbach-search-body">
+				<@az_listing.AZListingFilter />						
+				<h2 class="funnelback-search__title">Results</h2>
 				
-			</div>				
-		</div>
+				<@search_tools.SearchTools />
+				
+				<@query_blending.QueryBlending />
+				<@spelling_suggestions.SpellingSuggestions />
+				<@facets_breadcrumbs.Breadcrumb />
+
+				<@s.AfterSearchOnly>
+					<@curator.HasCuratorOrBestBet position="top">
+						<@curator.Curator position="top" />
+					</@curator.HasCuratorOrBestBet>
+
+					<@no_results.NoResults />
+					<@result_list.ResultList />
+
+					<@curator.HasCuratorOrBestBet position="bottom">
+						<@curator.Curator position="bottom" />
+					</@curator.HasCuratorOrBestBet>
+
+				</@s.AfterSearchOnly>
+
+				<@pagination.Pagination />
+				<@contextual_navigation.ContextualNavigation />
+			</div>
+
+			<div class="funnelback-search__side" id="funnelbach-search-facets">					
+				<@az_listing.AZToggle />
+
+				<#-- Get facets for the current selected tab -->
+				<#assign tabFacets = question.getCurrentProfileConfig().get("stencils.tabs.facets.${(response.customData.stencils.tabs.selected)!}")!>
+
+				<@facets.HasFacets facets=tabFacets>
+					<@facets.Facets 
+						facets=tabFacets 
+						maxCategories=question.getCurrentProfileConfig().get("stencils.faceted_navigation.max_displayed_categories")!
+					/>
+				</@facets.HasFacets>
+
+				<@curator.HasCuratorOrBestBet position="left">
+					<@curator.Curator position="left" />
+				</@curator.HasCuratorOrBestBet>
+			</div>			
+		</div>				
+	</div>
 	
 	<@sessions.SearchHistoryAndShortlist />
 
@@ -160,26 +165,16 @@
 		Avoid changing these if possible.
 	-->
 	<#-- Stencil specific code such as the quickview and dropdowns -->
-	<script type="text/javascript" src="/s/resources/${question.collection.id}/${question.profile}/themes/stencils/js/main.js"></script>
+	<script type="text/javascript" src="https://${httpHost!}/s/resources/${question.collection.id}/${question.profile}/themes/stencils/js/main.js"></script>
 
 	
 	<#-- Stencils specific code -->
-	<script src="/s/resources/${question.collection.id}/${question.profile}/js/stencils.js"></script> 
-	<script src="/s/resources/${question.collection.id}/${question.profile}/js/handlebars-helpers.js"></script> 
+	<script src="https://${httpHost!}/s/resources/${question.collection.id}/${question.profile}/js/stencils.js"></script> 
+	<script src="https://${httpHost!}/s/resources/${question.collection.id}/${question.profile}/js/handlebars-helpers.js"></script> 
 				
 	<script>
 		window.addEventListener('DOMContentLoaded', function() {			
-			setupDeferredImages();
-			
-			// Make the history button accessible via the keyboard for WCAG 2.1
-			var historyElement = document.querySelectorAll('.session-history-toggle');
-
-			// Add a href which does not reference any valid anchor so that 
-			// hitting enter while the element is in focus will activate
-			// the onclick event
-			historyElement.forEach((element) => {
-				element.setAttribute("href", "#fb-history-placeholder");
-			});
+			setupDeferredImages();			
 		});
 	</script>
 
@@ -193,8 +188,8 @@
 		<script nomodule src="https://cdn.jsdelivr.net/npm/es6-promise@4/dist/es6-promise.auto.min.js"></script>
 		
 		<#-- We have replaced the products session code with an extended version for Stencils -->
-		<script defer src="/s/resources/${question.collection.id}/${question.profile}/js/funnelback.session-cart-0.1.js"></script>
-		<script defer src="/s/resources/${question.collection.id}/${question.profile}/js/funnelback.session-history-0.1.js"></script>
+		<script defer src="https://${httpHost!}/s/resources/${question.collection.id}/${question.profile}/js/funnelback.session-cart-0.1.js"></script>
+		<script defer src="https://${httpHost!}/s/resources/${question.collection.id}/${question.profile}/js/funnelback.session-history-0.1.js"></script>
 		<@sessions.Configuration />
 	</#if>
 </body>
