@@ -25,7 +25,7 @@
 	<!-- sessions.shortlist.ShortlisTtemplate -->
 	<script id="cart-template" type="text/x-handlebars-template">
         <button id="flb-cart-box-back" class="search-shortlist__hide" type="button">
-            <svg class="svg-icon svg-icon--small"><use href="#arrow"></use></svg>
+            <svg class="svg-icon search-shortlist__icon"><use href="#arrow"></use></svg>
             {{>label-block label=backLabel}}
         </button>
 
@@ -38,7 +38,7 @@
                 class="search-shortlist__clear"
                 title="Remove all items from the shortlist"
             >
-                <svg class="svg-icon svg-icon"><use href="#close"></use></svg>
+				<svg class="svg-icon search-shortlist__icon"><use href="#close"></use></svg>
                     {{>label-block label=clearLabel}}
             </button>
         </div> 
@@ -107,7 +107,7 @@
 						class="drawer__close"
 					>
 						<svg
-							class="svg-icon svg-icon--xlarge"
+							class="svg-icon drawer__icon"
 							role="img"
 						>
 							<title>Close</title>

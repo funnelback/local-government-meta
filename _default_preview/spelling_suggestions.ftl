@@ -6,7 +6,7 @@
     <!-- spelling_suggestions::SpellingSuggestions -->
     <#if (response.resultPacket.spell)??>
         <div class="search-spelling-suggestions">
-            <svg class="svg-icon svg-icon--small">
+            <svg className="svg-icon search-spelling-suggestions__icon">
                 <use href="#information"></use>
             </svg>
             Did you mean

@@ -28,7 +28,7 @@
 						class="drawer__close"
 					>
 						<svg
-							class="svg-icon svg-icon--xlarge"
+							class="svg-icon drawer__icon"
 							role="img"
 						>
 							<title>Close</title>
