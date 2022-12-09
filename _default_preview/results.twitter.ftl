@@ -93,7 +93,7 @@
                             listing-item__subtitle-block--highlight
                             "
                         >
-                            <svg aria-hidden="true" class="svg-icon">
+                            <svg aria-hidden="true" class="svg-icon listing-item__icon">
                             <use href="#logo-twitter"></use>
                             </svg>
                             via twitter
@@ -189,7 +189,7 @@
                                 listing-item__subtitle-block--highlight
                                 "
                             >
-                                <svg aria-hidden="true" class="svg-icon">
+                                <svg aria-hidden="true" class="svg-icon listing-item__icon">
                                 <use href="#logo-twitter"></use>
                                 </svg>
                                 via twitter

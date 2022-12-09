@@ -101,7 +101,7 @@
             <div class="listing-item__footer">
                 <#if (result.listMetadata["planningRegisteredDate"]?first)!?has_content>                
                     <div class="listing-item__footer-block listing-item__footer-block">
-                        <svg class="svg-icon svg-icon--small">
+                        <svg class="svg-icon listing-item__icon">
                             <title>Registered date</title>
                             <use href="#calendar"></use>
                         </svg>
@@ -110,7 +110,7 @@
                 </#if>
                 <#if (result.listMetadata["planningDevelopementAddress"]?first)!?has_content>
                     <div class="listing-item__footer-block listing-item__footer-block">
-                        <svg class="svg-icon svg-icon--small">
+                        <svg class="svg-icon listing-item__icon">
                             <title>Time</title>
                             <use href="#map"></use>
                         </svg>
@@ -198,7 +198,7 @@
                 <div class="listing-item__footer">
                     {{#if metaData.planningRegisteredDate}} 
                         <div class="listing-item__footer-block listing-item__footer-block">
-                            <svg class="svg-icon svg-icon--small">
+                            <svg class="svg-icon listing-item__icon">
                                 <title>Registered date</title>
                                 <use href="#calendar"></use>
                             </svg>                            
@@ -208,7 +208,7 @@
 
                     {{#if metaData.planningDevelopementAddress}} 
                         <div class="listing-item__footer-block listing-item__footer-block">
-                            <svg class="svg-icon svg-icon--small">
+                            <svg class="svg-icon listing-item__icon">
                                 <title>Time</title>
                                 <use href="#map"></use>
                             </svg>
