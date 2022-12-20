@@ -95,7 +95,12 @@
             <#-- Title -->
             <#if (result.listMetadata["author"]?first)!?has_content>
                 <div class="listing-item__header">
-                    <a href="${result.clickTrackingUrl!}" title="${result.title!}" class="listing-item__title-link">
+                    <a 
+                        href="${result.clickTrackingUrl!}" 
+                        data-live-url="${result.liveUrl}" 
+                        title="${result.title!}" 
+                        class="listing-item__title-link"
+                    >
                         <h3 class="listing-item__title">
                             <@s.boldicize>
                                 <@s.Truncate length=180>

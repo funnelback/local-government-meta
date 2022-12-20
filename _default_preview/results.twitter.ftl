@@ -64,11 +64,13 @@
             <#-- Title -->
             <#if (result.listMetadata["author"])!?has_content>
                 <div class="listing-item__header">
-                    <a href="${result.clickTrackingUrl!}" 
+                    <a 
+                        href="${result.clickTrackingUrl!}" 
+                        data-live-url="${result.liveUrl}" 
                         title="${(result.listMetadata["author"]?first)!}" 
                         class="listing-item__title-link"
                         aria-label="View the profile of @${(result.listMetadata["author"]?first)!}"
-                    >   
+                    >
                         <h3 class="listing-item__title">
                             <@s.boldicize>
                                 <@s.Truncate length=90>

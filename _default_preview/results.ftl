@@ -84,7 +84,12 @@
                             <#break>
                     </#switch>
 
-                    <a href="${result.clickTrackingUrl!}" title="${result.title!}" class="listing-item__title-link">
+                    <a 
+                        href="${result.clickTrackingUrl!}" 
+                        data-live-url="${result.liveUrl}" 
+                        title="${result.title!}" 
+                        class="listing-item__title-link"
+                    >
                         <h3 class="listing-item__title">
                             <@s.boldicize>
                                 <@s.Truncate length=90>
@@ -94,18 +99,6 @@
                         </h3>
                     </a>
 
-                    <#--  Example of subtitle with icon -->
-                    <#--
-                    <div class="listing-item__subtitle">
-                        <svg class="svg-icon svg-icon--small">
-                            <title>Location</title>
-                            <use href="#map"></use>
-                        </svg>
-                        <a href="https://goo.gl/maps/3Ze7mNBpey6D6Q2k6" target="_blank" title="Opens in new window" class="listing-item__subtitle-link" rel="noreferrer">
-                            Online
-                        </a>
-                    </div>
-                    -->
                     <#-- Pretty version of the url of the document -->
                     <cite class="listing-item__subtitle listing-item__subtitle--highlight">
                         <@s.Truncate length=90>
@@ -136,9 +129,6 @@
 
                 <#-- Call to Action (CTA) -->                        
                 <#--  <a href="${result.clickTrackingUrl!}" class="listing-item__action">VIEW MORE</a>   -->
-                <span class="enable-cart-on-result listing-item__action" 
-                    aria-label="Add result to the shortlist">
-                </span>  
             </div>          
 
             <#-- Display the time which this result has last been visited by the user -->
@@ -148,7 +138,7 @@
             <#--              
                 <div class="listing-item__footer">
                     <div class="listing-item__footer-block listing-item__footer-block">
-                        <svg class="svg-icon svg-icon--small">
+                        <svg class="svg-icon listing-item__icon">
                             <title>Time</title>
                             <use href="#time">
                             </use>
@@ -156,14 +146,14 @@
                         10:30 AM - 1:30 PM
                     </div>
                     <a href="mailto:it@department.edu" class="listing-item__footer-block listing-item__footer-block--highlight">
-                        <svg class="svg-icon svg-icon--small">
+                        <svg class="svg-icon listing-item__icon">
                             <title>Contact email</title>
                             <use href="#email"></use>
                             </svg>
                             it@department.edu 
                     </a>
                     <a href="tel:650.725.4747" class="listing-item__footer-block listing-item__footer-block--highlight">
-                        <svg class="svg-icon svg-icon--small">
+                        <svg class="svg-icon listing-item__icon">
                             <title>Contact phone</title>
                             <use href="#phone"></use>
                         </svg>
@@ -175,77 +165,139 @@
     </article>
 </#macro>
 
-<#-- Output the cart template -->
-<#macro ShortlistTemplate>
-    <!-- results::ShortlistTemplate -->    
-    <#-- 
-        Note: Cart templates as assigned to document types in profile.cfg/collection.cfg using 
-        the following configuration:
+<#-- 
+    Output the template used in the quick view. Quick view
+    allows the user view more information about a particular
+    document without them having to leave the search results page.
+    This aims to minimise the amount of hopping back and forth 
+    between systems.
+-->
+<#macro QuickView result> 
+    <!-- results.QuickViewTemplate -->
+    <section id="${base.getCssID(result.liveUrl)}" class="quick-view js-quick-view" tabindex="-1" role="dialog">
+        <button class="quick-view__close"><span class="sr-only">close</span></button>
+        <div class="quick-view__wrapper">
+            <div class="quick-view__content">
+                <h2 class="quick-view__title">
+                    ${result.title!}          
+                </h2>
+                <p class="quick-view__desc">
+                    <#if (result.listMetadata["c"]?first)!?has_content>
+                        ${(result.listMetadata["c"]?first)!}
+                    <#else>
+                        ${result.summary!}
+                    </#if>
+                </p>
+                <div class="quick-view__details">
+                    <h3 class="quick-view__details-title">Program details</h3>
 
-        stencils.template.shortlist.<collection>=<type> 
-        
-        e.g. stencils.template.shortlist.higher-education-meta=programs
-
-        For this to function correctly, the ID must be in the following format:
-        id="shorlist-template-<type>".
-
-        e.g. id="shorlist-template-programs"
-    -->
-    <script id="shortlist-template-default" type="text/x-handlebars-template">
-        <article class="listing-item listing-item--program listing-item--background-grey10 listing-item--color-black" data-fb-result="{{indexUrl}}">   
-
-            {{#if metaData.image}} 
-                <div class="listing-item__image-wrapper">
-                    <img class="listing-item__image" alt="Thumbnail for {{title}}" src="{{metaData.image}}"> 
-                </div> 
-                <#-- Show a placeholder image for showcase -->     
-                <#if ((question.getCurrentProfileConfig().get("stencils.showcase"))!"FALSE")?upper_case == "TRUE">
-                    {{else}}
-                    <div class="listing-item__image-wrapper">
-                        <img class="listing-item__image" alt="Thumbnail for {{title}}" src="https://picsum.photos/300/300?sig={{title}}">
+                    <div class="quick-view__details-content">
+                        <#--  Introduction  -->
+                        <#--  
+                        <p>
+                            Insert more information
+                        </p>
+                        <p>
+                            Insert even more information
+                        </p>  
+                        -->
+                        <#-- Details panel -->
+                        <#--                          
+                        <dl>
+                            <#if (result.listMetadata["programCredentialType"]?first)!?has_content>
+                                <dt>Credential type:</dt>
+                                <dd>${(result.listMetadata["programCredentialType"]?first)!} </dd>
+                            </#if>                    
+                            <#if (result.listMetadata["stencilsTermCodes"]?first)!?has_content >
+                                <dt>Term codes:</dt>
+                                <dd>${(result.listMetadata["stencilsTermCodes"]?join(", "))!} </dd>
+                            </#if>             
+                        </dl>  
+                        -->
+                        <a href="${result.clickTrackingUrl!}" class="btn" data-target="#${base.getCssID(result.liveUrl)}">
+                            Visit page
+                        </a>                    
                     </div>
-                </#if>
-            {{/if}} 
-            <div class="listing-item__content">
-                <#-- Title -->
-                {{#if title}} 
-                    <div class="listing-item__header">
-                        <a href="{{indexUrl}}" title="{{title}}" class="listing-item__title-link">
-                            <h3 class="listing-item__title">
-                                {{#truncate 255}}
-                                    {{title}}  
-                                {{/truncate}}
-                            </h3>
-                        </a>
-
-                        <#-- Pretty version of the url of the document -->
-                        {{#if indexUrl}}  
-                            <cite class="listing-item__subtitle listing-item__subtitle--highlight">
-                                {{indexUrl}}
-                            </cite>
-                        {{/if}} 
-                    </div>
-                {{/if}} 
-                                
-                <#-- Body -->
-                <div class="listing-item__body">
-                    <#-- Summary -->
-                    {{#if summary}} 
-                        <div class="listing-item__summary">
-                            {{#truncate 255}}
-                                {{summary}}  
-                            {{/truncate}}
-                        </div>
-                    {{/if}} 
-
-                    <p>
-                        <span class="fb-cart__remove"></span>
-                    </p>
-                </div>          
+                </div>
             </div>
-        </article>    
-    </script>  
+            <#-- TODO: Add related results -->
+        </div>
+    </section>    
 </#macro>
 
+<#-- Default template for items that have been added to the cart -->
+<#macro ShortlistTemplate>
+    <!-- results.ShortlistTemplate -->
+    <script id="shortlist-template-default" type="text/x-handlebars-template">
+        <article class="search-results__item search-results__item--default">
+            <figure class="search-results__bg">
+                {{#if metaData.image}}  
+                    <img class="card-img-top" alt="Thumbnail for {{title}}" src="{{metaData.image}}" /> 
+                <#-- Show a placeholder image for showcase -->
+                <#if ((question.getCurrentProfileConfig().get("stencils.showcase"))!"FALSE")?upper_case == "TRUE">
+                    {{else}}
+                        <img class="card-img-top" alt="Thumbnail for {{title}}" src="https://source.unsplash.com/random/335x192?{{title}}"> 
+                </#if>    
+                {{/if}}
+            </figure>
+            <div class="search-results__content">
+                {{#if title}} 
+                    <h4 class="search-results__title">
+                        <a href="{{indexUrl}}" title="{{title}}" class="search-results__link">
+                            {{#truncate 255}}
+                                {{title}}  
+                            {{/truncate}}
+                        </a>
+
+                        <span class="enable-cart-on-result"></span>
+                    </h4>
+                {{/if}}
+                
+                <#-- Pretty version of the url of the document -->
+                <cite>
+                    {{#truncate 90}}
+                        {{indexUrl}}
+                    {{/truncate}}                
+                </cite>
+
+                
+                <#-- Summary -->
+                {{#if summary}}
+                    <p class="search-results__desc">
+                        {{#truncate 255}}
+                            {{summary}}  
+                        {{/truncate}}
+                    </p>
+                {{/if}}
+
+                <#-- Metadata can be shown as tags -->
+                <#--  
+                <section class="tags">
+                    <ul class="tags__list">
+                        <li class="tags__item">
+                            Lorem
+                        </li>
+                        <li class="tags__item">
+                            Lorem ipsum
+                        </li>
+                        <li class="tags__item">
+                            Lorem
+                        </li>
+                        <li class="tags__item">
+                            Lorem ipsum
+                        </li>
+                        <li class="tags__item">
+                            Lorem
+                        </li>
+                    </ul>
+                </section>  
+                -->
+                <div class="search-results__bottom">
+                    <span class="fb-cart__remove"></span>
+                </div>                         
+            </div>
+        </article>
+    </script>
+  </#macro>
 
 

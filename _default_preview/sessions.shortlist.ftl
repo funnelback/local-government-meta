@@ -8,9 +8,8 @@
 
   Note: Shortlist and cart are used interchangeably. There is a growing shift
   of using the term shortlist.
-
 -->
-<#macro Shortlist>
+<#macro Placeholder>
 	<#if question.collection.configuration.valueAsBoolean("ui.modern.session")>
 		<section class="search-cart" id="search-cart" class="search-results__list search-results__list--list-view" style="display: none;">
 		</section>
@@ -21,8 +20,8 @@
 	The handlebars template which is used to display the container which 
     holds all the shortlist items.  
 -->
-<#macro ShortlistTemplate>
-	<!-- sessions.shortlist.ShortlisTtemplate -->
+<#macro Template>
+	<!-- sessions.shortlist.Template -->
 	<script id="cart-template" type="text/x-handlebars-template">
         <button id="flb-cart-box-back" class="search-shortlist__hide" type="button">
             <svg class="svg-icon search-shortlist__icon"><use href="#arrow"></use></svg>
@@ -48,7 +47,7 @@
 </#macro>
 
 <#-- Output the config required to configure the cart templates -->
-<#macro ShortlistTemplatesConfig >
+<#macro TemplatesConfig >
 	<#-- 
 		Output the default template which is used when no cart template 
 		is explicitly defined.
@@ -74,8 +73,8 @@
 	namespaces. It is assummed that cart templates are macros defined with 
 	the name <#macro ShortlistTemplate> </#macro>.
 -->
-<#macro ShortlistTemplatesForResults>
-	<!-- sessions.shortlist.ShortlistTemplatesForResults -->
+<#macro TemplatesForResults>
+	<!-- sessions.shortlist.TemplatesForResults -->
 	<#list .main as key, namespace >
 		<#if (namespace)!?is_hash && (namespace.ShortlistTemplate)!?is_directive && key != "shortlist">
 			<@namespace.ShortlistTemplate />
@@ -83,24 +82,31 @@
 	</#list>
 </#macro>
 
+<#-- Outputs the placeholder used to determine where the shortlist button should rendered. -->
+<#macro Control>
+	<!-- sessions.shortlist.Control -->
+	<span class="flb-cart-count"></span>
+</#macro>
+
 <#--  Output the sliding drawer for the shortlist.  -->
-<#macro SearchHistoryDrawer>
-	<div class="search-history-drawer" tabindex="-1">
+<#macro Drawer>
+	<!-- sessions.shortlist.Drawer -->
+	<div class="shortlist-drawer" tabindex="-1">
 		<div
 			data-component="drawer"
 			data-drawer-width="100"
 			data-drawer-height="100"
 			data-drawer-transition-speed="0.3"
 			class="drawer drawer--open-bottom"
-			id="funnelback-search-search-history-drawer"
+			id="funnelback-search-shortlist-drawer"
 		>
 			<div
 				class="drawer__content"
 				role="alertdialog"
-				aria-labelledby="search-history-drawer-title"
+				aria-labelledby="shortlist-drawer-title"
 			>
 				<div class="drawer__controllers">
-					<h2 id="search-history-drawer-title">Search History</h2>
+					<h2 id="shortlist-drawer-title">Shortlist</h2>
 					<button
 						type="button"
 						aria-expanded="true"
@@ -116,22 +122,7 @@
 					</button>
 				</div>
 				<div class="drawer__body">
-										<#--  Search history configurations  -->
-					<div
-						data-component="search-history"
-						data-search-history-configuration="{}"
-					> </div>
-
-					<span
-						class="visuallyhidden"
-						data-pnp-component="link-tracker"
-						data-search-form=".autocomplete-concierge__form-wrapper"
-						data-link-query=".listing-item__title-link"
-						data-search-term="${question.originalQuery!}"
-						data-results-count="${response.resultPacket.resultsSummary.totalMatching!}"
-						data-history-size="20"
-						data-delay="500"
-					></span>
+					<@Placeholder />
 				</div>
 			</div>
 		</div>

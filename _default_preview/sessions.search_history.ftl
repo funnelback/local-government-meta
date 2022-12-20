@@ -6,6 +6,7 @@
 
 <#--  Output the sliding drawer for the shortlist.  -->
 <#macro Drawer>
+	<#--  sessions.search_history::sessions.Drawer -->
 	<div class="search-history-drawer" tabindex="-1">
 		<div
 			data-component="drawer"
@@ -51,7 +52,7 @@
 </#macro>
 
 <#macro Configuration>
-    <#--  sessions.Configuration -->
+    <#--  sessions.search_history::sessions.Configuration -->
     <span
         class="visuallyhidden"
         data-pnp-component="link-tracker"
