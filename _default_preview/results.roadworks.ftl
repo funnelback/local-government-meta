@@ -101,7 +101,7 @@
             <div class="listing-item__footer">
                 <#if (result.listMetadata["roadworksStartDate"]?first)!?has_content>
                     <div class="listing-item__footer-block listing-item__footer-block">
-                        <svg class="svg-icon svg-icon--small">
+                        <svg class="svg-icon listing-item__icon">
                         <title>Time</title>
                         <use href="#time"></use>
                         </svg>
@@ -110,7 +110,7 @@
                 </#if>                  
                 <#if (result.listMetadata["roadworksContactTelephoneNumber"]?first)!?has_content>
                     <div class="listing-item__footer-block listing-item__footer-block">
-                        <svg class="svg-icon svg-icon--small">
+                        <svg class="svg-icon listing-item__icon">
                         <title>Phone</title>
                         <use href="#phone"></use>
                         </svg>
@@ -119,7 +119,7 @@
                 </#if>                  
                 <#if (result.listMetadata["roadworksLocality"]?first)!?has_content>
                     <div class="listing-item__footer-block listing-item__footer-block">
-                        <svg class="svg-icon svg-icon--small">
+                        <svg class="svg-icon listing-item__icon">
                         <title>Locality</title>
                         <use href="#map"></use>
                         </svg>
@@ -207,7 +207,7 @@
                 <div class="listing-item__footer">
                     {{#if metaData.roadworksStartDate}} 
                         <div class="listing-item__footer-block listing-item__footer-block">
-                            <svg class="svg-icon svg-icon--small">
+                            <svg class="svg-icon listing-item__icon">
                                 <title>Time</title>
                                 <use href="#time">
                                 </use>
@@ -218,7 +218,7 @@
 
                     {{#if metaData.roadworksContactTelephoneNumber}} 
                         <div class="listing-item__footer-block listing-item__footer-block">
-                            <svg class="svg-icon svg-icon--small">
+                            <svg class="svg-icon listing-item__icon">
                                 <title>Phone</title>
                                 <use href="#phone"></use>
                             </svg>
@@ -228,7 +228,7 @@
 
                     {{#if metaData.roadworksLocality}} 
                         <div class="listing-item__footer-block listing-item__footer-block">
-                            <svg class="svg-icon svg-icon--small">
+                            <svg class="svg-icon listing-item__icon">
                                 <title>Locality</title>
                                 <use href="#map"></use>
                             </svg>

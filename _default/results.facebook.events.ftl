@@ -59,7 +59,12 @@
             <#-- Title -->
             <#if (result.title)!?has_content>
                 <div class="listing-item__header">
-                    <a href="${result.clickTrackingUrl!}" title="${result.title!}" class="listing-item__title-link">
+                    <a 
+                        href="${result.clickTrackingUrl!}" 
+                        data-live-url="${result.liveUrl}" 
+                        title="${result.title!}" 
+                        class="listing-item__title-link"
+                    >
                         <h3 class="listing-item__title">
                             <@s.boldicize>
                                 <@s.Truncate length=90>
@@ -72,7 +77,7 @@
                     <#--  Subtitle -->
                     <#if (result.listMetadata["stencilsFacebookEventLocation"]?first)!?has_content>
                         <div class="listing-item__subtitle">
-                            <svg class="svg-icon svg-icon--small">
+                            <svg class="svg-icon listing-item__icon">
                                 <title>Location</title>
                                 <use href="#map"></use>
                             </svg>
@@ -146,7 +151,7 @@
             <div class="listing-item__footer">
                 <#if (result.listMetadata["d"]?first)!?has_content>
                     <div class="listing-item__footer-block listing-item__footer-block">
-                        <svg class="svg-icon svg-icon--small">
+                        <svg class="svg-icon listing-item__icon">
                             <title>Duration</title>
                             <use href="#time">
                             </use>
@@ -159,7 +164,7 @@
                     </div>
                 <#else>
                     <div class="listing-item__footer-block listing-item__footer-block">                        
-                        <svg class="svg-icon svg-icon--small">
+                        <svg class="svg-icon listing-item__icon">
                             <title>Duration</title>
                             <use href="#time">
                             </use>
@@ -170,7 +175,7 @@
 
                 <#if (result.listMetadata["author"]?first)!?has_content>
                     <div class="listing-item__footer-block listing-item__footer-block">
-                        <svg class="svg-icon svg-icon--small">
+                        <svg class="svg-icon listing-item__icon">
                             <title>Author</title>
                             <use href="#user-avatar">
                             </use>

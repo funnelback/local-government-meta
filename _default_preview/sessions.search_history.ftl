@@ -6,6 +6,7 @@
 
 <#--  Output the sliding drawer for the shortlist.  -->
 <#macro Drawer>
+	<#--  sessions.search_history::sessions.Drawer -->
 	<div class="search-history-drawer" tabindex="-1">
 		<div
 			data-component="drawer"
@@ -28,7 +29,7 @@
 						class="drawer__close"
 					>
 						<svg
-							class="svg-icon svg-icon--xlarge"
+							class="svg-icon drawer__icon"
 							role="img"
 						>
 							<title>Close</title>
@@ -51,7 +52,7 @@
 </#macro>
 
 <#macro Configuration>
-    <#--  sessions.Configuration -->
+    <#--  sessions.search_history::sessions.Configuration -->
     <span
         class="visuallyhidden"
         data-pnp-component="link-tracker"

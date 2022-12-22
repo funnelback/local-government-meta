@@ -75,7 +75,7 @@
                     <div 
                         class="overflow-menu__wrapper" 
                         data-tab-group-element="overflow-menu-wrapper"
-                        data-component="OverflowButton"
+                        data-component="button-overflow"
                         data-container=".tabs"
                         data-items="[data-tab-group-control]"
                         data-items-container="[data-tab-group-element='tab-list-nav']"
@@ -87,7 +87,7 @@
                             aria-labelledby="View more"
                         >
                             <span class="sr-only">show more tabs</span>
-                            <svg class="svg-icon">
+                            <svg class="overflow-menu__icon">
                                 <use href="#overflow-menu"></use>
                             </svg>
                         </button>
