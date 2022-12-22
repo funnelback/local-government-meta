@@ -21,9 +21,13 @@
 
 <#macro SearchHistoryAndShortlist>
 	<@search_history.Drawer />
-    <@shortlist.Shortlist />
+    <@shortlist.Drawer />
 </#macro>
 
+<#--  	
+	This output the configurations required to setup the shortlist
+	which comes shipped with Funnelback.
+-->
 <#macro Configuration>
 	<!-- history_cart.Configurations -->
 	<#if question.collection.configuration.valueAsBoolean("ui.modern.session")>
@@ -39,28 +43,31 @@
 						template: '{{>icon-block}} {{>label-block}} ({{count}})',
 						icon: 'fas fa-star',
 						label: 'Shortlist',
-						isLabel: true
+						isLabel: true,
+						classes: "",
+						enableClick: false,
+						elementType: "span",
+						tabIndex: "-1",
 					},
 					cart: {
 						icon: '',
-						label: 'Shortlist',
+						label: '',
 						backIcon: 'fas fa-arrow-left',
 						backLabel: 'Back to results',
 						clearIcon: 'fas fa-times',
 						clearClasses: "btn btn-xs btn-light",                    
 						emptyMessage: '<span id="flb-cart-empty-message">No items in your shortlist</span>',
-					    pageSelector: ['#funnelbach-search-body', '#funnelbach-search-facets'], // list of CSS selectors to parts of page to hide it when history is displayed
 					},
 					item: {
 						icon: 'fas fa-star',          
 						templates: {
-							<@shortlist.ShortlistTemplatesConfig />
+							<@shortlist.TemplatesConfig />
 						},
 						class: ''
 					},
 					resultItemTrigger: {
 						selector: '.enable-cart-on-result',
-                        class: 'testing',
+                        class: '',
 						labelAdd: 'ADD TO SHORTLIST',
 						iconAdd: 'far fa-star',
 						labelDelete: 'REMOVE FROM SHORTLIST',
@@ -89,15 +96,22 @@
 </#macro>
 
 <#-- 
-	Displays the controls used to toggle the cart and history and 
-	query history functionality.
+	Displays the controls used to toggle the shortlist and search history 
+	functionality.
 -->
 <#macro Controls>
 	<#if question.collection.configuration.valueAsBoolean("ui.modern.session")>		
 		<!-- sessions::Controls -->
 		<div class="result-sessions__controls">
 			<#--  Shortlist  -->
-			<span class="flb-cart-count"></span>
+			<button
+				type="button"
+				aria-controls="funnelback-search-shortlist-drawer"
+				data-component="activate-drawer"
+			>
+				<@sessions.ShortlistControl />  
+			</button>
+
 			<#--  Search History  -->
 			<button 
 				class="session-history-toggle" 
@@ -112,9 +126,15 @@
 	</#if>    
 </#macro>
 
+<#-- Outputs the placeholder used to determine where the shortlist button should rendern -->
+<#macro ShortlistControl>
+	<!-- sessions::ShortlistControl -->
+	<@shortlist.Control />
+</#macro>
+
 <#macro Templates>
     <#-- Specifies how each cart item should be presented -->
-    <@shortlist.ShortlistTemplate />
+    <@shortlist.Template />
 
     <#-- 
         Automatically include the cart template for all document types defined
@@ -122,6 +142,9 @@
         do calls like <@courses.CartTemplate> to include the Handlebars templates 
         as this macro will automatically be include it for you.   
     -->
-    <@shortlist.ShortlistTemplatesForResults />    
+    <@shortlist.TemplatesForResults />    
 </#macro>
 
+<#macro ShortlistDrawer>
+	<@shortlist.Drawer />
+</#macro>

@@ -18,49 +18,50 @@
 	Global Stencils imports
 	The namespace will be available in all templates which are imported 
 -->
+<#import "a-z_listing.ftl" as az_listing />
+<#import "auto_complete.concierge.ftl" as concierge />
+<#import "auto_complete.ftl" as auto_complete />
 <#import "base.ftl" as base />
-<#import "hero_banner.ftl" as hero_banner />
-<#import "search_tools.ftl" as search_tools />
+<#import "client_includes.ftl" as client_includes />
+<#import "contextual_navigation.ftl" as contextual_navigation />
 <#import "counts.ftl" as counts />
-<#import "query_blending.ftl" as query_blending />
-<#import "spelling_suggestions.ftl" as spelling_suggestions />
 <#import "curator.ftl" as curator />
-<#import "tabs.ftl" as tabs />
+<#import "curator.ftl" as curator />
+<#import "extra_search.ftl" as extra_search />
 <#import "facets.breadcrumbs.ftl" as facets_breadcrumbs />
 <#import "facets.ftl" as facets />
-<#import "tier_bars.ftl" as tier_bars />
-<#import "pagination.ftl" as pagination />
-<#import "a-z_listing.ftl" as az_listing />
-<#import "contextual_navigation.ftl" as contextual_navigation />
-<#import "auto_complete.ftl" as auto_complete />
-<#import "auto_complete.concierge.ftl" as concierge />
-<#import "curator.ftl" as curator />
-<#import "result_list.ftl" as result_list />
+<#import "hero_banner.ftl" as hero_banner />
 <#import "no_results.ftl" as no_results />
-<#import "extra_search.ftl" as extra_search />
+<#import "pagination.ftl" as pagination />
+<#import "query_blending.ftl" as query_blending />
+<#import "result_list.ftl" as result_list />
 <#import "results.ftl" as results />
-<#import "client_includes.ftl" as client_includes />
+<#import "search_tools.ftl" as search_tools />
+<#import "spelling_suggestions.ftl" as spelling_suggestions />
+<#import "tabs.ftl" as tabs />
+<#import "tier_bars.ftl" as tier_bars />
 
+<#import "sessions.search_history.ftl" as search_history />
+<#import "sessions.shortlist.ftl" as shortlist />
 <#import "sessions.ftl" as sessions />
-
 
 <#-- Specific result styling imports
 	These imports are required for the automatic template selection to work
 	The various namespaces (e.g. 'video', 'facebook') need to be on the main scope 
 -->
-<#import "results.courses.ftl" as courses />
-<#import "results.programs.ftl" as programs />
-<#import "results.people.ftl" as people />
-<#import "results.video.ftl" as video />
-<#import "results.facebook.ftl" as facebook />
-<#import "results.events.ftl" as events />
-<#import "results.twitter.ftl" as twitter />
-<#import "results.instagram.ftl" as instagram />
 <#import "results.cemetery.ftl" as cemetery />
-<#import "results.planning_applications.ftl" as planning_applications />
+<#import "results.courses.ftl" as courses />
+<#import "results.events.ftl" as events />
+<#import "results.facebook.ftl" as facebook />
 <#import "results.faqs.ftl" as faqs />
+<#import "results.instagram.ftl" as instagram />
+<#import "results.people.ftl" as people />
+<#import "results.planning_applications.ftl" as planning_applications />
+<#import "results.programs.ftl" as programs />
 <#import "results.rates.ftl" as rates />
 <#import "results.roadworks.ftl" as roadworks />
+<#import "results.twitter.ftl" as twitter />
+<#import "results.video.ftl" as video />
 
 <#-- Used to send absolute URLs for resources -->
 <#assign httpHost=httpRequest.getHeader('host')!"">
