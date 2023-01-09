@@ -59,7 +59,12 @@
             <#-- Title -->
             <#if (result.title)!?has_content>
                 <div class="listing-item__header">
-                    <a href="${result.clickTrackingUrl!}" title="${result.title!}" class="listing-item__title-link">
+                    <a 
+                        href="${result.clickTrackingUrl!}" 
+                        data-live-url="${result.liveUrl}" 
+                        title="${(result.listMetadata["peopleFirstName"]?first)!} ${(result.listMetadata["peopleLastName"]?first)!}"
+                        class="listing-item__title-link"
+                    >
                         <h3 class="listing-item__title">
                             <@s.boldicize>
                                 <@s.Truncate length=90>
@@ -112,7 +117,7 @@
             <div class="listing-item__footer">
                 <#if (result.listMetadata["peopleEmail"]?first)!?has_content>                
                     <a href="mailto:${(result.listMetadata["peopleEmail"]?first)!}" class="listing-item__footer-block listing-item__footer-block--highlight">
-                        <svg class="svg-icon svg-icon--small">
+                        <svg class="svg-icon listing-item__icon">
                             <title>Contact email</title>
                             <use href="#email"></use>
                         </svg>
@@ -121,7 +126,7 @@
                 </#if>
                 <#if (result.listMetadata["peoplePhone"]?first)!?has_content>
                     <a href="tel:${(result.listMetadata["peoplePhone"]?first)!}" class="listing-item__footer-block listing-item__footer-block--highlight">
-                        <svg class="svg-icon svg-icon--small">
+                        <svg class="svg-icon listing-item__icon">
                             <title>Contact phone</title>
                             <use href="#phone"></use>
                         </svg>
@@ -130,7 +135,7 @@
                 </#if>
                 <#if (result.listMetadata["peopleLocation"]?first)!?has_content>
                     <div class="listing-item__footer-block listing-item__footer-block">
-                        <svg class="svg-icon svg-icon--small">
+                        <svg class="svg-icon listing-item__icon">
                         <title>Time</title>
                         <use href="#map"></use>
                         </svg>

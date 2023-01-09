@@ -60,7 +60,12 @@
             <#-- Title -->
             <#if (result.title)!?has_content>
                 <div class="listing-item__header">
-                    <a href="${result.clickTrackingUrl!}" title="${result.title!}" class="listing-item__title-link">
+                    <a 
+                        href="${result.clickTrackingUrl!}" 
+                        data-live-url="${result.liveUrl}" 
+                        title="${result.title!}" 
+                        class="listing-item__title-link"
+                    >
                         <h3 class="listing-item__title">
                             <@s.boldicize>
                                 <@s.Truncate length=90>
@@ -78,11 +83,11 @@
                     </#if>
 
                     <#-- Pretty version of the url of the document -->
-                    <cite class="listing-item__subtitle listing-item__subtitle--highlight">
+                    <#--  <cite class="listing-item__subtitle listing-item__subtitle--highlight">
                         <@s.Truncate length=90>
                             ${(result.displayUrl)!}
                         </@s.Truncate>                
-                    </cite>
+                    </cite>  -->
                 </div>
             </#if>
             
@@ -130,7 +135,7 @@
             <div class="listing-item__footer">
                 <#if (result.listMetadata["programLengthYears"]?first)!?has_content>
                     <div class="listing-item__footer-block listing-item__footer-block">
-                        <svg class="svg-icon svg-icon--small">
+                        <svg class="svg-icon listing-item__icon">
                             <title>Duration</title>
                             <use href="#time">
                             </use>
@@ -141,7 +146,7 @@
 
                 <#if (result.listMetadata["programCampus"]?first)!?has_content>
                     <div class="listing-item__footer-block listing-item__footer-block">
-                        <svg class="svg-icon svg-icon--small">
+                        <svg class="svg-icon listing-item__icon">
                             <title>Campus</title>
                             <use href="#map"></use>
                         </svg>
@@ -169,7 +174,7 @@
 
         e.g. id="shorlist-template-programs"
     -->
-    <script id="shortlist-template-program" type="text/x-handlebars-template">
+    <script id="shortlist-template-programs" type="text/x-handlebars-template">
         <article class="listing-item listing-item--program listing-item--background-grey10 listing-item--color-black" data-fb-result="{{indexUrl}}">   
 
             {{#if metaData.programImage}} 
@@ -242,13 +247,17 @@
                     <p>
                         <span class="fb-cart__remove"></span>
                     </p>
+
+                    <span class="enable-cart-on-result listing-item__action" 
+                            aria-label="Add result to the shortlist">
+                    </span> 
                 </div>          
 
                 <#-- Footer -->                    
                 <div class="listing-item__footer">
                     {{#if metaData.programLengthYears}} 
                         <div class="listing-item__footer-block listing-item__footer-block">
-                            <svg class="svg-icon svg-icon--small">
+                            <svg class="svg-icon listing-item__icon">
                                 <title>Duration</title>
                                 <use href="#time">
                                 </use>
@@ -259,7 +268,7 @@
 
                     {{#if metaData.programCampus}} 
                         <div class="listing-item__footer-block listing-item__footer-block">
-                            <svg class="svg-icon svg-icon--small">
+                            <svg class="svg-icon listing-item__icon">
                                 <title>Campus</title>
                                 <use href="#map"></use>
                             </svg>
@@ -270,4 +279,5 @@
             </div>
         </article>    
     </script>
+  
   </#macro>
